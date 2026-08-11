@@ -7,7 +7,7 @@ const evidence = [
   {
     label: "Progress you can inspect",
     detail:
-      "Review working software throughout the build. Decisions, trade-offs, and the next release stay visible—not buried in status theatre.",
+      "Review working software throughout the build. Decisions, trade-offs, and the next release stay visible, not buried in status theatre.",
   },
   {
     label: "A handoff that holds up",
@@ -18,20 +18,21 @@ const evidence = [
 
 export function Proof() {
   return (
-    <section className="border-b border-border bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <section className="relative overflow-hidden border-b border-border bg-[#fbf9ff]">
+      <div className="absolute -right-24 top-20 size-72 rounded-full bg-[#10d2f6]/10 blur-3xl" aria-hidden="true" />
+      <div className="relative mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>
             <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">
-              Credibility, not theatre
+              Proof over performance
             </p>
-            <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-              We won&apos;t promise billions. We&apos;ll show you what we can build.
+            <h2 className="mt-5 max-w-[12ch] font-heading text-4xl font-extrabold leading-[0.98] tracking-[-0.05em] sm:text-6xl">
+              We don&apos;t sell fantasies. We ship proof.
             </h2>
           </div>
           <div>
-            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Revenue depends on the offer, market, distribution, pricing, and execution—not a website
+            <p className="max-w-2xl text-xl font-medium leading-relaxed text-foreground/80">
+              Revenue depends on the offer, market, distribution, pricing, and execution, not a website
               alone. Our job is to engineer the product and conversion system properly, measure it,
               and improve what the evidence supports.
             </p>
@@ -42,14 +43,14 @@ export function Proof() {
           </div>
         </div>
 
-        <ol className="reveal-scroll-stagger mt-12 grid gap-8 border-t border-border pt-8 md:grid-cols-3">
+        <ol className="reveal-scroll-stagger mt-16 grid gap-10 border-t border-[#392a6f]/20 pt-10 md:grid-cols-3">
           {evidence.map((item, index) => (
             <li key={item.label} className="grid grid-cols-[2rem_1fr] gap-3">
-              <span className="font-mono text-xs text-primary" aria-hidden="true">
+              <span className="font-mono text-xs font-bold text-[#392a6f]" aria-hidden="true">
                 0{index + 1}
               </span>
               <div>
-                <h3 className="font-heading text-lg font-semibold">{item.label}</h3>
+                <h3 className="font-heading text-lg font-extrabold tracking-tight">{item.label}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
               </div>
             </li>

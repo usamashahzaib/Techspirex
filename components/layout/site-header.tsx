@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { CaretDown, List, X } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { routes, serviceNavItems, primaryNavItems } from "@/lib/routes";
 
@@ -62,12 +62,12 @@ function ServicesMenu() {
         )}
       >
         Services
-        <ChevronDown className={cn("size-4 transition-transform", open && "rotate-180")} aria-hidden="true" />
+        <CaretDown weight="bold" className={cn("size-3.5 transition-transform", open && "rotate-180")} aria-hidden="true" />
       </button>
       {open && (
         <div
           role="menu"
-          className="absolute left-0 top-full z-40 mt-3 w-72 rounded-lg border border-border bg-popover p-2 shadow-lg"
+          className="absolute left-0 top-full z-40 mt-4 w-80 rounded-2xl border border-border bg-popover p-2 shadow-[0_28px_70px_-38px_rgba(57,42,111,0.55)]"
         >
           <Link
             href={routes.services}
@@ -114,14 +114,21 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b bg-background/95 backdrop-blur transition-shadow duration-300 supports-backdrop-filter:bg-background/80",
-        scrolled ? "border-border shadow-sm" : "border-transparent"
+        "sticky top-0 z-50 border-b bg-background/95 backdrop-blur-xl transition-shadow duration-300 supports-backdrop-filter:bg-background/85",
+        scrolled ? "border-border shadow-[0_16px_40px_-32px_rgba(57,42,111,0.5)]" : "border-transparent"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href={routes.home} className="flex items-center gap-2.5">
-          <Image src="/logo-mark.svg" alt="" width={28} height={28} priority aria-hidden="true" />
-          <span className="font-heading text-lg font-semibold tracking-tight">TechSpireX</span>
+      <div className="mx-auto flex h-[4.5rem] max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href={routes.home} className="relative h-10 w-40 overflow-hidden" aria-label="TechSpireX home">
+          <Image
+            src="/logo-wordmark.png"
+            alt=""
+            width={936}
+            height={936}
+            priority
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 w-56 max-w-none -translate-x-1/2 -translate-y-1/2 mix-blend-multiply"
+          />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -134,7 +141,7 @@ export function SiteHeader() {
         <div className="hidden md:block">
           <Link
             href={routes.contact}
-            className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+            className="inline-flex items-center rounded-full bg-[#392a6f] px-5 py-2.5 text-sm font-bold text-[#fbf9ff] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
           >
             Discuss a build
           </Link>
@@ -148,7 +155,7 @@ export function SiteHeader() {
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           onClick={() => setMobileOpen((v) => !v)}
         >
-          {mobileOpen ? <X className="size-6" aria-hidden="true" /> : <Menu className="size-6" aria-hidden="true" />}
+          {mobileOpen ? <X weight="bold" className="size-6" aria-hidden="true" /> : <List weight="bold" className="size-6" aria-hidden="true" />}
         </button>
       </div>
 
@@ -189,7 +196,7 @@ export function SiteHeader() {
               <Link
                 href={routes.contact}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center rounded-md bg-primary px-4 py-3 text-base font-medium text-primary-foreground"
+                className="flex items-center justify-center rounded-full bg-[#392a6f] px-4 py-3 text-base font-bold text-[#fbf9ff]"
               >
                 Discuss a build
               </Link>

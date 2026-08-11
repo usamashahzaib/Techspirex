@@ -10,6 +10,15 @@ A young, engineering-first agency from Lahore, Pakistan, serving Western founder
 
 Calm competence. The visitor should feel like they found a small, serious team that will take their project seriously and communicate like adults — not be dazzled by spectacle, and not be reassured by empty confidence language.
 
+## Current brand expression (client override, 2026-08-11)
+
+The supplied TechSpireX identity is now the dominant visual source, not a minor accent. The homepage
+uses the logo violet `#392a6f` as a committed/drenched brand field and cyan `#10d2f6` as an active
+signal color. This explicitly supersedes the earlier restrained-indigo / rare-cyan treatment below.
+The visual target is confident, kinetic, and category-leading while claims remain evidence-based.
+Typography moves to one committed sans family with heavy scale contrast; the logo geometry drives
+orbits, circles, and cropped structural forms across the page.
+
 ## What must NOT happen (restated, project-specific)
 
 Beyond the brief's global bans, specific to this rebuild:
