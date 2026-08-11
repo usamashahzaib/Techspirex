@@ -26,7 +26,7 @@ export function TurnstileWidget() {
 
   return (
     <>
-      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" />
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
       <div className="cf-turnstile" data-sitekey={siteKey} />
     </>
   );

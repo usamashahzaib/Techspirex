@@ -6,6 +6,10 @@ import { ArrowRight } from "lucide-react";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/content/case-studies";
 import { routes } from "@/lib/routes";
 
+// Only the known case-study slugs render; any other path 404s at build/edge
+// instead of being dynamically evaluated on demand (docs/DEEP-AUDIT L-2).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getAllCaseStudies().map((study) => ({ slug: study.slug }));
 }

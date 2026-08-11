@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { routes } from "@/lib/routes";
+import { AuroraBackdrop } from "@/components/marketing/aurora-backdrop";
 
 export function FinalCta() {
   return (
     <section className="relative overflow-hidden bg-[#10d2f6] text-[#2a2051]">
+      <AuroraBackdrop className="opacity-70 mix-blend-soft-light" from="#2a2051" via="#7c5cff" to="#0a8fb0" grain={0.22} />
       <div className="absolute -right-24 -top-28 size-80 rounded-full border-[3rem] border-[#392a6f]/15" aria-hidden="true" />
       <div className="reveal-scroll relative mx-auto flex max-w-[1400px] flex-col items-start gap-8 px-4 py-20 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8 lg:py-28">
         <div className="max-w-3xl">

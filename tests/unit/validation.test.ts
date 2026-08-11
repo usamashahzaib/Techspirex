@@ -30,13 +30,23 @@ describe("contactSchema", () => {
 });
 
 describe("newsletterSchema", () => {
-  it("trims and accepts a valid email", () => {
-    const result = newsletterSchema.safeParse({ email: "  reader@example.com  ", website: "" });
+  it("trims and accepts a valid email with verification", () => {
+    const result = newsletterSchema.safeParse({
+      email: "  reader@example.com  ",
+      website: "",
+      "cf-turnstile-response": "verified-token",
+    });
     expect(result.success).toBe(true);
     if (result.success) expect(result.data.email).toBe("reader@example.com");
   });
 
-  it("rejects invalid email and bot honeypot input", () => {
-    expect(newsletterSchema.safeParse({ email: "invalid", website: "bot" }).success).toBe(false);
+  it("rejects invalid email", () => {
+    expect(
+      newsletterSchema.safeParse({ email: "invalid", "cf-turnstile-response": "verified-token" }).success
+    ).toBe(false);
+  });
+
+  it("rejects a submission missing spam verification", () => {
+    expect(newsletterSchema.safeParse({ email: "reader@example.com" }).success).toBe(false);
   });
 });

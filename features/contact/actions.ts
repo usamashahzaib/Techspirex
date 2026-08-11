@@ -1,9 +1,9 @@
 "use server";
 
-import { headers } from "next/headers";
 import { contactSchema } from "@/lib/validation/contact";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 import { rateLimit } from "@/lib/rate-limit";
+import { getClientIp } from "@/lib/request-ip";
 import { sendContactNotification, EmailNotConfiguredError } from "@/lib/email";
 
 export type ContactState =
@@ -31,7 +31,7 @@ export async function submitContactForm(
     return { status: "success" };
   }
 
-  const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = await getClientIp();
   const limited = rateLimit(`contact:${ip}`, 5, 10 * 60 * 1000);
   if (!limited.success) {
     return {
@@ -42,11 +42,17 @@ export async function submitContactForm(
 
   const verification = await verifyTurnstileToken(parsed.data["cf-turnstile-response"], ip);
   if (!verification.success) {
-    if ("notConfigured" in verification && verification.notConfigured) {
+    if (verification.notConfigured) {
       return {
         status: "error",
         message:
           "This form isn't fully configured yet (spam verification is missing). Nothing was sent — please email info@techspirex.com directly for now.",
+      };
+    }
+    if (verification.transient) {
+      return {
+        status: "error",
+        message: "We couldn't reach the spam-verification service. Please try again in a moment.",
       };
     }
     return { status: "error", message: "Verification failed. Please retry the form." };

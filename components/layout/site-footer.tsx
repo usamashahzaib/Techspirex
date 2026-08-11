@@ -9,6 +9,7 @@ import {
   siteContact,
 } from "@/lib/routes";
 import { NewsletterForm } from "@/features/newsletter/newsletter-form";
+import { CookieSettingsButton } from "@/components/consent/cookie-settings-button";
 
 const socialIcons = { LinkedIn: LinkedInIcon, Facebook: FacebookIcon } as const;
 
@@ -106,6 +107,7 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
+            <CookieSettingsButton />
             <span>© {new Date().getFullYear()} TechSpireX</span>
           </div>
         </div>

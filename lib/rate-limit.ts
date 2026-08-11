@@ -1,14 +1,27 @@
 /*
-  In-memory sliding-window rate limiter. Fine for a single Vercel instance /
-  low-volume marketing site forms; resets on redeploy/cold start. If traffic
-  ever justifies multi-instance consistency, swap for Upstash Ratelimit
-  (Redis-backed) — this function's signature is deliberately small so that
-  swap doesn't touch call sites.
+  In-memory sliding-window rate limiter. Adequate for a single Vercel instance /
+  low-volume marketing forms; it resets on redeploy/cold start and is NOT shared
+  across serverless instances, so under real scale it is best-effort only. It is
+  intentionally the *second* line of defense — Turnstile and newsletter
+  double-opt-in are the primary abuse controls (see docs/DEEP-AUDIT H-3).
+
+  Production upgrade path: back this with Upstash Ratelimit (Redis). The async
+  signature below is deliberately future-proof so swapping the body to an
+  awaited Redis call touches no call site.
 */
 const buckets = new Map<string, { count: number; resetAt: number }>();
 
+// Opportunistic cleanup so the Map can't grow unbounded on a long-lived instance.
+function sweep(now: number) {
+  if (buckets.size < 5000) return;
+  for (const [key, bucket] of buckets) {
+    if (now > bucket.resetAt) buckets.delete(key);
+  }
+}
+
 export function rateLimit(key: string, limit: number, windowMs: number) {
   const now = Date.now();
+  sweep(now);
   const bucket = buckets.get(key);
 
   if (!bucket || now > bucket.resetAt) {

@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllInsights, getInsightBySlug } from "@/lib/content/insights";
 import { routes } from "@/lib/routes";
+
+// Only known insight slugs render; unknown paths 404 rather than being
+// dynamically evaluated on demand (docs/DEEP-AUDIT L-2).
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return getAllInsights().map((insight) => ({ slug: insight.slug }));
@@ -30,6 +35,8 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   const insight = getInsightBySlug(slug);
   if (!insight) notFound();
 
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+
   const related = getAllInsights()
     .filter((item) => item.slug !== slug && item.category === insight.category)
     .slice(0, 3);
@@ -46,7 +53,7 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" nonce={nonce} dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="border-b border-border">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">

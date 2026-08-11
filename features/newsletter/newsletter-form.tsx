@@ -3,6 +3,7 @@
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { subscribeToNewsletter, type NewsletterState } from "./actions";
+import { TurnstileWidget } from "@/components/forms/turnstile-widget";
 import { trackEvent } from "@/lib/analytics/events";
 
 const initialState: NewsletterState = { status: "idle" };
@@ -24,8 +25,10 @@ export function NewsletterForm() {
   const [state, formAction] = useActionState(subscribeToNewsletter, initialState);
 
   useEffect(() => {
-    if (state.status === "success") trackEvent("newsletter_subscribe");
+    if (state.status === "pending") trackEvent("newsletter_subscribe");
   }, [state.status]);
+
+  const isError = state.status === "error";
 
   return (
     <form action={formAction} noValidate className="flex flex-col gap-2">
@@ -39,7 +42,9 @@ export function NewsletterForm() {
           type="email"
           required
           placeholder="you@company.com"
-          className="min-w-0 flex-1 rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          aria-invalid={isError || undefined}
+          aria-describedby="newsletter-status"
+          className="min-w-0 flex-1 rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-invalid:border-destructive"
         />
         <div className="sr-only" aria-hidden="true">
           <label htmlFor="newsletter-website">Leave this field empty</label>
@@ -47,11 +52,16 @@ export function NewsletterForm() {
         </div>
         <SubmitButton />
       </div>
-      <p role="status" className="text-xs text-muted-foreground min-h-4">
-        {state.status === "success" && "Subscribed — check your inbox."}
+      <TurnstileWidget />
+      <p
+        id="newsletter-status"
+        role={isError ? "alert" : "status"}
+        className={`text-xs min-h-4 ${isError ? "text-destructive" : "text-muted-foreground"}`}
+      >
+        {state.status === "pending" && "Almost there — check your inbox and click the confirmation link."}
         {state.status === "duplicate" && "You're already subscribed."}
         {state.status === "error" && state.message}
-        {state.status === "idle" && "Get the latest on AI trends and tech stacks. No spam."}
+        {state.status === "idle" && "Get the latest on AI trends and tech stacks. No spam. Double opt-in."}
       </p>
     </form>
   );

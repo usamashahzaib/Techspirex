@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef, cloneElement, type ReactElement } from "react";
 import { useFormStatus } from "react-dom";
 import { submitContactForm, type ContactState } from "./actions";
 import { projectTypes } from "@/lib/validation/contact";
@@ -32,17 +32,25 @@ function Field({
   label: string;
   name: string;
   error?: string[];
-  children: React.ReactNode;
+  children: ReactElement<Record<string, unknown>>;
 }) {
+  const hasError = Boolean(error?.[0]);
+  // Inject a11y attributes onto the control so screen readers announce the
+  // error and associate it with the field (WCAG 3.3.1 / 4.1.3).
+  const control = cloneElement(children, {
+    "aria-invalid": hasError || undefined,
+    "aria-describedby": hasError ? `${name}-error` : undefined,
+  });
+
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={name} className="text-sm font-medium text-foreground">
         {label}
       </label>
-      {children}
-      {error?.[0] && (
+      {control}
+      {hasError && (
         <p id={`${name}-error`} className="text-sm text-destructive">
-          {error[0]}
+          {error?.[0]}
         </p>
       )}
     </div>
@@ -54,16 +62,24 @@ const inputClass =
 
 export function ContactForm() {
   const [state, formAction] = useActionState(submitContactForm, initialState);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (state.status === "success") trackEvent("contact_form_submit");
+    // Move focus to the result so keyboard/screen-reader users are told the
+    // outcome instead of being left silently on the (now-replaced) form.
+    if (state.status === "success" || state.status === "error") {
+      resultRef.current?.focus();
+    }
   }, [state.status]);
 
   if (state.status === "success") {
     return (
       <div
+        ref={resultRef}
+        tabIndex={-1}
         role="status"
-        className="flex items-start gap-3 rounded-lg border border-border bg-card p-6"
+        className="flex items-start gap-3 rounded-lg border border-border bg-card p-6 focus:outline-none"
       >
         <CheckCircle2 className="mt-0.5 size-6 shrink-0 text-primary" aria-hidden="true" />
         <div>
@@ -82,7 +98,7 @@ export function ContactForm() {
   return (
     <form action={formAction} noValidate className="flex flex-col gap-5">
       {state.status === "error" && (
-        <div role="alert" className="flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
+        <div ref={resultRef} tabIndex={-1} role="alert" className="flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive focus:outline-none">
           <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <p>{state.message}</p>
         </div>

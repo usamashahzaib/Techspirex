@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Manrope } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ChromeGate } from "@/components/layout/chrome-gate";
+import { ConsentBanner } from "@/components/consent/consent-banner";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
 
@@ -53,7 +55,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <html
       lang="en"
@@ -62,6 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -84,7 +88,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ChromeGate>
           <SiteFooter />
         </ChromeGate>
-        <GoogleAnalytics />
+        <ConsentBanner />
+        <GoogleAnalytics nonce={nonce} />
       </body>
     </html>
   );

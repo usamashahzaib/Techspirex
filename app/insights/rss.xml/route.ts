@@ -2,6 +2,9 @@ import { getAllInsights } from "@/lib/content/insights";
 
 const SITE_URL = "https://techspirex.com";
 
+// Regenerate at most hourly instead of re-reading the filesystem on every hit.
+export const revalidate = 3600;
+
 export async function GET() {
   const insights = getAllInsights();
 
@@ -29,6 +32,9 @@ export async function GET() {
 </rss>`;
 
   return new Response(xml, {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    },
   });
 }

@@ -1,26 +1,15 @@
 import type { NextConfig } from "next";
 
-const isDev = process.env.NODE_ENV !== "production";
-
+/*
+  The Content-Security-Policy is intentionally NOT here — it is set per-request
+  in middleware.ts so it can carry a fresh nonce and drop 'unsafe-inline' from
+  script-src (see docs/DEEP-AUDIT H-1). Static, non-nonce headers stay below.
+*/
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-  {
-    key: "Content-Security-Policy",
-    // 'unsafe-eval' is required in dev only (Next/Turbopack dev-mode debugging); never in production.
-    value: [
-      `default-src 'self'`,
-      `script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval' " : ""}https://challenges.cloudflare.com https://www.googletagmanager.com`,
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https:",
-      "font-src 'self' data:",
-      "connect-src 'self' https://www.google-analytics.com https://challenges.cloudflare.com",
-      "frame-src https://challenges.cloudflare.com",
-      "frame-ancestors 'none'",
-    ].join("; "),
-  },
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
