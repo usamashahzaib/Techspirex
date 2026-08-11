@@ -19,7 +19,7 @@ export function Team() {
         />
       ))}
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="max-w-2xl">
+        <div className="reveal-scroll max-w-2xl">
           <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
             The people you&apos;d actually work with
           </h2>
@@ -30,7 +30,7 @@ export function Team() {
         </div>
 
         {team.length > 0 ? (
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="reveal-scroll-stagger mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member) => (
               <div key={member.name}>
                 <div className="aspect-square w-full rounded-lg bg-secondary" aria-hidden="true" />

@@ -63,13 +63,13 @@ export const metadata: Metadata = {
     url: "https://techspirex.com",
     title: "TechSpireX — Web engineering studio, Lahore",
     description:
-      "Engineering-led web, product, and platform delivery for founders and small teams in the US, UK, and EU. Senior team, transparent process, honest proof.",
+      "Web products, ecommerce, and focused AI automation from scope to production. Transparent process and working proof.",
   },
   twitter: {
     card: "summary_large_image",
     title: "TechSpireX — Web engineering studio, Lahore",
     description:
-      "Engineering-led web, product, and platform delivery for founders and small teams in the US, UK, and EU.",
+      "Web products, ecommerce, and focused AI automation from scope to production.",
   },
 };
 

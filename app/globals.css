@@ -50,16 +50,7 @@
   --color-accent-secondary: var(--accent-secondary);
 }
 
-/*
-  Warm engineering token set, reconciled with the real TechSpireX logo
-  (Logo/Artboard 1 copy - Copy.pdf.svg: indigo #392a6f + cyan #10d2f6).
-  Per approved direction: warm-tinted neutrals stay as the base (hue
-  ~55-65), primary accent moves to a refined, desaturated indigo derived
-  from the logo (not a neon purple), and the logo's cyan is reserved for
-  rare, secondary highlights only (--accent-secondary) - never paired with
-  the indigo as a dominant duo, which is the exact "purple/cyan neon tech
-  shortcut" the brief bans.
-*/
+/* Warm ivory base + restrained cobalt system. Logo cyan stays secondary. */
 :root {
   --background: oklch(0.98 0.007 65);
   --foreground: oklch(0.24 0.022 50);
@@ -67,20 +58,20 @@
   --card-foreground: oklch(0.24 0.022 50);
   --popover: oklch(0.98 0.007 65);
   --popover-foreground: oklch(0.24 0.022 50);
-  --primary: oklch(0.38 0.11 293);
+  --primary: oklch(0.43 0.14 260);
   --primary-foreground: oklch(0.98 0.012 65);
   --secondary: oklch(0.93 0.012 60);
   --secondary-foreground: oklch(0.28 0.025 50);
   --muted: oklch(0.935 0.011 60);
   --muted-foreground: oklch(0.47 0.023 50);
-  --accent: oklch(0.38 0.11 293);
+  --accent: oklch(0.43 0.14 260);
   --accent-foreground: oklch(0.98 0.012 65);
   --accent-secondary: oklch(0.75 0.12 210);
   --destructive: oklch(0.55 0.2 27);
   --border: oklch(0.88 0.013 58);
   --input: oklch(0.88 0.013 58);
-  --ring: oklch(0.38 0.11 293);
-  --chart-1: oklch(0.38 0.11 293);
+  --ring: oklch(0.43 0.14 260);
+  --chart-1: oklch(0.43 0.14 260);
   --chart-2: oklch(0.75 0.12 210);
   --chart-3: oklch(0.5 0.09 280);
   --chart-4: oklch(0.42 0.06 45);
@@ -88,12 +79,12 @@
   --radius: 0.5rem;
   --sidebar: oklch(0.965 0.009 62);
   --sidebar-foreground: oklch(0.24 0.022 50);
-  --sidebar-primary: oklch(0.38 0.11 293);
+  --sidebar-primary: oklch(0.43 0.14 260);
   --sidebar-primary-foreground: oklch(0.98 0.012 65);
   --sidebar-accent: oklch(0.93 0.012 60);
   --sidebar-accent-foreground: oklch(0.28 0.025 50);
   --sidebar-border: oklch(0.88 0.013 58);
-  --sidebar-ring: oklch(0.38 0.11 293);
+  --sidebar-ring: oklch(0.43 0.14 260);
 }
 
 .dark {
@@ -103,32 +94,32 @@
   --card-foreground: oklch(0.95 0.01 62);
   --popover: oklch(0.245 0.02 45);
   --popover-foreground: oklch(0.95 0.01 62);
-  --primary: oklch(0.62 0.13 293);
+  --primary: oklch(0.68 0.13 260);
   --primary-foreground: oklch(0.98 0.012 65);
   --secondary: oklch(0.3 0.02 47);
   --secondary-foreground: oklch(0.95 0.01 62);
   --muted: oklch(0.3 0.02 47);
   --muted-foreground: oklch(0.72 0.02 58);
-  --accent: oklch(0.62 0.13 293);
+  --accent: oklch(0.68 0.13 260);
   --accent-foreground: oklch(0.98 0.012 65);
   --accent-secondary: oklch(0.78 0.12 210);
   --destructive: oklch(0.65 0.19 25);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.62 0.13 293);
-  --chart-1: oklch(0.62 0.13 293);
+  --ring: oklch(0.68 0.13 260);
+  --chart-1: oklch(0.68 0.13 260);
   --chart-2: oklch(0.78 0.12 210);
   --chart-3: oklch(0.6 0.09 280);
   --chart-4: oklch(0.5 0.06 45);
   --chart-5: oklch(0.4 0.03 50);
   --sidebar: oklch(0.245 0.02 45);
   --sidebar-foreground: oklch(0.95 0.01 62);
-  --sidebar-primary: oklch(0.62 0.13 293);
+  --sidebar-primary: oklch(0.68 0.13 260);
   --sidebar-primary-foreground: oklch(0.98 0.012 65);
   --sidebar-accent: oklch(0.3 0.02 47);
   --sidebar-accent-foreground: oklch(0.95 0.01 62);
   --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.62 0.13 293);
+  --sidebar-ring: oklch(0.68 0.13 260);
 }
 
 @layer base {
@@ -154,5 +145,132 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*
+  Motion system, per DESIGN.md: transform/opacity only, exponential ease-out,
+  complete reduced-motion fallback. The global reduced-motion block above
+  already collapses every animation/transition here to ~instant (and forces
+  iteration-count: 1, so ambient "infinite" motion just settles on its final
+  frame instead of flickering) — nothing below needs its own reduced-motion
+  branch.
+*/
+@theme inline {
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer utilities {
+  /* On-load entrance (hero) — fires immediately, staggered via delay classes. */
+  .reveal {
+    animation: reveal-up 0.7s var(--ease-expo-out) both;
+  }
+  .reveal-delay-1 {
+    animation-delay: 0.08s;
+  }
+  .reveal-delay-2 {
+    animation-delay: 0.16s;
+  }
+  .reveal-delay-3 {
+    animation-delay: 0.24s;
+  }
+  .reveal-delay-4 {
+    animation-delay: 0.32s;
+  }
+
+  /* Card/list stagger inside a scroll-revealed group. */
+  .reveal-stagger > * {
+    animation: reveal-up 0.6s var(--ease-expo-out) both;
+  }
+  .reveal-stagger > *:nth-child(2) {
+    animation-delay: 0.06s;
+  }
+  .reveal-stagger > *:nth-child(3) {
+    animation-delay: 0.12s;
+  }
+  .reveal-stagger > *:nth-child(4) {
+    animation-delay: 0.18s;
+  }
+  .reveal-stagger > *:nth-child(5) {
+    animation-delay: 0.24s;
+  }
+  .reveal-stagger > *:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+
+  /* Gentle continuous drift for decorative hero accents. */
+  .animate-drift {
+    animation: drift 14s ease-in-out infinite;
+  }
+  .animate-float {
+    animation: float 7s ease-in-out infinite;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(2%, -3%) scale(1.06);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--float-rotate, -2deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--float-rotate, -2deg));
+  }
+}
+
+/*
+  Scroll-triggered reveal for below-the-fold sections. Pure CSS via
+  scroll-driven animations (no JS, no hydration risk): unsupported browsers
+  simply skip @supports and render the element in its normal, fully visible
+  state — the animation never "starts hidden" unless the browser can also
+  finish the timeline, so nothing is ever stuck invisible.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal-scroll {
+      animation: reveal-up 0.6s var(--ease-expo-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .reveal-scroll-stagger > * {
+      animation: reveal-up 0.55s var(--ease-expo-out) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .reveal-scroll-stagger > *:nth-child(2) {
+      animation-delay: 0.05s;
+    }
+    .reveal-scroll-stagger > *:nth-child(3) {
+      animation-delay: 0.1s;
+    }
+    .reveal-scroll-stagger > *:nth-child(4) {
+      animation-delay: 0.15s;
+    }
+    .reveal-scroll-stagger > *:nth-child(5) {
+      animation-delay: 0.2s;
+    }
+    .reveal-scroll-stagger > *:nth-child(6) {
+      animation-delay: 0.25s;
+    }
   }
 }

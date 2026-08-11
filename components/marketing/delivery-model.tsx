@@ -35,7 +35,7 @@ export function DeliveryModel() {
   return (
     <section className="border-b border-border bg-card">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="max-w-2xl">
+        <div className="reveal-scroll max-w-2xl">
           <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
             How an engagement actually runs
           </h2>
@@ -45,9 +45,9 @@ export function DeliveryModel() {
           </p>
         </div>
 
-        <ol className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="reveal-scroll-stagger mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((item) => (
-            <li key={item.step} className="border-t border-border pt-5">
+            <li key={item.step} className="border-t border-border pt-5 transition-colors duration-300 hover:border-primary/50">
               <span className="font-mono text-sm text-primary">{item.step}</span>
               <h3 className="mt-2 font-heading text-lg font-semibold">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>

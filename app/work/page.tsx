@@ -29,12 +29,12 @@ export default function WorkPage() {
       {caseStudies.length > 0 ? (
         <section>
           <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="reveal-scroll-stagger grid gap-6 sm:grid-cols-2">
               {caseStudies.map((study) => (
                 <Link
                   key={study.slug}
                   href={`${routes.work}/${study.slug}`}
-                  className="group flex flex-col justify-between rounded-xl border border-border p-6 transition-colors hover:border-primary"
+                  className="group flex flex-col justify-between rounded-xl border border-border p-6 transition-[transform,box-shadow,border-color] duration-300 ease-[var(--ease-expo-out)] hover:-translate-y-1 hover:border-primary hover:shadow-lg"
                 >
                   <div>
                     <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">

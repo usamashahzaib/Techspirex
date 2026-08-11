@@ -1,54 +1,60 @@
-import Link from "next/link";
-import { routes } from "@/lib/routes";
-
 const evidence = [
   {
-    label: "How we scope",
+    label: "Scope before promises",
     detail:
-      "Every engagement starts with a written technical review before a contract exists — what you actually need, what it will take, and where the risk is. No proposal goes out that we haven't stress-tested internally first.",
+      "We turn the goal into a written build plan: user flows, technical boundaries, delivery order, dependencies, and risks.",
   },
   {
-    label: "How we build",
+    label: "Progress you can inspect",
     detail:
-      "Two-week delivery cycles, code review on every change, and a staging environment you can see before anything reaches production. You get visibility into progress, not a black box until launch day.",
+      "Review working software throughout the build. Decisions, trade-offs, and the next release stay visible—not buried in status theatre.",
   },
   {
-    label: "How we hand off",
+    label: "A handoff that holds up",
     detail:
-      "Documentation, access, and a clean codebase are part of delivery, not an afterthought — the goal is a system your future team can maintain without us in the room.",
+      "Code, deployment access, operating notes, and known constraints ship with the product so your team is not locked in.",
   },
 ];
 
 export function Proof() {
   return (
     <section className="border-b border-border bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="max-w-2xl">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
-            We&apos;re a young studio. Here&apos;s what we&apos;d rather show you than tell you.
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            TechSpireX was founded in 2024. We don&apos;t have a decade of client logos to lean on, so
-            instead of a stat you can&apos;t verify, here&apos;s exactly how we actually work.
-          </p>
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <div>
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">
+              Credibility, not theatre
+            </p>
+            <h2 className="mt-4 font-heading text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              We won&apos;t promise billions. We&apos;ll show you what we can build.
+            </h2>
+          </div>
+          <div>
+            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              Revenue depends on the offer, market, distribution, pricing, and execution—not a website
+              alone. Our job is to engineer the product and conversion system properly, measure it,
+              and improve what the evidence supports.
+            </p>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Until a client result is attributable and approved, it is not used as a marketing claim.
+              Concept work is labelled as concept work. Simulated data is labelled as simulated data.
+            </p>
+          </div>
         </div>
 
-        <dl className="mt-10 grid gap-8 sm:grid-cols-3">
-          {evidence.map((item) => (
-            <div key={item.label} className="border-t border-border pt-5">
-              <dt className="font-heading text-base font-semibold">{item.label}</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</dd>
-            </div>
+        <ol className="reveal-scroll-stagger mt-12 grid gap-8 border-t border-border pt-8 md:grid-cols-3">
+          {evidence.map((item, index) => (
+            <li key={item.label} className="grid grid-cols-[2rem_1fr] gap-3">
+              <span className="font-mono text-xs text-primary" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <div>
+                <h3 className="font-heading text-lg font-semibold">{item.label}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+              </div>
+            </li>
           ))}
-        </dl>
-
-        <p className="mt-10 text-sm text-muted-foreground">
-          Want to see the process applied to a real project?{" "}
-          <Link href={routes.work} className="font-medium text-primary underline underline-offset-4">
-            Look at our work
-          </Link>
-          .
-        </p>
+        </ol>
       </div>
     </section>
   );

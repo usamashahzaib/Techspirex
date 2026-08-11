@@ -102,9 +102,22 @@ function ServicesMenu() {
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b bg-background/95 backdrop-blur transition-shadow duration-300 supports-backdrop-filter:bg-background/80",
+        scrolled ? "border-border shadow-sm" : "border-transparent"
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href={routes.home} className="flex items-center gap-2.5">
           <Image src="/logo-mark.svg" alt="" width={28} height={28} priority aria-hidden="true" />
@@ -123,7 +136,7 @@ export function SiteHeader() {
             href={routes.contact}
             className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Start a project
+            Discuss a build
           </Link>
         </div>
 
@@ -178,7 +191,7 @@ export function SiteHeader() {
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center justify-center rounded-md bg-primary px-4 py-3 text-base font-medium text-primary-foreground"
               >
-                Start a project
+                Discuss a build
               </Link>
             </li>
           </ul>
