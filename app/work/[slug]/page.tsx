@@ -29,6 +29,7 @@ const outcomeLabel = {
   measured: "Measured result",
   "client-supplied": "Client-supplied result",
   inferred: "Inferred / recommendation",
+  concept: "Concept build",
 } as const;
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {

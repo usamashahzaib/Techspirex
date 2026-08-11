@@ -3,6 +3,7 @@ import { Proof } from "@/components/marketing/proof";
 import { Capabilities } from "@/components/marketing/capabilities";
 import { DeliveryModel } from "@/components/marketing/delivery-model";
 import { Team } from "@/components/marketing/team";
+import { Faq } from "@/components/marketing/faq";
 import { FinalCta } from "@/components/marketing/final-cta";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <Capabilities />
       <DeliveryModel />
       <Team />
+      <Faq />
       <FinalCta />
     </>
   );
