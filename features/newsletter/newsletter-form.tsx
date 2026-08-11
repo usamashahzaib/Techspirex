@@ -1,0 +1,58 @@
+"use client";
+
+import { useActionState, useEffect } from "react";
+import { useFormStatus } from "react-dom";
+import { subscribeToNewsletter, type NewsletterState } from "./actions";
+import { trackEvent } from "@/lib/analytics/events";
+
+const initialState: NewsletterState = { status: "idle" };
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="shrink-0 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      {pending ? "Subscribing…" : "Subscribe"}
+    </button>
+  );
+}
+
+export function NewsletterForm() {
+  const [state, formAction] = useActionState(subscribeToNewsletter, initialState);
+
+  useEffect(() => {
+    if (state.status === "success") trackEvent("newsletter_subscribe");
+  }, [state.status]);
+
+  return (
+    <form action={formAction} noValidate className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <label htmlFor="newsletter-email" className="sr-only">
+          Email address
+        </label>
+        <input
+          id="newsletter-email"
+          name="email"
+          type="email"
+          required
+          placeholder="you@company.com"
+          className="min-w-0 flex-1 rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        />
+        <div className="sr-only" aria-hidden="true">
+          <label htmlFor="newsletter-website">Leave this field empty</label>
+          <input type="text" id="newsletter-website" name="website" tabIndex={-1} autoComplete="off" />
+        </div>
+        <SubmitButton />
+      </div>
+      <p role="status" className="text-xs text-muted-foreground min-h-4">
+        {state.status === "success" && "Subscribed — check your inbox."}
+        {state.status === "duplicate" && "You're already subscribed."}
+        {state.status === "error" && state.message}
+        {state.status === "idle" && "Get the latest on AI trends and tech stacks. No spam."}
+      </p>
+    </form>
+  );
+}
