@@ -61,7 +61,7 @@ export function NewsletterForm() {
         {state.status === "pending" && "Almost there - check your inbox and click the confirmation link."}
         {state.status === "duplicate" && "You're already subscribed."}
         {state.status === "error" && state.message}
-        {state.status === "idle" && "Get the latest on AI trends and tech stacks. No spam. Double opt-in."}
+        {state.status === "idle" && "Useful notes on building, running, and improving software. Confirm once by email."}
       </p>
     </form>
   );

@@ -1,83 +1,158 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { allServices } from "@/content/services";
+import { faqSchema, serviceCatalogSchema } from "@/lib/seo/schema";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Software development services and dedicated teams",
   description:
-    "Six real capabilities - web development, AI & automation, UI/UX design, DevOps & cloud, digital marketing, and ecommerce - led by web development as the flagship service.",
+    "End-to-end software services from Techspirex: product strategy, UI/UX design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.",
   alternates: { canonical: "/services" },
 };
 
-const orientationQuestions = [
-  { problem: "I need a product built or rebuilt", service: "Web development" },
-  { problem: "Manual work is eating my team's time", service: "AI & automation" },
-  { problem: "My product works but doesn't feel considered", service: "UI/UX design" },
-  { problem: "Deployments are risky or depend on one person", service: "DevOps & cloud" },
-  { problem: "Traffic isn't converting", service: "Digital marketing" },
-  { problem: "My storefront is slow or hard to update", service: "Ecommerce" },
+const lifecycle = [
+  ["01", "Discover and plan", "Product discovery, requirements, technical audits, architecture, roadmaps, and delivery planning."],
+  ["02", "Design the experience", "UX research, flows, wireframes, UI design, prototypes, design systems, and accessibility."],
+  ["03", "Build the software", "Web apps, SaaS, portals, internal tools, APIs, integrations, ecommerce, and AI-enabled workflows."],
+  ["04", "Verify and release", "QA, automated testing, performance, security review, CI/CD, cloud setup, migration, and launch."],
+  ["05", "Run and improve", "Monitoring, maintenance, conversion work, technical SEO, analytics, iteration, and ongoing delivery."],
+] as const;
+
+const flexibleWays = [
+  ["One specialist", "Add a developer, designer, QA engineer, DevOps engineer, or technical lead to your team."],
+  ["A dedicated pod", "Use a stable cross-functional team for a product area or sustained roadmap."],
+  ["A complete project team", "Give us a defined outcome and keep product, design, engineering, QA, and release under one owner."],
+  ["A focused intervention", "Bring us in for an audit, redesign, migration, launch, performance issue, or technical bottleneck."],
+] as const;
+
+const serviceFaqs = [
+  {
+    question: "What software development services does Techspirex provide?",
+    answer:
+      "Techspirex covers product discovery, UX and UI design, web and SaaS development, APIs, AI automation, ecommerce, cloud infrastructure, DevOps, QA, technical SEO, analytics, maintenance, and staff augmentation.",
+  },
+  {
+    question: "Can Techspirex provide one developer or designer for an existing team?",
+    answer:
+      "Yes. You can engage one named specialist, a dedicated delivery pod, or a complete project team. The role, availability, overlap hours, ownership, and duration are agreed before work starts.",
+  },
+  {
+    question: "Can we hire Techspirex for design without development?",
+    answer:
+      "Yes. Product audits, UX flows, interface design, prototypes, and design systems can be delivered as standalone work or followed by implementation.",
+  },
 ];
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
-        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Capabilities</p>
-          <h1 className="mt-5 max-w-[10ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Build the right system. Nothing extra.</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
-            Six real capabilities, built by one team. Web development is where most engagements start
-            and where we&apos;re deepest - the rest support a build rather than standing alone as separate
-            product lines.
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceCatalogSchema(allServices)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(serviceFaqs)) }} />
+
+      <section className="border-b border-[#63548f] bg-[#211744] text-[#faf7ee]">
+        <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-8 lg:py-24">
+          <div>
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#62e4ff]">Software services</p>
+            <h1 className="mt-5 max-w-[13ch] text-[clamp(3rem,6vw,6rem)] font-black leading-[0.9] tracking-[-0.065em]">
+              Everything needed to take software from idea to operation.
+            </h1>
+          </div>
+          <p className="max-w-xl text-lg leading-relaxed text-[#ded7eb]">
+            Use Techspirex for one specialist, a dedicated team, or a complete project. We can plan,
+            design, build, test, launch, run, and improve the system with clear ownership at every stage.
           </p>
         </div>
       </section>
 
-      <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <h2 className="font-heading text-xl font-semibold">Not sure where to start?</h2>
-          <dl className="mt-6 flex flex-col gap-3">
-            {orientationQuestions.map((item) => (
-              <div
-                key={item.problem}
-                className="flex flex-col justify-between gap-1 border-t border-border pt-3 sm:flex-row sm:items-center"
-              >
-                <dt className="text-sm text-muted-foreground">&ldquo;{item.problem}&rdquo;</dt>
-                <dd className="text-sm font-medium text-primary">{item.service} →</dd>
-              </div>
-            ))}
-          </dl>
+      <section className="border-b border-border bg-[#fbf9ff]">
+        <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">End-to-end delivery</p>
+              <h2 className="mt-4 max-w-[10ch] text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl">
+                One team across the full lifecycle.
+              </h2>
+            </div>
+            <ol className="divide-y divide-border border-y border-border">
+              {lifecycle.map(([number, title, detail]) => (
+                <li key={number} className="grid gap-3 py-6 sm:grid-cols-[3rem_0.65fr_1.35fr]">
+                  <span className="font-mono text-xs font-bold text-primary">{number}</span>
+                  <h3 className="text-lg font-extrabold tracking-tight">{title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{detail}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
-      <section>
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="divide-y divide-border border-y border-border">
-            {allServices.map((service) => (
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Capabilities</p>
+            <h2 className="mt-4 text-4xl font-black tracking-[-0.05em] sm:text-6xl">Choose the outcome, not a department.</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              Each service can stand alone. When the work crosses disciplines, we combine them under one delivery plan.
+            </p>
+          </div>
+          <div className="mt-12 divide-y divide-border border-y border-border">
+            {allServices.map((service, index) => (
               <Link
                 key={service.slug}
                 href={`${routes.services}/${service.slug}`}
-                className="group grid gap-3 py-7 transition-[padding,background-color] hover:bg-card sm:grid-cols-[1fr_1.5fr_auto] sm:items-center sm:px-4 sm:hover:px-6"
+                className="group grid gap-4 py-7 transition-[background-color,padding] hover:bg-card sm:grid-cols-[3rem_0.75fr_1.25fr_auto] sm:items-center sm:px-4 sm:hover:px-6"
               >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-heading text-lg font-semibold">{service.name}</h3>
-                    {service.flagship && (
-                      <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
-                        Flagship
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{service.heroSummary}</p>
-                <ArrowRight
-                  className="size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
+                <span className="font-mono text-xs text-primary">{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="text-xl font-extrabold tracking-tight">{service.name}</h3>
+                <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{service.heroSummary}</p>
+                <ArrowRight className="size-5 text-primary transition-transform group-hover:translate-x-1" weight="bold" aria-hidden="true" />
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#665890] bg-[#2a2051] text-[#faf7ee]">
+        <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <div>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#62e4ff]">Flexible capacity</p>
+              <h2 className="mt-4 max-w-[10ch] text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl">
+                Scale the team around the work.
+              </h2>
+            </div>
+            <div className="divide-y divide-[#776a9d] border-y border-[#776a9d]">
+              {flexibleWays.map(([title, detail]) => (
+                <div key={title} className="grid gap-3 py-6 sm:grid-cols-[0.7fr_1.3fr]">
+                  <h3 className="text-lg font-extrabold">{title}</h3>
+                  <p className="text-sm leading-relaxed text-[#d5cde5]">{detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Link href={routes.serviceStaffAugmentation} className="mt-10 inline-flex items-center gap-2 rounded-lg bg-[#62e4ff] px-6 py-3.5 text-sm font-extrabold text-[#211744]">
+            Explore staff augmentation <ArrowRight className="size-4" weight="bold" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Common questions</p>
+          <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] sm:text-5xl">Start with the shape of support you need.</h2>
+          <div className="mt-10 divide-y divide-border border-y border-border">
+            {serviceFaqs.map((item) => (
+              <div key={item.question} className="grid gap-3 py-6 sm:grid-cols-[0.8fr_1.2fr]">
+                <h3 className="text-lg font-extrabold">{item.question}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href={`${routes.contact}?path=brief`} className="inline-flex items-center rounded-lg bg-primary px-6 py-3.5 text-sm font-bold text-primary-foreground">Send a project brief</Link>
+            <Link href={`${routes.contact}?path=call`} className="inline-flex items-center rounded-lg border border-primary px-6 py-3.5 text-sm font-bold text-primary">Book a discovery call</Link>
           </div>
         </div>
       </section>

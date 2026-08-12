@@ -9,6 +9,7 @@ const routes = [
   "/services/devops-cloud",
   "/services/digital-marketing",
   "/services/ecommerce",
+  "/services/staff-augmentation",
   "/work",
   "/about",
   "/insights",

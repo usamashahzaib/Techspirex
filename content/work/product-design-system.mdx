@@ -1,0 +1,65 @@
+---
+title: "A data-dense product theme, built to feel calm"
+clientOrIndustry: "Concept build · UI/UX & Product Design"
+service: "ui-ux-design"
+summary: "The design system behind the Meridian demo - a dark, data-dense product theme deliberately distinct from this marketing site, with every chart hand-built for full control. Open the interactive demo and inspect it."
+outcomeType: "concept"
+outcome: "Interactive demo"
+publishedAt: "2026-08-12"
+---
+
+**This is a concept build, not a client engagement.** It documents the design
+system we built for [Meridian](/demos/meridian), our subscription-analytics
+dashboard. Product UI and marketing UI have different jobs, and a team that has
+only built one usually gives itself away. This is us showing both.
+
+[**→ Open the Meridian demo**](/demos/meridian)
+
+## The design problem
+
+Analytics dashboards are where information hierarchy either works or collapses.
+Dense with numbers, full of competing signals, and easy to make either
+overwhelming or uselessly shallow. The design goal was not "make it pretty" - it
+was to make a screen full of numbers feel calm and legible at a glance.
+
+## A separate theme, on purpose
+
+Meridian runs a dark, high-density product theme that is intentionally nothing
+like this marketing site. Marketing UI persuades; product UI is lived in for
+hours. They need different contrast, different spacing rhythm, different
+information density. Reusing the marketing look for a product surface is a common
+tell - we built a distinct system instead.
+
+## Design decisions worth naming
+
+- **Semantic color, not decorative color.** A metric moving up is not always
+  good - revenue up is good, churn up is not. The system colors each delta by
+  whether the movement is good for that specific metric, so the dashboard reads
+  correctly without the user having to think.
+- **Information hierarchy first.** KPI cards, the revenue chart, the cohort
+  heatmap, and the activity table are laid out so the eye lands on the headline
+  numbers first and drills down only when it wants to.
+- **Every chart hand-built in SVG.** The revenue area chart, the sparklines, the
+  donut, and the retention heatmap use no charting library. That keeps the bundle
+  small, the rendering fully controllable, the visuals matched exactly to the
+  design system instead of a library's defaults, and the whole thing compatible
+  with a strict Content Security Policy.
+- **Accessible interaction.** The hover crosshair, tooltips, and filterable table
+  are built to work with keyboard and screen readers, not just a mouse.
+
+## Why hand-built matters
+
+A charting library gets you 80 percent of the way and then fights you on the last
+20 - the part that is actually the design. Hand-authored SVG means the crosshair,
+the tooltip timing, the color logic, and the empty states are all ours to shape.
+That control is the difference between a dashboard that looks like a template and
+one that feels considered.
+
+## The honest caveat
+
+Meridian has no backend and no real customers - the data is generated from a fixed
+seed so it renders identically on every build. It is a demonstration of design and
+build quality, not a claim of delivered client outcomes. It exists so you can judge
+the thinking instead of taking our word for it.
+
+[**→ Open the Meridian demo**](/demos/meridian)

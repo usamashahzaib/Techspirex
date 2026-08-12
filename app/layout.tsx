@@ -8,6 +8,7 @@ import { ChromeGate } from "@/components/layout/chrome-gate";
 import { ConsentBanner } from "@/components/consent/consent-banner";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
+import { env } from "@/lib/env";
 
 const archivo = Archivo({
   variable: "--font-brand",
@@ -24,11 +25,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://techspirex.com"),
   title: {
-    default: "Techspirex | Product & web engineering studio",
+    default: "Techspirex | Software development company and dedicated teams",
     template: "%s | Techspirex",
   },
   description:
-    "Techspirex is a product engineering studio building web systems, AI automation, design, DevOps, marketing, and ecommerce for founders and teams worldwide.",
+    "Techspirex is a software development company in Lahore serving clients worldwide with product design, web and SaaS development, AI automation, cloud, QA, ecommerce, and dedicated teams.",
   keywords: [
     "web development agency",
     "product engineering studio",
@@ -37,21 +38,35 @@ export const metadata: Metadata = {
     "custom web application development",
     "Next.js development studio",
     "hire product engineers",
+    "staff augmentation company",
+    "dedicated software development team",
+    "software development company Lahore",
   ],
   openGraph: {
     type: "website",
     siteName: "Techspirex",
     locale: "en_US",
     url: "https://techspirex.com",
-    title: "Techspirex | Product & web engineering studio",
+    title: "Techspirex | Software development company and dedicated teams",
     description:
-      "Web products, ecommerce, and focused AI automation from scope to production. Transparent process and working proof.",
+      "Product design, software engineering, AI, cloud, QA, ecommerce, and dedicated talent from one accountable team.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Techspirex | Product & web engineering studio",
+    title: "Techspirex | Software development company and dedicated teams",
     description:
-      "Web products, ecommerce, and focused AI automation from scope to production.",
+      "Product design, software engineering, AI, cloud, QA, ecommerce, and dedicated talent.",
+  },
+  // Search-engine ownership verification. Each tag is emitted only when its env
+  // var is set, so no empty <meta> ships before the codes exist. Add the codes
+  // from Google Search Console and Bing Webmaster Tools to enable them.
+  verification: {
+    ...(env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { google: env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { other: { "msvalidate.01": env.NEXT_PUBLIC_BING_SITE_VERIFICATION } }
+      : {}),
   },
 };
 

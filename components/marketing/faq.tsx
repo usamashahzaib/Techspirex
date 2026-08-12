@@ -28,6 +28,16 @@ const faqs = [
     answer:
       "Code, deployment access, documentation, and known constraints are part of the handoff. Ownership and any third-party licensing are written into the agreement before delivery begins.",
   },
+  {
+    question: "Can you add developers, designers, or QA specialists to our existing team?",
+    answer:
+      "Yes. We provide individual specialists, dedicated delivery pods, or a managed cross-functional team for a defined period. The role, seniority, working hours, ownership, and replacement terms are agreed before the engagement starts.",
+  },
+  {
+    question: "Can we hire Techspirex for design, QA, cloud, or an audit without a full build?",
+    answer:
+      "Yes. You can engage us for a focused discovery, product design sprint, usability review, code audit, QA cycle, cloud migration, performance fix, or launch support. The work does not need to include full product development.",
+  },
 ];
 
 export function Faq() {
@@ -38,7 +48,7 @@ export function Faq() {
         <p className="reveal-scroll font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">Before you reach out</p>
         <h2 className="reveal-scroll mt-4 font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">The questions worth asking</h2>
         <p className="reveal-scroll mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-          Clear answers on proof, pricing, ownership, and the limits of what any product studio can promise.
+          Clear answers on proof, pricing, ownership, team extension, and focused engagements.
         </p>
 
         <div className="reveal-scroll mt-10 divide-y divide-border border-y border-border">

@@ -1,25 +1,23 @@
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { routes } from "@/lib/routes";
-import { AuroraBackdrop } from "@/components/marketing/aurora-backdrop";
-
 const models = [
   { number: "01", title: "Fixed scope", fit: "A defined outcome with known boundaries.", detail: "One written scope, milestone-based delivery, explicit change control." },
   { number: "02", title: "Dedicated build team", fit: "A product roadmap that needs sustained momentum.", detail: "A stable cross-functional team, visible capacity, regular releases." },
-  { number: "03", title: "Focused intervention", fit: "One risky workflow, launch, or technical bottleneck.", detail: "Short engagement, narrow goal, documented handoff to your team." },
+  { number: "03", title: "Staff augmentation", fit: "Your team needs one or more specialists for a defined period.", detail: "Named resources, agreed capacity, overlap hours, and direct integration with your team." },
+  { number: "04", title: "Focused intervention", fit: "One risky workflow, launch, or technical bottleneck.", detail: "Short engagement, narrow goal, documented handoff to your team." },
 ] as const;
 
 export function EngagementModels() {
   return (
-    <section className="relative overflow-hidden border-b border-[#7669a0] bg-[linear-gradient(180deg,#2a2051_0%,#30245f_60%,#281d55_100%)] text-[#faf7ee]">
-      <AuroraBackdrop className="opacity-70" grain={0.22} />
+    <section className="relative overflow-hidden border-b border-[#7669a0] bg-[#2a2051] text-[#faf7ee]">
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-20">
           <div>
             <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#10d2f6]">Ways to work together</p>
-            <h2 className="mt-5 max-w-[10ch] text-4xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl">Match the model to the uncertainty.</h2>
+            <h2 className="mt-5 max-w-[12ch] text-4xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl">Use the team shape that fits the work.</h2>
           </div>
-          <p className="max-w-2xl text-lg font-medium leading-relaxed text-[#d8d0e8] lg:pt-8">No default retainer and no oversized team. The commercial model follows what is known, what needs discovery, and how quickly evidence can reduce risk.</p>
+          <p className="max-w-2xl text-lg font-medium leading-relaxed text-[#d8d0e8]">Start with one resource, a dedicated pod, or a complete project team. Capacity can expand, reduce, or hand back as the roadmap changes.</p>
         </div>
 
         <div className="mt-14 divide-y divide-[#7669a0] border-y border-[#7669a0]">

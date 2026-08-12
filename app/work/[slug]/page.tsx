@@ -34,6 +34,7 @@ const outcomeLabel = {
   "client-supplied": "Client-supplied result",
   inferred: "Inferred / recommendation",
   concept: "Concept build",
+  implementation: "Implementation status",
   shipped: "Shipped · Live in production",
 } as const;
 

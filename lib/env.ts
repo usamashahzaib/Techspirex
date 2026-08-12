@@ -18,6 +18,12 @@ const envSchema = z.object({
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
   NEXT_PUBLIC_GA4_ID: z.string().min(1).optional(),
   NEXT_PUBLIC_SITE_URL: z.string().url().optional(),
+  // Search engine site verification (emitted as <meta> tags - see app/layout.tsx).
+  NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: z.string().min(1).optional(),
+  NEXT_PUBLIC_BING_SITE_VERIFICATION: z.string().min(1).optional(),
+  // IndexNow key for instant Bing/Yandex/Seznam URL submission. Overrides the
+  // committed default in lib/seo/indexnow.ts; the public key file must match.
+  INDEXNOW_KEY: z.string().min(8).optional(),
 });
 
 const parsed = envSchema.safeParse({
@@ -30,6 +36,9 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   NEXT_PUBLIC_GA4_ID: process.env.NEXT_PUBLIC_GA4_ID,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  NEXT_PUBLIC_BING_SITE_VERIFICATION: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+  INDEXNOW_KEY: process.env.INDEXNOW_KEY,
 });
 
 if (!parsed.success) {

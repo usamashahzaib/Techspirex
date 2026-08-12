@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
       { source: "/devops-cloud", destination: "/services/devops-cloud", permanent: true },
       { source: "/digital-marketing", destination: "/services/digital-marketing", permanent: true },
       { source: "/ecommerce-solutions", destination: "/services/ecommerce", permanent: true },
+      { source: "/staff-augmentation", destination: "/services/staff-augmentation", permanent: true },
       // Next.js redirect source matching is case-insensitive, so a rule for
       // "/Insights" also catches the real lowercase "/insights" route and
       // self-redirects. The old site's "/Insights" already 404s and isn't

@@ -16,12 +16,7 @@ export function TurnstileWidget() {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   if (!siteKey) {
-    return (
-      <div className="rounded-md border border-dashed border-border p-3 text-xs text-muted-foreground">
-        Spam verification is not configured in this environment yet - see .env.example.
-        <input type="hidden" name="cf-turnstile-response" value="dev-bypass" />
-      </div>
-    );
+    return <input type="hidden" name="cf-turnstile-response" value="dev-bypass" />;
   }
 
   return (

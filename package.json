@@ -9,7 +9,8 @@
     "lint": "eslint && npm run check:copy",
     "check:copy": "node scripts/check-copy.mjs",
     "test:e2e": "playwright test",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "seo:indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

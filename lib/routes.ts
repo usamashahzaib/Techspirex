@@ -7,6 +7,7 @@ export const routes = {
   serviceDevopsCloud: "/services/devops-cloud",
   serviceDigitalMarketing: "/services/digital-marketing",
   serviceEcommerce: "/services/ecommerce",
+  serviceStaffAugmentation: "/services/staff-augmentation",
   work: "/work",
   about: "/about",
   insights: "/insights",
@@ -32,6 +33,7 @@ export const serviceNavItems = [
   { label: "DevOps & cloud", href: routes.serviceDevopsCloud, flagship: false },
   { label: "Digital marketing", href: routes.serviceDigitalMarketing, flagship: false },
   { label: "Ecommerce", href: routes.serviceEcommerce, flagship: false },
+  { label: "Staff augmentation", href: routes.serviceStaffAugmentation, flagship: false },
 ] as const;
 
 export const primaryNavItems = [

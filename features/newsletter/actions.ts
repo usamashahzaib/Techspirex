@@ -40,7 +40,7 @@ export async function subscribeToNewsletter(
     if (verification.notConfigured) {
       return {
         status: "error",
-        message: "Signup isn't fully configured yet (spam verification is missing).",
+        message: "Signup is temporarily unavailable. Please try again later.",
       };
     }
     if (verification.transient) {
@@ -53,13 +53,13 @@ export async function subscribeToNewsletter(
     console.error("[newsletter] RESEND_API_KEY / RESEND_AUDIENCE_ID / NEWSLETTER_CONFIRM_SECRET not configured");
     return {
       status: "error",
-      message: "Newsletter signup isn't fully configured yet. Please check back soon.",
+      message: "Newsletter signup is temporarily unavailable. Please check back soon.",
     };
   }
 
   const token = createConfirmToken(parsed.data.email);
   if (!token) {
-    return { status: "error", message: "Newsletter signup isn't fully configured yet." };
+    return { status: "error", message: "Newsletter signup is temporarily unavailable." };
   }
   const confirmUrl = `${SITE_URL}/newsletter/confirm?token=${encodeURIComponent(token)}`;
 

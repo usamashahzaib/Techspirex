@@ -1,5 +1,5 @@
 import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
-import { draftTestimonials, publishableTestimonials } from "@/content/claims";
+import { publishableTestimonials } from "@/content/claims";
 
 const evidence = [
   ["Before commitment", "Written scope, assumptions, risks, delivery order, and ownership boundaries."],
@@ -8,8 +8,7 @@ const evidence = [
 ] as const;
 
 export function SocialProof() {
-  const isDevelopment = process.env.NODE_ENV === "development";
-  const testimonials = publishableTestimonials.length ? publishableTestimonials : isDevelopment ? draftTestimonials : [];
+  const testimonials = publishableTestimonials;
 
   return (
     <section className="border-b border-border bg-background">
@@ -32,15 +31,12 @@ export function SocialProof() {
 
         {testimonials.length > 0 && (
           <div className="mt-16 border border-dashed border-primary/40 bg-card p-5 sm:p-8">
-            {isDevelopment && publishableTestimonials.length === 0 && (
-              <p className="mb-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-destructive">Development preview · blocked from production until verified</p>
-            )}
             <div className="grid gap-8 md:grid-cols-2">
               {testimonials.map((item) => (
                 <blockquote key={item.quote}>
                   <CheckCircle className="size-5 text-primary" weight="fill" aria-hidden="true" />
-                  <p className="mt-4 text-lg font-medium leading-relaxed">“{item.quote}”</p>
-                  <footer className="mt-5 text-sm text-muted-foreground">{item.name} · {item.role}, {item.company}</footer>
+                  <p className="mt-4 text-lg font-medium leading-relaxed">&quot;{item.quote}&quot;</p>
+                  <footer className="mt-5 text-sm text-muted-foreground">{item.name} - {item.role}, {item.company}</footer>
                 </blockquote>
               ))}
             </div>

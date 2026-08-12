@@ -128,16 +128,32 @@ budget, and re-verify LCP/CLS/INP once real photography replaces the placeholder
 Per-route unique titles/descriptions (verified via curl against the production build), canonical URLs,
 Organization/Service/Breadcrumb/Person/Article JSON-LD, `sitemap.xml` and `robots.txt` both serving
 correctly, RSS feed at `/insights/rss.xml`, old-site redirect map in place, and a branded dynamic
-`opengraph-image.tsx` default card. Not yet done: submitting the sitemap to Google Search Console /
-Bing Webmaster Tools, which needs account access.
+`opengraph-image.tsx` default card.
+
+**Search-engine verification and instant indexing are now wired in code:**
+
+- **Ownership verification tags** — set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (Search Console) and/or
+  `NEXT_PUBLIC_BING_SITE_VERIFICATION` (Bing Webmaster Tools) and the `<meta>` tags render
+  automatically (`app/layout.tsx`). Each ships only when its var is set — no empty tags before launch.
+- **IndexNow** — instant URL submission to Bing, Yandex, Seznam, and Naver is fully implemented. A key
+  file is committed at `public/19508e750a743d11d13c921771d055b4.txt` (`lib/seo/indexnow.ts`). After a
+  production deploy, run `npm run seo:indexnow`; it reads the live sitemap and submits every URL. To
+  rotate the key, set `INDEXNOW_KEY` and rename the public file to match.
+
+Still needs account access (human-only): registering the property and submitting `sitemap.xml` in
+Google Search Console and Bing Webmaster Tools. Google does not consume IndexNow, so its sitemap
+submission remains manual.
 
 ## 10. Known limitations
 
 - **Photography**: the hero uses three bespoke abstract brand scenes. About and team retain honest
   placeholders until real, consented team/studio photography is supplied.
-- **Team roster**: `content/team.ts` ships empty pending your confirmation of who's current (see
-  `docs/CLAIMS-REGISTER.md` item 2). The team section degrades gracefully (an honest "profiles being
-  finalized" message) rather than showing placeholder people.
+- **Team roster**: `content/team.ts` is now populated with the four names carried from the company's
+  prior site (Azeem Ahmad, Usman Tahir, Javaid Fazeel, Musfira Shehroz), organized into a hierarchy
+  (Leadership / Engineering / Design & Product / DevOps & Delivery) and rendered on `/about`. **Confirm
+  each person is current, consents to a public bio/photo, and that their role line is accurate**, then
+  add a real `photoUrl` (see `docs/CLAIMS-REGISTER.md` item 2/6). The section still degrades gracefully
+  to a role-only structure if `team` is set back to `[]`.
 - **Insights articles**: the section retains its honest empty state until real editorial content exists.
 - **Visual QA**: homepage hero verified at 1440px and 390px after the three-scene redesign. The full
   Playwright suite checks overflow, console errors, routes, forms, and axe accessibility at mobile,
@@ -159,10 +175,13 @@ Bing Webmaster Tools, which needs account access.
 ## 12. Remaining credential-dependent tasks
 
 - Create Resend, Cloudflare Turnstile, and GA4 accounts and add the keys (§5).
+- Register the site in Google Search Console + Bing Webmaster Tools, add the verification codes to the
+  env vars (§9), submit `sitemap.xml`, then run `npm run seo:indexnow` after deploy.
 - Confirm team roster and supply real bios/photos.
 - Confirm contact details.
 - Supply real photography for hero/about/team sections.
-- Add real case studies and insights articles as they become available (content system is ready).
+- Add real case studies and insights articles as they become available (content system is ready — drop
+  an `.mdx` file in `content/insights/` or `content/work/`; index, detail, sitemap, and RSS auto-update).
 
 ## 13. Before/after summary
 

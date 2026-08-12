@@ -1,0 +1,69 @@
+---
+title: "A Next.js delivery platform, built for launch"
+clientOrIndustry: "Our own pre-launch build · DevOps & Cloud"
+service: "devops-cloud"
+summary: "Our own pre-launch implementation: a Next.js app with a strict CSP, automated accessibility checks, and integrations designed to fail visibly when configuration is missing."
+outcomeType: "implementation"
+outcome: "Built and ready for production deployment"
+publishedAt: "2026-08-12"
+---
+
+**This case study is about our own pre-launch implementation.** It is not a live
+production deployment. Before we can publish signed client infrastructure work,
+the most honest thing we can show is the code and local production build behind
+this site. The details below are verifiable in the repository and with the
+documented build and test commands.
+
+## Why our own site counts as evidence
+
+A DevOps claim is easy to make and hard to prove. So instead of describing a
+pipeline we ran for someone we cannot name, we document this implementation. The same
+discipline - security headers, a strict Content Security Policy, automated
+quality gates, and integrations that fail honestly instead of silently - is what
+we bring to client infrastructure.
+
+## Security posture
+
+- **Strict Content Security Policy with per-request nonces.** Every inline script
+  on the site carries a nonce generated in middleware; `unsafe-eval` is dropped
+  entirely outside development. There is no blanket `unsafe-inline` escape hatch.
+- **Full security header set** - HSTS, frame denial, referrer policy, and a
+  locked-down permissions policy - applied at the edge, not per-page.
+- **No third-party script runs before consent.** Analytics load only after the
+  visitor accepts, and the CSP is written so a rogue injected script has nowhere
+  to execute.
+
+## Quality gates that actually block
+
+Before release, this implementation is checked with:
+
+- **TypeScript in strict mode** - the whole codebase, no `any` escape hatches in
+  the app surface.
+- **Playwright end-to-end tests** covering route status codes, navigation, form
+  behavior, and layout overflow at mobile, tablet, and desktop viewports.
+- **Automated accessibility checks** - axe-core runs against real rendered pages
+  in the Playwright suite, not as an afterthought.
+- **A copy linter** - a small custom script that fails the build on typographic
+  and voice violations, because consistency is a delivery concern too.
+
+## Integrations that fail loudly, not silently
+
+The forms are designed around external email delivery and spam protection. When a
+credential is missing, the affected feature says so plainly
+and tells the visitor how to reach us directly. Nothing is ever silently
+dropped. That fail-closed, fail-honest pattern is a deliberate engineering
+decision, and it is the same one we apply to client systems.
+
+## The stack
+
+Next.js (App Router), React and TypeScript in strict mode, Tailwind
+CSS, middleware-based security and CSP, Playwright and axe-core for the test
+suite, and adapter-based integrations. The deployment target is Vercel; the
+required production credentials and deployment remain launch steps.
+
+## The honest caveat
+
+This is our own platform, not a client engagement. It demonstrates the standard
+we are building toward, not a claim that the site or its integrations are live.
+When we publish client infrastructure case studies, they will name the client
+and the measured result.

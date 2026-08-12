@@ -1,18 +1,18 @@
-# Techspirex — Product Definition
+# Techspirex - Product Definition
 
 ## What Techspirex is
 
-A full-service digital engineering agency based in Lahore, Pakistan, founded in 2024, serving Western SMBs and startups (US/UK/EU) who need a technical partner for web/product engineering, and — as supporting capability — AI & automation, UI/UX design, DevOps & cloud, digital marketing, and ecommerce. Web development is the flagship service and the anchor of the site's narrative; the other five are real, staffed offerings, not filler.
+A full-service software delivery company based in Lahore, Pakistan, founded in 2024, serving teams worldwide. Capabilities cover strategy, product design, software development, AI and automation, QA, DevOps and cloud, digital growth, ecommerce, and staff augmentation. Clients can engage one specialist, a dedicated team, a focused intervention, or a complete product build.
 
-This is a young, honest, small firm — not a 150-client enterprise agency. The rebuild's credibility comes from precision, real process, and real (even if modest) delivered work, not from volume claims.
+This is a young, honest, small firm - not a 150-client enterprise agency. The rebuild's credibility comes from precision, real process, and real delivered work, not from volume claims.
 
 ## Audience
 
-Primary: founders and small leadership teams at Western SMBs/startups evaluating an offshore/nearshore technical partner for a real build (a product, a rebuild, a platform) — not a $500 template job. They are price-conscious relative to US/UK agency rates but need to trust that quality and communication won't suffer for it. Skepticism about outsourced/offshore delivery quality is the primary objection this site must defeat — through evidence and process transparency, not reassurance copy.
+Primary: founders and leadership teams evaluating an offshore or nearshore technical partner for a real build, team extension, or focused technical engagement. Skepticism about outsourced delivery quality is the primary objection this site must defeat - through evidence and process transparency, not reassurance copy.
 
 ## Positioning
 
-Techspirex is a full-cycle engineering-led agency: web development is the core strength, extended by design, DevOps, AI/automation, marketing, and ecommerce as real, integrated capabilities — not a specialist shop and not a commodity six-service card grid.
+Techspirex is a full-cycle, engineering-led delivery company. Web development remains a core strength, backed by design, QA, DevOps, AI and automation, marketing, ecommerce, and staff augmentation as integrated capabilities.
 
 ## Commercial goal
 
@@ -24,24 +24,25 @@ Both paths lead to the same human process, just entered at different points.
 
 ## Founding story (resolved)
 
-Genuinely founded 2024. No "over the years" multi-era narrative, no 150+ client claim. The honest story is: a young, engineering-first team building real things for real clients since 2024, based in Lahore, serving international clients. Small and early is not a weakness to hide — it is the reason clients get senior attention instead of being routed to a junior on a bloated account list.
+Genuinely founded 2024. No "over the years" multi-era narrative, no 150+ client claim. The honest story is a young, engineering-first team building real things for real clients since 2024, based in Lahore, serving international clients. Small and early is not a weakness to hide - it is the reason clients get senior attention.
 
 ## Proof strategy
 
-No fabricated testimonials, no fabricated case studies, no invented metrics. Launch `/work` as an honest "selected capabilities and delivery evidence" section built from real skills and real process detail. Real case studies get added as they are won and can be disclosed (see `docs/CLAIMS-REGISTER.md` — open verification items). Photography must be real, representing the actual Lahore-based team and studio — not generic AI-stock or Western dashboard imagery.
+No fabricated testimonials, no fabricated case studies, no invented metrics. Launch `/work` as an honest "selected capabilities and delivery evidence" section built from real skills and process detail. Real case studies get added when they can be disclosed. Photography must represent the actual team and work - not generic stock people.
 
 ## Team
 
 Team section ships with real, consenting members only. Placeholder-but-clearly-internal state (not fabricated bios) until the client (you) confirms the current roster. See `docs/CLAIMS-REGISTER.md` items 2 and 6.
 
-## Services (six, web development flagship)
+## Services (seven, web development flagship)
 
-1. **Web Development** (flagship) — custom software, SaaS, enterprise systems, consumer apps
-2. **AI & Automation** — supporting capability
-3. **UI/UX & Product Design** — supporting capability
-4. **DevOps & Cloud Infrastructure** — supporting capability
-5. **Digital Marketing** — supporting capability
-6. **Ecommerce** — supporting capability
+1. **Web Development** (flagship) - custom software, SaaS, enterprise systems, consumer apps
+2. **AI & Automation** - supporting capability
+3. **UI/UX & Product Design** - supporting capability
+4. **DevOps & Cloud Infrastructure** - supporting capability
+5. **Digital Marketing** - supporting capability
+6. **Ecommerce** - supporting capability
+7. **Staff Augmentation** - individual specialists and dedicated cross-functional teams
 
 ## Required integrations (free-tier default, adapter-based so real keys can be dropped in later)
 

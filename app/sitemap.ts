@@ -9,7 +9,7 @@ const SITE_URL = "https://techspirex.com";
 // every static route as "changed" on every crawl, training crawlers to ignore
 // our lastmod signal (docs/DEEP-AUDIT M-6). Bump this only when the static
 // pages genuinely change.
-const STATIC_LASTMOD = new Date("2026-08-11");
+const STATIC_LASTMOD = new Date("2026-08-12");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = Object.values(routes).map((path) => ({

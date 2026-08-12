@@ -40,12 +40,9 @@ test("mobile menu opens via the hamburger button and all links resolve", async (
 
   const links = await mobileNav.getByRole("link").all();
   expect(links.length).toBeGreaterThan(0);
-  for (const link of links) {
-    const href = await link.getAttribute("href");
-    if (!href) continue;
-    const response = await page.request.get(href);
-    expect(response.ok(), `${href} should resolve`).toBeTruthy();
-  }
+  const hrefs = (await Promise.all(links.map((link) => link.getAttribute("href")))).filter(Boolean) as string[];
+  const responses = await Promise.all(hrefs.map((href) => page.request.get(href)));
+  responses.forEach((response, index) => expect(response.ok(), `${hrefs[index]} should resolve`).toBeTruthy());
 
   await page.getByRole("button", { name: /close menu/i }).click();
   await expect(mobileNav).toBeHidden();

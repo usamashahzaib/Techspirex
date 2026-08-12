@@ -67,7 +67,7 @@ function ServicesMenu() {
       {open && (
         <div
           role="menu"
-          className="absolute left-0 top-full z-40 mt-4 w-80 rounded-2xl border border-border bg-popover p-2 shadow-[0_28px_70px_-38px_rgba(57,42,111,0.55)]"
+          className="absolute left-1/2 top-full z-40 mt-4 w-[42rem] -translate-x-1/2 rounded-2xl border border-border bg-popover p-3 shadow-[0_28px_70px_-38px_rgba(57,42,111,0.55)]"
         >
           <Link
             href={routes.services}
@@ -78,13 +78,14 @@ function ServicesMenu() {
             All services
           </Link>
           <div className="my-1 h-px bg-border" />
+          <div className="grid grid-cols-2 gap-1">
           {serviceNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               role="menuitem"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-foreground/85 hover:bg-muted"
+              className="flex min-h-11 items-center justify-between rounded-md px-3 py-2 text-sm text-foreground/85 hover:bg-muted"
             >
               {item.label}
               {item.flagship && (
@@ -94,6 +95,7 @@ function ServicesMenu() {
               )}
             </Link>
           ))}
+          </div>
         </div>
       )}
     </div>
@@ -171,7 +173,7 @@ export function SiteHeader() {
             <li>
               <Link href={routes.services} onClick={() => setMobileOpen(false)} className="block min-h-11 px-2 py-2.5 text-base font-bold text-primary">Explore all services</Link>
             </li>
-            {serviceNavItems.slice(0, 3).map((item) => <li key={item.href}><Link href={item.href} onClick={() => setMobileOpen(false)} className="block min-h-11 px-2 py-2.5 text-sm text-foreground/80 hover:bg-muted">{item.label}</Link></li>)}
+            {serviceNavItems.map((item) => <li key={item.href}><Link href={item.href} onClick={() => setMobileOpen(false)} className="block min-h-11 px-2 py-2.5 text-sm text-foreground/80 hover:bg-muted">{item.label}</Link></li>)}
             <li className="my-2 h-px bg-border" />
             {primaryNavItems.map((item) => (
               <li key={item.href}>

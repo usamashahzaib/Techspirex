@@ -1,6 +1,5 @@
 /*
-  Premium decorative backdrop: layered radial "aurora" blooms + a fine grid +
-  an SVG-generated grain texture (feTurbulence). Pure inline SVG - no raster
+  Decorative backdrop: layered radial blooms and a fine vector grid. No raster
   asset, no network request, scales crisply on any display, and stays tiny.
   Fully decorative, so aria-hidden and pointer-events-none. Colors are passed
   in so it can sit on any section background.
@@ -10,13 +9,11 @@ export function AuroraBackdrop({
   from = "#392a6f",
   via = "#7c5cff",
   to = "#10d2f6",
-  grain = 0.28,
 }: {
   className?: string;
   from?: string;
   via?: string;
   to?: string;
-  grain?: number;
 }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
@@ -46,22 +43,12 @@ export function AuroraBackdrop({
           <pattern id="aurora-grid-pattern" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M48 0H0V48" fill="none" stroke="url(#aurora-grid)" strokeWidth="1" />
           </pattern>
-          <filter id="aurora-grain">
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope={grain} />
-            </feComponentTransfer>
-            <feComposite operator="over" in2="SourceGraphic" />
-          </filter>
         </defs>
 
         <rect width="1200" height="600" fill="url(#aurora-c)" />
         <rect width="1200" height="600" fill="url(#aurora-a)" />
         <rect width="1200" height="600" fill="url(#aurora-b)" />
         <rect width="1200" height="600" fill="url(#aurora-grid-pattern)" />
-        {/* Grain layer on top, blended subtly. */}
-        <rect width="1200" height="600" filter="url(#aurora-grain)" opacity="0.5" style={{ mixBlendMode: "overlay" }} />
       </svg>
     </div>
   );

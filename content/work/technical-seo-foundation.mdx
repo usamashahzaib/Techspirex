@@ -1,0 +1,61 @@
+---
+title: "A technical SEO foundation, built for launch"
+clientOrIndustry: "Our own pre-launch build · Digital Marketing"
+service: "digital-marketing"
+summary: "A pre-launch technical SEO implementation: connected schema, stable sitemap signals, and IndexNow submission support ready to activate after deployment."
+outcomeType: "implementation"
+outcome: "Implemented; activation follows production deployment"
+publishedAt: "2026-08-12"
+---
+
+**This case study is about our own pre-launch site.** Most "SEO" pitches are
+vague. This implementation is inspectable in the repository and local production
+build. It is not yet a live production SEO foundation or evidence of indexing,
+crawl performance, or ranking results.
+
+## Why technical SEO comes before campaigns
+
+You can buy traffic, but you cannot buy a site search engines fail to parse. Marketing spend leaks
+straight through a weak technical base. So the growth work starts underneath the
+content: make the site legible to crawlers, unambiguous about what each page is,
+and fast to get new pages discovered.
+
+## A connected knowledge graph, not scattered tags
+
+Rather than sprinkle disconnected structured data on each page, the implementation emits a
+single connected graph. One stable identity for the organization, referenced by
+the LocalBusiness node, by every Service, and by article and breadcrumb data.
+That is what lets a search engine build one coherent entity for the company
+instead of several fragments it has to reconcile.
+
+## Sitemap signals with discipline
+
+- **Honest lastmod dates.** Static pages carry a stable release date, not
+  `Date.now()` on every crawl. Stamping every page as "changed" on every visit
+  trains crawlers to ignore the signal - so we do not.
+- **Content-driven freshness.** Case studies and articles derive their lastmod
+  from their actual publish or update date, so real changes are the only thing
+  that moves the needle.
+- **Everything listed automatically.** The sitemap is configured to include every
+  published case study and article at build time - no manual list to forget to
+  update after deployment.
+
+## Instant indexing with IndexNow
+
+The repository includes an IndexNow key file and a command that can submit the
+deployed sitemap to Bing, Yandex, Seznam, and Naver after launch. It has not been
+submitted from this pre-launch site. Google does not consume IndexNow, so sitemap
+submission and Search Console verification remain separate launch steps.
+
+## Ownership verification, wired and clean
+
+Search Console and Bing Webmaster verification tags are wired to environment
+variables and render only when their codes exist. The properties still need to be
+registered and verified during launch.
+
+## The honest caveat
+
+This is our own pre-launch site. Ranking outcomes depend on content, competition,
+and time, and we will not promise a number we cannot control. The code provides a
+technical starting point; production deployment, search-property verification,
+and observed crawl or indexing results are still required.

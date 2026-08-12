@@ -6,7 +6,7 @@ export type CaseStudyFrontmatter = {
   clientOrIndustry: string;
   service: string;
   summary: string;
-  outcomeType: "measured" | "client-supplied" | "inferred" | "concept" | "shipped";
+  outcomeType: "measured" | "client-supplied" | "inferred" | "concept" | "implementation" | "shipped";
   outcome: string;
   publishedAt: string;
 };

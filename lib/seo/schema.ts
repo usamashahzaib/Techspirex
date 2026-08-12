@@ -20,7 +20,7 @@ export function organizationSchema() {
     image: `${SITE_URL}/logo-mark.svg`,
     email: "info@techspirex.com",
     description:
-      "Techspirex is a product engineering studio building web systems, AI automation, design, DevOps, marketing, and ecommerce for founders and teams worldwide. Headquartered in Lahore, Pakistan.",
+      "Techspirex is a software development company providing product design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth engineering, and dedicated technical teams worldwide.",
     foundingDate: "2024",
     address: {
       "@type": "PostalAddress",
@@ -74,6 +74,9 @@ export function localBusinessSchema() {
       "Cloud infrastructure",
       "Ecommerce development",
       "Digital marketing",
+      "Software quality assurance",
+      "Staff augmentation",
+      "Dedicated software teams",
     ],
     contactPoint: [
       {
@@ -96,11 +99,6 @@ export function localBusinessSchema() {
   };
 }
 
-/**
- * WebSite node - establishes the site as a distinct entity and declares the
- * site search endpoint, which is a prerequisite for a Google sitelinks
- * search box.
- */
 export function websiteSchema() {
   return {
     "@context": "https://schema.org",
@@ -109,14 +107,6 @@ export function websiteSchema() {
     url: SITE_URL,
     name: "Techspirex",
     publisher: { "@id": ORG_ID },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/insights?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -137,6 +127,25 @@ export function serviceSchema(name: string, description: string, path: string) {
   };
 }
 
+export function serviceCatalogSchema(services: { name: string; slug: string; heroSummary: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Techspirex software development services",
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.name,
+        description: service.heroSummary,
+        url: `${SITE_URL}/services/${service.slug}`,
+        provider: { "@id": ORG_ID },
+      },
+    })),
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -150,12 +159,6 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
   };
 }
 
-/**
- * FAQPage schema - makes a page eligible for FAQ rich results and, just as
- * importantly, captures the long-tail question queries ("is it safe to hire
- * an offshore dev team", "how much does a SaaS build cost") that a young firm
- * can realistically rank for before it has domain authority for the head terms.
- */
 export function faqSchema(items: { question: string; answer: string }[]) {
   return {
     "@context": "https://schema.org",

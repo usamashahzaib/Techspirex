@@ -11,7 +11,7 @@ const scenes = [
 
 export function Hero() {
   return (
-    <section className="grain hero-stage relative isolate overflow-hidden bg-[#171035] text-[#faf7ee]">
+    <section className="hero-stage relative isolate overflow-hidden bg-[#171035] text-[#faf7ee]">
       <div className="absolute inset-0" aria-hidden="true">
         {scenes.map(({ src }, index) => (
           <Image
@@ -32,13 +32,13 @@ export function Hero() {
         <div className="max-w-[48rem]">
           <p className="reveal inline-flex items-center gap-3 rounded-full border border-white/15 bg-[#171035]/45 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#9eefff] backdrop-blur-md">
             <span className="signal-pulse size-2 rounded-full bg-[#10d2f6]" aria-hidden="true" />
-            Product engineering studio · Working worldwide
+            Software delivery team - Working worldwide
           </p>
           <h1 className="reveal reveal-delay-1 mt-8 max-w-[10ch] text-[clamp(3.7rem,8vw,7.8rem)] font-black leading-[0.84] tracking-[-0.075em] [text-wrap:balance]">
             We ship what works. <span className="text-[#9eefff]">We prove it.</span>
           </h1>
           <p className="reveal reveal-delay-2 mt-8 max-w-[57ch] text-base font-medium leading-[1.7] tracking-[0.01em] text-[#e3dced] sm:text-lg">
-            Web products, AI automation, ecommerce, and infrastructure from one accountable team. Clear scope before commitment, working software throughout delivery.
+            Product strategy, design, software engineering, AI, cloud, QA, and dedicated talent from one accountable team. Start with one specialist or a complete build.
           </p>
           <div className="reveal reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href={`${routes.contact}?path=call`} className="glow-signal group inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#faf7ee] px-6 py-3 text-sm font-extrabold text-[#2a2051] transition-transform duration-300 hover:-translate-y-1">
@@ -48,7 +48,7 @@ export function Hero() {
               Send a project brief <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" weight="bold" aria-hidden="true" />
             </Link>
           </div>
-          <p className="reveal reveal-delay-4 mt-8 font-mono text-[10px] uppercase tracking-[0.16em] text-[#c6bdd8]">Founded 2024 · Global delivery · US / UK / EU overlap</p>
+          <p className="reveal reveal-delay-4 mt-8 font-mono text-[10px] uppercase tracking-[0.16em] text-[#c6bdd8]">Founded 2024 - Global delivery - US / UK / EU overlap</p>
         </div>
       </div>
 

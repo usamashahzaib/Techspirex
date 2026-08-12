@@ -17,15 +17,15 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-card text-[15px]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr]">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr_1.3fr]">
           <div>
             <div className="flex items-center gap-2.5">
               <Image src="/logo-mark.svg" alt="" width={24} height={24} aria-hidden="true" />
               <span className="font-heading text-lg font-semibold tracking-tight">Techspirex</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              A product engineering studio building web systems, design, and infrastructure for
-              founders and teams worldwide. Headquartered in Lahore, Pakistan.
+              Software strategy, design, engineering, QA, cloud, and dedicated technical teams for
+              companies worldwide. Headquartered in Lahore, Pakistan.
             </p>
             <div className="mt-5 flex gap-3">
               {verifiedSocialLinks.map((social) => {
@@ -98,7 +98,7 @@ export function SiteFooter() {
             <a href={`mailto:${siteContact.email}`} className="hover:text-foreground">
               {siteContact.email}
             </a>
-            <span className="hidden sm:inline">·</span>
+            <span className="hidden sm:inline">-</span>
             <span>{siteContact.address}</span>
           </div>
           <div className="flex items-center gap-4">
@@ -108,7 +108,7 @@ export function SiteFooter() {
               </Link>
             ))}
             <CookieSettingsButton />
-            <span>© {new Date().getFullYear()} Techspirex</span>
+            <span>Copyright {new Date().getFullYear()} Techspirex</span>
           </div>
         </div>
       </div>

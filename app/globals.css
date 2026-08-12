@@ -229,8 +229,8 @@
 
 /*
   Premium depth layer. The old hero/sections were flat single-fill color
-  blocks. These utilities add controlled depth - layered radial glows, a fine
-  film grain, a faint structural grid, and slow ambient drift - without
+  blocks. These utilities add controlled depth - layered radial glows,
+  a faint structural grid, and slow ambient drift - without
   introducing the banned literal "purple→cyan neon gradient" (glows are
   low-chroma violet with cyan used only as a small signal accent).
 */
@@ -277,17 +277,6 @@
       linear-gradient(to bottom, oklch(1 0 0 / 0.05) 1px, transparent 1px);
     background-size: 3.5rem 3.5rem;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
-  }
-
-  /* Fine film grain to kill flat-fill banding. */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.4;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /* Headline accent - controlled, low-neon gradient on a single phrase. */

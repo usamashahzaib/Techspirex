@@ -46,7 +46,7 @@ const demos = [
 
 export function WorkShowcase() {
   return (
-    <section className="grain relative overflow-hidden border-b border-[#6b56ad] bg-[linear-gradient(180deg,#221a4a_0%,#2a2051_55%,#241a4d_100%)] text-[#fbf9ff]">
+    <section className="relative overflow-hidden border-b border-[#6b56ad] bg-[linear-gradient(180deg,#221a4a_0%,#2a2051_55%,#241a4d_100%)] text-[#fbf9ff]">
       <div className="aurora opacity-60" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
