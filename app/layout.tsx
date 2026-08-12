@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Manrope } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -9,7 +9,7 @@ import { ConsentBanner } from "@/components/consent/consent-banner";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
 
-const manrope = Manrope({
+const archivo = Archivo({
   variable: "--font-brand",
   subsets: ["latin"],
   display: "swap",
@@ -60,7 +60,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${archivo.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <script

@@ -23,16 +23,20 @@ function applyConsent(choice: Choice) {
 */
 export function ConsentBanner() {
   const gaConfigured = Boolean(process.env.NEXT_PUBLIC_GA4_ID);
-  const [visible, setVisible] = useState(false);
+  // Lazy initializer reads the stored choice once, on the client, so the
+  // banner's initial visibility is correct from the first client render
+  // instead of being set from inside an effect (which would force an extra
+  // render pass right after mount). `typeof window` guards the SSR pass,
+  // where localStorage isn't available.
+  const [visible, setVisible] = useState(() => {
+    if (!gaConfigured || typeof window === "undefined") return false;
+    return !window.localStorage.getItem(STORAGE_KEY);
+  });
 
   useEffect(() => {
     if (!gaConfigured) return;
     const stored = localStorage.getItem(STORAGE_KEY) as Choice | null;
-    if (stored) {
-      applyConsent(stored);
-    } else {
-      setVisible(true);
-    }
+    if (stored) applyConsent(stored);
     const reopen = () => setVisible(true);
     window.addEventListener(OPEN_COOKIE_SETTINGS_EVENT, reopen);
     return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, reopen);

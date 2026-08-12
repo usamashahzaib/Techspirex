@@ -6,16 +6,18 @@ import { Capabilities } from "@/components/marketing/capabilities";
 import { DeliveryModel } from "@/components/marketing/delivery-model";
 import { Faq } from "@/components/marketing/faq";
 import { FinalCta } from "@/components/marketing/final-cta";
+import { EngagementModels } from "@/components/marketing/engagement-models";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Proof />
-      <SocialProof />
       <WorkShowcase />
+      <Proof />
       <Capabilities />
+      <EngagementModels />
       <DeliveryModel />
+      <SocialProof />
       <Faq />
       <FinalCta />
     </>

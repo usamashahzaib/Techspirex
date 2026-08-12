@@ -23,10 +23,11 @@ const orientationQuestions = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">Services</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Capabilities</p>
+          <h1 className="mt-5 max-w-[10ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Build the right system. Nothing extra.</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
             Six real capabilities, built by one team. Web development is where most engagements start
             and where we&apos;re deepest — the rest support a build rather than standing alone as separate
             product lines.
@@ -35,7 +36,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-xl font-semibold">Not sure where to start?</h2>
           <dl className="mt-6 flex flex-col gap-3">
             {orientationQuestions.map((item) => (
@@ -52,13 +53,13 @@ export default function ServicesPage() {
       </section>
 
       <section>
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+          <div className="divide-y divide-border border-y border-border">
             {allServices.map((service) => (
               <Link
                 key={service.slug}
                 href={`${routes.services}/${service.slug}`}
-                className="group flex flex-col justify-between gap-3 rounded-xl border border-border p-6 transition-colors hover:border-primary sm:flex-row sm:items-center"
+                className="group grid gap-3 py-7 transition-[padding,background-color] hover:bg-card sm:grid-cols-[1fr_1.5fr_auto] sm:items-center sm:px-4 sm:hover:px-6"
               >
                 <div>
                   <div className="flex items-center gap-2">
@@ -69,8 +70,8 @@ export default function ServicesPage() {
                       </span>
                     )}
                   </div>
-                  <p className="mt-1 max-w-xl text-sm text-muted-foreground">{service.heroSummary}</p>
                 </div>
+                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{service.heroSummary}</p>
                 <ArrowRight
                   className="size-5 shrink-0 text-primary transition-transform group-hover:translate-x-1"
                   aria-hidden="true"

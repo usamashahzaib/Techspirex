@@ -10,7 +10,6 @@ const steps = [
 export function DeliveryModel() {
   return (
     <section className="relative overflow-hidden border-b border-[#8cecff] bg-[#c9f6ff] text-[#2a2051]">
-      <div className="absolute -left-36 -top-36 size-80 rounded-full border-[4rem] border-[#10d2f6]/25" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-[1400px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24 lg:px-8 lg:py-32">
         <div className="reveal-scroll lg:sticky lg:top-28 lg:self-start">
           <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#392a6f]">How work moves</p>

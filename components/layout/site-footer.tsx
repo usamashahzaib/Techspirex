@@ -15,7 +15,7 @@ const socialIcons = { LinkedIn: LinkedInIcon, Facebook: FacebookIcon } as const;
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="border-t border-border bg-card text-[15px]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr]">
           <div>

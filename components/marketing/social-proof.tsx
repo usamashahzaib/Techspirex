@@ -1,53 +1,51 @@
-const testimonials = [
-  {
-    quote:
-      "They scoped the build honestly, told us what not to build, and delivered on the timeline they committed to. That alone put them ahead of the three agencies we talked to before.",
-    attribution: "Founder, B2B SaaS",
-    region: "UK",
-  },
-  {
-    quote:
-      "What stood out was the handoff. We got the codebase, deployment access, and a document covering every decision they made and why. Our in-house team picked it up without a single call.",
-    attribution: "CTO, logistics platform",
-    region: "US",
-  },
-  {
-    quote:
-      "Most agencies showed us Figma files. TechSpireX showed us working software in week two. The gap between promise and delivery was smaller than anywhere else we evaluated.",
-    attribution: "Product lead, fintech startup",
-    region: "UAE",
-  },
-];
+import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import { draftTestimonials, publishableTestimonials } from "@/content/claims";
+
+const evidence = [
+  ["Before commitment", "Written scope, assumptions, risks, delivery order, and ownership boundaries."],
+  ["During delivery", "Reviewable software, decision notes, acceptance checks, and visible next actions."],
+  ["At handoff", "Source access, deployment ownership, operating notes, and known constraints."],
+] as const;
 
 export function SocialProof() {
+  const isDevelopment = process.env.NODE_ENV === "development";
+  const testimonials = publishableTestimonials.length ? publishableTestimonials : isDevelopment ? draftTestimonials : [];
+
   return (
-    <section className="border-b border-border bg-[#fbf9ff]">
-      <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-        <div className="reveal-scroll">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#392a6f]">
-            From the people we&apos;ve built for
-          </p>
-          <h2 className="mt-5 max-w-[18ch] font-heading text-3xl font-extrabold leading-[0.98] tracking-[-0.04em] sm:text-4xl">
-            Trust is earned in delivery, not decks.
-          </h2>
+    <section className="border-b border-border bg-background">
+      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <div>
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Trust mechanics</p>
+            <h2 className="mt-5 max-w-[11ch] text-4xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl">Know what to verify before you hire us.</h2>
+          </div>
+          <ol className="divide-y divide-border border-y border-border">
+            {evidence.map(([title, detail], index) => (
+              <li key={title} className="grid gap-3 py-6 sm:grid-cols-[3rem_0.7fr_1.3fr] sm:items-start">
+                <span className="font-mono text-xs text-primary">0{index + 1}</span>
+                <h3 className="text-lg font-extrabold tracking-tight">{title}</h3>
+                <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">{detail}</p>
+              </li>
+            ))}
+          </ol>
         </div>
 
-        <div className="reveal-scroll-stagger mt-14 grid gap-8 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <blockquote
-              key={t.attribution}
-              className="flex flex-col justify-between rounded-2xl border border-[#392a6f]/10 bg-white p-7 shadow-[0_2px_12px_-4px_rgba(57,42,111,0.06)]"
-            >
-              <p className="text-[15px] leading-relaxed text-foreground/85">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <footer className="mt-6 border-t border-border pt-4">
-                <p className="text-sm font-bold text-foreground">{t.attribution}</p>
-                <p className="text-xs text-muted-foreground">{t.region}</p>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
+        {testimonials.length > 0 && (
+          <div className="mt-16 border border-dashed border-primary/40 bg-card p-5 sm:p-8">
+            {isDevelopment && publishableTestimonials.length === 0 && (
+              <p className="mb-6 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-destructive">Development preview · blocked from production until verified</p>
+            )}
+            <div className="grid gap-8 md:grid-cols-2">
+              {testimonials.map((item) => (
+                <blockquote key={item.quote}>
+                  <CheckCircle className="size-5 text-primary" weight="fill" aria-hidden="true" />
+                  <p className="mt-4 text-lg font-medium leading-relaxed">“{item.quote}”</p>
+                  <footer className="mt-5 text-sm text-muted-foreground">{item.name} · {item.role}, {item.company}</footer>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

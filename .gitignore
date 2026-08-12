@@ -46,4 +46,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
+# local tool configs / debug artifacts (Claude Code, Codex CLI)
+.claude/
+.codex-*

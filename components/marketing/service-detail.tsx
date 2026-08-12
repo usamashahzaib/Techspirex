@@ -27,23 +27,23 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
           ),
         }}
       />
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           {service.flagship && (
-            <span className="font-mono text-xs font-medium uppercase tracking-widest text-primary">
+            <span className="font-mono text-xs font-medium uppercase tracking-widest text-[#10d2f6]">
               Flagship service
             </span>
           )}
-          <h1 className="mt-3 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+          <h1 className="mt-4 max-w-[13ch] text-5xl font-black leading-[0.92] tracking-[-0.06em] sm:text-7xl">
             {service.name}
           </h1>
-          <p className="mt-3 font-heading text-lg text-primary">{service.tagline}</p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+          <p className="mt-5 text-lg font-bold text-[#9eefff]">{service.tagline}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
             {service.heroSummary}
           </p>
           <Link
-            href={routes.contact}
-            className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            href={`${routes.contact}?path=brief`}
+            className="mt-8 inline-flex min-h-12 items-center gap-2 bg-[#10d2f6] px-6 py-3.5 text-sm font-extrabold text-[#2a2051] transition-transform hover:-translate-y-1"
           >
             Start a project
             <ArrowRight className="size-4" aria-hidden="true" />
@@ -52,7 +52,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       </section>
 
       <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Problems this solves</h2>
           <ul className="mt-6 flex flex-col gap-4">
             {service.problems.map((problem) => (
@@ -65,7 +65,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       </section>
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">What you get</h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-3">
             {service.deliverables.map((item) => (
@@ -89,11 +89,11 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       </section>
 
       <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Engagement scope</h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
             {service.scope.map((item) => (
-              <div key={item.model} className="rounded-lg border border-border p-5">
+              <div key={item.model} className="border-t border-border pt-5">
                 <h3 className="font-heading text-base font-semibold">{item.model}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
               </div>
@@ -103,7 +103,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       </section>
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Process</h2>
           <ol className="mt-6 flex flex-col gap-6">
             {service.process.map((step, i) => (
@@ -125,7 +125,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
                 {service.tools.map((tool) => (
                   <span
                     key={tool}
-                    className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
+                    className="border border-border px-3 py-1 text-xs text-muted-foreground"
                   >
                     {tool}
                   </span>
@@ -137,7 +137,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       </section>
 
       <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Frequently asked</h2>
           <div className="mt-6 flex flex-col gap-6">
             {service.faqs.map((faq) => (
@@ -151,13 +151,13 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       </section>
 
       <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 px-4 py-14 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">
             Ready to talk about {service.name.toLowerCase()}?
           </h2>
           <Link
-            href={routes.contact}
-            className="inline-flex shrink-0 items-center justify-center rounded-md bg-background px-6 py-3.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-90"
+            href={`${routes.contact}?path=brief`}
+            className="inline-flex min-h-12 shrink-0 items-center justify-center bg-background px-6 py-3.5 text-sm font-bold text-foreground transition-transform hover:-translate-y-1"
           >
             Request a project review
           </Link>

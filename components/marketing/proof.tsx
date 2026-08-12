@@ -19,7 +19,6 @@ const evidence = [
 export function Proof() {
   return (
     <section className="relative overflow-hidden border-b border-border bg-[#fbf9ff]">
-      <div className="absolute -right-24 top-20 size-72 rounded-full bg-[#10d2f6]/10 blur-3xl" aria-hidden="true" />
       <div className="relative mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>

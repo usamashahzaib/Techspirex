@@ -50,26 +50,26 @@
   --color-accent-secondary: var(--accent-secondary);
 }
 
-/* TechSpireX brand system: committed violet + active cyan, tinting every neutral. */
+/* Proof Architecture: committed violet, paper-tinted neutrals, cyan signal. */
 :root {
-  --background: oklch(0.985 0.008 292);
-  --foreground: oklch(0.22 0.045 292);
-  --card: oklch(0.965 0.016 292);
+  --background: oklch(0.975 0.012 78);
+  --foreground: oklch(0.205 0.055 292);
+  --card: oklch(0.955 0.014 78);
   --card-foreground: oklch(0.22 0.045 292);
   --popover: oklch(0.99 0.006 292);
   --popover-foreground: oklch(0.22 0.045 292);
-  --primary: oklch(0.36 0.13 292);
-  --primary-foreground: oklch(0.985 0.008 292);
+  --primary: oklch(0.31 0.145 292);
+  --primary-foreground: oklch(0.975 0.012 78);
   --secondary: oklch(0.93 0.026 292);
   --secondary-foreground: oklch(0.3 0.09 292);
-  --muted: oklch(0.94 0.018 292);
+  --muted: oklch(0.925 0.018 78);
   --muted-foreground: oklch(0.42 0.045 292);
   --accent: oklch(0.78 0.14 213);
   --accent-foreground: oklch(0.25 0.08 292);
   --accent-secondary: oklch(0.78 0.14 213);
   --destructive: oklch(0.55 0.2 27);
-  --border: oklch(0.88 0.013 58);
-  --input: oklch(0.88 0.013 58);
+  --border: oklch(0.82 0.022 78);
+  --input: oklch(0.82 0.022 78);
   --ring: oklch(0.78 0.14 213);
   --chart-1: oklch(0.36 0.13 292);
   --chart-2: oklch(0.75 0.12 210);
@@ -132,6 +132,13 @@
   html {
     @apply font-sans scroll-smooth;
   }
+  body {
+    font-kerning: normal;
+    font-optical-sizing: auto;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;
   }
@@ -161,13 +168,6 @@
 }
 
 @layer utilities {
-  .hero-grid {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 56px 56px;
-  }
-
   /* On-load entrance (hero) — fires immediately, staggered via delay classes. */
   .reveal {
     animation: reveal-up 0.7s var(--ease-expo-out) both;
@@ -206,21 +206,6 @@
   }
 
   /* Gentle continuous drift for decorative hero accents. */
-  .animate-drift {
-    animation: drift 14s ease-in-out infinite;
-  }
-  .animate-float {
-    animation: float 7s ease-in-out infinite;
-  }
-
-  .brand-orbit {
-    animation: orbit-spin 22s linear infinite;
-  }
-
-  .mark-float {
-    animation: mark-float 7s var(--ease-expo-out) infinite;
-  }
-
   .signal-pulse {
     animation: signal-pulse 2.4s ease-in-out infinite;
   }
@@ -242,42 +227,6 @@
   }
 }
 
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(2%, -3%) scale(1.06);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(var(--float-rotate, -2deg));
-  }
-  50% {
-    transform: translateY(-8px) rotate(var(--float-rotate, -2deg));
-  }
-}
-
-@keyframes orbit-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes mark-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(7deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(4deg);
-  }
-}
-
 @keyframes signal-pulse {
   0%,
   100% {
@@ -295,8 +244,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-orbit,
-  .mark-float,
   .signal-pulse,
   .marquee-track {
     animation: none !important;

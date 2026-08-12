@@ -119,16 +119,9 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-[4.5rem] max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href={routes.home} className="relative h-10 w-40 overflow-hidden" aria-label="TechSpireX home">
-          <Image
-            src="/logo-wordmark.png"
-            alt=""
-            width={936}
-            height={936}
-            priority
-            aria-hidden="true"
-            className="absolute left-1/2 top-1/2 w-56 max-w-none -translate-x-1/2 -translate-y-1/2 mix-blend-multiply"
-          />
+        <Link href={routes.home} className="flex min-h-11 items-center gap-2" aria-label="TechSpireX home">
+          <Image src="/logo-mark.svg" alt="" width={30} height={30} priority aria-hidden="true" />
+          <span className="text-lg font-black tracking-[-0.04em]">TechSpireX</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -138,12 +131,18 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
           <Link
-            href={routes.contact}
-            className="inline-flex items-center rounded-full bg-[#392a6f] px-5 py-2.5 text-sm font-bold text-[#fbf9ff] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
+            href={`${routes.contact}?path=brief`}
+            className="inline-flex min-h-11 items-center px-3 text-sm font-bold text-foreground/80 hover:text-primary lg:px-4"
           >
-            Discuss a build
+            Send a brief
+          </Link>
+          <Link
+            href={`${routes.contact}?path=call`}
+            className="inline-flex min-h-11 items-center bg-[#392a6f] px-5 py-2.5 text-sm font-bold text-[#fbf9ff] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
+          >
+            Book a call
           </Link>
         </div>
 
@@ -169,17 +168,10 @@ export function SiteHeader() {
             <li className="pb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Services
             </li>
-            {serviceNavItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block rounded-md px-2 py-2.5 text-base text-foreground/90 hover:bg-muted"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link href={routes.services} onClick={() => setMobileOpen(false)} className="block min-h-11 px-2 py-2.5 text-base font-bold text-primary">Explore all services</Link>
+            </li>
+            {serviceNavItems.slice(0, 3).map((item) => <li key={item.href}><Link href={item.href} onClick={() => setMobileOpen(false)} className="block min-h-11 px-2 py-2.5 text-sm text-foreground/80 hover:bg-muted">{item.label}</Link></li>)}
             <li className="my-2 h-px bg-border" />
             {primaryNavItems.map((item) => (
               <li key={item.href}>
@@ -194,13 +186,14 @@ export function SiteHeader() {
             ))}
             <li className="pt-3">
               <Link
-                href={routes.contact}
+                href={`${routes.contact}?path=call`}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center rounded-full bg-[#392a6f] px-4 py-3 text-base font-bold text-[#fbf9ff]"
+                className="flex min-h-12 items-center justify-center bg-[#392a6f] px-4 py-3 text-base font-bold text-[#fbf9ff]"
               >
-                Discuss a build
+                Book a discovery call
               </Link>
             </li>
+            <li><Link href={`${routes.contact}?path=brief`} onClick={() => setMobileOpen(false)} className="flex min-h-12 items-center justify-center border border-primary px-4 py-3 text-base font-bold text-primary">Send a project brief</Link></li>
           </ul>
         </nav>
       )}

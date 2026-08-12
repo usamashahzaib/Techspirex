@@ -32,10 +32,11 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">About</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Small by design</p>
+          <h1 className="mt-5 max-w-[11ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Senior attention without agency theatre.</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
             TechSpireX is a web engineering studio founded in 2024 and based in Lahore, Pakistan. We
             work with founders and small leadership teams across the US, UK, and EU who need a
             technical partner they can actually trust with a real build.
@@ -44,7 +45,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Where we are today</h2>
           <p className="mt-4 max-w-2xl text-muted-foreground">
             We&apos;re early. Founded in 2024, TechSpireX is a small team, not an enterprise agency
@@ -61,7 +62,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">
             Principles, and where you&apos;d actually see them
           </h2>

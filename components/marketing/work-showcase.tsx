@@ -28,7 +28,6 @@ const demos = [
 export function WorkShowcase() {
   return (
     <section className="relative overflow-hidden border-b border-[#6b56ad] bg-[#2a2051] text-[#fbf9ff]">
-      <div className="absolute -left-36 bottom-[-18rem] size-[34rem] rounded-full border-[5rem] border-[#392a6f]" aria-hidden="true" />
       <div className="relative mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
