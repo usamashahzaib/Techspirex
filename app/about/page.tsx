@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "TechSpireX is a web engineering studio founded in 2024 and based in Lahore, Pakistan, working with founders and small teams across the US, UK, and EU.",
+    "Techspirex is a product engineering studio founded in 2024, working with founders and teams worldwide and headquartered in Lahore, Pakistan.",
   alternates: { canonical: "/about" },
 };
 
@@ -32,14 +32,16 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
-        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Small by design</p>
+      <section className="grain relative overflow-hidden border-b border-border bg-[linear-gradient(160deg,#1b1440_0%,#2a2051_50%,#221a4a_100%)] text-[#faf7ee]">
+        <div className="aurora" aria-hidden="true" />
+        <div className="grid-veil" aria-hidden="true" />
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6] backdrop-blur-sm"><span className="signal-pulse size-2 rounded-full bg-[#10d2f6]" aria-hidden="true" />Small by design</p>
           <h1 className="mt-5 max-w-[11ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Senior attention without agency theatre.</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
-            TechSpireX is a web engineering studio founded in 2024 and based in Lahore, Pakistan. We
-            work with founders and small leadership teams across the US, UK, and EU who need a
-            technical partner they can actually trust with a real build.
+            Techspirex is a product engineering studio founded in 2024, working with founders and
+            small leadership teams worldwide who need a technical partner they can actually trust with
+            a real build. We&apos;re headquartered in Lahore, Pakistan.
           </p>
         </div>
       </section>
@@ -48,14 +50,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Where we are today</h2>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            We&apos;re early. Founded in 2024, TechSpireX is a small team, not an enterprise agency
-            with a decade of client logos — and we&apos;d rather tell you that plainly than dress it up
+            We&apos;re early. Founded in 2024, Techspirex is a small team, not an enterprise agency
+            with a decade of client logos - and we&apos;d rather tell you that plainly than dress it up
             with unverifiable numbers. What we can offer instead is senior attention on every project,
             because there&apos;s no large account list to compete with yours for our time.
           </p>
           <p className="mt-4 max-w-2xl text-muted-foreground">
             The studio started with web development and has grown into a small set of supporting
-            capabilities — design, DevOps, AI and automation, marketing, and ecommerce — added because
+            capabilities - design, DevOps, AI and automation, marketing, and ecommerce - added because
             real client projects needed them, not because a services page needed six items.
           </p>
         </div>

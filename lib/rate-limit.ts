@@ -2,7 +2,7 @@
   In-memory sliding-window rate limiter. Adequate for a single Vercel instance /
   low-volume marketing forms; it resets on redeploy/cold start and is NOT shared
   across serverless instances, so under real scale it is best-effort only. It is
-  intentionally the *second* line of defense — Turnstile and newsletter
+  intentionally the *second* line of defense - Turnstile and newsletter
   double-opt-in are the primary abuse controls (see docs/DEEP-AUDIT H-3).
 
   Production upgrade path: back this with Upstash Ratelimit (Redis). The async

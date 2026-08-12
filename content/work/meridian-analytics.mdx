@@ -1,17 +1,17 @@
 ---
-title: "Meridian — a subscription analytics dashboard"
+title: "Meridian - a subscription analytics dashboard"
 clientOrIndustry: "Concept build · SaaS analytics"
 service: "web-development"
-summary: "A working, interactive analytics dashboard for SaaS teams — built end to end to show how we design and engineer data-dense product interfaces. Explore the live demo."
+summary: "A working, interactive analytics dashboard for SaaS teams - built end to end to show how we design and engineer data-dense product interfaces. Explore the live demo."
 outcomeType: "concept"
 outcome: "Live interactive demo"
 publishedAt: "2026-08-11"
 ---
 
 **This is a concept build, not a client engagement.** We built Meridian ourselves,
-end to end, to demonstrate how TechSpireX approaches a real product surface: a
+end to end, to demonstrate how Techspirex approaches a real product surface: a
 subscription-analytics dashboard of the kind a SaaS founder actually lives in.
-Nothing here is a claimed client result — it is our own work, and every number in
+Nothing here is a claimed client result - it is our own work, and every number in
 it is simulated. You can [open the live dashboard](/demos/meridian) and click
 through it yourself.
 
@@ -20,43 +20,43 @@ through it yourself.
 ## Why we built it
 
 A portfolio can describe capability or it can show it. For an engineering-led
-studio, the honest way to show it — before we can publish signed client work — is
+studio, the honest way to show it - before we can publish signed client work - is
 to build a real, non-trivial product and let it speak. Meridian is that: a
 functioning dashboard, not a static mockup, running the same stack we ship to
 clients.
 
 We chose subscription analytics deliberately. It is a genuinely hard product
-surface — dense with numbers, dependent on clear information hierarchy, and easy to
+surface - dense with numbers, dependent on clear information hierarchy, and easy to
 make either overwhelming or uselessly shallow. It is a good test of whether a team
 can make complex data feel calm.
 
 ## What it does
 
-- **Live period switching** — 30-day, 90-day, and 12-month views recompute every
+- **Live period switching** - 30-day, 90-day, and 12-month views recompute every
   KPI, the revenue chart, and the plan breakdown from a single underlying daily
   series.
 - **KPI cards** with real deltas against the previous equal-length window, and a
-  sparkline per metric — colored by whether the movement is good or bad for that
+  sparkline per metric - colored by whether the movement is good or bad for that
   specific metric (revenue up is good; churn up is not).
-- **An interactive revenue chart** — a hand-built SVG area chart with a hover
+- **An interactive revenue chart** - a hand-built SVG area chart with a hover
   crosshair and tooltip, no charting library.
-- **A cohort retention heatmap** — the view SaaS teams actually use to see whether
+- **A cohort retention heatmap** - the view SaaS teams actually use to see whether
   the product is getting stickier over time.
-- **A filterable activity table** — recent transactions with paid / failed /
+- **A filterable activity table** - recent transactions with paid / failed /
   refunded states you can filter in place.
 
 ## Engineering decisions worth naming
 
-**No chart library.** Every visualization — the revenue chart, sparklines, donut,
-and heatmap — is hand-built with SVG. That keeps the bundle small, the rendering
+**No chart library.** Every visualization - the revenue chart, sparklines, donut,
+and heatmap - is hand-built with SVG. That keeps the bundle small, the rendering
 fully controllable, and the whole thing compatible with a strict Content Security
 Policy. It also means the charts match the product's design exactly instead of
 fighting a library's defaults.
 
 **Deterministic data.** The demo's data is generated from a fixed seed and a fixed
 date anchor, so the dashboard renders identically on every build and can be
-statically prerendered. The same discipline — pure, predictable data
-transformation — is what makes real analytics features testable.
+statically prerendered. The same discipline - pure, predictable data
+transformation - is what makes real analytics features testable.
 
 **Its own design system.** The dashboard runs a dark, data-dense product theme that
 is deliberately distinct from this marketing site. Product UI and marketing UI have
@@ -66,12 +66,12 @@ one or the other.
 ## The stack
 
 Next.js (App Router) and React with TypeScript in strict mode, Tailwind CSS, and
-hand-authored SVG for every chart — the same foundation we build client products
+hand-authored SVG for every chart - the same foundation we build client products
 on. The dashboard is a single client island; the surrounding site stays static.
 
 ## The honest caveat
 
-Meridian has no backend and no real customers — it is a demonstration of build
+Meridian has no backend and no real customers - it is a demonstration of build
 quality and product thinking, not a claim of delivered client outcomes. When we
 publish client case studies, they will be clearly marked as such, with real,
 attributable results. Until then, this is us showing our work instead of telling

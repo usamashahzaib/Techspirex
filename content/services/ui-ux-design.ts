@@ -6,7 +6,7 @@ export const uiUxDesign: ServiceContent = {
   flagship: false,
   tagline: "Design that a real engineering team can build.",
   heroSummary:
-    "Interface and product design done alongside the engineering team building it — so what gets designed is what actually ships, not a Figma file that gets reinterpreted in development.",
+    "Interface and product design done alongside the engineering team building it - so what gets designed is what actually ships, not a Figma file that gets reinterpreted in development.",
   problems: [
     "A product works but feels unfinished or inconsistent, and it's costing trust or conversions.",
     "There's no design system, so every new screen is a one-off decision.",
@@ -38,7 +38,7 @@ export const uiUxDesign: ServiceContent = {
     },
     {
       question: "Do you do branding and logo design?",
-      answer: "No — this service is product and interface design. We can work alongside a brand identity you already have.",
+      answer: "No - this service is product and interface design. We can work alongside a brand identity you already have.",
     },
   ],
 };

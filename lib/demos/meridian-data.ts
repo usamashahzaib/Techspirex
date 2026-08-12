@@ -1,12 +1,12 @@
 /**
- * Meridian — deterministic demo data engine.
+ * Meridian - deterministic demo data engine.
  *
- * This powers the TechSpireX concept build at /demos/meridian: a subscription-
+ * This powers the Techspirex concept build at /demos/meridian: a subscription-
  * analytics dashboard for SaaS teams. All data is generated from a fixed seed
  * and a fixed "today" anchor so the dashboard renders identically on every
  * build (stable for static prerendering) and never depends on wall-clock time.
  *
- * Nothing here talks to a real backend — it is a self-contained demonstration
+ * Nothing here talks to a real backend - it is a self-contained demonstration
  * of how we model, aggregate, and present product metrics.
  */
 
@@ -56,7 +56,7 @@ export type Transaction = {
 };
 
 /* ------------------------------------------------------------------ */
-/* Seeded PRNG (mulberry32) — deterministic, no external dependency.   */
+/* Seeded PRNG (mulberry32) - deterministic, no external dependency.   */
 /* ------------------------------------------------------------------ */
 function mulberry32(seed: number) {
   return function () {
@@ -165,7 +165,7 @@ export function getKpis(period: Period): Kpi[] {
 
   // Churn rate as a monthly-normalized figure, compared as an intra-window
   // trend (second half vs first half) so the delta is meaningful for every
-  // period — including 12m, where there is no earlier window to compare to.
+  // period - including 12m, where there is no earlier window to compare to.
   const monthlyChurnRate = (slice: typeof current) => {
     const churned = slice.reduce((a, p) => a + p.churnedSubscribers, 0);
     const avgActive = slice.reduce((a, p) => a + p.activeSubscribers, 0) / slice.length;

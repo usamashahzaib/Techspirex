@@ -46,7 +46,7 @@ export async function submitContactForm(
       return {
         status: "error",
         message:
-          "This form isn't fully configured yet (spam verification is missing). Nothing was sent — please email info@techspirex.com directly for now.",
+          "This form isn't fully configured yet (spam verification is missing). Nothing was sent - please email info@techspirex.com directly for now.",
       };
     }
     if (verification.transient) {
@@ -74,7 +74,7 @@ export async function submitContactForm(
       return {
         status: "error",
         message:
-          "This form isn't fully configured yet (email delivery is missing). Nothing was sent — please email info@techspirex.com directly for now.",
+          "This form isn't fully configured yet (email delivery is missing). Nothing was sent - please email info@techspirex.com directly for now.",
       };
     }
     console.error("[contact] failed to send notification", error);

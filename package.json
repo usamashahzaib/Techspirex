@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint && npm run check:copy",
+    "check:copy": "node scripts/check-copy.mjs",
     "test:e2e": "playwright test",
     "test:unit": "vitest run"
   },

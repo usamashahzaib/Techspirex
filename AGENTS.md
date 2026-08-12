@@ -7,3 +7,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Website copy rules
+
+- Use only the plain ASCII hyphen (`-`). Never use Unicode en-dash or em-dash characters in website copy, metadata, email copy, demo copy, or source comments.
+- Write like a real, experienced person: specific, plain-spoken, and evidence-based. Avoid generic AI/marketing phrasing, inflated claims, filler, and invented details.
+- `npm run check:copy` enforces the dash rule. Keep it passing.

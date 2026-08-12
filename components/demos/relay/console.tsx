@@ -150,7 +150,7 @@ export function RelayConsole() {
               </span>
             </div>
             <p className="truncate text-xs text-[#5c6474]">
-              A TechSpireX concept build — AI triage is simulated
+              A Techspirex concept build - AI triage is simulated
             </p>
           </div>
           <div className="grid size-8 place-items-center rounded-full bg-gradient-to-br from-[#34d399] to-[#5eb0ef] text-xs font-semibold text-[#0a0d13]">
@@ -275,7 +275,7 @@ function MessageDetail({
   // Simulated "analyzing" state + streamed reply reveal. This component is
   // remounted (via its key) whenever the message or reply variant changes, so
   // the initial state below is always correct for the current reply and the
-  // effect only schedules the timed reveal — no synchronous state writes in the
+  // effect only schedules the timed reveal - no synchronous state writes in the
   // render or effect body.
   const fullReply = message.replies[variant];
   const [analyzing, setAnalyzing] = useState(!reduced);
@@ -454,7 +454,7 @@ function MessageDetail({
         <p className="mt-6 text-center text-xs text-[#5c6474]">
           Relay is a concept product built by{" "}
           <Link href="/" className="text-[#34d399] hover:underline">
-            TechSpireX
+            Techspirex
           </Link>
           . AI triage and replies are simulated for demonstration.
         </p>

@@ -1,8 +1,10 @@
-# TechSpireX — Content Strategy
+# Techspirex — Content Strategy
 
 ## Voice
 
-Precise, credible, outcome-first. Short paragraphs, specific nouns and verbs, sentence case. No em/en dashes. No banned buzzwords (see brief: "innovative solutions," "transcend the ordinary," "pixel-perfect," "future-proof," "top 1%," etc.). Write like a senior engineer explaining a decision to a smart founder, not like marketing copy performing enthusiasm.
+Precise, credible, outcome-first. Short paragraphs, specific nouns and verbs, sentence case. Use only the plain ASCII hyphen (`-`), never an en dash or em dash. No banned buzzwords (see brief: "innovative solutions," "transcend the ordinary," "pixel-perfect," "future-proof," "top 1%," etc.). Write like a senior engineer explaining a decision to a smart founder, not like marketing copy performing enthusiasm.
+
+Every line must sound like a real person with firsthand knowledge of the work. Prefer concrete facts, clear tradeoffs, and natural language. Do not invent detail, pad sections, make vague superlative claims, or rely on generic AI/marketing phrases. The source check `npm run check:copy` blocks en and em dashes in website source.
 
 ## Proof model (see `PRODUCT.md`)
 
@@ -29,4 +31,4 @@ The adapter interface (`lib/content/`) must be swappable to a headless CMS later
 
 ## Redirect map
 
-See `docs/CONTENT-INVENTORY.md` section "Redirect-map implications" — old TechSpireX URLs map to new IA slugs at launch.
+See `docs/CONTENT-INVENTORY.md` section "Redirect-map implications" — old Techspirex URLs map to new IA slugs at launch.

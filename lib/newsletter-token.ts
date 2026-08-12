@@ -7,7 +7,7 @@ import { env } from "@/lib/env";
   `<base64url(email)>.<expiry>.<hmac>` signed with NEWSLETTER_CONFIRM_SECRET.
   This lets the /newsletter/confirm route verify that the link we emailed is
   the one being clicked, that it hasn't been tampered with, and that it hasn't
-  expired — without persisting anything server-side.
+  expired - without persisting anything server-side.
 */
 
 const TTL_MS = 1000 * 60 * 60 * 24 * 3; // 3 days to confirm

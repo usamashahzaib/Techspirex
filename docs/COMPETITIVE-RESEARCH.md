@@ -1,10 +1,10 @@
-# TechSpireX — Competitive & Premium-Reference Research
+# Techspirex — Competitive & Premium-Reference Research
 
-This is a positioning input, not a design source to copy. No layout, section structure, or visual system from any firm named below should appear in the rebuild — the point is to understand what "premium and credible" looks like in this category so TechSpireX can own a different, specific position rather than imitate the category's defaults.
+This is a positioning input, not a design source to copy. No layout, section structure, or visual system from any firm named below should appear in the rebuild — the point is to understand what "premium and credible" looks like in this category so Techspirex can own a different, specific position rather than imitate the category's defaults.
 
 ## 1. Direct competitor pattern (small-to-mid full-service dev/design agencies, South Asia and globally distributed)
 
-Firms in TechSpireX's actual competitive set — small-to-mid agencies pitching "web dev + design + DevOps + marketing" as a bundle, often distributed/remote teams, often serving Western clients from a lower-cost base — tend to converge on the same failure pattern the current TechSpireX site already exhibits:
+Firms in Techspirex's actual competitive set — small-to-mid agencies pitching "web dev + design + DevOps + marketing" as a bundle, often distributed/remote teams, often serving Western clients from a lower-cost base — tend to converge on the same failure pattern the current Techspirex site already exhibits:
 
 - Six-service card grids with icon + title + two bullets, repeated identically
 - Inflated, unverifiable metrics in a stat band ("500+ projects," "98% satisfaction")
@@ -13,7 +13,7 @@ Firms in TechSpireX's actual competitive set — small-to-mid agencies pitching 
 - Purple/blue gradient "tech" palette, Inter or similar default font, glassmorphism cards
 - A "let's talk" CTA repeated at high frequency with no explanation of what actually happens after clicking it
 
-This is the exact pattern the rebuild must not replicate. TechSpireX's current site already sits inside this pattern rather than above it — the rebuild's job is to leave the category, not decorate it better.
+This is the exact pattern the rebuild must not replicate. Techspirex's current site already sits inside this pattern rather than above it — the rebuild's job is to leave the category, not decorate it better.
 
 ## 2. Aspirational / premium engineering and product studios (reference for rigor, not visuals)
 
@@ -29,7 +29,7 @@ Per current design-industry consensus (award criteria increasingly weight this):
 
 Sources: [Top Web Design Agencies 2026](https://digitalagencynetwork.com/web-design-agencies/), [Best Digital Agency Website Designs 2026 — DesignRush](https://www.designrush.com/best-designs/websites/digital-agencies), [59 Award-Winning Best Website Designs in 2026 — SPINX](https://www.spinxdigital.com/blog/best-website-design/)
 
-## 4. Where TechSpireX can credibly differentiate
+## 4. Where Techspirex can credibly differentiate
 
 Based on the audit and this research, the honest openings are:
 
@@ -38,4 +38,4 @@ Based on the audit and this research, the honest openings are:
 3. **A specific, named delivery model** (the current site references sprint-based delivery, staff augmentation, dedicated squads, fixed scope) explained in operational plain language beats vague "full-cycle agency" positioning, which is the most crowded claim in the category.
 4. **Restraint as a visual strategy.** Because the entire direct-competitor set uses the same purple/cyan gradient, glassmorphic, six-card visual language, a genuinely different, quieter, more precise visual system is itself a differentiator before a single word of copy is read.
 
-This research feeds `PRODUCT.md` and the Phase 3 shape brief once discovery (Phase 2) resolves what TechSpireX's real strongest service, proof, and audience are.
+This research feeds `PRODUCT.md` and the Phase 3 shape brief once discovery (Phase 2) resolves what Techspirex's real strongest service, proof, and audience are.

@@ -1,4 +1,4 @@
-# TechSpireX — Content Inventory (current site)
+# Techspirex — Content Inventory (current site)
 
 Page-by-page inventory of what exists today on techspirex.com. This is the raw material for the rebuild's content strategy — not a spec for what the new site will contain. See `docs/CLAIMS-REGISTER.md` for what is allowed to carry forward.
 

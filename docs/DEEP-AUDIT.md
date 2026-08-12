@@ -1,4 +1,4 @@
-# TechSpireX — Deep-Tissue Technical Audit
+# Techspirex — Deep-Tissue Technical Audit
 
 **Scope:** The rebuilt Next.js codebase at `X:\Usama\TS` (not the legacy live site — that is covered in `docs/AUDIT.md`).
 **Stack observed:** Next.js 16.3 (App Router, RSC), React 19.2, Tailwind v4, TypeScript strict, server actions, Resend, Cloudflare Turnstile, GA4, MDX (local files). No database, no auth, no user accounts, no payments.
@@ -167,7 +167,7 @@
 ### H-4 — `/demos/*` concept builds are indexable and unlabeled to crawlers
 - **Severity:** High · **Category:** SEO / Business Logic
 - **State:** The three demo routes (`app/demos/{camber,meridian,relay}/page.tsx`) render full-bleed via `ChromeGate` but export **no `robots: { index: false }`** metadata (grep for `noindex` = 0 hits). They're absent from the `routes` registry so they're not in `sitemap.ts`, but absence from the sitemap does **not** stop indexing — internal/external links or Google discovery will index them.
-- **Impact:** Google may index polished concept demos as if they were TechSpireX's own live product, competing with or outranking your real pages, and creating a credibility mismatch (your positioning is explicitly honesty-first / "concept build" per your own claims register). Thin, chrome-less pages also dilute crawl budget and site-quality signals.
+- **Impact:** Google may index polished concept demos as if they were Techspirex's own live product, competing with or outranking your real pages, and creating a credibility mismatch (your positioning is explicitly honesty-first / "concept build" per your own claims register). Thin, chrome-less pages also dilute crawl budget and site-quality signals.
 - **Root cause:** Demos were built as self-contained showcases; the indexing posture was never declared.
 - **Fix:** Add to each demo page (or a shared `app/demos/layout.tsx`):
   ```ts

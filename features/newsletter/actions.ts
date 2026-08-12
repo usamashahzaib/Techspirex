@@ -24,7 +24,7 @@ export async function subscribeToNewsletter(
     return { status: "error", message: "Enter a valid email address." };
   }
 
-  // Honeypot tripped — report the pending state so the bot learns nothing.
+  // Honeypot tripped - report the pending state so the bot learns nothing.
   if (parsed.data.website) {
     return { status: "pending" };
   }
@@ -73,6 +73,6 @@ export async function subscribeToNewsletter(
     return { status: "error", message: "Something went wrong. Please try again." };
   }
 
-  // Not "subscribed" yet — the user must confirm via the emailed link.
+  // Not "subscribed" yet - the user must confirm via the emailed link.
   return { status: "pending" };
 }

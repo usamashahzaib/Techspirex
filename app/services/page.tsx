@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Six real capabilities — web development, AI & automation, UI/UX design, DevOps & cloud, digital marketing, and ecommerce — led by web development as the flagship service.",
+    "Six real capabilities - web development, AI & automation, UI/UX design, DevOps & cloud, digital marketing, and ecommerce - led by web development as the flagship service.",
   alternates: { canonical: "/services" },
 };
 
@@ -29,7 +29,7 @@ export default function ServicesPage() {
           <h1 className="mt-5 max-w-[10ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Build the right system. Nothing extra.</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
             Six real capabilities, built by one team. Web development is where most engagements start
-            and where we&apos;re deepest — the rest support a build rather than standing alone as separate
+            and where we&apos;re deepest - the rest support a build rather than standing alone as separate
             product lines.
           </p>
         </div>

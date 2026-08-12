@@ -58,7 +58,7 @@ export function NewsletterForm() {
         role={isError ? "alert" : "status"}
         className={`text-xs min-h-4 ${isError ? "text-destructive" : "text-muted-foreground"}`}
       >
-        {state.status === "pending" && "Almost there — check your inbox and click the confirmation link."}
+        {state.status === "pending" && "Almost there - check your inbox and click the confirmation link."}
         {state.status === "duplicate" && "You're already subscribed."}
         {state.status === "error" && state.message}
         {state.status === "idle" && "Get the latest on AI trends and tech stacks. No spam. Double opt-in."}

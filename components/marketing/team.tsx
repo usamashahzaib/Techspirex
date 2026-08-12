@@ -13,7 +13,7 @@ export function Team() {
     "@type": "Person",
     name: member.name,
     jobTitle: member.role,
-    worksFor: { "@type": "Organization", name: "TechSpireX" },
+    worksFor: { "@type": "Organization", name: "Techspirex" },
   }));
 
   return (

@@ -5,7 +5,7 @@ import { siteContact } from "@/lib/routes";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Tell TechSpireX about your project. Real engineering review before anything is proposed, and a direct reply from our team.",
+    "Tell Techspirex about your project. Real engineering review before anything is proposed, and a direct reply from our team.",
   alternates: { canonical: "/contact" },
 };
 

@@ -1,15 +1,15 @@
 ---
-title: "Camber Coffee — a specialty-coffee storefront"
+title: "Camber Coffee - a specialty-coffee storefront"
 clientOrIndustry: "Concept build · Ecommerce"
 service: "ecommerce"
-summary: "A working specialty-coffee storefront — product catalog, live filtering, a real cart, and a full checkout flow with order-summary math. Explore the live demo."
+summary: "A working specialty-coffee storefront - product catalog, live filtering, a real cart, and a full checkout flow with order-summary math. Explore the live demo."
 outcomeType: "concept"
 outcome: "Live interactive demo"
 publishedAt: "2026-08-11"
 ---
 
 **This is a concept build, not a client engagement.** We built Camber Coffee to
-show how TechSpireX approaches an ecommerce storefront — the catalog, the cart, and
+show how Techspirex approaches an ecommerce storefront - the catalog, the cart, and
 the checkout flow that actually converts. It is a working store: browse, filter,
 add to cart, adjust quantities, and check out. No real payment is taken and nothing
 ships. [Open the live storefront](/demos/camber) and run a full order through it.
@@ -18,37 +18,37 @@ ships. [Open the live storefront](/demos/camber) and run a full order through it
 
 ## What it does
 
-- **A filterable catalog** — search by name, origin, or tasting note; filter by
-  roast; sort by price, rating, or popularity — all instant, no page reloads.
-- **A real cart** — add products at different weights, change quantities, remove
+- **A filterable catalog** - search by name, origin, or tasting note; filter by
+  roast; sort by price, rating, or popularity - all instant, no page reloads.
+- **A real cart** - add products at different weights, change quantities, remove
   lines, with a live item count in the header.
-- **Correct order math** — subtotal, a free-shipping threshold with a "spend $X
+- **Correct order math** - subtotal, a free-shipping threshold with a "spend $X
   more" nudge, estimated tax, and a running total that updates as the cart changes.
-- **A full checkout flow** — cart → shipping details → order summary → place order →
+- **A full checkout flow** - cart → shipping details → order summary → place order →
   confirmation, in a slide-over drawer.
 
 ## The part that actually matters in ecommerce: the checkout
 
-Storefronts don't lose money on the catalog page — they lose it at the cart and
+Storefronts don't lose money on the catalog page - they lose it at the cart and
 checkout. Camber is built around the details that move conversion: quantities are
 adjustable in one tap, the free-shipping threshold is surfaced with a concrete
 number ("add $8 more"), totals never hide fees until the last step, and the whole
 cart-to-confirmation flow happens in a drawer without yanking the shopper away from
 the store.
 
-The checkout is honest about being a demo — the "Pay" step confirms the order
-without processing a payment — but the flow, the state handling, and the totals are
+The checkout is honest about being a demo - the "Pay" step confirms the order
+without processing a payment - but the flow, the state handling, and the totals are
 the real thing. Wiring it to Stripe (or Shopify's checkout) is a contained,
 well-understood step from here.
 
 ## Engineering notes
 
-- **No external assets** — product visuals are rendered as styled SVG/gradient bags,
+- **No external assets** - product visuals are rendered as styled SVG/gradient bags,
   so the store is fully self-contained and safe under a strict Content Security
   Policy. In a production build these become real product photography.
-- **Accessible, keyboard-operable** — labelled controls, an escapable drawer, focus
+- **Accessible, keyboard-operable** - labelled controls, an escapable drawer, focus
   states throughout, and background-scroll locking while the cart is open.
-- **A light, warm retail identity** — deliberately distinct from our two dashboard
+- **A light, warm retail identity** - deliberately distinct from our two dashboard
   concept builds, [Meridian](/work/meridian-analytics) and
   [Relay](/work/relay-inbox-automation); a storefront should feel like a shop, not a
   console.
@@ -56,13 +56,13 @@ well-understood step from here.
 ## The stack
 
 Next.js (App Router), React with strict TypeScript, and Tailwind CSS. Cart and
-checkout are a single client island; the surrounding site stays static and fast —
+checkout are a single client island; the surrounding site stays static and fast -
 the pattern real storefronts want, where the catalog is cacheable and only the cart
 is dynamic.
 
 ## The honest caveat
 
-Camber Coffee is not a real store — no payment is processed, no order is fulfilled.
+Camber Coffee is not a real store - no payment is processed, no order is fulfilled.
 It is a demonstration of how we design and build a converting storefront, not a
 claim of a delivered client result. Real, attributable case studies will be clearly
 marked as such when we publish them.

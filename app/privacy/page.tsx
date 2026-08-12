@@ -3,7 +3,7 @@ import { siteContact } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
-  description: "How TechSpireX collects, uses, and protects information submitted through this site.",
+  description: "How Techspirex collects, uses, and protects information submitted through this site.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           When you submit the contact form, we collect your name, email address, and the project
           details you provide, along with optional company, budget, and timeline information. When
           you subscribe to our newsletter, we collect your email address. We use Cloudflare Turnstile
-          to verify that form submissions are from a real person, not an automated script — Turnstile
+          to verify that form submissions are from a real person, not an automated script - Turnstile
           may process limited technical data (such as browser signals) to make that determination.
         </p>
 

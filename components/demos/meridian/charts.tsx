@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import type { RetentionRow, RevenueSeries, PlanSlice } from "@/lib/demos/meridian-data";
 
 /* ------------------------------------------------------------------ */
-/* Sparkline — tiny inline trend line for KPI cards.                   */
+/* Sparkline - tiny inline trend line for KPI cards.                   */
 /* ------------------------------------------------------------------ */
 export function Sparkline({ data, color }: { data: number[]; color: string }) {
   const w = 96;
@@ -26,7 +26,7 @@ export function Sparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* RevenueChart — interactive area/line chart with hover crosshair.    */
+/* RevenueChart - interactive area/line chart with hover crosshair.    */
 /* ------------------------------------------------------------------ */
 export function RevenueChart({ series }: { series: RevenueSeries }) {
   const gradId = useId();
@@ -129,7 +129,7 @@ export function RevenueChart({ series }: { series: RevenueSeries }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* PlanDonut — revenue split by plan.                                  */
+/* PlanDonut - revenue split by plan.                                  */
 /* ------------------------------------------------------------------ */
 export function PlanDonut({ plans }: { plans: PlanSlice[] }) {
   const total = plans.reduce((a, p) => a + p.mrr, 0);
@@ -183,7 +183,7 @@ export function PlanDonut({ plans }: { plans: PlanSlice[] }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* RetentionHeatmap — cohort retention grid.                           */
+/* RetentionHeatmap - cohort retention grid.                           */
 /* ------------------------------------------------------------------ */
 function heatColor(v: number): string {
   // 0 -> faint, 100 -> vivid violet.

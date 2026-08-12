@@ -4,7 +4,7 @@ const SITE_URL = "https://techspirex.com";
  * A single, stable @id for the organization so every other schema node
  * (LocalBusiness, Service.provider, Article.publisher) can reference the same
  * entity instead of describing a new one. This is what lets Google build one
- * coherent knowledge-graph node for TechSpireX rather than several fragments.
+ * coherent knowledge-graph node for Techspirex rather than several fragments.
  */
 const ORG_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -14,13 +14,13 @@ export function organizationSchema() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": ORG_ID,
-    name: "TechSpireX",
+    name: "Techspirex",
     url: SITE_URL,
     logo: `${SITE_URL}/logo-mark.svg`,
     image: `${SITE_URL}/logo-mark.svg`,
     email: "info@techspirex.com",
     description:
-      "TechSpireX is a Lahore-based engineering studio building web systems, AI automation, design, DevOps, marketing, and ecommerce for founders and small teams in the US, UK, and EU.",
+      "Techspirex is a product engineering studio building web systems, AI automation, design, DevOps, marketing, and ecommerce for founders and teams worldwide. Headquartered in Lahore, Pakistan.",
     foundingDate: "2024",
     address: {
       "@type": "PostalAddress",
@@ -36,7 +36,7 @@ export function organizationSchema() {
 /**
  * ProfessionalService (a LocalBusiness subtype) is the schema that surfaces a
  * firm for "web development agency in Lahore"-style local + commercial queries.
- * It carries geo, service area, contact points, and price range — the fields
+ * It carries geo, service area, contact points, and price range - the fields
  * Google's local ranking systems actually read.
  */
 export function localBusinessSchema() {
@@ -44,7 +44,7 @@ export function localBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "@id": `${SITE_URL}/#localbusiness`,
-    name: "TechSpireX",
+    name: "Techspirex",
     url: SITE_URL,
     logo: `${SITE_URL}/logo-mark.svg`,
     image: `${SITE_URL}/logo-mark.svg`,
@@ -97,7 +97,7 @@ export function localBusinessSchema() {
 }
 
 /**
- * WebSite node — establishes the site as a distinct entity and declares the
+ * WebSite node - establishes the site as a distinct entity and declares the
  * site search endpoint, which is a prerequisite for a Google sitelinks
  * search box.
  */
@@ -107,7 +107,7 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     url: SITE_URL,
-    name: "TechSpireX",
+    name: "Techspirex",
     publisher: { "@id": ORG_ID },
     potentialAction: {
       "@type": "SearchAction",
@@ -128,7 +128,7 @@ export function serviceSchema(name: string, description: string, path: string) {
     name,
     description,
     url: `${SITE_URL}${path}`,
-    provider: { "@type": "Organization", "@id": ORG_ID, name: "TechSpireX", url: SITE_URL },
+    provider: { "@type": "Organization", "@id": ORG_ID, name: "Techspirex", url: SITE_URL },
     areaServed: [
       { "@type": "Country", name: "United States" },
       { "@type": "Country", name: "United Kingdom" },
@@ -151,7 +151,7 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
 }
 
 /**
- * FAQPage schema — makes a page eligible for FAQ rich results and, just as
+ * FAQPage schema - makes a page eligible for FAQ rich results and, just as
  * importantly, captures the long-tail question queries ("is it safe to hire
  * an offshore dev team", "how much does a SaaS build cost") that a young firm
  * can realistically rank for before it has domain authority for the head terms.

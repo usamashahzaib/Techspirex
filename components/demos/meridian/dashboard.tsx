@@ -110,7 +110,7 @@ export function MeridianDashboard() {
               </span>
             </div>
             <p className="truncate text-xs text-[#5c6474]">
-              A TechSpireX concept build — data is simulated
+              A Techspirex concept build - data is simulated
             </p>
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
@@ -251,7 +251,7 @@ export function MeridianDashboard() {
           <p className="pt-2 text-center text-xs text-[#5c6474]">
             Meridian is a concept product built by{" "}
             <Link href="/" className="text-[#a99bff] hover:underline">
-              TechSpireX
+              Techspirex
             </Link>{" "}
             to demonstrate data-dense product UI. All figures are simulated.
           </p>

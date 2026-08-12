@@ -5,7 +5,7 @@ import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "Insights",
-  description: "Engineering and delivery notes from the TechSpireX team.",
+  description: "Engineering and delivery notes from the Techspirex team.",
   alternates: { canonical: "/insights" },
 };
 
@@ -18,7 +18,7 @@ export default function InsightsPage() {
         <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">Insights</h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
           Notes on engineering and delivery from the team doing the work. Nothing here is generated
-          filler — this page ships empty until there&apos;s something worth writing.
+          filler - this page ships empty until there&apos;s something worth writing.
         </p>
 
         {insights.length > 0 ? (

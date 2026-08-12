@@ -1,11 +1,11 @@
 /**
- * Camber Coffee — deterministic demo catalog for the ecommerce storefront at
- * /demos/camber (a TechSpireX concept build).
+ * Camber Coffee - deterministic demo catalog for the ecommerce storefront at
+ * /demos/camber (a Techspirex concept build).
  *
  * A specialty-coffee storefront with a real working cart and checkout flow.
  * Product visuals are rendered as styled SVG/gradient bags rather than photos,
  * so the demo is fully self-contained and needs no external image hosts (safe
- * under a strict CSP). No real payment is taken — checkout is a demonstration
+ * under a strict CSP). No real payment is taken - checkout is a demonstration
  * of the flow and order-summary logic.
  */
 

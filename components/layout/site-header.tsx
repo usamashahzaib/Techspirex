@@ -119,9 +119,9 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-[4.5rem] max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href={routes.home} className="flex min-h-11 items-center gap-2" aria-label="TechSpireX home">
+        <Link href={routes.home} className="flex min-h-11 items-center gap-2" aria-label="Techspirex home">
           <Image src="/logo-mark.svg" alt="" width={30} height={30} priority aria-hidden="true" />
-          <span className="text-lg font-black tracking-[-0.04em]">TechSpireX</span>
+          <span className="text-lg font-black tracking-[-0.04em]">Techspirex</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -140,7 +140,7 @@ export function SiteHeader() {
           </Link>
           <Link
             href={`${routes.contact}?path=call`}
-            className="inline-flex min-h-11 items-center bg-[#392a6f] px-5 py-2.5 text-sm font-bold text-[#fbf9ff] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
+            className="inline-flex min-h-11 items-center rounded-lg bg-[#392a6f] px-5 py-2.5 text-sm font-bold text-[#fbf9ff] shadow-[0_10px_30px_-12px_rgba(57,42,111,0.6)] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
           >
             Book a call
           </Link>

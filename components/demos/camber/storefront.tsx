@@ -240,7 +240,7 @@ export function CamberStorefront() {
             Single-origin coffee, at peak freshness.
           </h1>
           <p className="max-w-xl text-sm text-[#7a6f66]">
-            Free shipping over ${FREE_SHIPPING_THRESHOLD}. A concept storefront by TechSpireX — the cart
+            Free shipping over ${FREE_SHIPPING_THRESHOLD}. A concept storefront by Techspirex - the cart
             and checkout are fully working; no real payment is taken.
           </p>
         </div>
@@ -292,7 +292,7 @@ export function CamberStorefront() {
         <p className="mt-10 text-center text-xs text-[#a99c90]">
           Camber Coffee is a concept storefront built by{" "}
           <Link href="/" className="text-[#b4532e] hover:underline">
-            TechSpireX
+            Techspirex
           </Link>
           . Products and checkout are simulated for demonstration.
         </p>
@@ -354,7 +354,7 @@ function CartDrawer({
         </div>
         <h2 className="font-heading text-xl font-semibold">Order placed</h2>
         <p className="max-w-xs text-sm text-[#7a6f66]">
-          This is a demo — no payment was processed and nothing will ship. In a real build this is where
+          This is a demo - no payment was processed and nothing will ship. In a real build this is where
           the confirmation, receipt email, and fulfillment webhook fire.
         </p>
         <button
@@ -417,7 +417,7 @@ function CartDrawer({
                     />
                   </div>
                 ))}
-                <p className="text-[11px] text-[#a99c90]">Demo form — details aren&rsquo;t stored or submitted.</p>
+                <p className="text-[11px] text-[#a99c90]">Demo form - details aren&rsquo;t stored or submitted.</p>
               </div>
             )}
 
@@ -510,7 +510,7 @@ function CartDrawer({
               </button>
             )}
             <p className="mt-2 text-center text-[11px] text-[#a99c90]">
-              {view === "checkout" ? "Demo checkout — no real payment is processed." : "Secure checkout · demo only"}
+              {view === "checkout" ? "Demo checkout - no real payment is processed." : "Secure checkout · demo only"}
             </p>
           </div>
         </>

@@ -4,7 +4,7 @@ import { env, SITE_URL } from "@/lib/env";
 export class EmailNotConfiguredError extends Error {
   constructor() {
     super(
-      "Email delivery is not configured. Set RESEND_API_KEY and CONTACT_NOTIFICATION_EMAIL in .env.local — see .env.example."
+      "Email delivery is not configured. Set RESEND_API_KEY and CONTACT_NOTIFICATION_EMAIL in .env.local - see .env.example."
     );
     this.name = "EmailNotConfiguredError";
   }
@@ -13,7 +13,7 @@ export class EmailNotConfiguredError extends Error {
 export class NewsletterNotConfiguredError extends Error {
   constructor() {
     super(
-      "Newsletter is not configured. Set RESEND_API_KEY, RESEND_AUDIENCE_ID and NEWSLETTER_CONFIRM_SECRET — see .env.example."
+      "Newsletter is not configured. Set RESEND_API_KEY, RESEND_AUDIENCE_ID and NEWSLETTER_CONFIRM_SECRET - see .env.example."
     );
     this.name = "NewsletterNotConfiguredError";
   }
@@ -33,7 +33,7 @@ function getClient() {
 }
 
 const FROM_NEWSLETTER =
-  env.NEWSLETTER_FROM_EMAIL ?? "TechSpireX <notifications@techspirex.com>";
+  env.NEWSLETTER_FROM_EMAIL ?? "Techspirex <notifications@techspirex.com>";
 
 export async function sendContactNotification(input: {
   projectType: string;
@@ -48,17 +48,17 @@ export async function sendContactNotification(input: {
   const resend = getClient();
 
   await resend.emails.send({
-    from: "TechSpireX website <notifications@techspirex.com>",
+    from: "Techspirex website <notifications@techspirex.com>",
     to: env.CONTACT_NOTIFICATION_EMAIL,
     replyTo: input.email,
-    subject: `New project inquiry: ${input.projectType} — ${input.name}`,
+    subject: `New project inquiry: ${input.projectType} - ${input.name}`,
     text: [
       `Project type: ${input.projectType}`,
       `Name: ${input.name}`,
       `Email: ${input.email}`,
-      `Company: ${input.company || "—"}`,
-      `Budget: ${input.budget || "—"}`,
-      `Timeline: ${input.timeline || "—"}`,
+      `Company: ${input.company || "-"}`,
+      `Budget: ${input.budget || "-"}`,
+      `Timeline: ${input.timeline || "-"}`,
       "",
       "Goal:",
       input.goal,
@@ -93,14 +93,14 @@ export async function beginNewsletterOptIn(email: string, confirmUrl: string) {
   const sent = await resend.emails.send({
     from: FROM_NEWSLETTER,
     to: email,
-    subject: "Confirm your TechSpireX subscription",
+    subject: "Confirm your Techspirex subscription",
     text: [
-      "Thanks for signing up to TechSpireX Insights.",
+      "Thanks for signing up to Techspirex Insights.",
       "",
       "Please confirm your subscription by opening this link:",
       confirmUrl,
       "",
-      "If you didn't request this, you can ignore this email — you won't be added to the list.",
+      "If you didn't request this, you can ignore this email - you won't be added to the list.",
       "",
       `${SITE_URL}`,
     ].join("\n"),

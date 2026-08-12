@@ -1,4 +1,4 @@
-# TechSpireX
+# Techspirex
 
 Web engineering studio based in Lahore, building web products, ecommerce, and AI systems for founders and small teams in the US, UK, and EU.
 

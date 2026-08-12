@@ -9,9 +9,9 @@ const faqs = [
       "Open the working demos on this site and test them. For your project, we first turn the brief into a concrete scope with risks, dependencies, and a delivery sequence. During delivery, you review working software against agreed acceptance criteria instead of relying on progress claims.",
   },
   {
-    question: "Where is TechSpireX based, and who will I actually work with?",
+    question: "Where is Techspirex based, and who will I actually work with?",
     answer:
-      "TechSpireX is based in Lahore, Pakistan. The people responsible for scoping, design, and engineering join the relevant project conversations directly; the delivery structure is documented before work starts.",
+      "Techspirex works with founders and teams worldwide and is headquartered in Lahore, Pakistan. The people responsible for scoping, design, and engineering join the relevant project conversations directly; the delivery structure is documented before work starts.",
   },
   {
     question: "How much does a project cost, and how do you price?",

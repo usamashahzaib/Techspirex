@@ -1,6 +1,6 @@
-# TechSpireX — Product Definition
+# Techspirex — Product Definition
 
-## What TechSpireX is
+## What Techspirex is
 
 A full-service digital engineering agency based in Lahore, Pakistan, founded in 2024, serving Western SMBs and startups (US/UK/EU) who need a technical partner for web/product engineering, and — as supporting capability — AI & automation, UI/UX design, DevOps & cloud, digital marketing, and ecommerce. Web development is the flagship service and the anchor of the site's narrative; the other five are real, staffed offerings, not filler.
 
@@ -12,7 +12,7 @@ Primary: founders and small leadership teams at Western SMBs/startups evaluating
 
 ## Positioning
 
-TechSpireX is a full-cycle engineering-led agency: web development is the core strength, extended by design, DevOps, AI/automation, marketing, and ecommerce as real, integrated capabilities — not a specialist shop and not a commodity six-service card grid.
+Techspirex is a full-cycle engineering-led agency: web development is the core strength, extended by design, DevOps, AI/automation, marketing, and ecommerce as real, integrated capabilities — not a specialist shop and not a commodity six-service card grid.
 
 ## Commercial goal
 

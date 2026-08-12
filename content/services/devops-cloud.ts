@@ -19,7 +19,7 @@ export const devopsCloud: ServiceContent = {
   ],
   audience: "Teams whose infrastructure has outgrown ad hoc management, or who are launching a new system and want it built right from the start.",
   credibility:
-    "This is usually delivered alongside a web development engagement, on the same codebase the team is already building — not a separate, disconnected ops function.",
+    "This is usually delivered alongside a web development engagement, on the same codebase the team is already building - not a separate, disconnected ops function.",
   scope: [
     { model: "Setup engagement", detail: "A fixed-scope project to stand up CI/CD and cloud architecture from scratch." },
     { model: "Ongoing management", detail: "Continued infrastructure ownership alongside an active build." },
@@ -34,11 +34,11 @@ export const devopsCloud: ServiceContent = {
   faqs: [
     {
       question: "Do you require a full cloud migration to start?",
-      answer: "No — most engagements start with the highest-risk piece (usually deployment or monitoring) rather than a full rebuild of infrastructure that's working fine.",
+      answer: "No - most engagements start with the highest-risk piece (usually deployment or monitoring) rather than a full rebuild of infrastructure that's working fine.",
     },
     {
       question: "Can you manage infrastructure you didn't set up?",
-      answer: "Yes, after an infrastructure review — we'll be direct if we find something that needs fixing before we take on ongoing ownership.",
+      answer: "Yes, after an infrastructure review - we'll be direct if we find something that needs fixing before we take on ongoing ownership.",
     },
   ],
 };

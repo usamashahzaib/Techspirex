@@ -1,4 +1,4 @@
-# TechSpireX — Sitemap
+# Techspirex — Sitemap
 
 Per the required IA (brief-specified routes). Web development is emphasized as flagship within `/services` ordering and homepage narrative, without demoting the other five to filler.
 

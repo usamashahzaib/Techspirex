@@ -4,7 +4,7 @@ import { z } from "zod";
   Environment validation. Uses safeParse so a single malformed *present* var
   (e.g. a typo'd CONTACT_NOTIFICATION_EMAIL) degrades the affected integration
   instead of throwing at import time and 500-ing every route that transitively
-  imports this module. Missing optional vars are fine — features that need them
+  imports this module. Missing optional vars are fine - features that need them
   fail closed with a clear message (see lib/turnstile.ts, lib/email.ts).
   See docs/IMPLEMENTATION-PLAN.md for which are still pending real credentials.
 */
@@ -33,7 +33,7 @@ const parsed = envSchema.safeParse({
 });
 
 if (!parsed.success) {
-  // Log loudly but do not crash the whole app — a bad env value must not take
+  // Log loudly but do not crash the whole app - a bad env value must not take
   // marketing pages down. The specific feature that needs the var still guards
   // itself and returns a user-facing "not configured" message.
   console.error(

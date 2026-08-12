@@ -19,7 +19,7 @@ export const ecommerce: ServiceContent = {
   ],
   audience: "Ecommerce businesses where the current platform is limiting growth, speed, or who can maintain it.",
   credibility:
-    "Ecommerce work draws on the same web development team and process — sprint-based delivery, staging environments, real QA before launch.",
+    "Ecommerce work draws on the same web development team and process - sprint-based delivery, staging environments, real QA before launch.",
   scope: [
     { model: "Fixed scope build", detail: "A new or rebuilt storefront with a defined launch date." },
     { model: "Ongoing optimization", detail: "Continued work on conversion and performance after launch." },
@@ -32,12 +32,12 @@ export const ecommerce: ServiceContent = {
   tools: ["Shopify", "WooCommerce", "Next.js commerce stacks", "Stripe"],
   faqs: [
     {
-      question: "Shopify or a custom build — how do you decide?",
-      answer: "Based on catalog complexity, integration needs, and who on your team will maintain it day to day — we'll recommend the option that fits, not the one that's more interesting to build.",
+      question: "Shopify or a custom build - how do you decide?",
+      answer: "Based on catalog complexity, integration needs, and who on your team will maintain it day to day - we'll recommend the option that fits, not the one that's more interesting to build.",
     },
     {
       question: "Can you migrate us without downtime?",
-      answer: "We plan every migration around a tested cutover window and rollback path — the goal is zero surprises, not zero risk pretended away.",
+      answer: "We plan every migration around a tested cutover window and rollback path - the goal is zero surprises, not zero risk pretended away.",
     },
   ],
 };

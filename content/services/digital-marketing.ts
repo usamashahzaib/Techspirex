@@ -6,7 +6,7 @@ export const digitalMarketing: ServiceContent = {
   flagship: false,
   tagline: "Marketing that agrees with what the site actually does.",
   heroSummary:
-    "SEO and performance marketing built with an understanding of the product underneath it — most useful paired with a web development engagement, so the site and the campaign tell the same story.",
+    "SEO and performance marketing built with an understanding of the product underneath it - most useful paired with a web development engagement, so the site and the campaign tell the same story.",
   problems: [
     "Traffic is arriving but not converting, often because the landing experience doesn't match what brought people there.",
     "Technical SEO issues (slow pages, broken metadata, poor crawlability) are capping organic growth regardless of content quality.",
@@ -17,7 +17,7 @@ export const digitalMarketing: ServiceContent = {
     { title: "Performance campaign support", detail: "Landing pages and tracking built to match paid or organic campaigns, not a generic homepage redirect." },
     { title: "Measurement setup", detail: "Analytics and conversion tracking that actually reflect what's happening on the site." },
   ],
-  audience: "Teams whose marketing and website are currently disconnected — different vendors, different assumptions, inconsistent results.",
+  audience: "Teams whose marketing and website are currently disconnected - different vendors, different assumptions, inconsistent results.",
   credibility:
     "Because this sits next to our web development work, technical SEO fixes happen at the source instead of being layered on top of a site we don't understand.",
   scope: [
@@ -37,7 +37,7 @@ export const digitalMarketing: ServiceContent = {
     },
     {
       question: "Is this useful without a full site rebuild?",
-      answer: "Yes — a technical SEO engagement can run against an existing site, though fixes are faster when we also own the code.",
+      answer: "Yes - a technical SEO engagement can run against an existing site, though fixes are faster when we also own the code.",
     },
   ],
 };

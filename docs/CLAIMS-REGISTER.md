@@ -1,4 +1,4 @@
-# TechSpireX — Claims Register
+# Techspirex — Claims Register
 
 Every material claim found on the current live site, classified per the required scheme: **Verified**, **Supplied but unverified**, **Inferred**, **Remove**, **Needs evidence**.
 

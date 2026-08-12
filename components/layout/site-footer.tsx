@@ -21,11 +21,11 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-2.5">
               <Image src="/logo-mark.svg" alt="" width={24} height={24} aria-hidden="true" />
-              <span className="font-heading text-lg font-semibold tracking-tight">TechSpireX</span>
+              <span className="font-heading text-lg font-semibold tracking-tight">Techspirex</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              A Lahore-based engineering studio building web systems, design, and infrastructure for
-              founders and teams in the US, UK, and EU.
+              A product engineering studio building web systems, design, and infrastructure for
+              founders and teams worldwide. Headquartered in Lahore, Pakistan.
             </p>
             <div className="mt-5 flex gap-3">
               {verifiedSocialLinks.map((social) => {
@@ -108,7 +108,7 @@ export function SiteFooter() {
               </Link>
             ))}
             <CookieSettingsButton />
-            <span>© {new Date().getFullYear()} TechSpireX</span>
+            <span>© {new Date().getFullYear()} Techspirex</span>
           </div>
         </div>
       </div>

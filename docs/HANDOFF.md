@@ -1,4 +1,4 @@
-# TechSpireX — Handoff
+# Techspirex — Handoff
 
 Status as of 2026-08-11. This is a working, production-buildable Next.js site — not a mockup. Read
 this alongside `docs/IMPLEMENTATION-PLAN.md` (phase tracker) and `docs/CLAIMS-REGISTER.md` (what's
@@ -16,7 +16,7 @@ npm run start    # run the production build locally
 npm run lint      # ESLint
 npx tsc --noEmit  # TypeScript strict check
 npm run test:e2e  # Playwright (route status, nav, forms, a11y, overflow)
-npm run test:unit # Vitest (none written yet — scaffold only, see §13)
+npm run test:unit # Vitest: validation + confirmation-token integrity
 ```
 
 ## 2. Production build result
@@ -127,30 +127,23 @@ budget, and re-verify LCP/CLS/INP once real photography replaces the placeholder
 
 Per-route unique titles/descriptions (verified via curl against the production build), canonical URLs,
 Organization/Service/Breadcrumb/Person/Article JSON-LD, `sitemap.xml` and `robots.txt` both serving
-correctly, RSS feed at `/insights/rss.xml`, old-site redirect map in place. Not yet done: submitting
-the sitemap to Google Search Console / Bing Webmaster Tools (needs your account access), and OG image
-generation (currently relies on default metadata — a dynamic `opengraph-image.tsx` per route would be
-a good next iteration once real photography exists to feature in social cards).
+correctly, RSS feed at `/insights/rss.xml`, old-site redirect map in place, and a branded dynamic
+`opengraph-image.tsx` default card. Not yet done: submitting the sitemap to Google Search Console /
+Bing Webmaster Tools, which needs account access.
 
 ## 10. Known limitations
 
-- **Photography**: hero, about, and team sections currently show clearly-labeled placeholder blocks
-  ("Photography pending") rather than stock imagery, per the approved warm-engineering direction. Real
-  photos of the team/studio are a hard dependency before this reads as fully finished.
+- **Photography**: the hero uses three bespoke abstract brand scenes. About and team retain honest
+  placeholders until real, consented team/studio photography is supplied.
 - **Team roster**: `content/team.ts` ships empty pending your confirmation of who's current (see
   `docs/CLAIMS-REGISTER.md` item 2). The team section degrades gracefully (an honest "profiles being
   finalized" message) rather than showing placeholder people.
-- **No case studies or insights articles yet**: both sections ship in their honest empty state by
-  design — see §4.
-- **Interactive browser QA tooling disconnected mid-session**: I visually verified the homepage myself
-  at desktop width early in the build and confirmed the approved warm-engineering + logo-indigo
-  direction rendered correctly; the rest of the visual/responsive verification for this round relied
-  on the automated Playwright suite (overflow checks, console-error checks, and axe accessibility scans
-  at 3 viewports across every route) rather than my own eyes on every page. I'd recommend a manual
-  visual pass across all 20 routes at the full 8-viewport list from the brief before calling the visual
-  QA gate fully closed.
-- **Vitest unit test scaffold only**: installed and scripted (`npm run test:unit`) but no unit tests
-  written yet — the Playwright e2e suite currently carries all automated coverage.
+- **Insights articles**: the section retains its honest empty state until real editorial content exists.
+- **Visual QA**: homepage hero verified at 1440px and 390px after the three-scene redesign. The full
+  Playwright suite checks overflow, console errors, routes, forms, and axe accessibility at mobile,
+  tablet, and desktop viewports.
+- **Vitest coverage**: 12 unit tests cover contact/newsletter validation and newsletter confirmation
+  token integrity. Playwright covers routing, navigation, forms, and accessibility.
 - **Contact details on `/contact` and in the footer** (email, phone numbers, address) are carried over
   from the old site as **supplied but unverified** — see `docs/CLAIMS-REGISTER.md`. Confirm these are
   current before launch.
@@ -181,6 +174,6 @@ unverifiable testimonials, and multiple unsourced numeric claims (150+, 98%, 99.
 **After**: a from-scratch Next.js 16 / React 19 / TypeScript-strict rebuild with an honest founding
 story, zero fabricated proof, a working contact/newsletter system with real fail-safe behavior, full
 IA including legal pages and a proper 404, structured data, and an automated test suite covering
-routing, navigation, forms, and accessibility. Design system reconciles the real TechSpireX logo
+routing, navigation, forms, and accessibility. Design system reconciles the real Techspirex logo
 (refined indigo, warm neutral base, cyan reserved as a rare accent) rather than either ignoring the
 brand asset or defaulting to the generic purple/cyan tech look the brief explicitly avoids.

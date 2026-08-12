@@ -3,7 +3,7 @@ import { siteContact } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "Terms of use",
-  description: "Terms governing use of the TechSpireX website.",
+  description: "Terms governing use of the Techspirex website.",
   alternates: { canonical: "/terms" },
 };
 
@@ -18,7 +18,7 @@ export default function TermsPage() {
         <p>
           These terms cover use of the techspirex.com website. They do not cover the terms of any
           client services agreement, which is governed by a separate contract entered into directly
-          with TechSpireX.
+          with Techspirex.
         </p>
 
         <h2>Website content</h2>
@@ -31,7 +31,7 @@ export default function TermsPage() {
 
         <h2>Intellectual property</h2>
         <p>
-          The TechSpireX name, logo, and website content are the property of TechSpireX unless
+          The Techspirex name, logo, and website content are the property of Techspirex unless
           otherwise noted. Case study content is published with client permission where applicable.
         </p>
 

@@ -81,7 +81,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.audience}</p>
             </div>
             <div>
-              <h3 className="font-heading text-base font-semibold">Why TechSpireX</h3>
+              <h3 className="font-heading text-base font-semibold">Why Techspirex</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.credibility}</p>
             </div>
           </div>

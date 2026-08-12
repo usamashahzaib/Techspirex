@@ -1,6 +1,6 @@
 # Insights articles
 
-Empty at launch by design — see `docs/CONTENT-STRATEGY.md`: "no filler/generated articles at launch.
+Empty at launch by design - see `docs/CONTENT-STRATEGY.md`: "no filler/generated articles at launch.
 Ships with zero articles rather than fake ones."
 
 ## Adding a real article
@@ -21,4 +21,4 @@ Body content in Markdown/MDX.
 ```
 
 The `/insights` index, `/insights/[slug]` template, and RSS feed automatically pick up any file added
-here — no code changes required.
+here - no code changes required.

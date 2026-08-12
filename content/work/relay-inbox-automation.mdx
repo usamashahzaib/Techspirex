@@ -1,16 +1,16 @@
 ---
-title: "Relay — an AI support-inbox automation console"
+title: "Relay - an AI support-inbox automation console"
 clientOrIndustry: "Concept build · AI & automation"
 service: "ai-automation"
-summary: "A working AI console that triages a support inbox — classifying messages, extracting structured fields, recommending an action, and drafting a reply. Explore the live demo."
+summary: "A working AI console that triages a support inbox - classifying messages, extracting structured fields, recommending an action, and drafting a reply. Explore the live demo."
 outcomeType: "concept"
 outcome: "Live interactive demo"
 publishedAt: "2026-08-11"
 ---
 
 **This is a concept build, not a client engagement.** We built Relay ourselves to
-show how TechSpireX approaches an AI-automation product: the part that is actually
-hard is not calling a model — it is the interface and the guardrails around it.
+show how Techspirex approaches an AI-automation product: the part that is actually
+hard is not calling a model - it is the interface and the guardrails around it.
 Every triage decision in this demo is pre-authored, not live inference, so the
 build is self-contained and deterministic. [Open the live console](/demos/relay)
 and work through the inbox yourself.
@@ -20,8 +20,8 @@ and work through the inbox yourself.
 ## The idea
 
 Support inboxes are where a lot of a team's time quietly disappears. Most incoming
-messages are variations on a handful of intents — a billing question, a bug report,
-an onboarding how-to — and a good automation layer can handle the routine ones end
+messages are variations on a handful of intents - a billing question, a bug report,
+an onboarding how-to - and a good automation layer can handle the routine ones end
 to end while making sure the genuinely sensitive ones reach a human fast.
 
 Relay is that layer, as a product surface: an inbox where every message arrives
@@ -31,23 +31,23 @@ already triaged.
 
 For each incoming message, Relay shows:
 
-- **Classification** — category, sentiment, intent, and urgency, with a confidence
+- **Classification** - category, sentiment, intent, and urgency, with a confidence
   score.
-- **Structured extraction** — the fields that matter pulled out as tidy chips
+- **Structured extraction** - the fields that matter pulled out as tidy chips
   (invoice IDs, amounts, VAT numbers, affected endpoints, renewal dates).
-- **A recommended action** — auto-resolve, route to a team, or escalate to a human —
+- **A recommended action** - auto-resolve, route to a team, or escalate to a human -
   with the reasoning for it.
 - **A drafted reply** you can edit, regenerate for an alternate tone, and approve.
 
 The console streams the drafted reply in as it "generates," runs a brief analysis
 state on each message, and lets you filter the queue, regenerate drafts, and
-approve or escalate — updating the message's status live.
+approve or escalate - updating the message's status live.
 
 ## The decision that actually matters: when *not* to automate
 
 The interesting design work in an AI automation tool is the boundary. A duplicate
 charge under the refund threshold is safe to auto-resolve. A price-driven
-cancellation before a renewal date is **not** — it gets escalated to a human with a
+cancellation before a renewal date is **not** - it gets escalated to a human with a
 suggested retention offer, never auto-cancelled. A sudden spike of API `429`s in
 production is paged to on-call, not answered with a template.
 
@@ -58,24 +58,24 @@ they turn off in a week.
 
 ## Engineering notes
 
-- **Accessible, controllable UI** — real form controls, keyboard-operable, a
+- **Accessible, controllable UI** - real form controls, keyboard-operable, a
   streaming reveal that collapses to instant text under `prefers-reduced-motion`.
-- **Deterministic by design** — no external calls, no keys, safe under a strict
+- **Deterministic by design** - no external calls, no keys, safe under a strict
   Content Security Policy; the same data renders identically on every build.
-- **A distinct product theme** — a dark automation console, separate from this
+- **A distinct product theme** - a dark automation console, separate from this
   marketing site, sharing a design language with our other concept build,
   [Meridian](/work/meridian-analytics).
 
 ## The stack
 
-Next.js (App Router), React with strict TypeScript, and Tailwind CSS — a single
+Next.js (App Router), React with strict TypeScript, and Tailwind CSS - a single
 client island rendered inside an otherwise static site. Wiring this to a real model
 (hosted or via an API) is a small, well-bounded change; the product design is the
 part shown here.
 
 ## The honest caveat
 
-Relay does not call a real model and has no real inbox — it is a demonstration of
+Relay does not call a real model and has no real inbox - it is a demonstration of
 how we design and build an AI-automation product, not a claim of a delivered client
 result. Real, attributable case studies will be clearly marked as such when we
 publish them.

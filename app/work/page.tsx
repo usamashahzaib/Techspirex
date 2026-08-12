@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected capabilities and delivery evidence from TechSpireX — real process, real projects as they're published, no fabricated case studies.",
+    "Selected capabilities and delivery evidence from Techspirex - real process, real projects as they're published, no fabricated case studies.",
   alternates: { canonical: "/work" },
 };
 
@@ -21,7 +21,7 @@ export default function WorkPage() {
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Proof you can open</p>
           <h1 className="mt-5 max-w-[10ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Judge the thinking in the work.</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">
-            TechSpireX was founded in 2024. We&apos;d rather publish real projects as we deliver and
+            Techspirex was founded in 2024. We&apos;d rather publish real projects as we deliver and
             can disclose them than pad this page with anything we can&apos;t stand behind.
           </p>
         </div>
@@ -77,7 +77,7 @@ export default function WorkPage() {
               <div className="border-t border-border pt-5">
                 <dt className="font-heading text-base font-semibold">Delivery process</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  A real, staged process from discovery to launch — see how an engagement runs on the
+                  A real, staged process from discovery to launch - see how an engagement runs on the
                   homepage.
                 </dd>
               </div>

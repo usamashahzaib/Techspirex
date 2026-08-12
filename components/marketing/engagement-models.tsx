@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { routes } from "@/lib/routes";
+import { AuroraBackdrop } from "@/components/marketing/aurora-backdrop";
 
 const models = [
   { number: "01", title: "Fixed scope", fit: "A defined outcome with known boundaries.", detail: "One written scope, milestone-based delivery, explicit change control." },
@@ -10,8 +11,9 @@ const models = [
 
 export function EngagementModels() {
   return (
-    <section className="border-b border-[#7669a0] bg-[#30245f] text-[#faf7ee]">
-      <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section className="relative overflow-hidden border-b border-[#7669a0] bg-[linear-gradient(180deg,#2a2051_0%,#30245f_60%,#281d55_100%)] text-[#faf7ee]">
+      <AuroraBackdrop className="opacity-70" grain={0.22} />
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
             <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#10d2f6]">Ways to work together</p>
@@ -31,13 +33,13 @@ export function EngagementModels() {
           ))}
         </div>
 
-        <div className="mt-14 grid gap-8 border border-[#10d2f6] p-6 sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div className="mt-14 grid gap-8 rounded-2xl border border-[#10d2f6]/70 bg-[#10d2f6]/[0.05] p-6 shadow-[0_0_80px_-40px_rgba(16,210,246,0.7)] backdrop-blur-sm sm:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <div>
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#10d2f6]">Start with evidence</p>
             <h3 className="mt-4 text-3xl font-black tracking-[-0.04em] sm:text-4xl">Send the brief. Get a technical direction.</h3>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#d8d0e8]">We will identify the core user flow, major dependencies, open risks, and the smallest useful first release. If a build is not the right next move, we will say that plainly.</p>
           </div>
-          <Link href={`${routes.contact}?path=brief`} className="group inline-flex min-h-12 items-center justify-center gap-2 bg-[#10d2f6] px-6 py-3 text-sm font-extrabold text-[#241a4d] transition-transform duration-300 hover:-translate-y-1 lg:justify-self-end">
+          <Link href={`${routes.contact}?path=brief`} className="glow-signal group inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-[#10d2f6] px-6 py-3 text-sm font-extrabold text-[#241a4d] hover:-translate-y-1 lg:justify-self-end">
             Send your brief <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" weight="bold" aria-hidden="true" />
           </Link>
         </div>

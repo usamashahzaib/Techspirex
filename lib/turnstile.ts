@@ -20,7 +20,7 @@ export async function verifyTurnstileToken(
   if (!env.TURNSTILE_SECRET_KEY) {
     if (process.env.NODE_ENV === "production") {
       console.error(
-        "[turnstile] TURNSTILE_SECRET_KEY is not configured in production — rejecting verification. See .env.example."
+        "[turnstile] TURNSTILE_SECRET_KEY is not configured in production - rejecting verification. See .env.example."
       );
       return { success: false, notConfigured: true };
     }

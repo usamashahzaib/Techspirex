@@ -24,32 +24,32 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://techspirex.com"),
   title: {
-    default: "TechSpireX | Web engineering studio, Lahore",
-    template: "%s | TechSpireX",
+    default: "Techspirex | Product & web engineering studio",
+    template: "%s | Techspirex",
   },
   description:
-    "TechSpireX is a Lahore-based engineering studio building web systems, AI automation, design, DevOps, marketing, and ecommerce for founders and small teams in the US, UK, and EU.",
+    "Techspirex is a product engineering studio building web systems, AI automation, design, DevOps, marketing, and ecommerce for founders and teams worldwide.",
   keywords: [
     "web development agency",
-    "software development Lahore",
+    "product engineering studio",
     "SaaS development",
-    "offshore development team",
+    "software development team",
     "custom web application development",
     "Next.js development studio",
-    "hire developers Pakistan",
+    "hire product engineers",
   ],
   openGraph: {
     type: "website",
-    siteName: "TechSpireX",
+    siteName: "Techspirex",
     locale: "en_US",
     url: "https://techspirex.com",
-    title: "TechSpireX | Web engineering studio, Lahore",
+    title: "Techspirex | Product & web engineering studio",
     description:
       "Web products, ecommerce, and focused AI automation from scope to production. Transparent process and working proof.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "TechSpireX | Web engineering studio, Lahore",
+    title: "Techspirex | Product & web engineering studio",
     description:
       "Web products, ecommerce, and focused AI automation from scope to production.",
   },

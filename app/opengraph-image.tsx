@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "TechSpireX — Web engineering studio, Lahore";
+export const alt = "Techspirex - Product & web engineering studio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
  * Branded default social card. A deep committed-violet field with cyan aurora
- * glows and a crisp grid — the brand's own look, so a shared link reads as a
+ * glows and a crisp grid - the brand's own look, so a shared link reads as a
  * considered studio rather than default-metadata plain text. Per-route cards
  * can override this by adding their own opengraph-image in the route segment.
  */
@@ -39,7 +39,7 @@ export default function OpengraphImage() {
           }}
         />
 
-        <div style={{ display: "flex", alignItems: "center", gap: "18px", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
           <div
             style={{
               width: "52px",
@@ -57,11 +57,11 @@ export default function OpengraphImage() {
               textTransform: "uppercase",
             }}
           >
-            TechSpireX
+            Techspirex
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "22px", zIndex: 1 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
           <div
             style={{
               fontSize: "20px",
@@ -71,7 +71,7 @@ export default function OpengraphImage() {
               color: "#82eaff",
             }}
           >
-            Web engineering studio · Lahore
+            Product engineering studio · Worldwide
           </div>
           <div
             style={{
@@ -87,7 +87,7 @@ export default function OpengraphImage() {
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "20px", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
           <div style={{ height: "5px", width: "72px", background: "#10d2f6", borderRadius: "3px" }} />
           <div style={{ fontSize: "24px", color: "#dcd5ee" }}>
             Engineering-led delivery for founders in the US, UK &amp; EU

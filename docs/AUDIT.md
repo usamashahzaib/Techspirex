@@ -1,4 +1,4 @@
-# TechSpireX — Current Site Audit
+# Techspirex — Current Site Audit
 
 Source: https://techspirex.com/ (live audit, 2026-08-11). Fetched via automated content extraction, not a full manual crawl — treat as first-pass, not exhaustive. Deeper pages (AI & Automation, DevOps & Cloud, Digital Marketing, Ecommerce, UI/UX detail, individual insights articles) were not yet individually fetched and should be spot-checked before final content migration decisions.
 

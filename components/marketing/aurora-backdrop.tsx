@@ -1,6 +1,6 @@
 /*
   Premium decorative backdrop: layered radial "aurora" blooms + a fine grid +
-  an SVG-generated grain texture (feTurbulence). Pure inline SVG — no raster
+  an SVG-generated grain texture (feTurbulence). Pure inline SVG - no raster
   asset, no network request, scales crisply on any display, and stays tiny.
   Fully decorative, so aria-hidden and pointer-events-none. Colors are passed
   in so it can sit on any section background.

@@ -7,13 +7,13 @@ import readingTime from "reading-time";
   Minimal local-MDX content adapter (per docs/CONTENT-STRATEGY.md: MDX now,
   swappable to a headless CMS later without route/component changes).
   Directories start empty and stay empty until real, client-approved
-  content exists — see content/work/README.md and content/insights/README.md.
+  content exists - see content/work/README.md and content/insights/README.md.
 
   TRUST BOUNDARY (docs/DEEP-AUDIT M-4): rawContent is rendered with
   next-mdx-remote/rsc, which COMPILES AND EXECUTES the MDX as JSX. That is safe
   only because these files are repository-authored (reviewed via PR). If this
   adapter is ever pointed at a headless CMS or any source where non-committers
-  can author content, MDX execution becomes a stored-XSS/RCE vector — at that
+  can author content, MDX execution becomes a stored-XSS/RCE vector - at that
   point switch untrusted authors to sanitized plain Markdown (remark + rehype-
   sanitize) or a strict allowlist of MDX components. Do not feed untrusted
   content into MDXRemote.

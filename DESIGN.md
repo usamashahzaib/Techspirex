@@ -1,4 +1,4 @@
-# TechSpireX — Design Direction (working document, pre-visual-approval)
+# Techspirex — Design Direction (working document, pre-visual-approval)
 
 This document captures design decisions locked so far. The actual visual system (palette, type, motif) is proposed as 2-4 directions in the Phase 3 shape brief and requires explicit approval before implementation — nothing here is final until that gate closes.
 
@@ -12,7 +12,7 @@ Calm competence. The visitor should feel like they found a small, serious team t
 
 ## Current brand expression (client override, 2026-08-11)
 
-The supplied TechSpireX identity is now the dominant visual source, not a minor accent. The homepage
+The supplied Techspirex identity is now the dominant visual source, not a minor accent. The homepage
 uses the logo violet `#392a6f` as a committed/drenched brand field and cyan `#10d2f6` as an active
 signal color. This explicitly supersedes the earlier restrained-indigo / rare-cyan treatment below.
 The visual target is confident, kinetic, and category-leading while claims remain evidence-based.
@@ -42,7 +42,7 @@ Rejected directions (kept for reference, not to be revisited without a new appro
 
 ### Logo reconciliation (2026-08-11)
 
-The real TechSpireX logo (`Logo/Artboard 1 copy - Copy.pdf.svg`) uses indigo `#392a6f` and cyan
+The real Techspirex logo (`Logo/Artboard 1 copy - Copy.pdf.svg`) uses indigo `#392a6f` and cyan
 `#10d2f6` — which collides with the brief's explicit ban on "purple and cyan neon as a default tech
 shortcut." Resolved with the client: the primary accent moved from terracotta to a refined,
 desaturated indigo derived from the logo (`oklch(0.38 0.11 293)`, low enough chroma to read as

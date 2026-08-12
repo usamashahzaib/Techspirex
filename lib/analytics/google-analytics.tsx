@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 /*
-  Loads GA4 only when NEXT_PUBLIC_GA4_ID is configured — no-op otherwise, never
+  Loads GA4 only when NEXT_PUBLIC_GA4_ID is configured - no-op otherwise, never
   a silent fake integration. Analytics is gated behind Google Consent Mode v2:
   storage is DENIED by default (globally, and explicitly for GB/EU regions), so
   no analytics cookies are set until the visitor accepts via the consent banner
@@ -14,7 +14,7 @@ export function GoogleAnalytics({ nonce }: { nonce?: string }) {
 
   return (
     <>
-      <Script id="ga4-consent-default" strategy="beforeInteractive" nonce={nonce}>
+      <Script id="ga4-consent-default" strategy="afterInteractive" nonce={nonce}>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

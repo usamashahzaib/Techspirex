@@ -24,9 +24,9 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>TechSpireX Insights</title>
+    <title>Techspirex Insights</title>
     <link>${SITE_URL}/insights</link>
-    <description>Engineering and delivery notes from the TechSpireX team.</description>
+    <description>Engineering and delivery notes from the Techspirex team.</description>
     <language>en</language>${items}
   </channel>
 </rss>`;

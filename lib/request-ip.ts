@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 /*
   Derive a client IP for rate-limiting. On Vercel, `x-forwarded-for` is set by
   the platform's proxy with the real client IP as the LEFT-most entry, and
-  `x-real-ip` carries the single normalized client IP — both are appended by
+  `x-real-ip` carries the single normalized client IP - both are appended by
   infrastructure the request cannot forge past. We prefer `x-real-ip` (single,
   proxy-controlled value) and fall back to the first `x-forwarded-for` hop.
 

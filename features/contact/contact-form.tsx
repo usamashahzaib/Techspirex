@@ -104,7 +104,7 @@ export function ContactForm() {
         </div>
       )}
 
-      {/* Honeypot — hidden from real users, visible to bots via DOM */}
+      {/* Honeypot - hidden from real users, visible to bots via DOM */}
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="website">Leave this field empty</label>
         <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
@@ -142,7 +142,7 @@ export function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Budget (optional)" name="budget" error={errors?.budget}>
-          <input id="budget" name="budget" type="text" placeholder="e.g. $10k–25k" className={inputClass} />
+          <input id="budget" name="budget" type="text" placeholder="e.g. $10k-25k" className={inputClass} />
         </Field>
         <Field label="Timeline (optional)" name="timeline" error={errors?.timeline}>
           <input id="timeline" name="timeline" type="text" placeholder="e.g. Q4 2026" className={inputClass} />
