@@ -121,9 +121,15 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-[4.5rem] max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href={routes.home} className="flex min-h-11 items-center gap-2" aria-label="Techspirex home">
-          <Image src="/logo-mark.svg" alt="" width={30} height={30} priority aria-hidden="true" />
-          <span className="text-lg font-black tracking-[-0.04em]">Techspirex</span>
+        <Link href={routes.home} className="flex min-h-11 items-center" aria-label="Techspirex home">
+          <Image
+            src="/techspirex-logo.png"
+            alt="Techspirex"
+            width={190}
+            height={40}
+            priority
+            className="h-auto w-[9.5rem] sm:w-[10.5rem]"
+          />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">

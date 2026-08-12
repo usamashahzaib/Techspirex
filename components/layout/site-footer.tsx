@@ -19,9 +19,14 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_0.8fr_1.3fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <Image src="/logo-mark.svg" alt="" width={24} height={24} aria-hidden="true" />
-              <span className="font-heading text-lg font-semibold tracking-tight">Techspirex</span>
+            <div>
+              <Image
+                src="/techspirex-logo.png"
+                alt="Techspirex"
+                width={190}
+                height={40}
+                className="h-auto w-[9.5rem]"
+              />
             </div>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
               Software strategy, design, engineering, QA, cloud, and dedicated technical teams for
