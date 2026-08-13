@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { routes } from "@/lib/routes";
 import { faqSchema } from "@/lib/seo/schema";
+import { JsonLd } from "@/components/seo/json-ld";
 
 const faqs = [
   {
@@ -43,7 +44,7 @@ const faqs = [
 export function Faq() {
   return (
     <section className="border-b border-border">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }} />
+      <JsonLd data={faqSchema(faqs)} />
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <p className="reveal-scroll font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">Before you reach out</p>
         <h2 className="reveal-scroll mt-4 font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">The questions worth asking</h2>

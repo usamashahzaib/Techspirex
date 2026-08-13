@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { allServices } from "@/content/services";
 import { faqSchema, serviceCatalogSchema } from "@/lib/seo/schema";
 import { routes } from "@/lib/routes";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Software development services and dedicated teams",
@@ -48,11 +50,12 @@ const serviceFaqs = [
 export default function ServicesPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceCatalogSchema(allServices)) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(serviceFaqs)) }} />
+      <JsonLd data={serviceCatalogSchema(allServices)} />
+      <JsonLd data={faqSchema(serviceFaqs)} />
 
-      <section className="border-b border-[#63548f] bg-[#211744] text-[#faf7ee]">
-        <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-8 lg:py-24">
+      <section className="relative isolate overflow-hidden border-b border-[#63548f] bg-[#211744] text-[#faf7ee]">
+        <BrandNodeField />
+        <div className="relative mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-8 lg:py-24">
           <div>
             <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#62e4ff]">Software services</p>
             <h1 className="mt-5 max-w-[13ch] text-[clamp(3rem,6vw,6rem)] font-black leading-[0.9] tracking-[-0.065em]">

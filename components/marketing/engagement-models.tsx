@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { routes } from "@/lib/routes";
 const models = [
   { number: "01", title: "Fixed scope", fit: "A defined outcome with known boundaries.", detail: "One written scope, milestone-based delivery, explicit change control." },
@@ -10,7 +11,8 @@ const models = [
 
 export function EngagementModels() {
   return (
-    <section className="relative overflow-hidden border-b border-[#7669a0] bg-[#2a2051] text-[#faf7ee]">
+    <section className="relative isolate overflow-hidden border-b border-[#7669a0] bg-[#2a2051] text-[#faf7ee]">
+      <BrandNodeField className="opacity-[0.45]" />
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-20">
           <div>

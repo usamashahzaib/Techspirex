@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { headers } from "next/headers";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
 import { getAllInsights, getInsightBySlug } from "@/lib/content/insights";
 import { routes } from "@/lib/routes";
+import { JsonLd } from "@/components/seo/json-ld";
 
 // Only known insight slugs render; unknown paths 404 rather than being
 // dynamically evaluated on demand (docs/DEEP-AUDIT L-2).
@@ -35,8 +36,6 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
   const insight = getInsightBySlug(slug);
   if (!insight) notFound();
 
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
-
   const related = getAllInsights()
     .filter((item) => item.slug !== slug && item.category === insight.category)
     .slice(0, 3);
@@ -53,9 +52,10 @@ export default async function InsightPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <script type="application/ld+json" nonce={nonce} dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <JsonLd data={jsonLd} />
+      <section className="relative isolate overflow-hidden border-b border-border">
+        <BlueprintBackdrop className="opacity-[0.45]" />
+        <div className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
             {insight.category}
           </span>

@@ -19,14 +19,6 @@ export class NewsletterNotConfiguredError extends Error {
   }
 }
 
-/** Raised when a contact already exists in the audience (double-opt-in resend). */
-export class DuplicateContactError extends Error {
-  constructor() {
-    super("Contact already exists.");
-    this.name = "DuplicateContactError";
-  }
-}
-
 function getClient() {
   if (!env.RESEND_API_KEY) throw new EmailNotConfiguredError();
   return new Resend(env.RESEND_API_KEY);
@@ -34,6 +26,18 @@ function getClient() {
 
 const FROM_NEWSLETTER =
   env.NEWSLETTER_FROM_EMAIL ?? "Techspirex <notifications@techspirex.com>";
+
+/*
+  Belt-and-braces against header injection (audit D1-9). lib/validation/contact
+  already rejects control characters in the fields that reach a header, but the
+  guarantee should not depend on every present and future caller having
+  validated first - so anything interpolated into a Subject is flattened here
+  too. Collapsing to spaces rather than erroring keeps a merely odd subject from
+  dropping a real lead on the floor.
+*/
+function headerSafe(value: string): string {
+  return value.replace(/\p{Cc}/gu, " ").replace(/\s+/g, " ").trim();
+}
 
 export async function sendContactNotification(input: {
   projectType: string;
@@ -51,7 +55,7 @@ export async function sendContactNotification(input: {
     from: "Techspirex website <notifications@techspirex.com>",
     to: env.CONTACT_NOTIFICATION_EMAIL,
     replyTo: input.email,
-    subject: `New project inquiry: ${input.projectType} - ${input.name}`,
+    subject: headerSafe(`New project inquiry: ${input.projectType} - ${input.name}`),
     text: [
       `Project type: ${input.projectType}`,
       `Name: ${input.name}`,
@@ -66,11 +70,24 @@ export async function sendContactNotification(input: {
   });
 }
 
+/** Resend has no typed "already exists" code, so match its message text. */
+function isAlreadyExistsError(error: { name?: string; message?: string }): boolean {
+  return (error.message || "").toLowerCase().includes("already");
+}
+
 /**
  * Double opt-in step 1: create the contact as UNSUBSCRIBED (pending) and email
  * a signed confirmation link. The address is never added to the active audience
  * until it clicks through, which is what prevents someone subscribing a third
  * party and satisfies GDPR/PECR consent.
+ *
+ * An address that already exists is NOT an error and is deliberately
+ * indistinguishable from a first-time signup (audit D1-1): reporting "already
+ * subscribed" back to an unauthenticated caller turns this form into a
+ * membership oracle for any address an attacker cares to test. We simply re-send
+ * the confirmation link, which is also what a real subscriber who lost the first
+ * email needs. Creation failing leaves the existing contact untouched, so this
+ * cannot be used to reset someone's subscription state either.
  */
 export async function beginNewsletterOptIn(email: string, confirmUrl: string) {
   if (!env.RESEND_AUDIENCE_ID) throw new NewsletterNotConfiguredError();
@@ -82,11 +99,9 @@ export async function beginNewsletterOptIn(email: string, confirmUrl: string) {
     unsubscribed: true,
   });
 
-  if (created.error) {
-    const msg = (created.error.message || "").toLowerCase();
-    if (msg.includes("already") || created.error.name === "invalid_parameter") {
-      throw new DuplicateContactError();
-    }
+  // Previously `invalid_parameter` was also treated as "already exists", which
+  // reported a genuinely rejected address back to the user as a duplicate.
+  if (created.error && !isAlreadyExistsError(created.error)) {
     throw new Error(created.error.message || "Failed to create contact");
   }
 

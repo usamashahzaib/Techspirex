@@ -1,4 +1,5 @@
 import { getAllInsights } from "@/lib/content/insights";
+import { cdata, escapeXml } from "@/lib/seo/xml";
 
 const SITE_URL = "https://techspirex.com";
 
@@ -9,16 +10,22 @@ export async function GET() {
   const insights = getAllInsights();
 
   const items = insights
-    .map(
-      (insight) => `
+    .map((insight) => {
+      const url = escapeXml(`${SITE_URL}/insights/${encodeURIComponent(insight.slug)}`);
+      // An unparseable date renders as "Invalid Date"; fall back to now so one
+      // bad frontmatter value cannot poison the whole feed.
+      const published = new Date(insight.publishedAt);
+      const pubDate = (Number.isNaN(published.getTime()) ? new Date() : published).toUTCString();
+
+      return `
     <item>
-      <title><![CDATA[${insight.title}]]></title>
-      <link>${SITE_URL}/insights/${insight.slug}</link>
-      <guid>${SITE_URL}/insights/${insight.slug}</guid>
-      <pubDate>${new Date(insight.publishedAt).toUTCString()}</pubDate>
-      <description><![CDATA[${insight.summary}]]></description>
-    </item>`
-    )
+      <title>${cdata(insight.title)}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <pubDate>${pubDate}</pubDate>
+      <description>${cdata(insight.summary)}</description>
+    </item>`;
+    })
     .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

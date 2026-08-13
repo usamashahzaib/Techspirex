@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
 import { getAllInsights } from "@/lib/content/insights";
 import { routes } from "@/lib/routes";
 
@@ -13,8 +14,9 @@ export default function InsightsPage() {
   const insights = getAllInsights();
 
   return (
-    <section>
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <section className="relative isolate overflow-hidden">
+      <BlueprintBackdrop className="opacity-[0.45]" />
+      <div className="relative mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">Insights</h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
           Notes on engineering and delivery from the team doing the work. Nothing here is generated

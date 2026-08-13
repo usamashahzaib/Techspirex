@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { ContactForm } from "@/features/contact/contact-form";
 import { siteContact } from "@/lib/routes";
 
@@ -19,8 +20,9 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
   const wantsCall = (await searchParams).path === "call";
   return (
     <section className="bg-background">
-      <div className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
-        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div className="relative isolate overflow-hidden border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <BrandNodeField />
+        <div className="relative mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Start with the problem</p>
           <h1 className="mt-5 max-w-[12ch] text-5xl font-black leading-[0.9] tracking-[-0.06em] sm:text-7xl">{wantsCall ? "Book a discovery call." : "Send the project brief."}</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8]">{wantsCall ? "Give us the essentials below. We will reply with available times and the right technical person for the conversation." : "Share the goal, constraints, and what is blocking progress. We will respond with a useful next step, not a sales sequence."}</p>

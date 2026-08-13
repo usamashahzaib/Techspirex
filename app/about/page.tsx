@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { BlueprintBackdrop, BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { Team } from "@/components/marketing/team";
 import { routes } from "@/lib/routes";
 
@@ -32,9 +33,8 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-[linear-gradient(160deg,#1b1440_0%,#2a2051_50%,#221a4a_100%)] text-[#faf7ee]">
-        <div className="aurora" aria-hidden="true" />
-        <div className="grid-veil" aria-hidden="true" />
+      <section className="relative isolate overflow-hidden border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <BrandNodeField />
         <div className="relative z-10 mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-8 lg:py-24">
           <div>
             <p className="inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6] backdrop-blur-sm"><span className="signal-pulse size-2 rounded-full bg-[#10d2f6]" aria-hidden="true" />About Techspirex</p>
@@ -53,8 +53,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-card">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <section className="relative isolate overflow-hidden border-b border-border bg-card">
+        <BlueprintBackdrop className="opacity-[0.45]" />
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">Where we are today</h2>
           <p className="mt-4 max-w-2xl text-muted-foreground">
             We&apos;re early. Founded in 2024, Techspirex is a small team, not an enterprise agency
@@ -90,7 +91,8 @@ export default function AboutPage() {
 
       <Team />
 
-      <section className="bg-primary text-primary-foreground">
+      <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+        <BrandNodeField variant="assembly" className="opacity-[0.55]" />
         <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 px-4 py-14 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
             <h2 className="font-heading text-2xl font-semibold tracking-tight">

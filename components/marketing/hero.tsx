@@ -3,29 +3,20 @@ import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { routes } from "@/lib/routes";
 
-const scenes = [
-  { src: "/hero/proof-architecture.webp", label: "Product architecture" },
-  { src: "/hero/intelligent-automation.webp", label: "Intelligent automation" },
-  { src: "/hero/reliable-scale.webp", label: "Reliable scale" },
-] as const;
-
 export function Hero() {
   return (
     <section className="hero-stage relative isolate overflow-hidden bg-[#171035] text-[#faf7ee]">
       <div className="absolute inset-0" aria-hidden="true">
-        {scenes.map(({ src }, index) => (
-          <Image
-            key={src}
-            src={src}
-            alt=""
-            fill
-            sizes="100vw"
-            preload={index === 0}
-            className={`hero-scene hero-scene-${index + 1} object-cover`}
-          />
-        ))}
+        <Image
+          src="/art/hero-brand-assembly.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+          className="hero-art object-cover"
+        />
         <div className="hero-scrim absolute inset-0" />
-        <div className="grid-veil opacity-35" />
+        <div className="grid-veil opacity-20" />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-[1440px] items-center px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
@@ -52,13 +43,9 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-7 right-4 z-20 hidden items-center gap-3 sm:grid sm:right-6 lg:right-8" aria-hidden="true">
-        {scenes.map(({ label }, index) => (
-          <span key={label} className={`hero-scene-label hero-scene-label-${index + 1} font-mono text-[10px] uppercase tracking-[0.17em] text-[#dcd5ea]`}>
-            0{index + 1} / {label}
-          </span>
-        ))}
-      </div>
+      <p className="absolute bottom-7 right-4 z-20 hidden font-mono text-[10px] uppercase tracking-[0.17em] text-[#bcb3c9] sm:block sm:right-6 lg:right-8" aria-hidden="true">
+        Built as one system / 01
+      </p>
     </section>
   );
 }

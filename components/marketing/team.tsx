@@ -1,4 +1,5 @@
 import { team, type TeamTier } from "@/content/team";
+import { JsonLd } from "@/components/seo/json-ld";
 
 const deliveryRoles = [
   ["Product direction", "Scope, priorities, user flows, commercial constraints"],
@@ -32,7 +33,7 @@ export function Team() {
   return (
     <section className="border-b border-border">
       {personSchemas.map((schema, index) => (
-        <script key={team[index].name} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        <JsonLd key={team[index].name} data={schema} />
       ))}
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="max-w-2xl">

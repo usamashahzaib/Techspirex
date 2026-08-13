@@ -1,3 +1,5 @@
+import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
+
 const evidence = [
   {
     label: "Scope before promises",
@@ -18,7 +20,8 @@ const evidence = [
 
 export function Proof() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-[#fbf9ff]">
+    <section className="relative isolate overflow-hidden border-b border-border bg-[#fbf9ff]">
+      <BlueprintBackdrop className="opacity-[0.55]" />
       <div className="relative mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>

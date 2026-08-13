@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { ArrowRight } from "lucide-react";
+import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/content/case-studies";
 import { routes } from "@/lib/routes";
 
@@ -45,8 +46,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <>
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <section className="relative isolate overflow-hidden border-b border-border">
+        <BlueprintBackdrop className="opacity-[0.4]" />
+        <div className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <span className="font-mono text-xs uppercase tracking-widest text-primary">
             {study.clientOrIndustry}
           </span>

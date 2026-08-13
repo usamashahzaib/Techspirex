@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { getAllCaseStudies } from "@/lib/content/case-studies";
 import { routes } from "@/lib/routes";
 
@@ -16,8 +17,9 @@ export default function WorkPage() {
 
   return (
     <>
-      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
-        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <section className="relative isolate overflow-hidden border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <BrandNodeField />
+        <div className="relative mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Proof you can open</p>
           <h1 className="mt-5 max-w-[10ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">Judge the thinking in the work.</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8] text-pretty">

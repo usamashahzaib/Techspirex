@@ -9,6 +9,7 @@ import { ConsentBanner } from "@/components/consent/consent-banner";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
 import { env } from "@/lib/env";
+import { JsonLd } from "@/components/seo/json-ld";
 
 const archivo = Archivo({
   variable: "--font-brand",
@@ -78,14 +79,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivo.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <script
-          type="application/ld+json"
-          nonce={nonce}
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [organizationSchema(), localBusinessSchema(), websiteSchema()],
-            }),
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [organizationSchema(), localBusinessSchema(), websiteSchema()],
           }}
         />
         <a

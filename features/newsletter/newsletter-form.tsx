@@ -59,7 +59,6 @@ export function NewsletterForm() {
         className={`text-xs min-h-4 ${isError ? "text-destructive" : "text-muted-foreground"}`}
       >
         {state.status === "pending" && "Almost there - check your inbox and click the confirmation link."}
-        {state.status === "duplicate" && "You're already subscribed."}
         {state.status === "error" && state.message}
         {state.status === "idle" && "Useful notes on building, running, and improving software. Confirm once by email."}
       </p>

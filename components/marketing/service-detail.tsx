@@ -1,34 +1,27 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import type { ServiceContent } from "@/content/services/types";
 import { routes } from "@/lib/routes";
 import { serviceSchema, breadcrumbSchema } from "@/lib/seo/schema";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export function ServiceDetail({ service }: { service: ServiceContent }) {
   const path = `${routes.services}/${service.slug}`;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema(service.name, service.heroSummary, path)),
-        }}
+      <JsonLd data={serviceSchema(service.name, service.heroSummary, path)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: routes.services },
+          { name: service.name, path },
+        ])}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbSchema([
-              { name: "Home", path: "/" },
-              { name: "Services", path: routes.services },
-              { name: service.name, path },
-            ])
-          ),
-        }}
-      />
-      <section className="border-b border-border bg-[#2a2051] text-[#faf7ee]">
-        <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <section className="relative isolate overflow-hidden border-b border-border bg-[#2a2051] text-[#faf7ee]">
+        <BrandNodeField />
+        <div className="relative mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           {service.flagship && (
             <span className="font-mono text-xs font-medium uppercase tracking-widest text-[#10d2f6]">
               Flagship service
@@ -150,7 +143,8 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
         </div>
       </section>
 
-      <section className="bg-primary text-primary-foreground">
+      <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+        <BrandNodeField variant="assembly" className="opacity-[0.55]" />
         <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-20">
           <h2 className="font-heading text-2xl font-semibold tracking-tight">
             Ready to talk about {service.name.toLowerCase()}?
