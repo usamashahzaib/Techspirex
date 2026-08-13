@@ -34,8 +34,10 @@ export const contactSchema = z.object({
   goal: z.string().trim().min(20, "Give us at least a sentence or two on the goal.").max(4000),
   budget: z.string().trim().max(120).optional().or(z.literal("")),
   timeline: z.string().trim().max(120).optional().or(z.literal("")),
-  // Honeypot: real users never see or fill this field. Any value means bot.
-  website: z.string().max(0, "").optional().or(z.literal("")),
+  // Honeypot: accept any value (bounded) so a hit parses cleanly and the
+  // action can silently return success instead of leaking a `website` field
+  // error that reveals the trap. Real users never see or fill this field.
+  website: z.string().max(2000).optional(),
   "cf-turnstile-response": z.string().min(1, "Verification failed, please retry."),
 });
 

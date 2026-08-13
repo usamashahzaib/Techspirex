@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Sparkles, RefreshCw, Send, ShieldAlert, CheckCircle2, Clock } from "lucide-react";
 import { usePrefersReducedMotion } from "@/lib/hooks/use-prefers-reduced-motion";
@@ -33,28 +33,23 @@ export function RelayMessageDetail({
   const [analyzing, setAnalyzing] = useState(!reduced);
   const [shown, setShown] = useState(reduced ? fullReply.length : 0);
   const [draft, setDraft] = useState(fullReply);
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     if (reduced) return;
-    const analyzeTimer = setTimeout(() => setAnalyzing(false), 650);
-    timers.current.push(analyzeTimer);
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    timers.push(setTimeout(() => setAnalyzing(false), 650));
 
     let i = 0;
     const step = () => {
       i += Math.max(2, Math.round(fullReply.length / 90));
       setShown(Math.min(i, fullReply.length));
-      if (i < fullReply.length) {
-        const t = setTimeout(step, 16);
-        timers.current.push(t);
-      }
+      if (i < fullReply.length) timers.push(setTimeout(step, 16));
     };
-    const startTyping = setTimeout(step, 750);
-    timers.current.push(startTyping);
+    timers.push(setTimeout(step, 750));
 
-    const scheduled = timers.current;
     return () => {
-      for (const t of scheduled) clearTimeout(t);
+      for (const t of timers) clearTimeout(t);
     };
   }, [fullReply, reduced]);
 
