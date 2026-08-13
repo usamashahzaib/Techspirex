@@ -6,6 +6,7 @@ import { allServices } from "@/content/services";
 import { faqSchema, serviceCatalogSchema } from "@/lib/seo/schema";
 import { routes } from "@/lib/routes";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 export const metadata: Metadata = {
   title: "Software development services and dedicated teams",
@@ -53,11 +54,11 @@ export default function ServicesPage() {
       <JsonLd data={serviceCatalogSchema(allServices)} />
       <JsonLd data={faqSchema(serviceFaqs)} />
 
-      <section className="relative isolate overflow-hidden border-b border-[#63548f] bg-[#211744] text-[#faf7ee]">
+      <section className="relative isolate overflow-hidden border-b border-[#63548f] bg-brand-ink-raised text-brand-cream">
         <BrandNodeField />
         <div className="relative mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-8 lg:py-24">
           <div>
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#62e4ff]">Software services</p>
+            <Eyebrow size="sm" tone="cyan-bright">Software services</Eyebrow>
             <h1 className="mt-5 max-w-[13ch] text-[clamp(3rem,6vw,6rem)] font-black leading-[0.9] tracking-[-0.065em]">
               Everything needed to take software from idea to operation.
             </h1>
@@ -69,11 +70,11 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-[#fbf9ff]">
+      <section className="border-b border-border bg-brand-paper">
         <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">End-to-end delivery</p>
+              <Eyebrow size="sm">End-to-end delivery</Eyebrow>
               <h2 className="mt-4 max-w-[10ch] text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl">
                 One team across the full lifecycle.
               </h2>
@@ -94,7 +95,7 @@ export default function ServicesPage() {
       <section className="border-b border-border">
         <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="max-w-3xl">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Capabilities</p>
+            <Eyebrow size="sm">Capabilities</Eyebrow>
             <h2 className="mt-4 text-4xl font-black tracking-[-0.05em] sm:text-6xl">Choose the outcome, not a department.</h2>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               Each service can stand alone. When the work crosses disciplines, we combine them under one delivery plan.
@@ -117,16 +118,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-b border-[#665890] bg-[#2a2051] text-[#faf7ee]">
+      <section className="border-b border-[#665890] bg-brand-violet-deep text-brand-cream">
         <div className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
             <div>
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#62e4ff]">Flexible capacity</p>
+              <Eyebrow size="sm" tone="cyan-bright">Flexible capacity</Eyebrow>
               <h2 className="mt-4 max-w-[10ch] text-4xl font-black leading-[0.95] tracking-[-0.05em] sm:text-6xl">
                 Scale the team around the work.
               </h2>
             </div>
-            <div className="divide-y divide-[#776a9d] border-y border-[#776a9d]">
+            <div className="divide-y divide-brand-violet-line border-y border-brand-violet-line">
               {flexibleWays.map(([title, detail]) => (
                 <div key={title} className="grid gap-3 py-6 sm:grid-cols-[0.7fr_1.3fr]">
                   <h3 className="text-lg font-extrabold">{title}</h3>
@@ -135,7 +136,7 @@ export default function ServicesPage() {
               ))}
             </div>
           </div>
-          <Link href={routes.serviceStaffAugmentation} className="mt-10 inline-flex items-center gap-2 rounded-lg bg-[#62e4ff] px-6 py-3.5 text-sm font-extrabold text-[#211744]">
+          <Link href={routes.serviceStaffAugmentation} className="mt-10 inline-flex items-center gap-2 rounded-lg bg-brand-cyan-bright px-6 py-3.5 text-sm font-extrabold text-brand-ink-raised">
             Explore staff augmentation <ArrowRight className="size-4" weight="bold" aria-hidden="true" />
           </Link>
         </div>
@@ -143,7 +144,7 @@ export default function ServicesPage() {
 
       <section className="border-b border-border bg-card">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Common questions</p>
+          <Eyebrow size="sm">Common questions</Eyebrow>
           <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] sm:text-5xl">Start with the shape of support you need.</h2>
           <div className="mt-10 divide-y divide-border border-y border-border">
             {serviceFaqs.map((item) => (

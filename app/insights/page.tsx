@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
 import { getAllInsights } from "@/lib/content/insights";
 import { routes } from "@/lib/routes";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 export const metadata: Metadata = {
   title: "Insights",
@@ -17,10 +18,10 @@ export default function InsightsPage() {
     <section className="relative isolate overflow-hidden">
       <BlueprintBackdrop className="opacity-[0.45]" />
       <div className="relative mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <h1 className="font-heading text-4xl font-semibold tracking-tight sm:text-5xl">Insights</h1>
+        <Eyebrow size="sm">Field notes</Eyebrow>
+        <h1 className="mt-4 font-heading text-4xl font-semibold tracking-tight sm:text-5xl">Insights</h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-          Notes on engineering and delivery from the team doing the work. Nothing here is generated
-          filler - this page ships empty until there&apos;s something worth writing.
+          Practical notes on scoping, designing, building, and running software from the team doing the work.
         </p>
 
         {insights.length > 0 ? (
@@ -44,15 +45,7 @@ export default function InsightsPage() {
               </Link>
             ))}
           </div>
-        ) : (
-          <div className="mt-12 rounded-lg border border-dashed border-border p-8 text-sm text-muted-foreground">
-            No articles published yet. Check back soon, or{" "}
-            <Link href={routes.contact} className="underline underline-offset-4">
-              get in touch
-            </Link>{" "}
-            if you&apos;d like to talk to the team directly in the meantime.
-          </div>
-        )}
+        ) : null}
       </div>
     </section>
   );

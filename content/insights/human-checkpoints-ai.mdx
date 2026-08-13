@@ -1,0 +1,57 @@
+---
+title: "Where AI automation should stop and a person should decide"
+summary: "Reliable automation is designed around confidence, reversibility, and escalation. The hard part is choosing where the system should hand control back."
+category: "AI and automation"
+author: "Techspirex team"
+publishedAt: "2026-08-10"
+---
+
+Automation is easiest to demo when it makes a complete decision on its own. That is also where many workflows become hardest to trust.
+
+A useful automation system does not need to remove every human step. It needs to remove repeatable work while preserving a clear path for review, correction, and escalation.
+
+## Start with the cost of being wrong
+
+Not all actions deserve the same level of confidence. Sorting an internal request, suggesting a reply, changing a customer record, and approving a payment have different consequences.
+
+Map the cost of a wrong action before choosing the automation boundary. A low-risk step may be automatic. A high-risk step may need a human confirmation even when confidence is high.
+
+## Separate extraction from decision
+
+Systems are often more reliable when they first extract structured information and only then recommend an action. This separation makes the result inspectable.
+
+For example, an inbox workflow might extract the request type, urgency, account reference, and missing information. A person can then see the fields that led to the recommendation instead of receiving an unexplained label.
+
+## Use confidence as a routing signal
+
+A confidence score is not proof that a recommendation is correct. It is a routing signal. Define what happens at each range:
+
+- high confidence: continue automatically when the action is reversible;
+- medium confidence: show the recommendation and the evidence for approval;
+- low confidence: ask for clarification or send the item to a human queue.
+
+The thresholds should be tested against real examples and adjusted when the cost of misses changes.
+
+## Design the correction path first
+
+People need to correct an automation without fighting it. A good review surface lets someone edit extracted fields, change the recommended action, reject a draft, and explain the reason when that explanation helps future work.
+
+Corrections should not disappear into a log nobody reads. They are useful evidence about where the system needs better rules, better input, or a narrower scope.
+
+## Keep actions reversible where possible
+
+Drafting is safer than sending. Queuing is safer than deleting. Preparing a change is safer than applying it without review.
+
+Reversibility gives the team room to learn. It also makes early releases easier to approve because the fallback is clear.
+
+## Measure the workflow, not the novelty
+
+The useful questions are operational:
+
+- how much manual work was removed;
+- how often a person corrected the recommendation;
+- which cases escalated;
+- how long the human review took;
+- whether the workflow became easier to audit.
+
+An automation project is working when people can make better decisions with less repeatable effort. It is not working merely because a model produced a convincing sentence.

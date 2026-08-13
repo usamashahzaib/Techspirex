@@ -1,0 +1,68 @@
+---
+title: "Scope the constraint before you scope the software"
+summary: "A useful project brief starts with the business constraint, not a list of screens. Here is the sequence we use to turn an unclear request into a buildable first release."
+category: "Delivery"
+author: "Techspirex team"
+publishedAt: "2026-08-13"
+---
+
+Most software projects do not start with a clean problem. They start with a sentence like "we need an app," "the current process is too manual," or "the website needs to convert better." Those statements may be true, but they are not yet a scope.
+
+The first useful step is to identify the constraint behind the request.
+
+## Start with the blocked outcome
+
+Ask what the team cannot do today that it needs to do next. The answer should describe a change in the business or user workflow, not a feature list.
+
+"Sales cannot see which enquiries need a response" is more useful than "build a CRM dashboard." The first statement gives us a user, a failure mode, and a direction for evidence. The second assumes the solution before anyone has examined the work.
+
+We normally write the constraint in one sentence:
+
+> The team needs to [outcome], but [specific friction or uncertainty] prevents it.
+
+That sentence becomes a filter. A proposed feature that does not reduce the named friction needs a clear reason to exist.
+
+## Map the current path
+
+Before choosing technology, walk through the current path from trigger to outcome. Note:
+
+- who starts the process;
+- what information they have at each step;
+- where a decision is made;
+- what gets copied, checked, or re-entered;
+- what happens when the normal path breaks.
+
+This is where hidden scope appears. A request that sounds like one form may also need permissions, audit history, notifications, retries, exports, and a handoff to another team. None of those should be added automatically, but each should be named before a price or timeline is treated as real.
+
+## Separate certainty from assumptions
+
+A short brief should distinguish what is known from what still needs validation. We use three buckets:
+
+1. **Known:** confirmed users, inputs, constraints, and required outcomes.
+2. **Assumed:** a reasonable working hypothesis that could change after testing.
+3. **Open:** a decision that blocks implementation or changes the shape of the first release.
+
+This keeps uncertainty visible. It also prevents a planning document from creating false precision through a long list of estimated tasks.
+
+## Define the smallest useful release
+
+The first release is not the smallest possible product. It is the smallest release that can produce evidence about the constraint.
+
+If the problem is slow triage, the first release might classify a narrow set of requests and put a human in control of the next action. It does not need every integration, every role, or an automated decision for every edge case. The release should make the important workflow observable.
+
+That usually means choosing one primary user path, one success signal, and a clear fallback when confidence is low.
+
+## What a useful scope document contains
+
+A workable scope does not need to be long. It should make these things explicit:
+
+- the blocked outcome;
+- the primary user and workflow;
+- the first release boundary;
+- dependencies and access needed;
+- risks that need a decision;
+- what will be reviewed before the next commitment.
+
+The document is useful when it helps two people disagree precisely. If everyone can read it and still mean something different by "done," it needs more work.
+
+Good delivery starts before the backlog. It starts when the team can explain which constraint it is reducing and what evidence will show that the work helped.

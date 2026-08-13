@@ -33,11 +33,11 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden border-b border-border bg-[#2a2051] text-[#faf7ee]">
+      <section className="relative isolate overflow-hidden border-b border-border bg-brand-violet-deep text-brand-cream">
         <BrandNodeField />
         <div className="relative z-10 mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-8 lg:py-24">
           <div>
-            <p className="inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6] backdrop-blur-sm"><span className="signal-pulse size-2 rounded-full bg-[#10d2f6]" aria-hidden="true" />About Techspirex</p>
+            <p className="inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cyan backdrop-blur-sm"><span className="signal-pulse size-2 rounded-full bg-brand-cyan" aria-hidden="true" />About Techspirex</p>
             <h1 className="mt-5 max-w-[13ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">A hands-on software team built for real delivery.</h1>
           </div>
           <div className="lg:pb-2">
@@ -46,8 +46,8 @@ export default function AboutPage() {
               Pakistan. We work with founders, product teams, agencies, and growing businesses worldwide.
             </p>
             <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-white/20 pt-6 text-sm">
-              <div><dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#75e7ff]">Delivery</dt><dd className="mt-2 font-bold">Projects, pods, and individual specialists</dd></div>
-              <div><dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#75e7ff]">Coverage</dt><dd className="mt-2 font-bold">Product, design, engineering, QA, cloud, and growth</dd></div>
+              <div><dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-cyan-light">Delivery</dt><dd className="mt-2 font-bold">Projects, pods, and individual specialists</dd></div>
+              <div><dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-cyan-light">Coverage</dt><dd className="mt-2 font-bold">Product, design, engineering, QA, cloud, and growth</dd></div>
             </dl>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { publishableTestimonials } from "@/content/claims";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 const evidence = [
   ["Before commitment", "Written scope, assumptions, risks, delivery order, and ownership boundaries."],
@@ -15,7 +16,7 @@ export function SocialProof() {
       <div className="mx-auto max-w-[1440px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>
-            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Trust mechanics</p>
+            <Eyebrow size="sm">Trust mechanics</Eyebrow>
             <h2 className="mt-5 max-w-[11ch] text-4xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl">Know what to verify before you hire us.</h2>
           </div>
           <ol className="divide-y divide-border border-y border-border">

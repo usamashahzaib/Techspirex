@@ -1,4 +1,5 @@
 import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 const evidence = [
   {
@@ -20,14 +21,14 @@ const evidence = [
 
 export function Proof() {
   return (
-    <section className="relative isolate overflow-hidden border-b border-border bg-[#fbf9ff]">
+    <section className="relative isolate overflow-hidden border-b border-border bg-brand-paper">
       <BlueprintBackdrop className="opacity-[0.55]" />
       <div className="relative mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div>
-            <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">
+            <Eyebrow weight="medium">
               Proof over performance
-            </p>
+            </Eyebrow>
             <h2 className="mt-5 max-w-[12ch] font-heading text-4xl font-extrabold leading-[0.98] tracking-[-0.05em] sm:text-6xl">
               We don&apos;t sell fantasies. We ship proof.
             </h2>
@@ -45,10 +46,10 @@ export function Proof() {
           </div>
         </div>
 
-        <ol className="reveal-scroll-stagger mt-16 grid gap-10 border-t border-[#392a6f]/20 pt-10 md:grid-cols-3">
+        <ol className="reveal-scroll-stagger mt-16 grid gap-10 border-t border-brand-violet/20 pt-10 md:grid-cols-3">
           {evidence.map((item, index) => (
             <li key={item.label} className="grid grid-cols-[2rem_1fr] gap-3">
-              <span className="font-mono text-xs font-bold text-[#392a6f]" aria-hidden="true">
+              <span className="font-mono text-xs font-bold text-brand-violet" aria-hidden="true">
                 0{index + 1}
               </span>
               <div>

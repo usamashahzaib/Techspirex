@@ -138,13 +138,24 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export const WEIGHTS = [
-  { id: "250g", label: "250g", multiplier: 1 },
-  { id: "500g", label: "500g", multiplier: 1.85 },
-  { id: "1kg", label: "1kg", multiplier: 3.4 },
-] as const;
+/*
+  Weights are a keyed record plus an explicit display order, rather than an
+  array searched with `.find(...)!`. Lookup by WeightId is now total - no
+  assertion, no possible undefined - and adding an ID to WEIGHT_IDS fails to
+  compile until WEIGHTS defines it.
+*/
+export const WEIGHT_IDS = ["250g", "500g", "1kg"] as const;
 
-export type WeightId = (typeof WEIGHTS)[number]["id"];
+export type WeightId = (typeof WEIGHT_IDS)[number];
+
+export const WEIGHTS: Record<WeightId, { label: string; multiplier: number }> = {
+  "250g": { label: "250g", multiplier: 1 },
+  "500g": { label: "500g", multiplier: 1.85 },
+  "1kg": { label: "1kg", multiplier: 3.4 },
+};
+
+/** Display order for the weight selector. */
+export const WEIGHT_OPTIONS = WEIGHT_IDS.map((id) => ({ id, ...WEIGHTS[id] }));
 
 export type CartLine = {
   productId: string;
@@ -153,8 +164,15 @@ export type CartLine = {
 };
 
 export function unitPrice(product: Product, weight: WeightId): number {
-  const w = WEIGHTS.find((x) => x.id === weight)!;
-  return Math.round(product.price * w.multiplier);
+  return Math.round(product.price * WEIGHTS[weight].multiplier);
+}
+
+const PRODUCTS_BY_ID = new Map(PRODUCTS.map((p) => [p.id, p]));
+
+/** Cart lines hold an ID, so this is genuinely partial - callers must handle a
+ *  miss rather than assert it away. */
+export function getProduct(id: string): Product | undefined {
+  return PRODUCTS_BY_ID.get(id);
 }
 
 export const FREE_SHIPPING_THRESHOLD = 45;

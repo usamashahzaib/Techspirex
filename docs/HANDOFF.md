@@ -38,11 +38,11 @@ outside development.
 | `/services/devops-cloud` | Static | |
 | `/services/digital-marketing` | Static | |
 | `/services/ecommerce` | Static | |
-| `/work` | Static | Empty-state honest capabilities section until real case studies exist |
-| `/work/[slug]` | SSG | Renders from `content/work/*.mdx`; none published yet |
+| `/work` | Static | Published delivery evidence and clearly labelled concept builds |
+| `/work/[slug]` | SSG | Renders from `content/work/*.mdx` |
 | `/about` | Static | |
-| `/insights` | Static | Empty-state until real articles exist |
-| `/insights/[slug]` | SSG | Renders from `content/insights/*.mdx`; none published yet |
+| `/insights` | Static | Published field-note index |
+| `/insights/[slug]` | SSG | Renders from `content/insights/*.mdx` |
 | `/insights/rss.xml` | Dynamic route handler | |
 | `/contact` | Static | Contact form |
 | `/privacy`, `/terms` | Static | |
@@ -154,7 +154,7 @@ submission remains manual.
   each person is current, consents to a public bio/photo, and that their role line is accurate**, then
   add a real `photoUrl` (see `docs/CLAIMS-REGISTER.md` item 2/6). The section still degrades gracefully
   to a role-only structure if `team` is set back to `[]`.
-- **Insights articles**: the section retains its honest empty state until real editorial content exists.
+- **Insights articles**: five repository-authored field notes are published; add future articles as reviewed MDX.
 - **Visual QA**: homepage hero verified at 1440px and 390px after the three-scene redesign. The full
   Playwright suite checks overflow, console errors, routes, forms, and axe accessibility at mobile,
   tablet, and desktop viewports.

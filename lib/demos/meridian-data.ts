@@ -45,13 +45,15 @@ export type RetentionRow = {
   values: number[];
 };
 
+export type TransactionStatus = "paid" | "failed" | "refunded";
+
 export type Transaction = {
   id: string;
   customer: string;
   email: string;
   plan: string;
   amount: number;
-  status: "paid" | "failed" | "refunded";
+  status: TransactionStatus;
   date: string;
 };
 

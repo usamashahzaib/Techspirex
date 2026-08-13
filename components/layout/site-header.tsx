@@ -148,7 +148,7 @@ export function SiteHeader() {
           </Link>
           <Link
             href={`${routes.contact}?path=call`}
-            className="inline-flex min-h-11 items-center rounded-lg bg-[#392a6f] px-5 py-2.5 text-sm font-bold text-[#fbf9ff] shadow-[0_10px_30px_-12px_rgba(57,42,111,0.6)] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
+            className="inline-flex min-h-11 items-center rounded-lg bg-brand-violet px-5 py-2.5 text-sm font-bold text-brand-paper shadow-[0_10px_30px_-12px_rgba(57,42,111,0.6)] transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#4b388f] active:translate-y-0"
           >
             Book a call
           </Link>
@@ -196,7 +196,7 @@ export function SiteHeader() {
               <Link
                 href={`${routes.contact}?path=call`}
                 onClick={() => setMobileOpen(false)}
-                className="flex min-h-12 items-center justify-center bg-[#392a6f] px-4 py-3 text-base font-bold text-[#fbf9ff]"
+                className="flex min-h-12 items-center justify-center bg-brand-violet px-4 py-3 text-base font-bold text-brand-paper"
               >
                 Book a discovery call
               </Link>

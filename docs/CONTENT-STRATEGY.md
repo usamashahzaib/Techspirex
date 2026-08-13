@@ -27,7 +27,7 @@ The adapter interface (`lib/content/`) must be swappable to a headless CMS later
 - **Proof**: real named/anonymized project detail, or an honest capabilities framing — never a stat band.
 - **Services**: each of the six pages gets unique copy answering business problem, deliverable, audience, credibility, relevant work, next action — no noun-swapped template.
 - **Team**: real name, real role, relevant expertise, no superhero bios.
-- **Insights**: no filler/generated articles at launch. Ships with zero articles rather than fake ones if none are ready; index and article template built and tested with realistic placeholder content marked clearly as such during development only (never shipped to production).
+- **Insights**: publish practical, repository-authored field notes with no fabricated client results or performance claims. The current set covers delivery, working together, AI and automation, and web development.
 
 ## Redirect map
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { routes } from "@/lib/routes";
 import { faqSchema } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 const faqs = [
   {
@@ -46,7 +47,7 @@ export function Faq() {
     <section className="border-b border-border">
       <JsonLd data={faqSchema(faqs)} />
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-        <p className="reveal-scroll font-mono text-xs font-medium uppercase tracking-[0.18em] text-primary">Before you reach out</p>
+        <Eyebrow weight="medium" className="reveal-scroll">Before you reach out</Eyebrow>
         <h2 className="reveal-scroll mt-4 font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">The questions worth asking</h2>
         <p className="reveal-scroll mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
           Clear answers on proof, pricing, ownership, team extension, and focused engagements.

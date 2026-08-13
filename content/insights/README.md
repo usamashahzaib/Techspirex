@@ -1,9 +1,9 @@
 # Insights articles
 
-Empty at launch by design - see `docs/CONTENT-STRATEGY.md`: "no filler/generated articles at launch.
-Ships with zero articles rather than fake ones."
+Published field notes live here as repository-authored MDX. Articles are practical and evidence-led,
+with no fabricated client results, testimonials, or performance claims.
 
-## Adding a real article
+## Adding an article
 
 Create `<slug>.mdx` here with this frontmatter:
 

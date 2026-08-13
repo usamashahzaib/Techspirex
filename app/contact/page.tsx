@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { ContactForm } from "@/features/contact/contact-form";
 import { siteContact } from "@/lib/routes";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -20,17 +21,17 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
   const wantsCall = (await searchParams).path === "call";
   return (
     <section className="bg-background">
-      <div className="relative isolate overflow-hidden border-b border-border bg-[#2a2051] text-[#faf7ee]">
+      <div className="relative isolate overflow-hidden border-b border-border bg-brand-violet-deep text-brand-cream">
         <BrandNodeField />
         <div className="relative mx-auto max-w-[1440px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#10d2f6]">Start with the problem</p>
+          <Eyebrow size="sm" tone="cyan" weight="normal">Start with the problem</Eyebrow>
           <h1 className="mt-5 max-w-[12ch] text-5xl font-black leading-[0.9] tracking-[-0.06em] sm:text-7xl">{wantsCall ? "Book a discovery call." : "Send the project brief."}</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8d0e8]">{wantsCall ? "Give us the essentials below. We will reply with available times and the right technical person for the conversation." : "Share the goal, constraints, and what is blocking progress. We will respond with a useful next step, not a sales sequence."}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-lilac-pale">{wantsCall ? "Give us the essentials below. We will reply with available times and the right technical person for the conversation." : "Share the goal, constraints, and what is blocking progress. We will respond with a useful next step, not a sales sequence."}</p>
         </div>
       </div>
       <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8 lg:py-24">
         <div>
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">What happens next</p>
+          <Eyebrow size="sm">What happens next</Eyebrow>
 
           <ol className="mt-10 flex flex-col gap-6">
             {processSteps.map((step, i) => (

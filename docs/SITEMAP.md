@@ -14,7 +14,7 @@ Per the required IA (brief-specified routes). Web development is emphasized as f
 /work                          Selected capabilities & delivery evidence (case studies once available)
 /work/[slug]                   Case study detail (populated as real projects are approved)
 /about
-/insights                      Index (ships empty or with real content only, never filler)
+/insights                      Index of published engineering and delivery field notes
 /insights/[slug]
 /contact
 /privacy

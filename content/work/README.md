@@ -1,9 +1,9 @@
 # Case studies
 
-This directory is intentionally empty at launch. See `docs/PRODUCT.md` and `docs/CLAIMS-REGISTER.md` -
-no fabricated case studies ship on this site.
+Published delivery evidence lives here as repository-authored MDX. Each entry labels whether it is
+shipped work, a concept build, or an implementation reference. No fabricated client result ships on this site.
 
-## Adding a real case study
+## Adding a case study
 
 Create `<slug>.mdx` in this directory with this frontmatter shape:
 

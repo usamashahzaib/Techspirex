@@ -51,6 +51,50 @@
 }
 
 /* Proof Architecture: committed violet, paper-tinted neutrals, cyan signal. */
+/*
+  Brand palette.
+
+  These are the fixed Techspirex brand colors, distinct from the semantic
+  shadcn tokens below: they do not flip between light and dark, because they are
+  applied to sections that are *always* dark (hero, CTA bands) or always light.
+
+  Registering them in `@theme` generates the utilities directly - `bg-brand-cyan`,
+  `text-brand-cream`, `border-brand-violet-edge`, opacity modifiers included -
+  which replaced ~113 hardcoded hex literals scattered across app/ and
+  components/. A rebrand is now this block, not a find-and-replace.
+
+  Only colors used more than once are tokenized. Genuinely single-use shades
+  stay as arbitrary values at their call site; naming them would add vocabulary
+  without adding meaning.
+*/
+@theme {
+  /* Violet: deepest ink through to section edges. */
+  --color-brand-ink: #171035;
+  --color-brand-ink-raised: #211744;
+  --color-brand-ink-elevated: #241a4d;
+  --color-brand-violet-deep: #2a2051;
+  --color-brand-violet: #392a6f;
+  --color-brand-violet-line: #776a9d;
+  --color-brand-violet-edge: #7669a0;
+
+  /* Cyan: the accent, light to bright. */
+  --color-brand-cyan: #10d2f6;
+  --color-brand-cyan-bright: #62e4ff;
+  --color-brand-cyan-light: #75e7ff;
+  --color-brand-cyan-pale: #9eefff;
+
+  /* Neutrals. */
+  --color-brand-cream: #faf7ee;
+  --color-brand-paper: #fbf9ff;
+
+  /* Lilac: muted foregrounds on dark surfaces. */
+  --color-brand-lilac: #aaa0c7;
+  --color-brand-lilac-bright: #c9bff0;
+  --color-brand-lilac-soft: #d0c8e2;
+  --color-brand-lilac-pale: #d8d0e8;
+  --color-brand-lilac-mist: #d9d1ec;
+}
+
 :root {
   --background: oklch(0.975 0.012 78);
   --foreground: oklch(0.205 0.055 292);

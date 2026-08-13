@@ -1,14 +1,11 @@
 "use server";
 
 import { newsletterSchema } from "@/lib/validation/newsletter";
-import { verifyTurnstileToken } from "@/lib/turnstile";
-import { rateLimit } from "@/lib/rate-limit";
-import { getClientIdentity, rateLimitTarget } from "@/lib/request-ip";
+import { guardFormSubmission } from "@/lib/security/form-guard";
+import { guardMessage } from "@/lib/security/guard-messages";
 import { beginNewsletterOptIn } from "@/lib/email";
 import { createConfirmToken } from "@/lib/newsletter-token";
 import { env, SITE_URL } from "@/lib/env";
-
-const WINDOW_MS = 10 * 60 * 1000;
 
 /*
   There is deliberately no "duplicate" state. Whether an address is already on
@@ -35,40 +32,10 @@ export async function subscribeToNewsletter(
     return { status: "pending" };
   }
 
-  const identity = await getClientIdentity();
-  const tooMany: NewsletterState = {
-    status: "error",
-    message: "Too many attempts. Please try again shortly.",
-  };
-
-  // See features/contact/actions.ts for why the budget is split in two: the
-  // generous pre-check caps outbound siteverify calls, the real budget is only
-  // spent once Turnstile has vouched for the caller (audit D1-3).
-  const verifyBudget = rateLimitTarget("newsletter:verify", identity, 20, 300);
-  if (!rateLimit(verifyBudget.key, verifyBudget.limit, WINDOW_MS).success) {
-    return tooMany;
-  }
-
-  const verification = await verifyTurnstileToken(
-    parsed.data["cf-turnstile-response"],
-    identity.trusted ? (identity.ip ?? undefined) : undefined
-  );
-  if (!verification.success) {
-    if (verification.notConfigured) {
-      return {
-        status: "error",
-        message: "Signup is temporarily unavailable. Please try again later.",
-      };
-    }
-    if (verification.transient) {
-      return { status: "error", message: "Couldn't reach verification. Please try again in a moment." };
-    }
-    return { status: "error", message: "Verification failed. Please retry." };
-  }
-
-  const submitBudget = rateLimitTarget("newsletter:submit", identity, 5, 100);
-  if (!rateLimit(submitBudget.key, submitBudget.limit, WINDOW_MS).success) {
-    return tooMany;
+  // Rate limiting + Turnstile, in the order documented in lib/security/form-guard.ts.
+  const guard = await guardFormSubmission("newsletter", parsed.data["cf-turnstile-response"]);
+  if (!guard.ok) {
+    return { status: "error", message: guardMessage("newsletter", guard.reason) };
   }
 
   if (!env.RESEND_API_KEY || !env.RESEND_AUDIENCE_ID || !env.NEWSLETTER_CONFIRM_SECRET) {

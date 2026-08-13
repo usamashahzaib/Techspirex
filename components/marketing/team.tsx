@@ -1,5 +1,6 @@
 import { team, type TeamTier } from "@/content/team";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Eyebrow } from "@/components/ui/eyebrow";
 
 const deliveryRoles = [
   ["Product direction", "Scope, priorities, user flows, commercial constraints"],
@@ -37,7 +38,7 @@ export function Team() {
       ))}
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="max-w-2xl">
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Delivery structure</p>
+          <Eyebrow size="sm">Delivery structure</Eyebrow>
           <h2 className="mt-5 text-3xl font-black tracking-[-0.045em] sm:text-5xl">The people accountable for the build.</h2>
           <p className="mt-4 text-muted-foreground">A small, senior team - the person responsible for each decision joins the relevant conversation directly.</p>
         </div>
@@ -46,7 +47,7 @@ export function Team() {
           <div className="mt-12 flex flex-col gap-12">
             {populatedTiers.map((group) => (
               <div key={group.tier} className="grid gap-6 sm:grid-cols-[10rem_1fr] sm:items-start">
-                <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary sm:pt-1">{group.label}</p>
+                <Eyebrow weight="normal" className="sm:pt-1">{group.label}</Eyebrow>
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   {group.members.map((member) => (
                     <div key={member.name} className="border-t border-border pt-5">

@@ -48,7 +48,13 @@ export type Message = {
   defaultStatus: MessageStatus;
 };
 
-export const MESSAGES: Message[] = [
+/*
+  `satisfies` rather than a `: Message[]` annotation: it still validates every
+  entry against Message, but preserves the literal `id` strings so MessageId
+  below is the actual union of IDs rather than plain `string`. That is what
+  makes getMessage() total and lets the console drop its non-null assertion.
+*/
+export const MESSAGES = [
   {
     id: "m_8801",
     from: "Priya Raman",
@@ -310,7 +316,40 @@ export const MESSAGES: Message[] = [
     ],
     defaultStatus: "new",
   },
-];
+] satisfies Message[];
+
+/** The IDs that actually exist, not `string`. Selection state is typed with
+ *  this, so an unknown ID is a compile error instead of a runtime crash. */
+export type MessageId = (typeof MESSAGES)[number]["id"];
+
+const BY_ID = new Map(MESSAGES.map((m) => [m.id, m as Message]));
+
+/** Total by construction: MessageId can only name a message that exists. */
+export function getMessage(id: MessageId): Message {
+  const message = BY_ID.get(id);
+  if (!message) {
+    // Unreachable while MessageId is derived from MESSAGES. Kept as an honest
+    // guard rather than a `!`, which would lie to the compiler instead.
+    throw new Error(`Unknown message id: ${id}`);
+  }
+  return message;
+}
+
+/*
+  The console's initial status map.
+
+  Building a Record keyed on a union from an array needs one assertion -
+  TypeScript cannot prove a `.map()` covered every key. Keeping it here, next to
+  the data that makes it true, means it is stated once with its justification
+  rather than repeated at each call site: MESSAGES is the sole source of both
+  MessageId and these entries, so the keys are exhaustive by construction.
+*/
+export function defaultStatuses(): Record<MessageId, MessageStatus> {
+  return Object.fromEntries(MESSAGES.map((m) => [m.id, m.defaultStatus])) as Record<
+    MessageId,
+    MessageStatus
+  >;
+}
 
 /** Aggregate stats for the console header, derived from the message set. */
 export function relayStats() {
