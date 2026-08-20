@@ -1,0 +1,28 @@
+# Repository-root ignores.
+#
+# The tracked application lives entirely in Website/, which has its own
+# .gitignore. This file guards the root itself, which doubles as a working
+# directory for business documents that sit alongside the code and must never
+# land in a public website repository.
+#
+# Every pattern here is root-anchored with a leading slash, so it applies only
+# to files sitting directly at the repository root and can never shadow
+# anything tracked under Website/.
+
+# Business, financial, and client working documents.
+/*.xlsx
+/*.xlsm
+/*.xls
+/*.docx
+/*.doc
+/*.pptx
+/*.csv
+/*.pdf
+
+# Environment files, in case one is ever dropped at the root by mistake.
+/.env
+/.env.*
+
+# OS noise.
+.DS_Store
+Thumbs.db
