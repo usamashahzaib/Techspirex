@@ -13,7 +13,7 @@
 > |---|---|---|
 > | C-1 Newsletter abuse/opt-in | **Fixed** | Turnstile added; real double opt-in via HMAC-signed link + `/newsletter/confirm`; contact created `unsubscribed` until confirmed |
 > | C-2 GA consent | **Fixed** | Consent Mode v2 (denied default + GB/EU region), consent banner, footer "Cookie preferences", `anonymize_ip` |
-> | H-1 CSP `'unsafe-inline'` | **Fixed** | Per-request nonce via `proxy.ts`; prod `script-src` now `'self' 'nonce-…' 'strict-dynamic'` — verified live |
+> | H-1 CSP `'unsafe-inline'` | **Fixed, then deliberately revised (2026-08-20)** | Originally fixed with a per-request nonce via `proxy.ts`. That was later reversed on purpose: the nonce forced **every** route to render dynamically (0 of 26 prerendered), because `<JsonLd>` in the root layout read `headers()` on every page. CSP is now a static header in `next.config.ts`; `script-src` carries `'unsafe-inline'` again, every other directive stays strict. Full reasoning, threat model, and the exact revert are documented in `next.config.ts`. |
 > | H-2 Turnstile throws | **Fixed** | `res.ok` + timeout + try/catch; new `transient` state surfaced to users |
 > | H-3 Rate-limit | **Hardened** | Trusted-IP helper + bounded map + async seam; **shared Redis store still needs Upstash creds** (documented) |
 > | H-4 Demos noindex | **Already done** | Was a false positive — all three demos already set `robots:{index:false}` |
@@ -34,7 +34,9 @@
 > | L-5 aria-current | **Already done** | False positive — header already sets it |
 > | L-7 gitignore | **Verified** | `.vercel`, `test-results`, `.env*` all ignored |
 >
-> **Known tradeoff:** the nonce CSP reads `headers()` in the root layout, so pages now render dynamically (SSR per request) instead of static. Standard for nonce-based CSP; fine for this site, and still CDN-cacheable. **Two items need external accounts before they're fully live:** H-3 (Upstash) and M-7 (Sentry).
+> **Known tradeoff — RESOLVED 2026-08-20.** This previously read: "the nonce CSP reads `headers()` in the root layout, so pages now render dynamically instead of static… still CDN-cacheable." The second half of that was wrong — a per-request nonce is precisely what makes a page *not* CDN-cacheable, and the build confirmed 0 of 26 routes were prerendered. The nonce has been retired in favour of static prerendering (24 of 26 routes now static; only `/contact` and `/newsletter/confirm` stay dynamic, correctly, since they read `searchParams`). See `next.config.ts`.
+>
+> **H-3 (shared rate limit) is now implemented** — `checkRateLimit` in `lib/rate-limit.ts` uses Upstash over its REST API when `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` are set, with no new dependency, falling back to the in-memory limiter when they are absent or Redis is unreachable. It needs credentials, not code. **M-7 (Sentry) still needs an external account.**
 >
 > **What this codebase gets right (so the report is honest):** layered spam defense (honeypot + Turnstile + rate-limit), Turnstile *fails closed* in production, strict security headers incl. HSTS preload, a coherent schema.org `@graph`, env-driven "never fake an integration" pattern, no secrets committed (`.env.example` only), strict TS, and an existing Playwright + axe + Vitest suite. The findings below are the gaps, not a verdict on the whole.
 

@@ -1,5 +1,3 @@
-import { headers } from "next/headers";
-
 /*
   The single place structured data is written into the document.
 
@@ -12,10 +10,11 @@ import { headers } from "next/headers";
      three sequences that matter as JSON unicode escapes keeps the JSON
      semantically identical while making tag breakout impossible.
 
-  2. Half the call sites forgot the CSP nonce, so proxy.ts's production policy
+  2. Half the call sites forgot the CSP nonce, so the old per-request policy
      (script-src with no 'unsafe-inline') silently blocked them and the
-     structured data never reached crawlers. Sourcing the nonce here means a
-     call site cannot forget it.
+     structured data never reached crawlers. The nonce is gone now - the site
+     prerenders statically and the CSP is static too (see next.config.ts) - but
+     centralizing emission here is what stops that class of bug recurring.
 
   Note on scope: this is for `application/ld+json` only, which browsers parse as
   data and never as JavaScript. It deliberately does not handle the JS-specific
@@ -31,13 +30,10 @@ export function serializeJsonLd(data: unknown): string {
     .replace(/&/g, "\\u0026");
 }
 
-export async function JsonLd({ data }: { data: unknown }) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
-
+export function JsonLd({ data }: { data: unknown }) {
   return (
     <script
       type="application/ld+json"
-      nonce={nonce}
       dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );

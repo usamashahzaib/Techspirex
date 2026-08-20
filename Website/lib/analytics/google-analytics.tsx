@@ -8,13 +8,13 @@ import Script from "next/script";
   (see components/consent/consent-banner.tsx). This is what keeps GA compliant
   with GDPR/PECR for the UK/EU markets the studio targets (docs/DEEP-AUDIT C-2).
 */
-export function GoogleAnalytics({ nonce }: { nonce?: string }) {
+export function GoogleAnalytics() {
   const gaId = process.env.NEXT_PUBLIC_GA4_ID;
   if (!gaId) return null;
 
   return (
     <>
-      <Script id="ga4-consent-default" strategy="afterInteractive" nonce={nonce}>
+      <Script id="ga4-consent-default" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -39,9 +39,8 @@ export function GoogleAnalytics({ nonce }: { nonce?: string }) {
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
         strategy="afterInteractive"
-        nonce={nonce}
       />
-      <Script id="ga4-init" strategy="afterInteractive" nonce={nonce}>
+      <Script id="ga4-init" strategy="afterInteractive">
         {`
           gtag('js', new Date());
           gtag('config', '${gaId}', { anonymize_ip: true });

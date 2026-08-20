@@ -6,7 +6,7 @@ import { submitContactForm, type ContactState } from "./actions";
 import { projectTypes } from "@/lib/validation/contact";
 import { TurnstileWidget } from "@/components/forms/turnstile-widget";
 import { trackEvent } from "@/lib/analytics/events";
-import { CheckCircle2, AlertCircle } from "lucide-react";
+import { CheckCircle, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 
 const initialState: ContactState = { status: "idle" };
 
@@ -81,7 +81,7 @@ export function ContactForm() {
         role="status"
         className="flex items-start gap-3 rounded-lg border border-border bg-card p-6 focus:outline-none"
       >
-        <CheckCircle2 className="mt-0.5 size-6 shrink-0 text-primary" aria-hidden="true" />
+        <CheckCircle className="mt-0.5 size-6 shrink-0 text-primary" aria-hidden="true" />
         <div>
           <p className="font-heading text-lg font-semibold">Brief received.</p>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -99,7 +99,7 @@ export function ContactForm() {
     <form action={formAction} noValidate className="flex flex-col gap-5">
       {state.status === "error" && (
         <div ref={resultRef} tabIndex={-1} role="alert" className="flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive focus:outline-none">
-          <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          <WarningCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <p>{state.message}</p>
         </div>
       )}

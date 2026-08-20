@@ -31,6 +31,15 @@ const envSchema = z.object({
     automatically via VERCEL=1 and does not need this.
   */
   TRUST_PROXY_HEADERS: z.enum(["true", "false"]).optional(),
+  /*
+    Optional shared rate-limit store. Both must be set for it to engage; with
+    neither, lib/rate-limit.ts stays on its in-memory limiter, which is
+    per-instance and resets on cold start (see the note there). Set these and
+    the limit becomes global across every serverless instance, which is what
+    makes it hold under real traffic.
+  */
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
 });
 
 /*
@@ -55,6 +64,8 @@ const rawEnv = {
   NEXT_PUBLIC_BING_SITE_VERIFICATION: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
   INDEXNOW_KEY: process.env.INDEXNOW_KEY,
   TRUST_PROXY_HEADERS: process.env.TRUST_PROXY_HEADERS,
+  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
 };
 
 const normalizedEnv = Object.fromEntries(
@@ -115,6 +126,7 @@ export const integrationsConfigured = {
   newsletter: Boolean(env.RESEND_API_KEY && env.RESEND_AUDIENCE_ID),
   spamProtection: Boolean(env.TURNSTILE_SECRET_KEY && env.NEXT_PUBLIC_TURNSTILE_SITE_KEY),
   analytics: Boolean(env.NEXT_PUBLIC_GA4_ID),
+  sharedRateLimit: Boolean(env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN),
 };
 
 /** Canonical site origin, used for absolute links in emails and metadata. */

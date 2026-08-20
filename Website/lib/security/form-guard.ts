@@ -1,4 +1,4 @@
-import { rateLimit } from "@/lib/rate-limit";
+import { checkRateLimit } from "@/lib/rate-limit";
 import { getClientIdentity, rateLimitTarget } from "@/lib/request-ip";
 import { verifyTurnstileToken } from "@/lib/turnstile";
 
@@ -39,7 +39,7 @@ export async function guardFormSubmission(
   const identity = await getClientIdentity();
 
   const verifyBudget = rateLimitTarget(`${surface}:verify`, identity, 20, 300);
-  if (!rateLimit(verifyBudget.key, verifyBudget.limit, WINDOW_MS).success) {
+  if (!(await checkRateLimit(verifyBudget.key, verifyBudget.limit, WINDOW_MS)).success) {
     return { ok: false, reason: "rate-limited" };
   }
 
@@ -55,7 +55,7 @@ export async function guardFormSubmission(
   }
 
   const submitBudget = rateLimitTarget(`${surface}:submit`, identity, 5, 100);
-  if (!rateLimit(submitBudget.key, submitBudget.limit, WINDOW_MS).success) {
+  if (!(await checkRateLimit(submitBudget.key, submitBudget.limit, WINDOW_MS)).success) {
     return { ok: false, reason: "rate-limited" };
   }
 

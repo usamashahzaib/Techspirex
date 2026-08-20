@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono } from "next/font/google";
-import { headers } from "next/headers";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -9,7 +8,7 @@ import { ConsentBanner } from "@/components/consent/consent-banner";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
-import { env } from "@/lib/env";
+import { env, SITE_URL } from "@/lib/env";
 import { JsonLd } from "@/components/seo/json-ld";
 
 const archivo = Archivo({
@@ -25,7 +24,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://techspirex.com"),
+  /*
+    Sourced from SITE_URL (NEXT_PUBLIC_SITE_URL, falling back to the production
+    origin) rather than hardcoded. Hardcoding it meant every preview and staging
+    deploy emitted canonical links and OG image URLs pointing at production, so
+    a preview link shared for review unfurled as - and told crawlers it was -
+    the live site.
+  */
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Techspirex | Software development company and dedicated teams",
     template: "%s | Techspirex",
@@ -48,7 +54,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Techspirex",
     locale: "en_US",
-    url: "https://techspirex.com",
+    url: SITE_URL,
     title: "Techspirex | Software development company and dedicated teams",
     description:
       "Product design, software engineering, AI, cloud, QA, ecommerce, and dedicated talent from one accountable team.",
@@ -72,8 +78,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+/*
+  Deliberately synchronous and free of any dynamic API (headers/cookies). This
+  layout wraps every route, so a single `await headers()` here opts the entire
+  site out of static prerendering - which is exactly what used to happen for the
+  CSP nonce. See next.config.ts for why the nonce was retired.
+*/
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
@@ -103,7 +114,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         </ChromeGate>
         <ConsentBanner />
         <CustomCursor />
-        <GoogleAnalytics nonce={nonce} />
+        <GoogleAnalytics />
       </body>
     </html>
   );

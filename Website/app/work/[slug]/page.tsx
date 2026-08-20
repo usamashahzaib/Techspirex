@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { BlueprintBackdrop } from "@/components/marketing/brand-backdrops";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/lib/content/case-studies";
 import { routes } from "@/lib/routes";

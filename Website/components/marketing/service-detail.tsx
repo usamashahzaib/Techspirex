@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { Section } from "@/components/ui/section";
 import { DetailList } from "@/components/ui/detail-list";

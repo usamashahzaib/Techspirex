@@ -5,9 +5,12 @@
   intentionally the *second* line of defense - Turnstile and newsletter
   double-opt-in are the primary abuse controls (see docs/DEEP-AUDIT H-3).
 
-  Production upgrade path: back this with Upstash Ratelimit (Redis). The async
-  signature below is deliberately future-proof so swapping the body to an
-  awaited Redis call touches no call site.
+  The shared store is now implemented: `checkRateLimit` at the bottom of this
+  file uses Upstash over its REST API when UPSTASH_REDIS_REST_URL and
+  UPSTASH_REDIS_REST_TOKEN are set, and falls back to the Map below when they
+  are not, or when Redis is unreachable. Call sites use `checkRateLimit`; the
+  synchronous `rateLimit` below remains the in-memory implementation it
+  delegates to.
 
   MEMORY/CPU BOUND (audit D1-2): the previous implementation swept the entire
   Map on every call once it held 5,000 entries, and only deleted *expired*
@@ -76,6 +79,95 @@ export function rateLimit(key: string, limit: number, windowMs: number) {
 
   bucket.count += 1;
   return { success: true, remaining: limit - bucket.count };
+}
+
+/* ---------------------------------------------------------------- shared store */
+
+/*
+  Optional Redis-backed limiter, used when UPSTASH_REDIS_REST_URL and
+  UPSTASH_REDIS_REST_TOKEN are both set. This is what makes the limit hold
+  across serverless instances and survive cold starts; without it the
+  per-process Map above is all there is.
+
+  Deliberately implemented over Upstash's plain REST endpoint rather than the
+  @upstash/ratelimit SDK: it is one fetch, it adds no dependency to a site whose
+  whole pitch is a lean, auditable build, and it keeps the failure posture in
+  view instead of behind a library.
+
+  Fixed window rather than sliding: the key carries the window index, so the
+  counter for a window is a distinct key that Redis expires on its own. Slightly
+  burstier at a window boundary than a sliding log, and much cheaper - one round
+  trip, no sorted sets, no cleanup.
+*/
+type Budget = { success: boolean; remaining: number };
+
+async function redisRateLimit(
+  key: string,
+  limit: number,
+  windowMs: number
+): Promise<Budget | null> {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+
+  // Window index makes each window its own key, so expiry is self-managing.
+  const windowKey = `rl:${key}:${Math.floor(Date.now() / windowMs)}`;
+
+  try {
+    const res = await fetch(`${url.replace(/\/$/, "")}/pipeline`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      /*
+        PEXPIRE ... NX sets the TTL only if the key has none, i.e. only on the
+        INCR that created it. Without NX every hit would push the expiry
+        forward and a steady attacker's window would never close.
+      */
+      body: JSON.stringify([
+        ["INCR", windowKey],
+        ["PEXPIRE", windowKey, windowMs, "NX"],
+      ]),
+      signal: AbortSignal.timeout(1500),
+      cache: "no-store",
+    });
+
+    if (!res.ok) return null;
+
+    const payload: unknown = await res.json();
+    if (!Array.isArray(payload) || payload.length === 0) return null;
+
+    const first = payload[0] as { result?: unknown; error?: unknown };
+    if (first?.error || typeof first?.result !== "number") return null;
+
+    const count = first.result;
+    return { success: count <= limit, remaining: Math.max(0, limit - count) };
+  } catch {
+    // Network blip, timeout, or malformed body. Returning null hands the
+    // decision back to the in-memory limiter rather than failing the
+    // submission - the store is an availability upgrade, not a gate.
+    return null;
+  }
+}
+
+/*
+  The entry point every call site should use. Prefers the shared store and falls
+  back to the in-memory limiter whenever it is absent or unreachable, so a Redis
+  outage degrades the limiter's *reach* rather than blocking real submissions.
+
+  Both are consulted in the fallback path, never in parallel: `rateLimit` has a
+  side effect (it increments), so calling it when Redis already answered would
+  double-count an honest visitor.
+*/
+export async function checkRateLimit(
+  key: string,
+  limit: number,
+  windowMs: number
+): Promise<Budget> {
+  const shared = await redisRateLimit(key, limit, windowMs);
+  if (shared) return shared;
+  return rateLimit(key, limit, windowMs);
 }
 
 /** Test-only: drop all state so cases can't leak buckets into each other. */
