@@ -16,7 +16,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex w-full items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground transition-[transform,opacity] duration-300 hover:-translate-y-0.5 hover:opacity-95 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Sending…" : "Send project brief"}
     </button>
@@ -58,7 +58,7 @@ function Field({
 }
 
 const inputClass =
-  "w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+  "min-h-12 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground transition-[border-color,box-shadow] duration-300 placeholder:text-muted-foreground hover:border-primary/40 focus-visible:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 
 export function ContactForm() {
   const [state, formAction] = useActionState(submitContactForm, initialState);

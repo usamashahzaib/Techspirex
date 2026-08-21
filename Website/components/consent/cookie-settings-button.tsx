@@ -13,7 +13,7 @@ export function CookieSettingsButton() {
     <button
       type="button"
       onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT))}
-      className="hover:text-foreground"
+      className="inline-flex min-h-11 items-center hover:text-foreground"
     >
       Cookie preferences
     </button>

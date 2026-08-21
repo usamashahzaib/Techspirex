@@ -55,19 +55,22 @@ export default function ServicesPage() {
       <JsonLd data={serviceCatalogSchema(allServices)} />
       <JsonLd data={faqSchema(serviceFaqs)} />
 
-      <section className="relative isolate overflow-hidden border-b border-[#63548f] bg-brand-ink-raised text-brand-cream">
-        <BrandNodeField />
-        <div className="relative mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:px-8 lg:py-24">
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-brand-ink text-brand-cream">
+        <BrandNodeField className="opacity-[0.45]" />
+        <div className="grid-veil opacity-15" aria-hidden="true" />
+        <div className="relative mx-auto grid min-h-[42rem] max-w-[1440px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:px-8 lg:py-28">
           <div>
             <Eyebrow size="sm" tone="cyan-bright">Software services</Eyebrow>
-            <h1 className="mt-5 max-w-[13ch] text-[clamp(3rem,6vw,6rem)] font-black leading-[0.9] tracking-[-0.065em]">
-              Everything needed to take software from idea to operation.
+            <h1 className="mt-6 max-w-[11ch] text-[clamp(4rem,7.5vw,8rem)] font-black leading-[0.84] tracking-[-0.075em]">
+              One system. Every discipline it needs.
             </h1>
           </div>
-          <p className="max-w-xl text-lg leading-relaxed text-[#ded7eb]">
-            Use Techspirex for one specialist, a dedicated team, or a complete project. We can plan,
-            design, build, test, launch, run, and improve the system with clear ownership at every stage.
-          </p>
+          <div>
+            <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale">Use one specialist, a stable pod, or a complete project team. The shape follows the constraint.</p>
+            <ol className="mt-9 grid grid-cols-5 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
+              {lifecycle.map(([number, title]) => <li key={number} className="bg-brand-ink/80 px-2 py-4"><span className="block font-mono text-[8px] text-brand-cyan">{number}</span><span className="mt-2 block text-[10px] font-bold leading-tight text-brand-lilac-pale">{title}</span></li>)}
+            </ol>
+          </div>
         </div>
       </section>
 
@@ -132,7 +135,7 @@ export default function ServicesPage() {
               {flexibleWays.map(([title, detail]) => (
                 <div key={title} className="grid gap-3 py-6 sm:grid-cols-[0.7fr_1.3fr]">
                   <h3 className="text-lg font-extrabold">{title}</h3>
-                  <p className="text-sm leading-relaxed text-[#d5cde5]">{detail}</p>
+                  <p className="text-sm leading-relaxed text-brand-lilac-pale">{detail}</p>
                 </div>
               ))}
             </div>

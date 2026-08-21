@@ -17,7 +17,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
       href={href}
       aria-current={isActive ? "page" : undefined}
       className={cn(
-        "text-sm font-medium transition-colors duration-300 ease-[var(--ease-expo-out)] hover:text-primary",
+        "inline-flex min-h-11 items-center px-1 text-sm font-medium transition-colors duration-300 ease-[var(--ease-expo-out)] hover:text-primary",
         isActive ? "text-primary" : "text-foreground/80"
       )}
     >
@@ -30,6 +30,7 @@ function ServicesMenu() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const isActive = pathname.startsWith(routes.services);
 
   useEffect(() => {
@@ -39,7 +40,10 @@ function ServicesMenu() {
       }
     }
     function onKeydown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
     }
     document.addEventListener("mousedown", onClickOutside);
     document.addEventListener("keydown", onKeydown);
@@ -47,18 +51,19 @@ function ServicesMenu() {
       document.removeEventListener("mousedown", onClickOutside);
       document.removeEventListener("keydown", onKeydown);
     };
-  }, []);
+  }, [open]);
 
   return (
     <div className="relative" ref={containerRef}>
       <button
+        ref={triggerRef}
         type="button"
         aria-expanded={open}
         aria-haspopup="true"
         aria-current={isActive ? "page" : undefined}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex items-center gap-1 text-sm font-medium transition-colors duration-300 ease-[var(--ease-expo-out)] hover:text-primary",
+          "flex min-h-11 items-center gap-1 px-1 text-sm font-medium transition-colors duration-300 ease-[var(--ease-expo-out)] hover:text-primary",
           isActive ? "text-primary" : "text-foreground/80"
         )}
       >
@@ -71,13 +76,11 @@ function ServicesMenu() {
       </button>
       {open && (
         <div
-          role="menu"
           className="reveal absolute left-1/2 top-full z-40 mt-5 w-[42rem] -translate-x-1/2 bezel-shell border border-border bg-popover/95 p-2 shadow-[0_40px_90px_-40px_rgba(57,42,111,0.45)] backdrop-blur-xl"
         >
           <div className="bezel-core p-2">
             <Link
               href={routes.services}
-              role="menuitem"
               onClick={() => setOpen(false)}
               className="block rounded-2xl px-4 py-3 text-sm font-medium text-primary hover:bg-muted"
             >
@@ -89,7 +92,6 @@ function ServicesMenu() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  role="menuitem"
                   onClick={() => setOpen(false)}
                   className="flex min-h-11 items-center justify-between rounded-2xl px-4 py-2.5 text-sm text-foreground/85 hover:bg-muted"
                 >
@@ -140,6 +142,8 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
 
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
@@ -156,8 +160,35 @@ export function SiteHeader() {
   useEffect(() => {
     if (!mobileOpen) return;
     document.body.style.overflow = "hidden";
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const focusable = mobileNavRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    focusable?.[0]?.focus();
+
+    function onKeydown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== "Tab" || !focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeydown);
     return () => {
       document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKeydown);
+      if (previouslyFocused && document.contains(previouslyFocused)) previouslyFocused.focus();
     };
   }, [mobileOpen]);
 
@@ -192,14 +223,14 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
           <ServicesMenu />
           {primaryNavItems.map((item) => (
             <NavLink key={item.href} href={item.href} label={item.label} />
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <Link
             href={`${routes.contact}?path=brief`}
             className="inline-flex min-h-11 items-center px-3 text-sm font-bold text-foreground/80 transition-colors duration-300 ease-[var(--ease-expo-out)] hover:text-primary lg:px-4"
@@ -212,8 +243,9 @@ export function SiteHeader() {
         </div>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          className="inline-flex items-center justify-center rounded-full p-2.5 text-foreground transition-colors duration-300 hover:bg-muted md:hidden"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full p-2.5 text-foreground transition-colors duration-300 hover:bg-muted lg:hidden"
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -225,10 +257,13 @@ export function SiteHeader() {
 
       {/* Full-screen glass overlay, mobile only. */}
       <div
+        ref={mobileNavRef}
         id="mobile-nav"
         aria-label="Mobile"
+        role="dialog"
+        aria-modal="true"
         className={cn(
-          "fixed inset-0 z-40 flex flex-col bg-brand-ink/97 backdrop-blur-2xl transition-[opacity,visibility] duration-500 ease-[var(--ease-expo-out)] md:hidden",
+          "fixed inset-0 z-40 flex flex-col bg-brand-ink/97 backdrop-blur-2xl transition-[opacity,visibility] duration-500 ease-[var(--ease-expo-out)] lg:hidden",
           mobileOpen ? "visible opacity-100" : "invisible opacity-0"
         )}
       >

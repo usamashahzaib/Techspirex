@@ -55,16 +55,14 @@ export function WorkShowcase() {
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
             <Eyebrow tone="cyan">
-              Real work, and proof you can click
+              Proof you can open
             </Eyebrow>
             <h2 className="mt-5 max-w-[11ch] font-heading text-4xl font-extrabold leading-[0.95] tracking-[-0.05em] sm:text-6xl">
-              A shipped product. And demos you can open.
+              The work is the pitch.
             </h2>
           </div>
           <p className="max-w-xl text-lg leading-relaxed text-brand-lilac-mist lg:pt-7">
-            One SaaS product live in production for a real founder, plus concept builds we made
-            ourselves - so you can judge product thinking, interface quality, and engineering detail
-            directly.
+            Start with a live SaaS product. Then open the product labs and test the details yourself. No moodboard standing in for delivery.
           </p>
         </div>
 
@@ -91,15 +89,20 @@ export function WorkShowcase() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 self-center">
-                {featured.capabilities.map((cap) => (
-                  <span
-                    key={cap}
-                    className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3 text-center font-mono text-[11px] leading-tight text-brand-lilac-bright"
-                  >
-                    {cap}
-                  </span>
-                ))}
+              <div className="signal-panel self-stretch overflow-hidden rounded-[1.5rem] border border-white/10 bg-brand-ink/55 p-2">
+                <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-brand-cyan-pale">Product surface / inspected</span>
+                  <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-brand-lilac"><span className="size-1.5 rounded-full bg-brand-cyan" /> live</span>
+                </div>
+                <ol className="divide-y divide-white/10 px-2">
+                  {featured.capabilities.map((cap, index) => (
+                    <li key={cap} className="grid grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-3.5">
+                      <span className="font-mono text-[9px] text-brand-lilac">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="text-sm font-bold text-brand-lilac-bright">{cap}</span>
+                      <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-brand-cyan">shipped</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </div>
           </div>

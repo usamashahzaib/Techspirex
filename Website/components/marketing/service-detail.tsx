@@ -9,7 +9,7 @@ import { serviceSchema, breadcrumbSchema } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/seo/json-ld";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
-  return <h2 className="font-heading text-2xl font-semibold tracking-tight">{children}</h2>;
+  return <h2 className="max-w-[14ch] font-heading text-3xl font-black leading-[0.98] tracking-[-0.045em] sm:text-5xl">{children}</h2>;
 }
 
 export function ServiceDetail({ service }: { service: ServiceContent }) {
@@ -26,26 +26,16 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
         ])}
       />
 
-      <Section tone="violet" width="full" backdrop={<BrandNodeField />} innerClassName="lg:py-24">
-        {service.flagship && (
-          <span className="font-mono text-xs font-medium uppercase tracking-widest text-brand-cyan">
-            Flagship service
-          </span>
-        )}
-        <h1 className="mt-4 max-w-[13ch] text-5xl font-black leading-[0.92] tracking-[-0.06em] sm:text-7xl">
-          {service.name}
-        </h1>
-        <p className="mt-5 text-lg font-bold text-brand-cyan-pale">{service.tagline}</p>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-lilac-pale text-pretty">
-          {service.heroSummary}
-        </p>
-        <Link
-          href={`${routes.contact}?path=brief`}
-          className="mt-8 inline-flex min-h-12 items-center gap-2 bg-brand-cyan px-6 py-3.5 text-sm font-extrabold text-brand-violet-deep transition-transform hover:-translate-y-1"
-        >
-          Start a project
-          <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
+      <Section tone="violet" width="full" padding="xl" className="border-white/10 bg-brand-ink" backdrop={<><BrandNodeField className="opacity-[0.45]" /><div className="grid-veil opacity-15" /></>} innerClassName="grid min-h-[36rem] gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+        <div>
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-brand-cyan">{service.flagship ? "Flagship service" : "Techspirex service"}</span>
+          <h1 className="mt-6 max-w-[10ch] text-[clamp(4rem,8vw,8rem)] font-black leading-[0.82] tracking-[-0.075em]">{service.name}</h1>
+        </div>
+        <div className="lg:pb-3">
+          <p className="text-xl font-black tracking-[-0.03em] text-brand-cyan-pale">{service.tagline}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-lilac-pale text-pretty">{service.heroSummary}</p>
+          <Link href={`${routes.contact}?path=brief`} className="mt-9 inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-cyan px-7 py-3.5 text-sm font-extrabold text-brand-ink transition-transform hover:-translate-y-1">Start a project <ArrowRight className="size-4" aria-hidden="true" /></Link>
+        </div>
       </Section>
 
       <Section tone="card">

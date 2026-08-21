@@ -14,7 +14,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="shrink-0 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+      className="min-h-12 shrink-0 rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-[transform,opacity] hover:-translate-y-0.5 hover:opacity-95 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Subscribing…" : "Subscribe"}
     </button>
@@ -44,7 +44,7 @@ export function NewsletterForm() {
           placeholder="you@company.com"
           aria-invalid={isError || undefined}
           aria-describedby="newsletter-status"
-          className="min-w-0 flex-1 rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-invalid:border-destructive"
+          className="min-h-12 min-w-0 flex-1 rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-invalid:border-destructive"
         />
         <div className="sr-only" aria-hidden="true">
           <label htmlFor="newsletter-website">Leave this field empty</label>

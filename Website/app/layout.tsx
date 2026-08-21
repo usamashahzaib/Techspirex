@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ChromeGate } from "@/components/layout/chrome-gate";
 import { ConsentBanner } from "@/components/consent/consent-banner";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
 import { env, SITE_URL } from "@/lib/env";
@@ -113,7 +112,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteFooter />
         </ChromeGate>
         <ConsentBanner />
-        <CustomCursor />
         <GoogleAnalytics />
       </body>
     </html>

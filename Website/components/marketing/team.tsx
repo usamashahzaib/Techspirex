@@ -36,29 +36,30 @@ export function Team() {
       {personSchemas.map((schema, index) => (
         <JsonLd key={team[index].name} data={schema} />
       ))}
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="max-w-2xl">
-          <Eyebrow size="sm">Delivery structure</Eyebrow>
-          <h2 className="mt-5 text-3xl font-black tracking-[-0.045em] sm:text-5xl">The people accountable for the build.</h2>
-          <p className="mt-4 text-muted-foreground">A small, senior team - the person responsible for each decision joins the relevant conversation directly.</p>
+      <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-20">
+          <div><Eyebrow size="sm">Accountability map</Eyebrow><h2 className="mt-5 text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">The names behind the decisions.</h2></div>
+          <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">A small, senior team. The person responsible for each decision joins the relevant conversation directly.</p>
         </div>
 
         {team.length > 0 ? (
-          <div className="mt-12 flex flex-col gap-12">
-            {populatedTiers.map((group) => (
-              <div key={group.tier} className="grid gap-6 sm:grid-cols-[10rem_1fr] sm:items-start">
-                <Eyebrow weight="normal" className="sm:pt-1">{group.label}</Eyebrow>
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                  {group.members.map((member) => (
-                    <div key={member.name} className="border-t border-border pt-5">
-                      <h3 className="text-lg font-extrabold">{member.name}</h3>
-                      <p className="mt-1 text-sm text-primary">{member.role}</p>
-                      <p className="mt-2 text-sm text-muted-foreground">{member.expertise}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <div className="mt-14 grid gap-4 lg:grid-cols-2">
+            {populatedTiers.flatMap((group) => group.members.map((member, memberIndex) => ({ ...member, groupLabel: group.label, memberIndex }))).map((member, index) => {
+              const initials = member.name.split(" ").map((part) => part[0]).join("").slice(0, 2);
+              return (
+                <article key={member.name} className={`signal-panel group relative overflow-hidden border border-border bg-card p-6 sm:p-8 ${index === 0 ? "lg:col-span-2 lg:grid lg:grid-cols-[0.55fr_1.45fr] lg:gap-16 lg:p-10" : ""}`}>
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="flex size-24 items-end bg-brand-ink p-4 text-brand-cyan-pale sm:size-28" aria-hidden="true"><span className="text-3xl font-black tracking-[-0.06em]">{initials}</span></div>
+                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">{String(index + 1).padStart(2, "0")} / {member.groupLabel}</span>
+                  </div>
+                  <div className={index === 0 ? "lg:self-end" : "mt-10"}>
+                    <h3 className="text-2xl font-black tracking-[-0.04em] sm:text-3xl">{member.name}</h3>
+                    <p className="mt-2 text-sm font-bold text-primary">{member.role}</p>
+                    <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground">{member.expertise}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         ) : (
           <div className="mt-10 divide-y divide-border border-y border-border">

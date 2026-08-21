@@ -69,10 +69,10 @@
 */
 @theme {
   /* Violet: deepest ink through to section edges. */
-  --color-brand-ink: #171035;
-  --color-brand-ink-raised: #211744;
-  --color-brand-ink-elevated: #241a4d;
-  --color-brand-violet-deep: #2a2051;
+  --color-brand-ink: #0e0d15;
+  --color-brand-ink-raised: #14111f;
+  --color-brand-ink-elevated: #1a1528;
+  --color-brand-violet-deep: #241c3b;
   --color-brand-violet: #392a6f;
   --color-brand-violet-line: #776a9d;
   --color-brand-violet-edge: #7669a0;
@@ -179,6 +179,7 @@
   body {
     font-kerning: normal;
     font-optical-sizing: auto;
+    background-image: radial-gradient(circle at 15% 10%, oklch(1 0 0 / 0.38), transparent 28%);
   }
   h1, h2, h3 {
     text-wrap: balance;
@@ -186,6 +187,19 @@
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-ring;
   }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    repeating-radial-gradient(circle at 20% 30%, rgb(14 13 21 / 0.7) 0 0.45px, transparent 0.7px 4px),
+    repeating-radial-gradient(circle at 75% 60%, rgb(255 255 255 / 0.8) 0 0.35px, transparent 0.65px 5px);
+  mix-blend-mode: multiply;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -410,8 +424,8 @@
 
 .hero-scrim {
   background:
-    linear-gradient(90deg, rgb(23 16 53 / 96%) 0%, rgb(23 16 53 / 80%) 40%, rgb(23 16 53 / 8%) 72%, rgb(23 16 53 / 12%) 100%),
-    linear-gradient(0deg, rgb(18 12 45 / 56%) 0%, transparent 42%);
+    linear-gradient(90deg, rgb(14 13 21 / 98%) 0%, rgb(14 13 21 / 88%) 42%, rgb(14 13 21 / 30%) 74%, rgb(14 13 21 / 48%) 100%),
+    linear-gradient(0deg, rgb(14 13 21 / 82%) 0%, transparent 48%);
 }
 
 /*
@@ -424,16 +438,71 @@
 @media (max-width: 639px) {
   .hero-scrim {
     background:
-      linear-gradient(90deg, rgb(23 16 53 / 88%) 0%, rgb(23 16 53 / 64%) 72%, rgb(23 16 53 / 26%) 100%),
-      linear-gradient(0deg, rgb(18 12 45 / 66%) 0%, transparent 48%);
+      linear-gradient(90deg, rgb(14 13 21 / 94%) 0%, rgb(14 13 21 / 76%) 72%, rgb(14 13 21 / 42%) 100%),
+      linear-gradient(0deg, rgb(14 13 21 / 84%) 0%, transparent 48%);
   }
+}
+
+@layer utilities {
+  .proof-system {
+    transform: perspective(1200px) rotateY(-3deg) rotateX(1deg);
+    transform-origin: center;
+  }
+  .proof-system-glow {
+    position: absolute;
+    inset: 12% 8%;
+    border-radius: 9999px;
+    background: oklch(0.78 0.14 213 / 0.2);
+    filter: blur(70px);
+    animation: proof-glow 6s ease-in-out infinite;
+  }
+  .proof-system-path {
+    stroke-dasharray: 0.17 0.83;
+    animation: proof-path 3.8s linear infinite;
+  }
+  .proof-stage {
+    border-radius: 1.1rem;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.07), 0 22px 50px -32px rgb(0 0 0 / 0.8);
+  }
+  .editorial-rule {
+    height: 1px;
+    opacity: 0.25;
+    background: linear-gradient(90deg, currentColor 0 12%, transparent 12% 100%);
+  }
+  .signal-panel {
+    position: relative;
+    overflow: hidden;
+  }
+  .signal-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 0 42%, rgb(117 231 255 / 0.07) 49%, transparent 56% 100%);
+    transform: translateX(-100%);
+    transition: transform 0.9s var(--ease-expo-out);
+  }
+  .signal-panel:hover::after {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes proof-glow {
+  0%, 100% { transform: scale(0.9); opacity: 0.55; }
+  50% { transform: scale(1.08); opacity: 0.9; }
+}
+
+@keyframes proof-path {
+  to { stroke-dashoffset: -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .aurora::before,
   .aurora::after,
   .float-slow,
-  .beam::before {
+  .beam::before,
+  .proof-system-glow,
+  .proof-system-path {
     animation: none !important;
   }
 }
@@ -525,16 +594,6 @@
     box-shadow: 0 24px 60px -30px rgb(23 16 53 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.5);
     transition: box-shadow 0.5s var(--ease-expo-out), transform 0.5s var(--ease-expo-out);
   }
-}
-
-/*
-  Custom cursor (components/ui/custom-cursor.tsx) hides the native cursor
-  once JS confirms a fine-pointer, non-reduced-motion visitor - text inputs
-  are excluded so the I-beam stays available for precise editing/selection.
-*/
-.custom-cursor-active,
-.custom-cursor-active *:not(input):not(textarea):not(select) {
-  cursor: none !important;
 }
 
 /*

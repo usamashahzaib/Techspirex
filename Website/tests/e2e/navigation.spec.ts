@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 
-// Tailwind's md breakpoint is min-width:768px, so the tablet-768 project
-// also renders the desktop nav (not the mobile hamburger) — both desktop
-// projects share the same nav assertions.
-const desktopProjects = ["tablet-768", "desktop-1440"];
+// The marketing header deliberately keeps the compact dialog navigation
+// through tablet widths; the full primary nav starts at Tailwind's lg
+// breakpoint to avoid a cramped 768px header.
+const desktopProjects = ["desktop-1440"];
 
 test("primary navigation links all resolve", async ({ page }, testInfo) => {
   test.skip(!desktopProjects.includes(testInfo.project.name), "Desktop nav is hidden below md breakpoint.");
@@ -26,9 +26,10 @@ test("services dropdown opens via keyboard and closes on Escape", async ({ page 
   const trigger = page.getByRole("button", { name: "Services" });
   await trigger.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("menu")).toBeVisible();
+  const servicesPanel = page.getByRole("link", { name: "All services", exact: true });
+  await expect(servicesPanel).toBeVisible();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("menu")).toBeHidden();
+  await expect(servicesPanel).toBeHidden();
 });
 
 test("mobile menu opens via the hamburger button and all links resolve", async ({ page }, testInfo) => {

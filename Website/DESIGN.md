@@ -96,3 +96,15 @@ System vocabulary locked for this pass:
 - Motion: transform/opacity only, exponential ease-out, reduced-motion complete fallback
 - Full responsive coverage: 320, 360, 390, 768, 1024, 1280, 1440, 1920
 - WCAG 2.2 AA target throughout
+
+## Approved evolution: Proof Architecture (2026-08-21)
+
+The cinematic direction remains, but the visual source changes from generic space-tech atmosphere to content-specific delivery evidence.
+
+- Carbon replaces saturated violet as the dominant dark field. Violet remains structural brand ink. Cyan is reserved for live status, primary action, and proof.
+- The hero visual is a delivery system: decision map, reviewable build, owned handoff, and a direct line to shipped work.
+- Homepage narrative is limited to five acts: proposition, flagship work, evidence packet, capabilities, and contact.
+- Work is presented as one flagship shipped system plus a clearly labelled archive. Concept work never receives the same visual status as shipped work.
+- Secondary pages receive the same cinematic scale and spatial composition as the homepage instead of reverting to a generic document template.
+- Real team photography remains the preferred About-page asset. Until approved photography exists, the site uses explicit accountability plates and monograms rather than fabricated or stock portraits.
+- Interaction targets are at least 44px. Mobile navigation behaves as an accessible modal with focus containment, Escape close, and focus return.

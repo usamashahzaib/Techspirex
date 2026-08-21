@@ -33,73 +33,64 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden border-b border-border bg-brand-violet-deep text-brand-cream">
-        <BrandNodeField />
-        <div className="relative z-10 mx-auto grid max-w-[1440px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-8 lg:py-24">
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-brand-ink text-brand-cream">
+        <BrandNodeField className="opacity-50" />
+        <div className="grid-veil opacity-15" aria-hidden="true" />
+        <div className="relative z-10 mx-auto grid min-h-[42rem] max-w-[1440px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-8 lg:py-28">
           <div>
             <Eyebrow size="sm" tone="cyan" weight="normal">About Techspirex</Eyebrow>
-            <h1 className="mt-5 max-w-[13ch] text-5xl font-black leading-[0.9] tracking-[-0.065em] sm:text-7xl">A hands-on software team built for real delivery.</h1>
+            <h1 className="mt-6 max-w-[10ch] text-[clamp(4rem,8vw,8rem)] font-black leading-[0.82] tracking-[-0.075em]">Small enough to stay accountable.</h1>
           </div>
           <div className="lg:pb-2">
-            <p className="max-w-xl text-lg leading-relaxed text-[#e3ddec] text-pretty">
-              Techspirex is a software development company headquartered in Lahore,
-              Pakistan. We work with founders, product teams, agencies, and growing businesses worldwide.
-            </p>
-            <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-white/20 pt-6 text-sm">
-              <div><dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-cyan-light">Delivery</dt><dd className="mt-2 font-bold">Projects, pods, and individual specialists</dd></div>
-              <div><dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-brand-cyan-light">Coverage</dt><dd className="mt-2 font-bold">Product, design, engineering, QA, cloud, and growth</dd></div>
+            <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale text-pretty">A senior software team in Lahore working directly with founders, product teams, and agencies worldwide.</p>
+            <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 text-sm">
+              <div className="bg-brand-ink/80 p-5"><dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cyan-light">Delivery</dt><dd className="mt-3 font-bold">Projects, pods, and individual specialists</dd></div>
+              <div className="bg-brand-ink/80 p-5"><dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cyan-light">Coverage</dt><dd className="mt-3 font-bold">Product, design, engineering, QA, cloud, and growth</dd></div>
             </dl>
           </div>
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden border-b border-border bg-card">
-        <BlueprintBackdrop className="opacity-[0.45]" />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">Where we are today</h2>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            We&apos;re early. Techspirex is a small team, not an enterprise agency
-            with a decade of client logos - and we&apos;d rather tell you that plainly than dress it up
-            with unverifiable numbers. What we can offer instead is senior attention on every project,
-            because there&apos;s no large account list to compete with yours for our time.
-          </p>
-          <p className="mt-4 max-w-2xl text-muted-foreground">
-            The studio started with web development and has grown into a small set of supporting
-            capabilities - design, DevOps, AI and automation, marketing, and ecommerce - added because
-            real client projects needed them, not because a services page needed six items.
-          </p>
+      <section className="relative isolate overflow-hidden border-b border-border bg-brand-cream">
+        <BlueprintBackdrop className="opacity-[0.32]" />
+        <div className="relative mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24 lg:px-8 lg:py-32">
+          <div><Eyebrow size="sm">Where we are today</Eyebrow><h2 className="mt-5 max-w-[11ch] text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">No scale theatre. Senior attention is the model.</h2></div>
+          <div className="space-y-6 self-end text-lg leading-relaxed text-muted-foreground">
+            <p>We&apos;re early. Techspirex is a small team, not an enterprise agency with a decade of client logos. We would rather say that plainly than dress it up with unverifiable numbers.</p>
+            <p>The studio grew from web development into design, DevOps, AI automation, marketing, and ecommerce because real delivery required those disciplines to work together.</p>
+            <p className="border-l-2 border-primary pl-5 font-semibold text-foreground">The advantage is simple: your work does not compete with a giant account list for senior attention.</p>
+          </div>
         </div>
       </section>
 
-      <section className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
-            Principles, and where you&apos;d actually see them
-          </h2>
-          <div className="mt-8 flex flex-col gap-8">
-            {principles.map((item) => (
-              <div key={item.title} className="border-t border-border pt-5">
-                <h3 className="font-heading text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-                  {item.behavior}
-                </p>
-              </div>
+      <section className="border-b border-white/10 bg-brand-ink-raised text-brand-cream">
+        <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
+            <div><Eyebrow size="sm" tone="cyan">Visible principles</Eyebrow><h2 className="mt-5 max-w-[10ch] text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">What you would actually notice.</h2></div>
+            <ol className="border-y border-white/12">
+            {principles.map((item, index) => (
+              <li key={item.title} className="signal-panel grid gap-4 border-b border-white/12 py-8 last:border-b-0 sm:grid-cols-[3rem_0.75fr_1.25fr] sm:px-5">
+                <span className="font-mono text-xs text-brand-cyan">{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="text-xl font-black tracking-[-0.035em]">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-brand-lilac-soft">{item.behavior}</p>
+              </li>
             ))}
+            </ol>
           </div>
         </div>
       </section>
 
       <Team />
 
-      <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+      <section className="relative isolate overflow-hidden bg-brand-violet text-brand-cream">
         <BrandNodeField variant="assembly" className="opacity-[0.55]" />
-        <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 px-4 py-14 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-start gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8 lg:py-20">
           <div>
             <h2 className="font-heading text-2xl font-semibold tracking-tight">
-              Want to work with us?
+              Work with the people doing the work.
             </h2>
             <p className="mt-2 text-primary-foreground/85">
-              Tell us about your project, or reach out about joining the team.
+              Tell us what is blocked. The relevant builder will join the conversation.
             </p>
           </div>
           <PillCta href={routes.contact} tone="cream">

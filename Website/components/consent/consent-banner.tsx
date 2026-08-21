@@ -22,8 +22,7 @@ function applyConsent(choice: Choice) {
   first-time visit, not just a lint nitpick. useSyncExternalStore is built
   for exactly this: the server snapshot below is what both the SSR pass and
   the hydration pass use, and React swaps in the real client snapshot itself
-  right after, with no manual effect/setState needed (see custom-cursor.tsx
-  for the same pattern applied to `matchMedia`).
+  right after, with no manual effect/setState needed.
 */
 function subscribeToStorage(onChange: () => void) {
   window.addEventListener("storage", onChange);
