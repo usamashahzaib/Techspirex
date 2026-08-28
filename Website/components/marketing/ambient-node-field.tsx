@@ -1,13 +1,7 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { useReducedMotion } from "motion/react";
-import { ambientPreset, mountNodeField } from "@/lib/node-field";
-
 /*
-  Quiet dark-section backdrop, anchors matching the static blob layouts this
-  replaced: "field" sat top-right (brand-node-violet/cyan/cream), "assembly"
-  sat lower and closer to center-right (cta-arc/cta-node-*).
+  Static vector counterpart to the hero backdrop. Repeated section backgrounds
+  should not each own an animation loop, so this keeps the shared orbital motif
+  without client JavaScript, canvas allocation, or continuous main-thread work.
 */
 type Variant = "field" | "assembly";
 
@@ -18,18 +12,32 @@ export function AmbientNodeField({
   variant?: Variant;
   tone?: "dark" | "light";
 }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (!canvasRef.current) return;
-    const preset =
-      variant === "assembly" ? ambientPreset(0.78, 0.58, 0.7, tone) : ambientPreset(0.82, 0.35, 0.78, tone);
-    return mountNodeField(canvasRef.current, preset, Boolean(prefersReducedMotion));
-  }, [variant, tone, prefersReducedMotion]);
-
-  // Decorative only. Every caller already wraps this in an aria-hidden
-  // container, but marking the canvas itself keeps it out of the a11y tree
-  // even if a future caller forgets.
-  return <canvas ref={canvasRef} className="absolute inset-0" aria-hidden="true" />;
+  return (
+    <div className="ambient-orbit" data-variant={variant} data-tone={tone} aria-hidden="true">
+      <svg viewBox="0 0 760 560" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <g className="ambient-orbit__mesh" fill="none" stroke="currentColor">
+          <ellipse cx="510" cy="235" rx="228" ry="82" />
+          <ellipse cx="510" cy="235" rx="180" ry="64" transform="rotate(57 510 235)" />
+          <ellipse cx="510" cy="235" rx="146" ry="50" transform="rotate(116 510 235)" />
+          <ellipse cx="510" cy="235" rx="105" ry="225" transform="rotate(25 510 235)" />
+          <path d="M283 235H737M510 8V462M319 109L701 361M332 382L688 88" />
+        </g>
+        <g className="ambient-orbit__nodes" fill="currentColor">
+          <circle cx="283" cy="235" r="3" />
+          <circle cx="404" cy="170" r="2.5" />
+          <circle cx="510" cy="8" r="3.5" />
+          <circle cx="588" cy="102" r="2.5" />
+          <circle cx="688" cy="88" r="4" />
+          <circle cx="701" cy="361" r="3" />
+          <circle cx="510" cy="462" r="4" />
+          <circle cx="332" cy="382" r="2.5" />
+        </g>
+        <g className="ambient-orbit__signals" fill="currentColor">
+          <circle cx="404" cy="170" r="6" />
+          <circle cx="688" cy="88" r="7" />
+          <circle cx="510" cy="462" r="5" />
+        </g>
+      </svg>
+    </div>
+  );
 }

@@ -1,53 +1,37 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
-import { HeroNodeField } from "@/components/marketing/hero-node-field";
-
 /*
-  The hero's centerpiece: a starlight tunnel that dives forward as the page
-  scrolls and parts around the cursor (lib/starfield.ts).
-
-  Three is loaded from inside the effect, not imported at module scope, so its
-  weight never lands in the homepage's initial bundle - the hero paints its ink
-  ground and copy first, and the tunnel fades in behind it a beat later.
-
-  Machines without WebGL are not left with a hole: `HeroNodeField`, the Canvas
-  2D mesh that still backs every other dark section, takes over. Readers who
-  asked for reduced motion keep the tunnel, drawn once as a still starfield -
-  no drift, twinkle, spin, or dive.
+  CSS/SVG hero backdrop. It is present in the server-rendered HTML, so the hero
+  never waits for hydration, a dynamic import, or a WebGL context before it has
+  visual depth. Motion is limited to composited transform and opacity changes.
 */
 export function HeroStarfield() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-  const [fallback, setFallback] = useState(false);
+  return (
+    <div className="hero-cosmos absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className="hero-cosmos__glow hero-cosmos__glow--violet" />
+      <div className="hero-cosmos__glow hero-cosmos__glow--cyan" />
+      <div className="hero-cosmos__stars hero-cosmos__stars--far" />
+      <div className="hero-cosmos__stars hero-cosmos__stars--near" />
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    let cleanup: (() => void) | undefined;
-    let cancelled = false;
-
-    import("@/lib/starfield")
-      .then(({ mountStarfield }) => {
-        if (cancelled) return;
-        // `null` means the browser refused a WebGL context.
-        const mounted = mountStarfield(canvas, Boolean(prefersReducedMotion));
-        if (mounted) cleanup = mounted;
-        else setFallback(true);
-      })
-      .catch(() => {
-        if (!cancelled) setFallback(true);
-      });
-
-    return () => {
-      cancelled = true;
-      cleanup?.();
-    };
-  }, [prefersReducedMotion]);
-
-  if (fallback) return <HeroNodeField />;
-
-  return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />;
+      <svg
+        className="hero-cosmos__orbit"
+        viewBox="0 0 900 900"
+        preserveAspectRatio="xMidYMid meet"
+        focusable="false"
+      >
+        <g fill="none">
+          <ellipse cx="450" cy="450" rx="320" ry="126" stroke="currentColor" strokeOpacity="0.2" />
+          <ellipse cx="450" cy="450" rx="246" ry="94" stroke="currentColor" strokeOpacity="0.14" transform="rotate(58 450 450)" />
+          <ellipse cx="450" cy="450" rx="205" ry="74" stroke="currentColor" strokeOpacity="0.12" transform="rotate(118 450 450)" />
+          <path d="M156 333C260 170 620 126 758 310" stroke="currentColor" strokeOpacity="0.1" />
+          <path d="M195 610C348 758 656 708 748 532" stroke="currentColor" strokeOpacity="0.12" />
+        </g>
+        <g fill="currentColor">
+          <circle cx="190" cy="337" r="4" />
+          <circle cx="676" cy="286" r="3" />
+          <circle cx="637" cy="616" r="5" />
+          <circle cx="353" cy="691" r="2.5" />
+          <circle cx="510" cy="242" r="2.5" />
+        </g>
+      </svg>
+    </div>
+  );
 }

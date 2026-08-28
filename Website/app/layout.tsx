@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -9,12 +10,6 @@ import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/se
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
 import { env, SITE_URL } from "@/lib/env";
 import { JsonLd } from "@/components/seo/json-ld";
-
-const archivo = Archivo({
-  variable: "--font-brand",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-code",
@@ -87,7 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${GeistSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <JsonLd

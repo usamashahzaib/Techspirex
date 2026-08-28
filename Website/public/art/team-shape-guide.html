@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Choose the team your work needs</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; width: 1200px; height: 1400px; overflow: hidden; }
+      body {
+        background: #0e0d15;
+        color: #faf7ee;
+        font-family: Geist, Arial, sans-serif;
+      }
+      main {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 78px;
+        overflow: hidden;
+      }
+      .orb {
+        position: absolute;
+        width: 680px;
+        height: 680px;
+        right: -250px;
+        top: -210px;
+        border: 1px solid rgba(117, 231, 255, 0.24);
+        border-radius: 50%;
+      }
+      .orb::before, .orb::after {
+        content: "";
+        position: absolute;
+        inset: 90px;
+        border: 1px solid rgba(117, 231, 255, 0.16);
+        border-radius: 50%;
+      }
+      .orb::after { inset: 190px; border-color: rgba(201, 191, 240, 0.22); }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: #9eefff;
+        font-size: 18px;
+        font-weight: 760;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .mark {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #10d2f6;
+        box-shadow: 22px 0 0 #392a6f;
+        margin-right: 22px;
+      }
+      h1 {
+        max-width: 850px;
+        margin: 92px 0 72px;
+        font-size: 94px;
+        line-height: 0.92;
+        letter-spacing: -0.065em;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+      }
+      .card {
+        min-height: 300px;
+        padding: 42px;
+        border-right: 1px solid rgba(255, 255, 255, 0.14);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+        background: #14111f;
+      }
+      .card:nth-child(2), .card:nth-child(4) { border-right: 0; }
+      .card:nth-child(3), .card:nth-child(4) { border-bottom: 0; }
+      .card:nth-child(2), .card:nth-child(3) { background: #241c3b; }
+      .card:nth-child(1) { grid-column: span 5; }
+      .card:nth-child(2) { grid-column: span 7; }
+      .card:nth-child(3) { grid-column: span 7; }
+      .card:nth-child(4) { grid-column: span 5; }
+      .number { color: #10d2f6; font: 700 16px monospace; letter-spacing: 0.12em; }
+      h2 { margin: 52px 0 16px; font-size: 40px; letter-spacing: -0.04em; }
+      p { margin: 0; color: #d8d0e8; font-size: 22px; line-height: 1.38; }
+      footer {
+        position: absolute;
+        left: 78px;
+        right: 78px;
+        bottom: 54px;
+        display: flex;
+        justify-content: space-between;
+        color: #aaa0c7;
+        font-size: 17px;
+        letter-spacing: 0.06em;
+      }
+      footer strong { color: #9eefff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="orb" aria-hidden="true"></div>
+      <div class="brand"><span class="mark"></span>Techspirex field guide</div>
+      <h1>Choose the team your work needs.</h1>
+      <section class="grid">
+        <article class="card"><span class="number">01</span><h2>Specialist</h2><p>Clear owner. One skill gap.</p></article>
+        <article class="card"><span class="number">02</span><h2>Dedicated pod</h2><p>Long roadmap. One shared rhythm.</p></article>
+        <article class="card"><span class="number">03</span><h2>Project team</h2><p>One outcome. Several disciplines.</p></article>
+        <article class="card"><span class="number">04</span><h2>Intervention</h2><p>Narrow constraint. Firm decision.</p></article>
+      </section>
+      <footer><span>Ownership first. Headcount second.</span><strong>techspirex.com</strong></footer>
+    </main>
+  </body>
+</html>

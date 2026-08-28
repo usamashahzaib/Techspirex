@@ -8,9 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-brand);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-code);
-  --font-heading: var(--font-brand);
+  --font-heading: var(--font-geist-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -223,6 +223,7 @@ body::after {
 */
 @theme inline {
   --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 @layer utilities {
@@ -429,6 +430,164 @@ body::after {
 }
 
 /*
+  Reliable hero depth with no WebGL, canvas, runtime import, or client
+  hydration. Only opacity and transform animate, so the browser composites
+  the star planes while the rest of the page stays idle.
+*/
+.hero-cosmos {
+  background:
+    radial-gradient(circle at 78% 42%, rgb(57 42 111 / 0.42), transparent 34%),
+    radial-gradient(circle at 92% 12%, rgb(16 210 246 / 0.14), transparent 28%),
+    linear-gradient(135deg, #0e0d15 0%, #171035 56%, #0e0d15 100%);
+}
+
+.hero-cosmos__glow {
+  position: absolute;
+  width: 44rem;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  opacity: 0.7;
+  will-change: transform;
+}
+
+.hero-cosmos__glow--violet {
+  right: -10rem;
+  top: -17rem;
+  background: radial-gradient(circle, rgb(124 92 255 / 0.26), transparent 68%);
+  animation: cosmos-glow-violet 18s var(--ease-in-out) alternate infinite;
+}
+
+.hero-cosmos__glow--cyan {
+  bottom: -21rem;
+  right: 18%;
+  background: radial-gradient(circle, rgb(16 210 246 / 0.18), transparent 68%);
+  animation: cosmos-glow-cyan 22s var(--ease-in-out) alternate infinite;
+}
+
+.hero-cosmos__stars {
+  position: absolute;
+  inset: -8%;
+  opacity: 0.6;
+  will-change: transform, opacity;
+}
+
+.hero-cosmos__stars--far {
+  background-image: radial-gradient(circle, rgb(201 191 240 / 0.72) 0 0.7px, transparent 1px);
+  background-position: 7px 11px;
+  background-size: 43px 43px;
+  animation: cosmos-drift-far 18s var(--ease-in-out) alternate infinite;
+}
+
+.hero-cosmos__stars--near {
+  background-image:
+    radial-gradient(circle, rgb(158 239 255 / 0.9) 0 1.2px, transparent 1.7px),
+    radial-gradient(circle, rgb(250 247 238 / 0.7) 0 0.8px, transparent 1.2px);
+  background-position: 13px 29px, 46px 4px;
+  background-size: 91px 91px, 127px 127px;
+  opacity: 0.74;
+  animation: cosmos-drift-near 14s var(--ease-in-out) alternate infinite;
+}
+
+.hero-cosmos__orbit {
+  position: absolute;
+  right: -12rem;
+  top: 50%;
+  width: min(78vw, 58rem);
+  color: #75e7ff;
+  opacity: 0.72;
+  transform: translateY(-50%) rotate(-8deg);
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: cosmos-orbit 20s var(--ease-in-out) alternate infinite;
+}
+
+@keyframes cosmos-drift-far {
+  from { transform: translate3d(-1.5%, -1%, 0); opacity: 0.48; }
+  to { transform: translate3d(1.5%, 1%, 0); opacity: 0.64; }
+}
+
+@keyframes cosmos-drift-near {
+  from { transform: translate3d(0, -1%, 0); opacity: 0.64; }
+  to { transform: translate3d(-2%, 1.5%, 0); opacity: 0.8; }
+}
+
+@keyframes cosmos-glow-violet {
+  from { transform: translate3d(0, 0, 0) scale(0.96); }
+  to { transform: translate3d(-3rem, 2rem, 0) scale(1.06); }
+}
+
+@keyframes cosmos-glow-cyan {
+  from { transform: translate3d(0, 0, 0) scale(0.96); }
+  to { transform: translate3d(2rem, -2rem, 0) scale(1.05); }
+}
+
+@keyframes cosmos-orbit {
+  from { transform: translateY(-50%) rotate(-8deg) scale(0.98); opacity: 0.58; }
+  to { transform: translateY(-50%) rotate(-4deg) scale(1.02); opacity: 0.76; }
+}
+
+/* Static shared section motif. Repetition earns consistency, not more loops. */
+.ambient-orbit {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: rgb(158 239 255 / 0.7);
+  background: radial-gradient(circle at 78% 36%, rgb(57 42 111 / 0.38), transparent 32%);
+}
+
+.ambient-orbit[data-tone="light"] {
+  color: rgb(57 42 111 / 0.38);
+  background: radial-gradient(circle at 78% 36%, rgb(57 42 111 / 0.09), transparent 32%);
+}
+
+.ambient-orbit svg {
+  position: absolute;
+  right: -4%;
+  top: -4%;
+  width: min(70rem, 78vw);
+  height: 108%;
+}
+
+.ambient-orbit[data-variant="assembly"] svg {
+  right: -12%;
+  top: 14%;
+  transform: rotate(18deg) scale(0.92);
+}
+
+.ambient-orbit__mesh {
+  stroke-width: 1;
+  stroke-opacity: 0.2;
+}
+
+.ambient-orbit__nodes {
+  opacity: 0.52;
+}
+
+.ambient-orbit__signals {
+  color: #10d2f6;
+  opacity: 0.82;
+}
+
+.ambient-orbit[data-tone="light"] .ambient-orbit__signals {
+  color: #397091;
+  opacity: 0.44;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cosmos__glow,
+  .hero-cosmos__stars,
+  .hero-cosmos__orbit {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .pill-cta:hover .pill-cta-icon,
+  .pill-cta:active {
+    transform: none !important;
+  }
+}
+
+/*
   Phones get a heavier scrim than desktop because the headline runs the full
   width with no clear right-hand gutter to breathe into. It stays keyed to
   brand ink (23 16 53) like the desktop stop above - it used to be a neutral
@@ -536,10 +695,8 @@ body::after {
   shared primitives used everywhere so the elevation feels like one system
   rather than per-component flourishes:
 
-  1. Pill CTA - button-in-button trailing icon. Static shape/press-scale
-     lives here; the cursor-follow magnetic pull is spring physics via
-     `motion` in `components/ui/pill-cta.tsx` (reduced-motion aware).
-     Color is supplied per call site via Tailwind.
+  1. Pill CTA - button-in-button trailing icon with CSS press and hover
+     feedback. Color is supplied per call site via Tailwind.
   2. Double bezel - outer shell (hairline ring, soft fill) wrapping an inner
      core with its own inset highlight and a concentric radius ~0.75rem
      smaller than the shell. `.bezel-shell` / `.bezel-core` factor out the
@@ -554,10 +711,10 @@ body::after {
     gap: 0.75rem;
     border-radius: 9999px;
     padding: 0.3rem 0.3rem 0.3rem 1.75rem;
-    transition: transform 0.4s var(--ease-expo-out), box-shadow 0.4s var(--ease-expo-out);
+    transition: transform 140ms var(--ease-expo-out), box-shadow 180ms var(--ease-expo-out);
   }
   .pill-cta:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
   .pill-cta-icon {
     display: inline-flex;
@@ -567,7 +724,13 @@ body::after {
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 9999px;
-    transition: background-color 0.4s var(--ease-expo-out), color 0.4s var(--ease-expo-out);
+    transition: background-color 180ms var(--ease-expo-out), color 180ms var(--ease-expo-out), transform 180ms var(--ease-expo-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .pill-cta:hover .pill-cta-icon {
+      transform: translate3d(2px, -2px, 0) scale(1.04);
+    }
   }
 
   .bezel-shell {

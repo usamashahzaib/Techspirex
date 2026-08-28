@@ -2,11 +2,9 @@ import Image from "next/image";
 import { AmbientNodeField } from "@/components/marketing/ambient-node-field";
 
 /*
-  Every other dark section's backdrop - the same living-mesh renderer the
-  hero uses (see hero-node-field.tsx / lib/node-field.ts), at a quieter,
-  non-reactive setting so the motif reads as one continuous system across
-  the whole site rather than a hero-only flourish. `variant` only changes
-  where the form anchors, echoing the two static-blob layouts this replaced.
+  Every other dark section's backdrop - the same orbital visual language as
+  the hero, rendered as a static vector so repeated sections add no animation
+  loops or client JavaScript. `variant` only changes where the form anchors.
 */
 export function BrandNodeField({
   variant = "field",
@@ -23,9 +21,8 @@ export function BrandNodeField({
 }
 
 /*
-  Light-section counterpart to BrandNodeField - same living mesh, inked in
-  low-alpha violet instead of glowing on dark, layered under the blueprint
-  texture and its fade so paper sections carry the motif too.
+  Light-section counterpart to BrandNodeField - the vector motif inked in
+  low-alpha violet, beneath the blueprint texture and fade.
 */
 export function BlueprintBackdrop({ className = "" }: { className?: string }) {
   return (

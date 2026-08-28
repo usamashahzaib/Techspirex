@@ -16,9 +16,9 @@ export function HeroProofSystem() {
           <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
             <div className="flex items-center gap-2.5">
               <span className="signal-pulse size-2 rounded-full bg-brand-cyan" aria-hidden="true" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-cyan-pale">Delivery signal</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-cyan-pale">How the work stays visible</span>
             </div>
-            <span className="font-mono text-[9px] uppercase tracking-[0.17em] text-brand-lilac">Live system / 01</span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.17em] text-brand-lilac">Brief to handoff</span>
           </div>
 
           <div className="relative px-5 py-7 sm:px-7 sm:py-9">
