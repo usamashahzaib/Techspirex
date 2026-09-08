@@ -89,6 +89,39 @@ const nextConfig: NextConfig = {
       // self-redirects. The old site's "/Insights" already 404s and isn't
       // worth preserving link equity for, so it's simply not redirected.
       { source: "/contact-us", destination: "/contact", permanent: true },
+      /*
+        Three insight posts were rewritten around the specific incidents they
+        had only described in the abstract, which changed the subject enough
+        that the old slugs no longer named the content. Redirecting rather
+        than leaving a slug that lies about the page. All three sources are
+        lowercase and distinct from their destinations, so the case-insensitive
+        matching noted above cannot turn these into self-redirects.
+      */
+      {
+        source: "/insights/build-in-the-open",
+        destination: "/insights/honeypot-revealed-itself",
+        permanent: true,
+      },
+      {
+        source: "/insights/human-checkpoints-ai",
+        destination: "/insights/get-requests-should-not-subscribe-people",
+        permanent: true,
+      },
+      {
+        source: "/insights/technical-seo-foundation",
+        destination: "/insights/the-redirect-we-did-not-add",
+        permanent: true,
+      },
+      {
+        source: "/insights/choosing-team-shape",
+        destination: "/insights",
+        permanent: true,
+      },
+      {
+        source: "/insights/scope-before-build",
+        destination: "/insights",
+        permanent: true,
+      },
     ];
   },
 };

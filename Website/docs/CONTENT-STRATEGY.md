@@ -1,4 +1,4 @@
-# Techspirex — Content Strategy
+# Techspirex - Content Strategy
 
 ## Voice
 
@@ -8,7 +8,7 @@ Every line must sound like a real person with firsthand knowledge of the work. P
 
 ## Proof model (see `PRODUCT.md`)
 
-Launch state: honest capabilities and delivery evidence, zero fabricated testimonials or case studies. As real projects and testimonials become available and are approved by the client, they replace capability-only content module by module — the content system must support both states without a redesign.
+Launch state: honest capabilities and delivery evidence, zero fabricated testimonials or case studies. As real projects and testimonials become available and are approved by the client, they replace capability-only content module by module - the content system must support both states without a redesign.
 
 ## Content types and ownership
 
@@ -24,11 +24,11 @@ The adapter interface (`lib/content/`) must be swappable to a headless CMS later
 ## Section-level content rules
 
 - **Hero**: one positioning statement, one supporting paragraph, no invented metric.
-- **Proof**: real named/anonymized project detail, or an honest capabilities framing — never a stat band.
-- **Services**: each of the six pages gets unique copy answering business problem, deliverable, audience, credibility, relevant work, next action — no noun-swapped template.
+- **Proof**: real named/anonymized project detail, or an honest capabilities framing - never a stat band.
+- **Services**: each of the six pages gets unique copy answering business problem, deliverable, audience, credibility, relevant work, next action - no noun-swapped template.
 - **Team**: real name, real role, relevant expertise, no superhero bios.
 - **Insights**: publish practical, repository-authored field notes with no fabricated client results or performance claims. The current set covers delivery, working together, AI and automation, and web development.
 
 ## Redirect map
 
-See `docs/CONTENT-INVENTORY.md` section "Redirect-map implications" — old Techspirex URLs map to new IA slugs at launch.
+See `docs/CONTENT-INVENTORY.md` section "Redirect-map implications" - old Techspirex URLs map to new IA slugs at launch.

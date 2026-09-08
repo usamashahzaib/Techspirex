@@ -1,4 +1,4 @@
-# Techspirex — Sitemap
+# Techspirex - Sitemap
 
 Per the required IA (brief-specified routes). Web development is emphasized as flagship within `/services` ordering and homepage narrative, without demoting the other five to filler.
 
@@ -38,7 +38,7 @@ error boundaries (route-level, where relevant)
 | `/about` | `/about` |
 | `/contact-us/` | `/contact` |
 
-Note: `/Insights` (404 on the old site) is deliberately **not** added as a redirect source — Next.js
+Note: `/Insights` (404 on the old site) is deliberately **not** added as a redirect source - Next.js
 redirect matching is case-insensitive, so a rule for `/Insights` also catches the real lowercase
 `/insights` route and creates a self-redirect loop. Since the old URL already 404s, there's no link
 equity to preserve.

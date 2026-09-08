@@ -1,6 +1,6 @@
-# Techspirex — Handoff
+# Techspirex - Handoff
 
-Status as of 2026-08-11. This is a working, production-buildable Next.js site — not a mockup. Read
+Status as of 2026-08-11. This is a working, production-buildable Next.js site - not a mockup. Read
 this alongside `docs/IMPLEMENTATION-PLAN.md` (phase tracker) and `docs/CLAIMS-REGISTER.md` (what's
 verified vs. still pending from you).
 
@@ -22,7 +22,7 @@ npm run test:unit # Vitest: validation + confirmation-token integrity
 ## 2. Production build result
 
 `npm run build` succeeds cleanly: TypeScript strict mode passes, ESLint passes, and all 20 routes
-prerender (static or SSG where content-driven). Verified locally with `npm run start` — every route
+prerender (static or SSG where content-driven). Verified locally with `npm run start` - every route
 returns its expected status code, security headers apply, and CSP correctly drops `unsafe-eval`
 outside development.
 
@@ -50,32 +50,32 @@ outside development.
 | `not-found`, `error` | Static | Custom, on-brand |
 
 Old-site redirects are configured in `next.config.ts` (`/web-development` → `/services/web-development`,
-etc. — see `docs/SITEMAP.md` for the full table and the one deliberate exception, `/Insights`).
+etc. - see `docs/SITEMAP.md` for the full table and the one deliberate exception, `/Insights`).
 
 ## 4. Feature inventory
 
-- **Contact form** — Zod validation, honeypot, in-memory rate limiting (5 submissions / 10 min / IP),
+- **Contact form** - Zod validation, honeypot, in-memory rate limiting (5 submissions / 10 min / IP),
   Cloudflare Turnstile verification, Resend email delivery. Fails loudly and honestly (no fake
-  success) if `RESEND_API_KEY` / `CONTACT_NOTIFICATION_EMAIL` / `TURNSTILE_SECRET_KEY` aren't set —
+  success) if `RESEND_API_KEY` / `CONTACT_NOTIFICATION_EMAIL` / `TURNSTILE_SECRET_KEY` aren't set -
   see §5.
-- **Newsletter form** — Same validation/honeypot/rate-limit pattern, Resend audience adapter.
-- **MDX content system** — `content/work/` and `content/insights/` are typed local MDX directories
+- **Newsletter form** - Same validation/honeypot/rate-limit pattern, Resend audience adapter.
+- **MDX content system** - `content/work/` and `content/insights/` are typed local MDX directories
   behind a swappable adapter (`lib/content/`). Both ship empty by design (see `docs/CLAIMS-REGISTER.md`
-  — no fabricated case studies or articles). Adding a real `.mdx` file with the documented frontmatter
-  automatically populates the index, detail page, sitemap, and (for insights) the RSS feed — no code
+ - no fabricated case studies or articles). Adding a real `.mdx` file with the documented frontmatter
+  automatically populates the index, detail page, sitemap, and (for insights) the RSS feed - no code
   changes needed. READMEs in both directories document the exact frontmatter shape.
-- **SEO** — Per-route metadata via the title template, canonical URLs, Organization/Service/
+- **SEO** - Per-route metadata via the title template, canonical URLs, Organization/Service/
   Breadcrumb/Article/Person JSON-LD (Person only for real, named team members), generated
   `sitemap.xml` and `robots.txt`, RSS feed for insights.
-- **Analytics** — GA4, loaded only if `NEXT_PUBLIC_GA4_ID` is set (no-op otherwise). `contact_form_submit`
+- **Analytics** - GA4, loaded only if `NEXT_PUBLIC_GA4_ID` is set (no-op otherwise). `contact_form_submit`
   and `newsletter_subscribe` events fire on real success.
-- **Security** — CSP, X-Frame-Options, HSTS, Referrer-Policy, Permissions-Policy set globally in
+- **Security** - CSP, X-Frame-Options, HSTS, Referrer-Policy, Permissions-Policy set globally in
   `next.config.ts`. CSP relaxes `unsafe-eval` in development only (required for Next/Turbopack dev
-  tooling) and drops it in production builds — verified.
+  tooling) and drops it in production builds - verified.
 
 ## 5. Environment variables (`.env.example`)
 
-None of these are configured yet — that's expected, not a bug. Every form is built to fail honestly
+None of these are configured yet - that's expected, not a bug. Every form is built to fail honestly
 rather than fake success when they're missing:
 
 | Variable | Powers | Behavior if missing |
@@ -86,17 +86,17 @@ rather than fake success when they're missing:
 | `NEXT_PUBLIC_GA4_ID` | Analytics | Analytics script simply doesn't load. |
 
 **Before real launch**, create accounts and set these in your Vercel project (or `.env.local` locally):
-Resend (resend.com — email + newsletter audience), Cloudflare Turnstile (dash.cloudflare.com — free
+Resend (resend.com - email + newsletter audience), Cloudflare Turnstile (dash.cloudflare.com - free
 widget), Google Analytics 4 (a Measurement ID from GA4 Admin).
 
 ## 6. Content editing
 
-- **Case studies**: add `content/work/<slug>.mdx` — see `content/work/README.md` for the exact
+- **Case studies**: add `content/work/<slug>.mdx` - see `content/work/README.md` for the exact
   frontmatter. Only add real, disclosable projects (see `docs/CLAIMS-REGISTER.md`).
-- **Insights articles**: add `content/insights/<slug>.mdx` — see `content/insights/README.md`.
-- **Team**: edit `content/team.ts` — currently empty pending your confirmation of the current roster
+- **Insights articles**: add `content/insights/<slug>.mdx` - see `content/insights/README.md`.
+- **Team**: edit `content/team.ts` - currently empty pending your confirmation of the current roster
   (see open item below).
-- **Services copy**: `content/services/*.ts` — one file per service, typed.
+- **Services copy**: `content/services/*.ts` - one file per service, typed.
 - All content changes are git-based (per your discovery answer: MDX now, no CMS needed yet).
 
 ## 7. Accessibility report
@@ -104,7 +104,7 @@ widget), Google Analytics 4 (a Measurement ID from GA4 Admin).
 Automated axe-core (WCAG 2.2 A/AA + 2.2 AA-specific rules) run against 7 key routes (`/`, `/services`,
 `/services/web-development`, `/work`, `/about`, `/insights`, `/contact`) at mobile/tablet/desktop
 viewports: **zero critical or serious violations** (`tests/e2e/accessibility.spec.ts`, part of the
-committed test suite — re-run anytime with `npm run test:e2e`). Manually verified: skip link, focus-
+committed test suite - re-run anytime with `npm run test:e2e`). Manually verified: skip link, focus-
 visible ring, keyboard-operable services dropdown and mobile menu, `aria-current` on active nav items,
 honeypot fields properly hidden from assistive tech, reduced-motion CSS rule in `globals.css`.
 
@@ -115,7 +115,7 @@ fully validated against final imagery yet).
 ## 8. Performance
 
 Not yet measured with Lighthouse in this session (no interactive browser tool was available for the
-final stretch of this build — see limitation note below). Structurally built for the stated budget:
+final stretch of this build - see limitation note below). Structurally built for the stated budget:
 all marketing pages are static/SSG, fonts loaded via `next/font` with `display: swap`, no unnecessary
 client components (forms and interactive nav are the only client boundaries), Tailwind CSS with no
 runtime CSS-in-JS, `next/image` used for the logo mark. **Recommended next step**: run
@@ -132,10 +132,10 @@ correctly, RSS feed at `/insights/rss.xml`, old-site redirect map in place, and 
 
 **Search-engine verification and instant indexing are now wired in code:**
 
-- **Ownership verification tags** — set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (Search Console) and/or
+- **Ownership verification tags** - set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (Search Console) and/or
   `NEXT_PUBLIC_BING_SITE_VERIFICATION` (Bing Webmaster Tools) and the `<meta>` tags render
-  automatically (`app/layout.tsx`). Each ships only when its var is set — no empty tags before launch.
-- **IndexNow** — instant URL submission to Bing, Yandex, Seznam, and Naver is fully implemented. A key
+  automatically (`app/layout.tsx`). Each ships only when its var is set - no empty tags before launch.
+- **IndexNow** - instant URL submission to Bing, Yandex, Seznam, and Naver is fully implemented. A key
   file is committed at `public/19508e750a743d11d13c921771d055b4.txt` (`lib/seo/indexnow.ts`). After a
   production deploy, run `npm run seo:indexnow`; it reads the live sitemap and submits every URL. To
   rotate the key, set `INDEXNOW_KEY` and rename the public file to match.
@@ -163,7 +163,7 @@ submission remains manual.
   covers routing, navigation, forms, newsletter confirmation, and accessibility at mobile, tablet, and
   desktop viewports.
 - **Contact details on `/contact` and in the footer** (email, phone numbers, address) are carried over
-  from the old site as **supplied but unverified** — see `docs/CLAIMS-REGISTER.md`. Confirm these are
+  from the old site as **supplied but unverified** - see `docs/CLAIMS-REGISTER.md`. Confirm these are
   current before launch.
 
 ## 11. Deployment instructions (Vercel, per your preference)
@@ -182,14 +182,14 @@ submission remains manual.
 - Confirm team roster and supply real bios/photos.
 - Confirm contact details.
 - Supply real photography for hero/about/team sections.
-- Add real case studies and insights articles as they become available (content system is ready — drop
+- Add real case studies and insights articles as they become available (content system is ready - drop
   an `.mdx` file in `content/insights/` or `content/work/`; index, detail, sitemap, and RSS auto-update).
 
 ## 13. Before/after summary
 
 **Before**: current live site had a 404 on its primary "Insights" nav item, no legal pages, an
 internally contradictory founding story (2024 vs. "150+ clients" and multi-era history), 16
-unverifiable testimonials, and multiple unsourced numeric claims (150+, 98%, 99.9%) — full detail in
+unverifiable testimonials, and multiple unsourced numeric claims (150+, 98%, 99.9%) - full detail in
 `docs/AUDIT.md` and `docs/CLAIMS-REGISTER.md`.
 
 **After**: a from-scratch Next.js 16 / React 19 / TypeScript-strict rebuild with an honest founding

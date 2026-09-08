@@ -1,0 +1,147 @@
+---
+title: "Mail scanners were confirming newsletter subscriptions nobody clicked"
+summary: "Our double opt-in confirmation mutated state on GET. Every corporate link-scanner and inbox prefetcher that followed the link subscribed the recipient automatically, which is precisely the consent the second step exists to collect."
+category: "AI and automation"
+author: "Moeez Ahmad"
+publishedAt: "2026-08-16"
+updatedAt: "2026-09-08"
+---
+
+Double opt-in exists for one reason: a human being must take a deliberate action
+to prove they want the email. Someone types an address, we send a confirmation
+link, and only when that link is followed do we treat the subscription as real.
+The second step is the consent record.
+
+Ours confirmed the subscription the instant anything requested the page. Not
+anything human. Anything.
+
+## Who clicks a link that nobody clicked
+
+Between our confirmation email leaving Resend and a person reading it, the URL
+inside it passes through machinery that opens links as a matter of routine:
+
+- Corporate mail security gateways that fetch every URL in every inbound message
+  to check it against threat feeds, before the recipient sees the mail at all.
+- Inbox providers prefetching links to render previews.
+- Anti-phishing scanners, archivers, and DLP tooling doing the same.
+
+None of these are attacks. They are the normal, expected behaviour of email
+infrastructure, and they are the reason the rule exists that a `GET` request must
+not change server state. A `GET` is a question. It is allowed to be repeated,
+cached, prefetched, and replayed by intermediaries that have no idea what your
+application means by it.
+
+Our confirmation page was a `GET` that performed the mutation directly. So the
+sequence for a recipient inside a company running link scanning was:
+
+1. They enter an address, possibly by mistake, possibly not theirs.
+2. The confirmation email arrives at the gateway.
+3. The scanner fetches the link.
+4. They are subscribed.
+5. The email lands in their inbox, unread.
+
+The record in our database says a human clicked to confirm. No human did. The one
+artifact the whole flow exists to produce was fabricated by a virus scanner.
+
+<div style={{margin:'2.5rem 0'}}>
+<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two flows: the broken version where a mail scanner's GET request triggers subscription, and the fixed version where GET only renders a button that a human must click to POST" style={{width:'100%',maxWidth:'640px',height:'auto',display:'block',margin:'0 auto'}}>
+<defs>
+<marker id="gs-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" fillOpacity="0.4"/></marker>
+<marker id="gs-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+<marker id="gs-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22c55e"/></marker>
+</defs>
+<text x="320" y="16" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif" fontWeight="700" letterSpacing="0.08em" fillOpacity="0.4">BROKEN</text>
+<rect x="10" y="26" width="110" height="28" rx="5" fill="currentColor" fillOpacity="0.06" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.2"/>
+<text x="65" y="44" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif">mail scanner</text>
+<line x1="120" y1="40" x2="170" y2="40" stroke="#ef4444" strokeWidth="1" markerEnd="url(#gs-ar)"/>
+<rect x="174" y="26" width="180" height="28" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="264" y="44" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="monospace">GET /confirm?token=x</text>
+<line x1="354" y1="40" x2="400" y2="40" stroke="#ef4444" strokeWidth="1" markerEnd="url(#gs-ar)"/>
+<rect x="404" y="26" width="120" height="28" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="464" y="44" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="system-ui,sans-serif">page mutates</text>
+<line x1="524" y1="40" x2="560" y2="40" stroke="#ef4444" strokeWidth="1" markerEnd="url(#gs-ar)"/>
+<rect x="564" y="26" width="66" height="28" rx="5" fill="#ef4444" fillOpacity="0.12" stroke="#ef4444" strokeWidth="1"/>
+<text x="597" y="44" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="system-ui,sans-serif" fontWeight="700">subbed</text>
+<text x="597" y="70" textAnchor="middle" fill="#ef4444" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.7">no human acted</text>
+<line x1="10" y1="96" x2="630" y2="96" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.1"/>
+<text x="320" y="118" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif" fontWeight="700" letterSpacing="0.08em" fillOpacity="0.4">FIXED</text>
+<rect x="10" y="128" width="110" height="28" rx="5" fill="currentColor" fillOpacity="0.06" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.2"/>
+<text x="65" y="146" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif">mail scanner</text>
+<line x1="120" y1="142" x2="170" y2="142" stroke="currentColor" strokeWidth="1" markerEnd="url(#gs-a)" strokeOpacity="0.4"/>
+<rect x="174" y="128" width="180" height="28" rx="5" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="264" y="146" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="monospace" fillOpacity="0.6">GET /confirm?token=x</text>
+<line x1="354" y1="142" x2="400" y2="142" stroke="currentColor" strokeWidth="1" markerEnd="url(#gs-a)" strokeOpacity="0.4"/>
+<rect x="404" y="128" width="120" height="28" rx="5" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="464" y="146" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif" fillOpacity="0.5">renders button</text>
+<text x="464" y="170" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">scanner stops here</text>
+<rect x="174" y="190" width="110" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="229" y="208" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="system-ui,sans-serif">human clicks</text>
+<line x1="284" y1="204" x2="340" y2="204" stroke="#22c55e" strokeWidth="1" markerEnd="url(#gs-ag)"/>
+<rect x="344" y="190" width="100" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="394" y="208" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="monospace" fontWeight="600">POST</text>
+<line x1="444" y1="204" x2="486" y2="204" stroke="#22c55e" strokeWidth="1" markerEnd="url(#gs-ag)"/>
+<rect x="490" y="190" width="66" height="28" rx="5" fill="#22c55e" fillOpacity="0.12" stroke="#22c55e" strokeWidth="1"/>
+<text x="523" y="208" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="system-ui,sans-serif" fontWeight="700">subbed</text>
+<text x="523" y="234" textAnchor="middle" fill="#22c55e" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.7">consent recorded</text>
+</svg>
+</div>
+
+## The fix, and the thing we kept
+
+The mutation moved behind a server action, which is a `POST`, and the page now
+renders an explicit confirm button that a person has to press.
+
+What is worth noting is what the page still does on `GET`:
+
+```tsx
+// Only a structural pre-check for UX (skip rendering the button for an
+// obviously bad link) - the real, trusted verification happens again
+// server-side inside confirmNewsletterSubscription when the form submits.
+const check = verifyConfirmToken(token);
+```
+
+The page verifies the token on load, but that check is explicitly not trusted. It
+exists so somebody arriving with an expired link sees "this link has expired"
+instead of a confirm button that will fail when they press it. The verification
+that actually authorises the subscription runs again inside the action, on
+submit.
+
+That duplication is deliberate and we would fight to keep it. A check performed
+to decide what to render is a user-experience affordance. A check performed to
+decide whether to mutate is a security control. They look identical, they call
+the same function, and collapsing them into one is how an application ends up
+trusting a decision made before the request that mattered.
+
+## Why this sits under automation
+
+We ship AI and automation work, and the reflex in that field is to ask how much
+of a workflow a machine can complete on its own. This bug is a small, unglamorous
+answer to the same question from the other direction: the machines were already
+acting. Nobody designed a system to auto-subscribe people. It happened because a
+link existed, and things that are not people follow links.
+
+The design principle we apply in automation work is the same one that fixes this
+page. Ask what the cost of being wrong is, then decide who holds the action at
+that cost. In our Relay triage console, every AI-drafted reply shows its
+confidence, and an action above the escalation boundary hands control back to a
+person with an editable draft rather than sending on its own. The reason is
+identical: a system that can act should still not act when the record of intent
+is the entire point of the step.
+
+A confirmation click is a consent record. A model's reply is a statement made in
+your company's name. Neither should be produced by something that cannot mean it.
+
+## The check to run on your own code
+
+Search your application for state changes reachable from a `GET`. Not just
+newsletter confirmations. Unsubscribe links, invitation acceptances, "mark as
+read", one-click approvals in notification emails, anything with a token in a
+query string that does something when visited.
+
+For each one, ask whether you would be comfortable if it fired every time the
+recipient's employer scanned their mail, because that is the actual behaviour you
+have shipped. If the answer is no, the mutation belongs behind a `POST` and a
+button.
+
+We had exactly one. It took a line of code to fix and it had been quietly
+manufacturing consent for as long as the form had been live.
