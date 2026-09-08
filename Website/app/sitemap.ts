@@ -3,7 +3,7 @@ import { routes } from "@/lib/routes";
 import { getAllCaseStudies } from "@/lib/content/case-studies";
 import { getAllInsights } from "@/lib/content/insights";
 
-const SITE_URL = "https://techspirex.com";
+import { SITE_URL } from "@/lib/env";
 
 // A stable release date for static pages. Using `new Date()` here would stamp
 // every static route as "changed" on every crawl, training crawlers to ignore

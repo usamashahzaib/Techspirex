@@ -1,7 +1,7 @@
 import { getAllInsights } from "@/lib/content/insights";
 import { cdata, escapeXml } from "@/lib/seo/xml";
 
-const SITE_URL = "https://techspirex.com";
+import { SITE_URL } from "@/lib/env";
 
 // Regenerate at most hourly instead of re-reading the filesystem on every hit.
 export const revalidate = 3600;

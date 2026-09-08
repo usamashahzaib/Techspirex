@@ -1,4 +1,4 @@
-const SITE_URL = "https://techspirex.com";
+import { SITE_URL } from "@/lib/env";
 
 /**
  * A single, stable @id for the organization so every other schema node

@@ -130,4 +130,9 @@ export const integrationsConfigured = {
 };
 
 /** Canonical site origin, used for absolute links in emails and metadata. */
-export const SITE_URL = env.NEXT_PUBLIC_SITE_URL ?? "https://techspirex.com";
+const configuredSiteUrl = new URL(env.NEXT_PUBLIC_SITE_URL ?? "https://www.techspirex.com");
+// Production redirects the apex domain to www. Keep canonical signals aligned.
+if (configuredSiteUrl.hostname === "techspirex.com") {
+  configuredSiteUrl.hostname = "www.techspirex.com";
+}
+export const SITE_URL = configuredSiteUrl.toString().replace(/\/$/, "");
