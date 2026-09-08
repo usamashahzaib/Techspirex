@@ -23,7 +23,7 @@ Three concept builds ship with the site as interactive proof of product thinking
 | **Relay** | AI support triage console | `/demos/relay` |
 | **Camber** | Ecommerce storefront | `/demos/camber` |
 
-Each demo is a self-contained working application — not a mockup.
+Each demo is a self-contained working application - not a mockup.
 
 ## Development
 

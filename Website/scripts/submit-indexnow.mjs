@@ -5,7 +5,7 @@
 //
 // It reads the deployed sitemap.xml as the single source of truth for URLs, so
 // it never drifts from the routes/content the site actually ships. Google is not
-// an IndexNow consumer — submit the sitemap in Search Console separately.
+// an IndexNow consumer - submit the sitemap in Search Console separately.
 //
 // Env overrides (optional):
 //   SITE_URL       default https://techspirex.com
@@ -26,7 +26,7 @@ async function main() {
   const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
 
   if (urls.length === 0) {
-    console.error("No <loc> URLs found in sitemap — nothing to submit.");
+    console.error("No <loc> URLs found in sitemap - nothing to submit.");
     process.exit(1);
   }
 

@@ -1,0 +1,213 @@
+---
+title: "Fixing our rate limiter's memory leak almost created a way to bypass it"
+summary: "The original limiter was a denial-of-service vector against itself. The obvious fix handed attackers a fresh quota on demand. The difference between the two correct-looking versions is which end of a Map you delete from."
+category: "Web development"
+author: "Tayyab Ahmad"
+publishedAt: "2026-09-02"
+---
+
+Our forms are protected by a sliding-window rate limiter backed by an in-memory
+`Map`. It is deliberately the second line of defence, behind Turnstile and
+newsletter double opt-in, and for a low-volume marketing site that is a
+reasonable place for it to sit.
+
+It had two problems. The first made the limiter a way to attack the server. The
+second was introduced by fixing the first, and it made the limiter optional for
+anyone who understood it.
+
+## Problem one: the limiter was the denial-of-service
+
+The original cleanup strategy was to sweep the entire `Map` on every call once it
+held more than 5,000 entries, deleting buckets whose window had expired.
+
+Both halves of that are wrong together in a way neither is alone.
+
+Sweeping on every call is an O(n) scan paid by every request. Deleting only
+expired buckets means a burst of *distinct* keys inside a single window frees
+nothing, because none of them have expired yet. An attacker sending requests from
+many distinct keys inside one window therefore grows the `Map` without limit,
+while making every request, including requests from real visitors, pay a scan
+proportional to how much garbage they have already inserted.
+
+That is quadratic total work, and the input driving it is unauthenticated. The
+component whose job was to bound the cost of abusive traffic was converting
+abusive traffic into more cost. It would have fallen over long before the limit
+it enforced ever mattered.
+
+## Problem two: eviction as a bypass
+
+The fix is a hard cap plus cheap eviction. Cap the `Map`, and when a new key
+would exceed the cap, drop a small batch of old entries instead of walking
+everything:
+
+```ts
+const MAX_BUCKETS = 10_000;
+const EVICT_BATCH = 64;
+```
+
+JavaScript's `Map` iterates in insertion order, so the first keys the iterator
+yields are the oldest inserted. Delete from the head, stop after 64, never touch
+the rest. O(1) amortised, no scan, problem solved.
+
+Except that version is bypassable, and the bypass is the whole attack.
+
+Work it through from the attacker's side. They are being limited, so their bucket
+is in the `Map` with its count at the ceiling. They want a fresh quota. Under
+plain insertion-order eviction, all they have to do is send requests with 10,000
+distinct keys. Each new key evicts from the head. Their own bucket, inserted
+before all that noise, is *at* the head. They flood until they push their own
+bucket out of the `Map`, and the next request from their real key looks brand
+new. Count resets. Limit gone.
+
+The eviction policy meant to protect memory had become a mechanism for clearing
+your own record on demand, triggerable by exactly the behaviour the limiter
+exists to stop. The more aggressively you attack, the faster you are forgiven.
+
+<div style={{margin:'2.5rem 0'}}>
+<svg viewBox="0 0 660 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison: insertion-order eviction lets the attacker push their own bucket off the Map head, while LRU eviction keeps the attacker at the tail because touch() refreshes on reject" style={{width:'100%',maxWidth:'660px',height:'auto',display:'block',margin:'0 auto'}}>
+<defs>
+<marker id="rl-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" fillOpacity="0.5"/></marker>
+<marker id="rl-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+</defs>
+<text x="150" y="18" textAnchor="middle" fill="currentColor" fontSize="12" fontWeight="700" fontFamily="system-ui,sans-serif">INSERTION ORDER</text>
+<text x="150" y="34" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="system-ui,sans-serif">bypassed</text>
+<text x="14" y="68" fill="currentColor" fontSize="9" fontFamily="monospace" fillOpacity="0.4">HEAD</text>
+<rect x="48" y="52" width="220" height="26" rx="4" fill="#ef4444" fillOpacity="0.12" stroke="#ef4444" strokeWidth="1"/>
+<text x="58" y="70" fill="#ef4444" fontSize="11" fontFamily="monospace" fontWeight="600">attacker    47/50</text>
+<rect x="48" y="82" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="58" y="100" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.4">idle-1      expired</text>
+<rect x="48" y="112" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="58" y="130" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.4">idle-2      3/50</text>
+<rect x="48" y="142" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="58" y="160" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.3">flood-9998  1/50</text>
+<rect x="48" y="172" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="58" y="190" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.3">flood-9999  1/50</text>
+<text x="14" y="190" fill="currentColor" fontSize="9" fontFamily="monospace" fillOpacity="0.4">TAIL</text>
+<line x1="272" y1="65" x2="300" y2="65" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#rl-ar)"/>
+<text x="306" y="62" fill="#ef4444" fontSize="9" fontFamily="system-ui,sans-serif">evicted</text>
+<text x="150" y="224" textAnchor="middle" fill="#ef4444" fontSize="11" fontFamily="system-ui,sans-serif" fontWeight="600">attacker wins fresh quota</text>
+<line x1="330" y1="52" x2="330" y2="240" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.1"/>
+<text x="510" y="18" textAnchor="middle" fill="currentColor" fontSize="12" fontWeight="700" fontFamily="system-ui,sans-serif">LRU ORDER</text>
+<text x="510" y="34" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="system-ui,sans-serif">correct</text>
+<text x="374" y="68" fill="currentColor" fontSize="9" fontFamily="monospace" fillOpacity="0.4">HEAD</text>
+<rect x="408" y="52" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="418" y="70" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.4">idle-1      expired</text>
+<rect x="408" y="82" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="418" y="100" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.4">idle-2      3/50</text>
+<rect x="408" y="112" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="418" y="130" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.3">flood-9998  1/50</text>
+<rect x="408" y="142" width="220" height="26" rx="4" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.15"/>
+<text x="418" y="160" fill="currentColor" fontSize="11" fontFamily="monospace" fillOpacity="0.3">flood-9999  1/50</text>
+<rect x="408" y="172" width="220" height="26" rx="4" fill="#22c55e" fillOpacity="0.12" stroke="#22c55e" strokeWidth="1"/>
+<text x="418" y="190" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="600">attacker    47/50</text>
+<text x="374" y="190" fill="currentColor" fontSize="9" fontFamily="monospace" fillOpacity="0.4">TAIL</text>
+<line x1="632" y1="185" x2="650" y2="185" stroke="#22c55e" strokeWidth="1" strokeOpacity="0.6"/>
+<text x="636" y="178" fill="#22c55e" fontSize="8" fontFamily="monospace" fillOpacity="0.8">touch()</text>
+<line x1="632" y1="65" x2="650" y2="65" stroke="currentColor" strokeWidth="1" markerEnd="url(#rl-a)" strokeOpacity="0.3"/>
+<text x="510" y="224" textAnchor="middle" fill="#22c55e" fontSize="11" fontFamily="system-ui,sans-serif" fontWeight="600">attacker still limited</text>
+<text x="330" y="252" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">Map iteration order determines who is evicted first</text>
+</svg>
+</div>
+
+## The one-line difference
+
+The fix is to make eviction LRU rather than insertion-age, by re-inserting a
+bucket every time it is touched:
+
+```ts
+/** Move an existing key to the young end of the LRU order. */
+function touch(key: string, bucket: { count: number; resetAt: number }) {
+  buckets.delete(key);
+  buckets.set(key, bucket);
+}
+```
+
+Delete then set moves the entry to the end of the iteration order. Now an active
+attacker is continuously refreshed to the young end, so the flood they generate
+evicts *idle* buckets, never their own. They cannot outrun their own record.
+
+The subtlety that makes this actually correct is one line further down:
+
+```ts
+// Refresh LRU position even when refusing the request - a blocked caller who
+// keeps hammering must not age out of the Map and win back a fresh quota.
+touch(key, bucket);
+```
+
+The refresh happens on the *rejected* path too. If you only touch buckets on
+successful requests, a caller who has already hit the limit stops being touched,
+ages toward the head, and is eventually evicted, which restores the bypass in a
+form that is much harder to see. The blocked caller is the one whose record you
+most need to keep.
+
+Two implementations, both O(1), both capping memory, both passing a test suite
+that asserts the cap holds. One of them enforces a rate limit and one of them
+does not.
+
+## The comment that described code we had not written
+
+The other thing we found in this file was a lie, and it was ours.
+
+The header comment said the limiter had an "async seam ready for Upstash," which
+is the sort of note that stops anyone from looking closer. The seam did not
+exist. `rateLimit` was synchronous. There was no place for a shared store to plug
+into, and there had not been since the comment was written.
+
+An in-memory limiter on serverless has an obvious ceiling: it is per-instance and
+it resets on cold start, so under real traffic it is best-effort at most. Our
+comment implied we had already dealt with that. What we had done was describe
+dealing with it.
+
+So we built the seam the comment had been promising. `checkRateLimit` is now the
+entry point every call site uses, it goes to Upstash over the plain REST API when
+credentials are present, and it falls back to the in-memory `Map` when they are
+absent or Redis is unreachable.
+
+Two details in there are worth more than the rest of the implementation:
+
+```ts
+body: JSON.stringify([
+  ["INCR", windowKey],
+  ["PEXPIRE", windowKey, windowMs, "NX"],
+]),
+```
+
+`PEXPIRE ... NX` sets the TTL only if the key does not already have one, meaning
+only on the `INCR` that created it. Without `NX`, every hit pushes the expiry
+forward, and a steady attacker's window never closes. Their key would be renewed
+by the very requests it is supposed to be counting, and the window would become
+permanent rather than periodic. It is the same failure as the eviction bug in a
+different costume: a mechanism that resets under sustained abuse.
+
+And the fallback returns `null` rather than throwing:
+
+```ts
+} catch {
+  // Network blip, timeout, or malformed body. Returning null hands the
+  // decision back to the in-memory limiter rather than failing the
+  // submission - the store is an availability upgrade, not a gate.
+  return null;
+}
+```
+
+A Redis outage degrades the limiter's *reach*, not the site's ability to accept a
+contact form. We would rather lose cross-instance accuracy for a few minutes than
+reject a real enquiry because a cache was down. The two limiters are also never
+consulted in parallel, because the in-memory one increments as a side effect, and
+calling it after Redis already answered would double-count an honest visitor.
+
+## What generalises
+
+Every bug in this file is the same bug wearing different clothes: **a protective
+mechanism that weakens under exactly the load it exists to handle.** The sweep got
+more expensive as abuse grew. The eviction forgave the heaviest attacker first.
+The missing `NX` renewed the window of whoever kept hitting it.
+
+That is the question worth asking of any control you write. Not "does this work,"
+which a test will answer, but "what does this do when someone is deliberately
+pushing on it, and does pushing harder make it weaker?" A rate limiter that
+performs best against traffic that is not attacking it has the sign wrong.
+
+The unit suite for this file grew from 75 to 84 cases while we worked through
+it. The ones that matter are not the cap assertions. They are the cases that
+flood distinct keys and then check that the original offender is still limited.

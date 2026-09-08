@@ -1,8 +1,8 @@
-# Techspirex — Content Inventory (current site)
+# Techspirex - Content Inventory (current site)
 
-Page-by-page inventory of what exists today on techspirex.com. This is the raw material for the rebuild's content strategy — not a spec for what the new site will contain. See `docs/CLAIMS-REGISTER.md` for what is allowed to carry forward.
+Page-by-page inventory of what exists today on techspirex.com. This is the raw material for the rebuild's content strategy - not a spec for what the new site will contain. See `docs/CLAIMS-REGISTER.md` for what is allowed to carry forward.
 
-## `/` — Homepage
+## `/` - Homepage
 
 - Hero: "Your Vision. Engineered." + supporting paragraph, two CTAs (Start a Project → /contact-us/, Explore Capabilities → /services/)
 - Metric band: "150+ global brands," "Top 1% Talent," "Deploy in weeks, not months," ecommerce sales-jump anecdote
@@ -13,7 +13,7 @@ Page-by-page inventory of what exists today on techspirex.com. This is the raw m
 - Testimonial wall: 16 entries
 - Footer: tagline, three-column link structure (Services / Company / Stay Updated newsletter), copyright, social icons (LinkedIn, Facebook, two unclear)
 
-## `/services/` — Services index
+## `/services/` - Services index
 
 - Six service blocks, each icon + one-line description + two sub-bullets + CTA:
   1. Web Development → "Start Development"
@@ -26,19 +26,19 @@ Page-by-page inventory of what exists today on techspirex.com. This is the raw m
 - Metrics band: 200+ Projects Delivered, 24/7 Support, 99.9% uptime
 - No pricing anywhere on the page
 
-## `/web-development` — Service detail (only one fully audited in depth)
+## `/web-development` - Service detail (only one fully audited in depth)
 
 - Hero: "Web Apps Built for Performance." + subheading, fake "98 Score DEPLOYED • LIVE" metric
 - CTAs: Start Your Project, View Portfolio
-- Process: "Two-Week Sprint Methodology" — Sprint Planning, Development, QA & Review, Ship & Demo
+- Process: "Two-Week Sprint Methodology" - Sprint Planning, Development, QA & Review, Ship & Demo
 - Tech stack lists: Frontend, Backend, Mobile, Data/Cloud
 - Domain expertise: SaaS Platforms, Enterprise Systems, Consumer Apps
 - Integrations referenced: Stripe/PayPal/Crypto, OpenAI/Anthropic, Auth0/Firebase/Okta
 - Closing CTA referencing "150+ global brands"
 
-**Not yet individually audited (queued, not blocking):** `/ai-automation`, `/ui-ux-design`, `/devops-cloud`, `/digital-marketing`, `/ecommerce-solutions`. Given the web-development page's template shape, these five are expected to follow the same hero/process/stack/CTA structure — worth a quick pass before final IA lock, but not required to proceed to discovery.
+**Not yet individually audited (queued, not blocking):** `/ai-automation`, `/ui-ux-design`, `/devops-cloud`, `/digital-marketing`, `/ecommerce-solutions`. Given the web-development page's template shape, these five are expected to follow the same hero/process/stack/CTA structure - worth a quick pass before final IA lock, but not required to proceed to discovery.
 
-## `/about` — Company/team
+## `/about` - Company/team
 
 - Founding: "Established 2024," global presence claimed
 - Mission statement
@@ -48,7 +48,7 @@ Page-by-page inventory of what exists today on techspirex.com. This is the raw m
 - Leadership team: same four names/roles as homepage
 - **Contains the founding-year/history-length contradiction flagged in AUDIT.md**
 
-## `/contact-us/` — Contact
+## `/contact-us/` - Contact
 
 - Form fields: Name, Email, Phone, Company, Project Details, Service Interest (dropdown: Web Dev, App Design, Marketing, Cloud/AI, UI/UX, SEO, Graphic Design, Other)
 - Contact details: info@techspirex.com; +44 7708 626539 (UK); +92 371 4156567 (Pakistan); Park View Society, Lahore, Pakistan
@@ -57,15 +57,15 @@ Page-by-page inventory of what exists today on techspirex.com. This is the raw m
 - Social links: LinkedIn (working), Facebook (working), Twitter (broken/incomplete)
 - No stated form success/failure behavior, no visible spam protection, no privacy statement referenced in extracted content
 
-## `/Insights` — Broken
+## `/Insights` - Broken
 
-- Returns HTTP 404. Linked from primary nav. No content recoverable. Treat as if no content system currently exists — the rebuild's insights section starts from zero real content, not a migration.
+- Returns HTTP 404. Linked from primary nav. No content recoverable. Treat as if no content system currently exists - the rebuild's insights section starts from zero real content, not a migration.
 
 ## Pages not found / not linked anywhere in crawled content
 
 - No `/privacy`
 - No `/terms`
-- No `/work` or case-study/portfolio index despite "View Portfolio" CTA existing on the web-development page — this CTA appears to be a dead or unbuilt control.
+- No `/work` or case-study/portfolio index despite "View Portfolio" CTA existing on the web-development page - this CTA appears to be a dead or unbuilt control.
 - No careers page
 
 ## Redirect-map implications for the rebuild

@@ -1,0 +1,129 @@
+---
+title: "The redirect we did not add, and the loop it would have caused"
+summary: "Next.js matches redirect sources case-insensitively. A rule for the old site's /Insights would have caught the real /insights route and sent it to itself. Technical SEO is mostly engineering decisions like this one."
+category: "Web development"
+author: "Tayyab Ahmad"
+publishedAt: "2026-08-22"
+updatedAt: "2026-09-08"
+---
+
+When we rebuilt this site we did the ordinary migration work: enumerate the old
+URLs, map each one to its new home, add permanent redirects so no link and no
+accumulated ranking is thrown away. Seven service pages moved under `/services`,
+`/contact-us` became `/contact`, and so on.
+
+One old URL did not get a redirect, and the reason it did not is a better
+illustration of technical SEO than any checklist we could publish.
+
+## The rule that eats itself
+
+The old site had a page at `/Insights`, capital I. The new site has `/insights`.
+The obvious rule writes itself:
+
+```ts
+{ source: "/Insights", destination: "/insights", permanent: true }
+```
+
+That rule breaks the site.
+
+Next.js matches redirect sources case-insensitively. So `source: "/Insights"`
+does not only match `/Insights`. It also matches `/insights`, which is the real
+page we are redirecting *to*. Every request for the actual insights index would
+match the rule, get redirected to `/insights`, match the rule again, and continue
+until the browser gives up with a redirect loop.
+
+The section would be unreachable. Not slow, not misranked, gone. And it would be
+gone in a way that looks fine in local development if you happen to only ever
+type the lowercase URL, because the loop is not conditional on which case you
+requested. It fires either way.
+
+<div style={{margin:'2.5rem 0'}}>
+<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the self-redirect loop: a request to /insights matches the case-insensitive source /Insights and redirects back to /insights, creating an infinite loop" style={{width:'100%',maxWidth:'480px',height:'auto',display:'block',margin:'0 auto'}}>
+<defs>
+<marker id="rd-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+</defs>
+<rect x="150" y="14" width="180" height="32" rx="6" fill="currentColor" fillOpacity="0.06" stroke="currentColor" strokeWidth="1" strokeOpacity="0.25"/>
+<text x="240" y="35" textAnchor="middle" fill="currentColor" fontSize="13" fontFamily="monospace" fontWeight="600">GET /insights</text>
+<line x1="240" y1="46" x2="240" y2="66" stroke="currentColor" strokeWidth="1" strokeOpacity="0.3" markerEnd="url(#rd-a)"/>
+<rect x="100" y="68" width="280" height="44" rx="6" fill="#ef4444" fillOpacity="0.07" stroke="#ef4444" strokeWidth="1" strokeOpacity="0.4"/>
+<text x="240" y="86" textAnchor="middle" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif" fillOpacity="0.5">Next.js matcher (case-insensitive)</text>
+<text x="240" y="102" textAnchor="middle" fill="#ef4444" fontSize="12" fontFamily="monospace">source: "/Insights" ← matches</text>
+<line x1="240" y1="112" x2="240" y2="134" stroke="#ef4444" strokeWidth="1" markerEnd="url(#rd-a)"/>
+<rect x="150" y="136" width="180" height="32" rx="6" fill="#ef4444" fillOpacity="0.1" stroke="#ef4444" strokeWidth="1"/>
+<text x="240" y="157" textAnchor="middle" fill="#ef4444" fontSize="13" fontFamily="monospace" fontWeight="600">301 → /insights</text>
+<path d="M334 152 Q420 152 420 95 Q420 30 334 30" stroke="#ef4444" strokeWidth="1.5" fill="none" strokeDasharray="5 3" markerEnd="url(#rd-a)"/>
+<text x="438" y="95" fill="#ef4444" fontSize="18" fontFamily="system-ui,sans-serif" fontWeight="700">∞</text>
+<text x="240" y="190" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">the browser gives up after ~20 cycles</text>
+</svg>
+</div>
+
+We caught it before shipping. What made the difference was not knowing the rule
+in advance, it was checking what the redirect matcher actually guarantees before
+trusting a one-line config change with a whole content section.
+
+## The decision, written down
+
+Here is what is in `next.config.ts` where the rule would have been:
+
+```ts
+// Next.js redirect source matching is case-insensitive, so a rule for
+// "/Insights" also catches the real lowercase "/insights" route and
+// self-redirects. The old site's "/Insights" already 404s and isn't
+// carrying link equity worth preserving.
+```
+
+Two things are being recorded there, and the second matters as much as the first.
+
+The first is the constraint, so nobody helpfully adds the missing redirect in six
+months. A comment that only says "do not add this" invites someone to add it
+anyway. A comment that explains the loop does not.
+
+The second is the cost of not acting. `/Insights` returned a 404 on the old site
+as well, so it was never indexed and never accumulated links. There is nothing to
+preserve. If it *had* been a live, linked page, the answer would not have been to
+skip the redirect. It would have been to handle it somewhere the matcher is
+case-sensitive. The decision is only correct because of a fact about the old
+site, and that fact belongs next to the decision.
+
+## Canonicals have to agree with the server
+
+The other correction we shipped recently was smaller and more embarrassing.
+
+Production serves this site from the `www` host and redirects the apex to it.
+Meanwhile our sitemap, our RSS feed, and our canonical tags were generating URLs
+without `www`. Every canonical we published pointed at a URL that answers with a
+301 rather than with content.
+
+This is not fatal, because crawlers follow the redirect and generally work out
+the intent. It is also entirely self-inflicted: we were asking every crawler to
+make an extra request and a judgement call on every single page, forever, to
+resolve an inconsistency we could have removed in one commit. Search engines are
+tolerant of this. That is not a reason to spend their patience.
+
+The related fix is that `metadataBase` and `openGraph.url` now derive from an
+environment variable rather than a hardcoded string. Before that, every preview
+deployment emitted canonical tags claiming to be production. Preview URLs are
+crawlable if anyone links to one, and a preview that advertises itself as the
+canonical production page is a genuinely bad thing to leave lying around.
+
+The rule we now hold: the canonical URL is whatever the production server
+actually serves after every redirect has run, and nothing else. Not what the
+brand guidelines say, not what is in the README. Curl the production host and
+believe the response.
+
+## Why we file this under engineering, not marketing
+
+Almost nothing described here is a marketing decision. It is redirect matcher
+semantics, environment-derived configuration, and keeping generated URLs in
+agreement with server behaviour. The tooling that flags these problems is a
+crawler, but the tooling that *prevents* them is code review by somebody who
+knows how the framework resolves a route.
+
+This is why we resist treating technical SEO as a phase that happens after a
+build. By the time an audit tool reports "redirect chain detected" or "canonical
+points to a redirect," the decision that caused it was made months earlier by
+someone who was not thinking about crawlers, and unwinding it costs more than
+getting it right did.
+
+The most valuable output of our migration was not the seven redirects we added.
+It was the one we did not, and the paragraph explaining why.

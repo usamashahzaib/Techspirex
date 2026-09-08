@@ -1,0 +1,163 @@
+---
+title: "Our bot honeypot told every bot exactly where the trap was"
+summary: "A one-character validation rule made the silent-success branch unreachable and returned a field error naming the hidden field. The trap worked perfectly, in reverse."
+category: "Web development"
+author: "Moeez Ahmad"
+publishedAt: "2026-08-14"
+updatedAt: "2026-09-08"
+---
+
+A honeypot field is the cheapest bot filter there is. You put a text input in the
+form, hide it from humans with CSS, and give it a name a naive scraper will want
+to fill, like `website`. Real people never see it. Bots that fill every field
+they find walk straight into it.
+
+The rule that makes it work is that the bot must never learn it stepped on
+anything. You accept the submission, return success, and quietly throw the
+message away.
+
+Ours did the opposite. It told the bot precisely which field was the trap.
+
+## The branch that could never run
+
+Here is the shape of the server action. Read it the way we did for weeks, which
+is to say approvingly:
+
+```ts
+const parsed = contactSchema.safeParse(raw);
+
+if (!parsed.success) {
+  return {
+    status: "error",
+    message: "Please fix the errors below and try again.",
+    fieldErrors: parsed.error.flatten().fieldErrors,
+  };
+}
+
+if (parsed.data.website) {
+  // Honeypot tripped. Report success to the bot without doing anything.
+  return { status: "success" };
+}
+```
+
+The comment describes the correct behaviour. The code above it makes that
+behaviour impossible.
+
+The schema declared the honeypot like this:
+
+```ts
+website: z.string().max(0).optional(),
+```
+
+`.max(0)` means the string must be empty. So the moment a bot filled the field,
+validation failed. `safeParse` returned unsuccessful, the first branch fired, and
+the function returned before it ever reached the line that was supposed to handle
+a honeypot hit.
+
+The silent-success branch was dead code. It had never executed in production,
+not once.
+
+<div style={{margin:'2.5rem 0'}}>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two paths: with .max(0) the bot gets a field error naming the honeypot, with .max(2000) the bot gets silent success and learns nothing" style={{width:'100%',maxWidth:'640px',height:'auto',display:'block',margin:'0 auto'}}>
+<defs>
+<marker id="hp-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" fillOpacity="0.4"/></marker>
+<marker id="hp-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+<marker id="hp-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22c55e"/></marker>
+</defs>
+<rect x="240" y="6" width="160" height="28" rx="5" fill="currentColor" fillOpacity="0.06" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.2"/>
+<text x="320" y="25" textAnchor="middle" fill="currentColor" fontSize="11" fontFamily="monospace">bot fills website=""</text>
+<line x1="240" y1="34" x2="140" y2="60" stroke="#ef4444" strokeWidth="1" markerEnd="url(#hp-ar)"/>
+<line x1="400" y1="34" x2="500" y2="60" stroke="#22c55e" strokeWidth="1" markerEnd="url(#hp-ag)"/>
+<text x="140" y="56" textAnchor="end" fill="#ef4444" fontSize="9" fontFamily="monospace">.max(0)</text>
+<text x="500" y="56" fill="#22c55e" fontSize="9" fontFamily="monospace">.max(2000)</text>
+<rect x="20" y="64" width="240" height="28" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="140" y="83" textAnchor="middle" fill="#ef4444" fontSize="11" fontFamily="system-ui,sans-serif">Zod validation fails</text>
+<line x1="140" y1="92" x2="140" y2="114" stroke="#ef4444" strokeWidth="1" markerEnd="url(#hp-ar)"/>
+<rect x="20" y="116" width="240" height="38" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="140" y="133" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="monospace">fieldErrors:</text>
+<text x="140" y="147" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="monospace" fontWeight="700">{"{"} website: "..." {"}"}</text>
+<line x1="140" y1="154" x2="140" y2="178" stroke="#ef4444" strokeWidth="1" markerEnd="url(#hp-ar)"/>
+<text x="140" y="196" textAnchor="middle" fill="#ef4444" fontSize="11" fontFamily="system-ui,sans-serif" fontWeight="700">bot learns the trap</text>
+<rect x="380" y="64" width="240" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="500" y="83" textAnchor="middle" fill="#22c55e" fontSize="11" fontFamily="system-ui,sans-serif">Zod validation passes</text>
+<line x1="500" y1="92" x2="500" y2="114" stroke="#22c55e" strokeWidth="1" markerEnd="url(#hp-ag)"/>
+<rect x="380" y="116" width="240" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="500" y="135" textAnchor="middle" fill="#22c55e" fontSize="11" fontFamily="monospace">if (parsed.data.website)</text>
+<line x1="500" y1="144" x2="500" y2="168" stroke="#22c55e" strokeWidth="1" markerEnd="url(#hp-ag)"/>
+<rect x="380" y="170" width="240" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="1"/>
+<text x="500" y="189" textAnchor="middle" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="700">{"{"} status: "success" {"}"}</text>
+<text x="500" y="212" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="system-ui,sans-serif" fillOpacity="0.7">bot learns nothing</text>
+</svg>
+</div>
+
+## The part that actually hurt
+
+Failing closed would have been survivable. A bot gets an error, the message never
+sends, the spam does not arrive. Annoying, not dangerous.
+
+What we actually did was return `parsed.error.flatten().fieldErrors` to the
+caller. That object is keyed by field name, so the response we handed the bot
+contained an entry under `website`.
+
+We had built a hidden field whose entire value depended on the client not knowing
+it existed, and then we shipped a response that named it, explained it was
+invalid, and did so only when it was filled. An attacker probing the form learns
+the trap on the first request. Clear that one field, resubmit, and every
+subsequent submission sails through untouched.
+
+The honeypot was not merely broken. It was an oracle.
+
+## The fix is one line, the lesson is not
+
+```ts
+// Honeypot: accept any value (bounded) so a hit parses cleanly and the
+// action can silently return success instead of leaking a `website` field
+// error that reveals the trap. Real users never see or fill this field.
+website: z.string().max(2000).optional(),
+```
+
+Accept the input. Bound it, because an unbounded string from an anonymous client
+is its own problem. Then let the action decide what to do about it, which is what
+the action was always written to do.
+
+The interesting part is why nobody caught this in review, and the answer is that
+two layers disagreed about a word. To the validation layer, a filled honeypot is
+*invalid input*, and the correct response to invalid input is a descriptive
+error. To the security layer, a filled honeypot is *a successful detection*, and
+the correct response is to reveal nothing at all.
+
+Both layers were individually correct. The bug lived in the space between them,
+and it looked like good practice from either side. The Zod schema read like
+careful validation. The action read like a correct honeypot. Only the composition
+was wrong, and composition is exactly what a file-by-file code review does not
+show you.
+
+## What we changed about how we review
+
+Validation schemas now get read as part of the security surface, not as a
+formatting concern. Concretely, we ask one question of any field that exists for
+a security reason: **what does the response tell the caller when this field is
+populated?** If the answer differs from what the response says when the field is
+empty, the field is an oracle and the design is broken, no matter how correct
+each individual layer looks.
+
+That same question is why our newsletter form does not tell you whether an
+address is already subscribed, and why the wording of every guard failure lives
+in one file per surface rather than being written inline at each call site. A
+control that behaves differently in the interesting case has already leaked the
+interesting case.
+
+## Why we are publishing this
+
+We say on this site that we build in the open. The easy version of that promise
+is streaming task updates and calling it transparency. The version that actually
+costs something is writing up the security bug you shipped, in your own contact
+form, on your own website, with the broken line quoted.
+
+This one was live. It was found in an internal audit, fixed in a commit that
+also fixed two others, and the honeypot has been silently swallowing bot
+submissions ever since, which is the only evidence a working honeypot ever
+produces.
+
+If a vendor's engineering blog contains no bugs, that does not mean they do not
+ship any.

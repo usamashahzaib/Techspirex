@@ -1,0 +1,193 @@
+---
+title: "Our CSP nonce silently disabled static rendering on all 26 routes"
+summary: "A strict Content-Security-Policy and static prerendering in Next.js are a genuine either/or, not a configuration problem. Here is how we found it, the red herring that cost us the first fix, and why we picked the weaker script-src."
+category: "Web development"
+author: "Tayyab Ahmad"
+publishedAt: "2026-09-08"
+---
+
+We shipped this site with a Content-Security-Policy that had no `'unsafe-inline'`
+in `script-src`. Every request passed through a proxy that generated a fresh
+nonce and stamped it onto our inline scripts. On paper it was the stronger
+policy, and every security checklist we ran agreed.
+
+It also meant not a single page on the site was being served from cache.
+
+The build output said so plainly, and we had been reading past it for weeks:
+
+```
+0 of 26 routes prerendered
+```
+
+## Why a nonce forces dynamic rendering
+
+A nonce has one job: be unpredictable, and be different on every request. If an
+attacker can guess the nonce, the policy is decorative.
+
+That requirement is fundamentally incompatible with prerendering. A prerendered
+page is HTML written once at build time and handed to every visitor unchanged.
+If the nonce is baked into that HTML, it is a constant, which means it is
+guessable, which means it is not a nonce. Next.js resolves this the only way it
+can: any route that reads `headers()` to source a nonce is marked dynamic and
+rendered on demand, forever.
+
+So the nonce was not slow because of a misconfiguration. It was slow because we
+had asked for two things that cannot both be true.
+
+<div style={{margin:'2.5rem 0'}}>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the tradeoff: a nonce requires headers() which forces dynamic rendering on all routes, while unsafe-inline allows static prerendering on 24 of 26 routes" style={{width:'100%',maxWidth:'640px',height:'auto',display:'block',margin:'0 auto'}}>
+<defs>
+<marker id="cs-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" fillOpacity="0.4"/></marker>
+<marker id="cs-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+<marker id="cs-ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22c55e"/></marker>
+</defs>
+<text x="14" y="18" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif" fontWeight="700" letterSpacing="0.08em" fillOpacity="0.4">BEFORE</text>
+<rect x="14" y="28" width="90" height="28" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="59" y="46" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="monospace">nonce</text>
+<line x1="104" y1="42" x2="140" y2="42" stroke="#ef4444" strokeWidth="1" markerEnd="url(#cs-ar)"/>
+<rect x="144" y="28" width="110" height="28" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="199" y="46" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="monospace">headers()</text>
+<line x1="254" y1="42" x2="290" y2="42" stroke="#ef4444" strokeWidth="1" markerEnd="url(#cs-ar)"/>
+<rect x="294" y="28" width="150" height="28" rx="5" fill="#ef4444" fillOpacity="0.08" stroke="#ef4444" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="369" y="46" textAnchor="middle" fill="#ef4444" fontSize="10" fontFamily="system-ui,sans-serif">all routes dynamic</text>
+<line x1="444" y1="42" x2="480" y2="42" stroke="#ef4444" strokeWidth="1" markerEnd="url(#cs-ar)"/>
+<rect x="484" y="28" width="142" height="28" rx="5" fill="#ef4444" fillOpacity="0.12" stroke="#ef4444" strokeWidth="1"/>
+<text x="555" y="46" textAnchor="middle" fill="#ef4444" fontSize="11" fontFamily="monospace" fontWeight="700">0/26 cached</text>
+<line x1="14" y1="80" x2="626" y2="80" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.1"/>
+<text x="14" y="102" fill="currentColor" fontSize="10" fontFamily="system-ui,sans-serif" fontWeight="700" letterSpacing="0.08em" fillOpacity="0.4">AFTER</text>
+<rect x="14" y="112" width="120" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="74" y="130" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="monospace">'unsafe-inline'</text>
+<line x1="134" y1="126" x2="170" y2="126" stroke="#22c55e" strokeWidth="1" markerEnd="url(#cs-ag)"/>
+<rect x="174" y="112" width="130" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="239" y="130" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="system-ui,sans-serif">no headers() read</text>
+<line x1="304" y1="126" x2="340" y2="126" stroke="#22c55e" strokeWidth="1" markerEnd="url(#cs-ag)"/>
+<rect x="344" y="112" width="140" height="28" rx="5" fill="#22c55e" fillOpacity="0.08" stroke="#22c55e" strokeWidth="0.5" strokeOpacity="0.4"/>
+<text x="414" y="130" textAnchor="middle" fill="#22c55e" fontSize="10" fontFamily="system-ui,sans-serif">static prerendering</text>
+<line x1="484" y1="126" x2="510" y2="126" stroke="#22c55e" strokeWidth="1" markerEnd="url(#cs-ag)"/>
+<rect x="514" y="112" width="112" height="28" rx="5" fill="#22c55e" fillOpacity="0.12" stroke="#22c55e" strokeWidth="1"/>
+<text x="570" y="130" textAnchor="middle" fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="700">24/26 cached</text>
+<text x="570" y="158" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">/contact + /newsletter/confirm</text>
+<text x="570" y="170" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">stay dynamic (correct)</text>
+<text x="74" y="170" textAnchor="start" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.3">script-src weaker, but XSS sources: none</text>
+</svg>
+</div>
+
+## The red herring that cost us the first fix
+
+Our first attempt was to narrow the blast radius. Most pages on a marketing site
+do not need a per-request nonce, so we removed the `headers()` read from
+`app/layout.tsx` and rebuilt, expecting most of the 26 routes to go static.
+
+The build output did not move. Still zero.
+
+The read we removed was not the only one. `components/seo/json-ld.tsx` also
+sourced the nonce, and that component renders on every page in the app, because
+the root layout mounts it. We had deleted the obvious call and left the one that
+actually mattered, which produced the worst possible debugging signal: a change
+that is correct, and does nothing.
+
+This is worth naming as a general pattern. When a fix that should work produces
+no change at all, the instinct is to assume the fix was wrong. Usually the fix
+was incomplete, and the thing you did not find is being pulled in by a layout,
+a provider, or a middleware that never appears in the file you are editing.
+Search for the API, not for the component you suspect.
+
+## Then we checked whether the goal was reachable at all
+
+With both reads found, the real question was whether we could keep the nonce and
+still prerender most of the site. We could scope our own inline scripts. Could we
+get rid of inline script entirely?
+
+No, and the reason is in the framework itself. Next.js streams its React Server
+Component payload to the browser through its own inline script tags:
+
+```html
+<script>self.__next_f.push(...)</script>
+```
+
+Those appear in every document Next.js produces. Under a nonce-or-hash policy
+they need the nonce too, and they are the specific reason a nonce forces dynamic
+rendering in the first place. There is no arrangement of a Next.js App Router
+application that is both statically prerendered and free of inline script.
+
+We spent an afternoon confirming this rather than assuming it, and that was the
+right call. The conclusion changed the decision from "optimize this" to "choose
+one," and those are very different conversations to have with a client.
+
+## We chose static, and here is the honest cost
+
+`script-src` regains `'unsafe-inline'`. That is a real weakening and we are not
+going to dress it up. One directive got worse.
+
+What made it acceptable is that we went looking for the XSS sources this site
+actually has, and there are none. No user-generated content is rendered. No query
+parameter is reflected into markup. All MDX is repository-authored and reviewed
+in a pull request. `json-ld.tsx` escapes `<`, `>`, and `&` on top of that, so
+structured data cannot break out of its own tag even after the headless CMS
+migration our content layer is designed to allow.
+
+Meanwhile every directive that actually contains an incident stayed strict:
+
+```
+object-src 'none'
+base-uri 'self'
+form-action 'self'
+frame-ancestors 'none'
+connect-src <closed allowlist>
+```
+
+That set is doing more work than people give it credit for. `base-uri 'self'`
+blocks `<base>` hijacking. `form-action 'self'` blocks credential exfiltration by
+retargeting a form. The closed `connect-src` blocks the exfiltration leg of most
+XSS payloads, which is the step that turns a script injection into an actual
+breach. An attacker who lands script on this page still cannot send what they
+find anywhere.
+
+Our position, which is arguable and which we will defend: `'unsafe-inline'` in
+`script-src` on a site with no injection sources is a smaller real risk than
+serving every page dynamically, and the checklist-driven instinct to treat any
+`'unsafe-inline'` as an automatic failure is how teams end up with slow sites and
+no additional safety.
+
+## Verified, not assumed
+
+The claim is that pages are now cached. Here is the evidence we took from a
+production build rather than from the build log:
+
+```
+x-nextjs-cache: HIT
+Cache-Control: s-maxage=31536000
+```
+
+Prerendered routes went from 0 of 26 to 24 of 26. The two that stayed dynamic
+are `/contact` and `/newsletter/confirm`, and they are correct to be dynamic,
+because both read `searchParams`. A page that genuinely depends on the request
+should render per request. The bug was never that dynamic rendering exists, it
+was that we had accidentally applied it to a set of pages that are identical for
+every visitor.
+
+## The leftover we did not delete
+
+`proxy.ts` is now inert. The obvious cleanup is to remove it, and we deliberately
+have not, because deleting it is not free: the old file still emits its own CSP
+header, and until it is removed carefully the site would send two conflicting
+policies and break hydration. It is documented as dead, with the reason, and it
+comes out in its own change where the effect can be observed on its own.
+
+We also corrected a note in our internal audit doc that claimed the nonce build
+was "still CDN-cacheable." It was not. A stale internal note that reassures you
+about a problem you still have is worse than no note, and the correction was
+part of the same commit as the fix.
+
+## What we would tell another team
+
+Read your build output. `0 of 26 routes prerendered` was printed on every build
+for weeks and we treated it as noise, because the site was fast in development
+and nothing was visibly broken. Performance regressions do not announce
+themselves; they sit in a line of build output that everyone has learned to
+scroll past.
+
+And when a security control and a performance property appear to conflict, find
+out whether the conflict is real before you start optimizing. Ours was real. The
+afternoon we spent proving that saved us from a much longer week of trying to
+configure our way out of a constraint that does not bend.

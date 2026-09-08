@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowDown } from "@phosphor-icons/react/dist/ssr";
 import { TeamShapeMotion } from "@/components/marketing/team-shape-motion";
 
 const shapes = [
@@ -82,10 +81,6 @@ export function TeamShapeGuide() {
               />
             </div>
             <div className="mt-5 flex flex-wrap gap-5 text-sm font-bold text-brand-violet">
-              <Link href="/insights/choosing-team-shape" data-guide-event="field_guide_read" className="group inline-flex min-h-11 items-center gap-2">
-                Read the full decision test
-                <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-              </Link>
               <a href="/art/team-shape-guide.png" download data-guide-event="field_guide_download" className="group inline-flex min-h-11 items-center gap-2">
                 Download the share card
                 <ArrowDown className="size-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
