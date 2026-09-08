@@ -111,7 +111,7 @@ describe("GET /insights/rss.xml", () => {
 
     // Raw metacharacters in element text are escaped. (`<` is excluded from the
     // class because it legitimately begins the closing </link> tag.)
-    expect(xml).toContain("<link>https://techspirex.com/insights/normal-post</link>");
+    expect(xml).toContain("<link>https://www.techspirex.com/insights/normal-post</link>");
     expect(xml).not.toMatch(/<link>[^<]*[&>]/);
     expect(xml).not.toMatch(/<guid[^>]*>[^<]*[&>]/);
 
