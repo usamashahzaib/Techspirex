@@ -34,8 +34,8 @@ rendered on demand, forever.
 So the nonce was not slow because of a misconfiguration. It was slow because we
 had asked for two things that cannot both be true.
 
-<div style={{margin:'2.5rem 0'}}>
-<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the tradeoff: a nonce requires headers() which forces dynamic rendering on all routes, while unsafe-inline allows static prerendering on 24 of 26 routes" style={{width:'100%',maxWidth:'640px',height:'auto',display:'block',margin:'0 auto'}}>
+
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the tradeoff: a nonce requires headers() which forces dynamic rendering on all routes, while unsafe-inline allows static prerendering on 24 of 26 routes" width="100%">
 <defs>
 <marker id="cs-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" fillOpacity="0.4"/></marker>
 <marker id="cs-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
@@ -70,7 +70,6 @@ had asked for two things that cannot both be true.
 <text x="570" y="170" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">stay dynamic (correct)</text>
 <text x="74" y="170" textAnchor="start" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.3">script-src weaker, but XSS sources: none</text>
 </svg>
-</div>
 
 ## The red herring that cost us the first fix
 

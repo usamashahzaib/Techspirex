@@ -63,8 +63,8 @@ The eviction policy meant to protect memory had become a mechanism for clearing
 your own record on demand, triggerable by exactly the behaviour the limiter
 exists to stop. The more aggressively you attack, the faster you are forgiven.
 
-<div style={{margin:'2.5rem 0'}}>
-<svg viewBox="0 0 660 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison: insertion-order eviction lets the attacker push their own bucket off the Map head, while LRU eviction keeps the attacker at the tail because touch() refreshes on reject" style={{width:'100%',maxWidth:'660px',height:'auto',display:'block',margin:'0 auto'}}>
+
+<svg viewBox="0 0 660 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparison: insertion-order eviction lets the attacker push their own bucket off the Map head, while LRU eviction keeps the attacker at the tail because touch() refreshes on reject" width="100%">
 <defs>
 <marker id="rl-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor" fillOpacity="0.5"/></marker>
 <marker id="rl-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
@@ -107,7 +107,6 @@ exists to stop. The more aggressively you attack, the faster you are forgiven.
 <text x="510" y="224" textAnchor="middle" fill="#22c55e" fontSize="11" fontFamily="system-ui,sans-serif" fontWeight="600">attacker still limited</text>
 <text x="330" y="252" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">Map iteration order determines who is evicted first</text>
 </svg>
-</div>
 
 ## The one-line difference
 
