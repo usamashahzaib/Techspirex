@@ -160,6 +160,7 @@ export default function ServicesPage() {
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
             <PillCta href={`${routes.contact}?path=brief`} tone="violet">Send a project brief</PillCta>
+            <PillCta href={`${routes.contact}?path=talent`} tone="outline-light">Hire talent</PillCta>
             <PillCta href={`${routes.contact}?path=call`} tone="outline-light">Book a discovery call</PillCta>
           </div>
         </div>

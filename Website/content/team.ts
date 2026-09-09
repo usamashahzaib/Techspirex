@@ -23,28 +23,28 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
-    name: "Azeem Ahmad",
-    role: "Founder & Principal Engineer",
+    name: "Haseem H.",
+    role: "CEO",
     expertise:
-      "Sets technical direction and stays close to the code. Architecture, product scope, and the standard every engagement is held to.",
+      "Leads company direction, client partnerships, and delivery accountability across project teams and talent engagements.",
     tier: "leadership",
   },
   {
-    name: "Usman Tahir",
+    name: "Usman T.",
     role: "Engineering Lead",
     expertise:
       "Owns implementation and review across web and product builds. Type-safe architecture, testing discipline, and shipping without surprises.",
     tier: "engineering",
   },
   {
-    name: "Javaid Fazeel",
+    name: "Javaid F.",
     role: "DevOps & Cloud Engineer",
     expertise:
       "Delivery pipelines, cloud infrastructure, security posture, and observability - the work that keeps what we ship fast and reliable.",
     tier: "delivery",
   },
   {
-    name: "Musfira Shehroz",
+    name: "Musfira S.",
     role: "Product & UX Design",
     expertise:
       "Interaction design, interface systems, and accessibility. Turns dense product surfaces into something that feels clear and considered.",

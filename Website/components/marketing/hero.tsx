@@ -16,23 +16,23 @@ export function Hero() {
         <div className="max-w-6xl">
           <p className="reveal inline-flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-cyan-pale">
             <span className="signal-pulse size-2 rounded-full bg-brand-cyan" aria-hidden="true" />
-            Engineering-led delivery - Lahore to the world
+            Software delivery and dedicated teams - worldwide
           </p>
           <h1 className="reveal reveal-delay-1 mt-9 max-w-6xl text-[clamp(3.6rem,7vw,7.8rem)] font-black leading-[0.84] tracking-[-0.08em] [text-wrap:balance]">
-            We ship what works. <span className="text-brand-cyan-pale">We prove it.</span>
+            Build the product. <span className="text-brand-cyan-pale">Extend the team.</span>
           </h1>
           <p className="reveal reveal-delay-2 mt-9 max-w-[57ch] text-base font-medium leading-[1.7] tracking-[0.01em] text-[#e3dced] sm:text-lg">
-            One accountable team takes the work from product decisions to tested software and an owned handoff. Bring one constraint or the whole build.
+            Techspirex gives product companies one accountable delivery partner for complete software builds, dedicated teams, and individual technical specialists.
           </p>
           <div className="reveal reveal-delay-3 mt-10 flex flex-col gap-3 sm:flex-row">
             <PillCta href={`${routes.contact}?path=call`} tone="cream">
-              Book a discovery call
+              Discuss a project
             </PillCta>
-            <PillCta href={`${routes.contact}?path=brief`} tone="outline-dark">
-              Send a project brief
+            <PillCta href={`${routes.contact}?path=talent`} tone="outline-dark">
+              Hire talent
             </PillCta>
           </div>
-          <p className="reveal reveal-delay-4 mt-9 font-mono text-[10px] uppercase tracking-[0.16em] text-[#c6bdd8]">Global delivery - US / UK / EU overlap</p>
+          <p className="reveal reveal-delay-4 mt-9 font-mono text-[10px] uppercase tracking-[0.16em] text-[#c6bdd8]">Product - engineering - QA - cloud - dedicated capacity</p>
         </div>
         <div className="hidden lg:block">
           <HeroProofSystem />

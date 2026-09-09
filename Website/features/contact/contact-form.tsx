@@ -10,7 +10,7 @@ import { CheckCircle, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 
 const initialState: ContactState = { status: "idle" };
 
-function SubmitButton() {
+function SubmitButton({ talent }: { talent: boolean }) {
   const { pending } = useFormStatus();
   return (
     <button
@@ -18,7 +18,7 @@ function SubmitButton() {
       disabled={pending}
       className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground transition-[transform,opacity] duration-300 hover:-translate-y-0.5 hover:opacity-95 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
     >
-      {pending ? "Sending…" : "Send project brief"}
+      {pending ? "Sending..." : talent ? "Send talent requirement" : "Send project brief"}
     </button>
   );
 }
@@ -60,7 +60,7 @@ function Field({
 const inputClass =
   "min-h-12 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground transition-[border-color,box-shadow] duration-300 placeholder:text-muted-foreground hover:border-primary/40 focus-visible:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 
-export function ContactForm() {
+export function ContactForm({ talent = false }: { talent?: boolean }) {
   const [state, formAction] = useActionState(submitContactForm, initialState);
   const resultRef = useRef<HTMLDivElement>(null);
 
@@ -111,7 +111,7 @@ export function ContactForm() {
       </div>
 
       <Field label="Project type" name="projectType" error={errors?.projectType}>
-        <select id="projectType" name="projectType" required defaultValue="" className={inputClass}>
+        <select id="projectType" name="projectType" required defaultValue={talent ? "Staff augmentation" : ""} className={inputClass}>
           <option value="" disabled>
             Select one
           </option>
@@ -136,16 +136,16 @@ export function ContactForm() {
         <input id="company" name="company" type="text" autoComplete="organization" className={inputClass} />
       </Field>
 
-      <Field label="What are you trying to achieve?" name="goal" error={errors?.goal}>
-        <textarea id="goal" name="goal" required rows={5} className={inputClass} />
+      <Field label={talent ? "Describe the role or team you need" : "What are you trying to achieve?"} name="goal" error={errors?.goal}>
+        <textarea id="goal" name="goal" required rows={5} placeholder={talent ? "Include role, seniority, stack, headcount, responsibilities, and working-hour overlap." : undefined} className={inputClass} />
       </Field>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Budget (optional)" name="budget" error={errors?.budget}>
-          <input id="budget" name="budget" type="text" placeholder="e.g. $10k-25k" className={inputClass} />
+        <Field label={talent ? "Monthly budget (optional)" : "Budget (optional)"} name="budget" error={errors?.budget}>
+          <input id="budget" name="budget" type="text" placeholder={talent ? "e.g. monthly range" : "e.g. $10k-25k"} className={inputClass} />
         </Field>
-        <Field label="Timeline (optional)" name="timeline" error={errors?.timeline}>
-          <input id="timeline" name="timeline" type="text" placeholder="e.g. Q4 2026" className={inputClass} />
+        <Field label={talent ? "Start date and duration (optional)" : "Timeline (optional)"} name="timeline" error={errors?.timeline}>
+          <input id="timeline" name="timeline" type="text" placeholder={talent ? "e.g. October, 6 months" : "e.g. Q4 2026"} className={inputClass} />
         </Field>
       </div>
 
@@ -164,7 +164,7 @@ export function ContactForm() {
         .
       </p>
 
-      <SubmitButton />
+      <SubmitButton talent={talent} />
     </form>
   );
 }

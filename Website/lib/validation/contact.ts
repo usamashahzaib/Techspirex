@@ -1,12 +1,16 @@
 import { z } from "zod";
 
 export const projectTypes = [
+  "Hire a specialist",
+  "Dedicated team",
   "Web development",
   "AI & automation",
   "UI/UX design",
   "DevOps & cloud",
   "Digital marketing",
   "Ecommerce",
+  "Staff augmentation",
+  "Dedicated team",
   "Other",
 ] as const;
 

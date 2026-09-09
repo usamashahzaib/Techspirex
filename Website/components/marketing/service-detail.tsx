@@ -14,6 +14,8 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export function ServiceDetail({ service }: { service: ServiceContent }) {
   const path = `${routes.services}/${service.slug}`;
+  const isStaffing = service.slug === "staff-augmentation";
+  const contactPath = `${routes.contact}?path=${isStaffing ? "talent" : "brief"}`;
 
   return (
     <>
@@ -34,7 +36,7 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
         <div className="lg:pb-3">
           <p className="text-xl font-black tracking-[-0.03em] text-brand-cyan-pale">{service.tagline}</p>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-lilac-pale text-pretty">{service.heroSummary}</p>
-          <Link href={`${routes.contact}?path=brief`} className="mt-9 inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-cyan px-7 py-3.5 text-sm font-extrabold text-brand-ink transition-transform hover:-translate-y-1">Start a project <ArrowRight className="size-4" aria-hidden="true" /></Link>
+          <Link href={contactPath} className="mt-9 inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-cyan px-7 py-3.5 text-sm font-extrabold text-brand-ink transition-transform hover:-translate-y-1">{isStaffing ? "Tell us who you need" : "Start a project"} <ArrowRight className="size-4" aria-hidden="true" /></Link>
         </div>
       </Section>
 
@@ -118,10 +120,10 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
       >
         <SectionHeading>Ready to talk about {service.name.toLowerCase()}?</SectionHeading>
         <Link
-          href={`${routes.contact}?path=brief`}
+          href={contactPath}
           className="inline-flex min-h-12 shrink-0 items-center justify-center bg-background px-6 py-3.5 text-sm font-bold text-foreground transition-transform hover:-translate-y-1"
         >
-          Request a project review
+          {isStaffing ? "Send a talent requirement" : "Request a project review"}
         </Link>
       </Section>
     </>

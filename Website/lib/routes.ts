@@ -33,10 +33,11 @@ export const serviceNavItems = [
   { label: "DevOps & cloud", href: routes.serviceDevopsCloud, flagship: false },
   { label: "Digital marketing", href: routes.serviceDigitalMarketing, flagship: false },
   { label: "Ecommerce", href: routes.serviceEcommerce, flagship: false },
-  { label: "Staff augmentation", href: routes.serviceStaffAugmentation, flagship: false },
+  { label: "Staff augmentation", href: routes.serviceStaffAugmentation, flagship: true },
 ] as const;
 
 export const primaryNavItems = [
+  { label: "Hire talent", href: routes.serviceStaffAugmentation },
   { label: "Work", href: routes.work },
   { label: "About", href: routes.about },
   { label: "Insights", href: routes.insights },

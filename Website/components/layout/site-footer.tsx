@@ -22,9 +22,9 @@ export function SiteFooter() {
         <div className="grid gap-10 border-b border-white/12 pb-14 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-cyan">The next useful move</p>
-            <h2 className="mt-5 max-w-[12ch] text-4xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl">Bring us the constraint. We&apos;ll map the build.</h2>
+            <h2 className="mt-5 max-w-[13ch] text-4xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl">Build the product or add the people to move it forward.</h2>
           </div>
-          <PillCta href={`${routes.contact}?path=brief`} tone="cyan" className="lg:justify-self-end">Send the brief</PillCta>
+          <div className="flex flex-wrap gap-3 lg:justify-self-end"><PillCta href={`${routes.contact}?path=brief`} tone="cyan">Discuss a project</PillCta><PillCta href={`${routes.contact}?path=talent`} tone="outline-dark">Hire talent</PillCta></div>
         </div>
 
         <div className="grid gap-12 py-14 lg:grid-cols-[0.8fr_1.2fr_1fr] lg:gap-20">

@@ -232,10 +232,10 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <Link
-            href={`${routes.contact}?path=brief`}
+            href={`${routes.contact}?path=talent`}
             className="inline-flex min-h-11 items-center px-3 text-sm font-bold text-foreground/80 transition-colors duration-300 ease-[var(--ease-expo-out)] hover:text-primary lg:px-4"
           >
-            Send a brief
+            Hire talent
           </Link>
           <PillCta href={`${routes.contact}?path=call`} tone="violet" className="scale-[0.92]">
             Book a call
@@ -297,8 +297,8 @@ export function SiteHeader() {
             <PillCta href={`${routes.contact}?path=call`} tone="cyan" className="w-full justify-between">
               Book a discovery call
             </PillCta>
-            <PillCta href={`${routes.contact}?path=brief`} tone="outline-dark" className="w-full justify-between">
-              Send a project brief
+            <PillCta href={`${routes.contact}?path=talent`} tone="outline-dark" className="w-full justify-between">
+              Send a talent requirement
             </PillCta>
           </div>
         </nav>

@@ -12,13 +12,10 @@ export type DraftTestimonial = {
  */
 export const draftTestimonials: DraftTestimonial[] = [
   {
-    // byQalam is real, shipped work - but this exact wording is a placeholder
-    // until Fizza approves it verbatim. Keep verified:false until then; set it
-    // to true only once the real, written-approved quote is in place.
-    quote: "Techspirex took byQalam from an idea to a real product in production. They pushed back on the parts that wouldn't work, shipped something we could actually use, and treated it like their own.",
-    name: "Fizza M.",
+    quote: "Client testimonial pending written approval.",
+    name: "Client name pending",
     role: "Founder",
-    company: "byQalam",
+    company: "Software company",
     verified: false,
   },
   {

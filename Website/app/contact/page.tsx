@@ -18,7 +18,9 @@ const processSteps = [
 ];
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ path?: string }> }) {
-  const wantsCall = (await searchParams).path === "call";
+  const path = (await searchParams).path;
+  const wantsCall = path === "call";
+  const wantsTalent = path === "talent";
   return (
     <section className="bg-background">
       <div className="relative isolate overflow-hidden border-b border-white/10 bg-brand-ink text-brand-cream">
@@ -27,9 +29,9 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         <div className="relative mx-auto grid min-h-[36rem] max-w-[1440px] gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.7fr] lg:items-end lg:px-8 lg:py-28">
           <div>
           <Eyebrow size="sm" tone="cyan" weight="normal">Start with the problem</Eyebrow>
-          <h1 className="mt-6 max-w-[10ch] text-[clamp(4rem,8vw,8rem)] font-black leading-[0.82] tracking-[-0.075em]">{wantsCall ? "Start the right conversation." : "Put the real constraint on the table."}</h1>
+          <h1 className="mt-6 max-w-[10ch] text-[clamp(4rem,8vw,8rem)] font-black leading-[0.82] tracking-[-0.075em]">{wantsTalent ? "Add the capability your roadmap needs." : wantsCall ? "Start the right conversation." : "Put the real constraint on the table."}</h1>
           </div>
-          <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale lg:pb-3">{wantsCall ? "Give us the essentials. We will reply with available times and the right technical person for the conversation." : "Share the goal, dependencies, and what is blocking progress. We will respond with a useful next move, not a sales sequence."}</p>
+          <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale lg:pb-3">{wantsTalent ? "Tell us the role, skills, seniority, headcount, working hours, and start date. We will reply with the right staffing path." : wantsCall ? "Give us the essentials. We will reply with available times and the right technical person for the conversation." : "Share the goal, dependencies, and what is blocking progress. We will respond with a useful next move, not a sales sequence."}</p>
         </div>
       </div>
       <div className="mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20 lg:px-8 lg:py-32">
@@ -61,8 +63,8 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
 
         <div className="bezel-shell border border-primary/20 bg-card p-2 shadow-[0_50px_120px_-80px_rgba(57,42,111,0.7)]">
           <div className="bezel-core bg-background p-6 sm:p-8 lg:p-12">
-            <div className="mb-9 flex items-center justify-between border-b border-border pb-5"><h2 className="text-3xl font-black tracking-[-0.045em]">{wantsCall ? "Request a call" : "Project brief"}</h2><span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Direct to delivery</span></div>
-            <ContactForm />
+            <div className="mb-9 flex items-center justify-between border-b border-border pb-5"><h2 className="text-3xl font-black tracking-[-0.045em]">{wantsTalent ? "Talent requirement" : wantsCall ? "Request a call" : "Project brief"}</h2><span className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Direct to delivery</span></div>
+            <ContactForm talent={wantsTalent} />
           </div>
         </div>
       </div>

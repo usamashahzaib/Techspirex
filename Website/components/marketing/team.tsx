@@ -39,7 +39,7 @@ export function Team() {
       <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-20">
           <div><Eyebrow size="sm">Accountability map</Eyebrow><h2 className="mt-5 text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">The names behind the decisions.</h2></div>
-          <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">A small, senior team. The person responsible for each decision joins the relevant conversation directly.</p>
+          <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">Leadership and discipline owners stay visible. The person responsible for each decision joins the relevant conversation directly.</p>
         </div>
 
         {team.length > 0 ? (

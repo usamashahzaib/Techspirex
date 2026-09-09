@@ -24,9 +24,9 @@ const principles = [
       "Staging environments and two-week sprint reviews mean you're never waiting weeks to find out whether something works.",
   },
   {
-    title: "Small team, no bench you don't know about",
+    title: "Named people, visible responsibility",
     behavior:
-      "The people scoping your project are the people building it. There's no senior-sells, junior-delivers handoff.",
+      "You know who owns the work, who reviews it, and how decisions move. Staffed specialists integrate directly with your team.",
   },
 ];
 
@@ -39,10 +39,10 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto grid min-h-[42rem] max-w-[1440px] gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:px-8 lg:py-28">
           <div>
             <Eyebrow size="sm" tone="cyan" weight="normal">About Techspirex</Eyebrow>
-            <h1 className="mt-6 max-w-[10ch] text-[clamp(4rem,8vw,8rem)] font-black leading-[0.82] tracking-[-0.075em]">Small enough to stay accountable.</h1>
+            <h1 className="mt-6 max-w-[10ch] text-[clamp(4rem,8vw,8rem)] font-black leading-[0.82] tracking-[-0.075em]">Built to carry important software work.</h1>
           </div>
           <div className="lg:pb-2">
-            <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale text-pretty">A senior software team in Lahore working directly with founders, product teams, and agencies worldwide.</p>
+            <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale text-pretty">A software delivery and staff augmentation company in Lahore, working directly with founders, product teams, agencies, and technology leaders worldwide.</p>
             <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 text-sm">
               <div className="bg-brand-ink/80 p-5"><dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cyan-light">Delivery</dt><dd className="mt-3 font-bold">Projects, pods, and individual specialists</dd></div>
               <div className="bg-brand-ink/80 p-5"><dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-brand-cyan-light">Coverage</dt><dd className="mt-3 font-bold">Product, design, engineering, QA, cloud, and growth</dd></div>
@@ -54,11 +54,11 @@ export default function AboutPage() {
       <section className="relative isolate overflow-hidden border-b border-border bg-brand-cream">
         <BlueprintBackdrop className="opacity-[0.32]" />
         <div className="relative mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24 lg:px-8 lg:py-32">
-          <div><Eyebrow size="sm">Where we are today</Eyebrow><h2 className="mt-5 max-w-[11ch] text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">No scale theatre. Senior attention is the model.</h2></div>
+          <div><Eyebrow size="sm">How we operate</Eyebrow><h2 className="mt-5 max-w-[11ch] text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">One delivery standard across projects and teams.</h2></div>
           <div className="space-y-6 self-end text-lg leading-relaxed text-muted-foreground">
-            <p>We&apos;re early. Techspirex is a small team, not an enterprise agency with a decade of client logos. We would rather say that plainly than dress it up with unverifiable numbers.</p>
-            <p>The studio grew from web development into design, DevOps, AI automation, marketing, and ecommerce because real delivery required those disciplines to work together.</p>
-            <p className="border-l-2 border-primary pl-5 font-semibold text-foreground">The advantage is simple: your work does not compete with a giant account list for senior attention.</p>
+            <p>Techspirex brings product direction, design, engineering, QA, cloud, AI, ecommerce, and growth into one delivery system. Clients can use the complete system or add the specific capability their team needs.</p>
+            <p>Every engagement starts with ownership, access, communication, review, and release expectations in writing. That operating clarity matters as much for one embedded engineer as it does for a complete product build.</p>
+            <p className="border-l-2 border-primary pl-5 font-semibold text-foreground">The client keeps visibility. The people doing the work stay close to the decisions.</p>
           </div>
         </div>
       </section>

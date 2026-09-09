@@ -2,9 +2,9 @@
 
 ## What Techspirex is
 
-A full-service software delivery company based in Lahore, Pakistan, founded in 2024, serving teams worldwide. Capabilities cover strategy, product design, software development, AI and automation, QA, DevOps and cloud, digital growth, ecommerce, and staff augmentation. Clients can engage one specialist, a dedicated team, a focused intervention, or a complete product build.
+A software delivery and staff augmentation company based in Lahore, Pakistan, founded in 2024 and serving teams worldwide. Capabilities cover strategy, product design, software development, AI and automation, QA, DevOps and cloud, digital growth, ecommerce, and team extension. Clients can engage one specialist, a dedicated team, a focused intervention, or a complete product build.
 
-This is a young, honest, small firm - not a 150-client enterprise agency. The rebuild's credibility comes from precision, real process, and real delivered work, not from volume claims.
+The website presents Techspirex through its delivery model, technical breadth, operational controls, people, and published work. It does not use unverified volume claims.
 
 ## Audience
 
@@ -24,7 +24,7 @@ Both paths lead to the same human process, just entered at different points.
 
 ## Founding story (resolved)
 
-Genuinely founded 2024. No "over the years" multi-era narrative, no 150+ client claim. The honest story is a young, engineering-first team building real things for real clients since 2024, based in Lahore, serving international clients. Small and early is not a weakness to hide - it is the reason clients get senior attention.
+Founded in 2024, based in Lahore, and serving international clients. The company is presented as an engineering-led delivery and team extension partner. Public copy focuses on how engagements operate and what clients can evaluate.
 
 ## Proof strategy
 
@@ -34,9 +34,14 @@ No fabricated testimonials, no fabricated case studies, no invented metrics. Lau
 
 Team section ships with real, consenting members only. Placeholder-but-clearly-internal state (not fabricated bios) until the client (you) confirms the current roster. See `docs/CLAIMS-REGISTER.md` items 2 and 6.
 
-## Services (seven, web development flagship)
+## Primary offers
 
-1. **Web Development** (flagship) - custom software, SaaS, enterprise systems, consumer apps
+1. **Software Delivery** - complete builds, modernization, and focused technical work
+2. **Staff Augmentation** - individual specialists and dedicated cross-functional teams
+
+## Capabilities
+
+1. **Web Development** - custom software, SaaS, enterprise systems, consumer apps
 2. **AI & Automation** - supporting capability
 3. **UI/UX & Product Design** - supporting capability
 4. **DevOps & Cloud Infrastructure** - supporting capability
