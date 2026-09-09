@@ -37,8 +37,8 @@ gone in a way that looks fine in local development if you happen to only ever
 type the lowercase URL, because the loop is not conditional on which case you
 requested. It fires either way.
 
-
-<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the self-redirect loop: a request to /insights matches the case-insensitive source /Insights and redirects back to /insights, creating an infinite loop" width="100%">
+<div style={{margin:'2.5rem 0'}}>
+<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing the self-redirect loop: a request to /insights matches the case-insensitive source /Insights and redirects back to /insights, creating an infinite loop" style={{width:'100%',maxWidth:'480px',height:'auto',display:'block',margin:'0 auto'}}>
 <defs>
 <marker id="rd-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
 </defs>
@@ -55,6 +55,7 @@ requested. It fires either way.
 <text x="438" y="95" fill="#ef4444" fontSize="18" fontFamily="system-ui,sans-serif" fontWeight="700">∞</text>
 <text x="240" y="190" textAnchor="middle" fill="currentColor" fontSize="9" fontFamily="system-ui,sans-serif" fillOpacity="0.35">the browser gives up after ~20 cycles</text>
 </svg>
+</div>
 
 We caught it before shipping. What made the difference was not knowing the rule
 in advance, it was checking what the redirect matcher actually guarantees before
