@@ -82,6 +82,16 @@ const nextConfig: NextConfig = {
       { source: "/ui-ux-design", destination: "/services/ui-ux-design", permanent: true },
       { source: "/devops-cloud", destination: "/services/devops-cloud", permanent: true },
       { source: "/digital-marketing", destination: "/services/digital-marketing", permanent: true },
+      {
+        source: "/digital-marketing/ai-automation",
+        destination: "/services/ai-automation",
+        permanent: true,
+      },
+      {
+        source: "/digital-marketing/ui-ux-design",
+        destination: "/services/ui-ux-design",
+        permanent: true,
+      },
       { source: "/ecommerce-solutions", destination: "/services/ecommerce", permanent: true },
       { source: "/staff-augmentation", destination: "/services/staff-augmentation", permanent: true },
       // Next.js redirect source matching is case-insensitive, so a rule for
