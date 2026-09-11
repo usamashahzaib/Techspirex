@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { ContactForm } from "@/features/contact/contact-form";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Tell Techspirex about your project. Real engineering review before anything is proposed, and a direct reply from our team.",
   alternates: { canonical: "/contact" },
+    ...pageSocialMetadata("Contact", "Tell Techspirex about your project. Real engineering review before anything is proposed, and a direct reply from our team.", "/contact"),
 };
 
 const processSteps = [

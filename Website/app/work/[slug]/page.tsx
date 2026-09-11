@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -27,6 +28,7 @@ export async function generateMetadata({
     title: study.title,
     description: study.summary,
     alternates: { canonical: `/work/${slug}` },
+    ...pageSocialMetadata(study.title, study.summary, `/work/${slug}`),
   };
 }
 

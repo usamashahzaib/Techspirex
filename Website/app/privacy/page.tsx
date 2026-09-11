@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import { siteContact } from "@/lib/routes";
 
@@ -5,6 +6,7 @@ export const metadata: Metadata = {
   title: "Privacy policy",
   description: "How Techspirex collects, uses, and protects information submitted through this site.",
   alternates: { canonical: "/privacy" },
+    ...pageSocialMetadata("Privacy policy", "How Techspirex collects, uses, and protects information submitted through this site.", "/privacy"),
 };
 
 export default function PrivacyPage() {

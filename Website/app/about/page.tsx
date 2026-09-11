@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import { BlueprintBackdrop, BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { Team } from "@/components/marketing/team";
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Techspirex is a software development company headquartered in Lahore, Pakistan, providing project delivery and dedicated technical teams worldwide.",
   alternates: { canonical: "/about" },
+    ...pageSocialMetadata("About", "Techspirex is a software development company headquartered in Lahore, Pakistan, providing project delivery and dedicated technical teams worldwide.", "/about"),
 };
 
 const principles = [

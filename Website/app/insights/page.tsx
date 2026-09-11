@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BlueprintBackdrop, BrandNodeField } from "@/components/marketing/brand-backdrops";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "Insights",
   description: "Engineering and delivery notes from the Techspirex team.",
   alternates: { canonical: "/insights" },
+    ...pageSocialMetadata("Insights", "Engineering and delivery notes from the Techspirex team.", "/insights"),
 };
 
 export default function InsightsPage() {
