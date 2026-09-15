@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import { ServiceDetail } from "@/components/marketing/service-detail";
 import { devopsCloud } from "@/content/services";
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   title: devopsCloud.name,
   description: devopsCloud.heroSummary,
   alternates: { canonical: "/services/devops-cloud" },
+    ...pageSocialMetadata(devopsCloud.name, devopsCloud.heroSummary, "/services/devops-cloud"),
 };
 
 export default function Page() {

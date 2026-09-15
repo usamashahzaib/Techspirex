@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   description:
     "End-to-end software services from Techspirex: product strategy, UI/UX design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.",
   alternates: { canonical: "/services" },
+    ...pageSocialMetadata("Software development services and dedicated teams", "End-to-end software services from Techspirex: product strategy, UI/UX design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.", "/services"),
 };
 
 const lifecycle = [

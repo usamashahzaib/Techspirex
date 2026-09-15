@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "Selected capabilities and delivery evidence from Techspirex - real process, real projects as they're published, no fabricated case studies.",
   alternates: { canonical: "/work" },
+    ...pageSocialMetadata("Work", "Selected capabilities and delivery evidence from Techspirex - real process, real projects as they're published, no fabricated case studies.", "/work"),
 };
 
 export default function WorkPage() {

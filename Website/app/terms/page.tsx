@@ -1,3 +1,4 @@
+import { pageSocialMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
 import { siteContact } from "@/lib/routes";
 
@@ -5,6 +6,7 @@ export const metadata: Metadata = {
   title: "Terms of use",
   description: "Terms governing use of the Techspirex website.",
   alternates: { canonical: "/terms" },
+    ...pageSocialMetadata("Terms of use", "Terms governing use of the Techspirex website.", "/terms"),
 };
 
 export default function TermsPage() {
