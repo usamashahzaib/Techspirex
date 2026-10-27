@@ -47,7 +47,7 @@ export function localBusinessSchema() {
     logo: `${SITE_URL}/logo-mark.svg`,
     image: `${SITE_URL}/logo-mark.svg`,
     email: "info@techspirex.com",
-    telephone: "+92 371 4156567",
+    telephone: "+44 7708 626539",
     priceRange: "$$",
     parentOrganization: { "@id": ORG_ID },
     address: {
@@ -83,13 +83,6 @@ export function localBusinessSchema() {
         telephone: "+44 7708 626539",
         areaServed: ["US", "GB", "EU"],
         availableLanguage: ["English"],
-      },
-      {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        telephone: "+92 371 4156567",
-        areaServed: "PK",
-        availableLanguage: ["English", "Urdu"],
       },
     ],
     sameAs: ["https://linkedin.com/company/techspirex/", "https://facebook.com/techspirex"],

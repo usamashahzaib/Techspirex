@@ -18,6 +18,7 @@ export function GET() {
     "",
     `- Website: ${SITE_URL}`,
     `- Email: ${siteContact.email}`,
+    `- Phone: ${siteContact.phoneUk}`,
     `- Location: ${siteContact.address}`,
     `- Contact page: ${SITE_URL}${routes.contact}`,
     "- Pricing: not published. Monthly capacity, duration and notice are agreed before work starts.",
