@@ -18,6 +18,18 @@ export function ServiceDetail({ service }: { service: ServiceContent }) {
   return (
     <>
       <JsonLd data={serviceSchema(service.name, service.heroSummary, path)} />
+      {/* The same questions and answers render in the FAQ list further down this page. */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: service.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        }}
+      />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", path: "/" },
