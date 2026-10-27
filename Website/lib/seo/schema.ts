@@ -84,6 +84,13 @@ export function localBusinessSchema() {
         areaServed: ["US", "GB", "EU"],
         availableLanguage: ["English"],
       },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: "+92 371 4156567",
+        areaServed: "PK",
+        availableLanguage: ["English", "Urdu"],
+      },
     ],
     sameAs: ["https://linkedin.com/company/techspirex/", "https://facebook.com/techspirex"],
   };
