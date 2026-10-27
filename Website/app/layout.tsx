@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   */
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Techspirex | Software development company and dedicated teams",
+    default: "Techspirex | Software development company in Pakistan",
     template: "%s | Techspirex",
   },
   description:
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     siteName: "Techspirex",
     locale: "en_US",
     url: SITE_URL,
-    title: "Techspirex | Software development company and dedicated teams",
+    title: "Techspirex | Software development company in Pakistan",
     description:
       "Product design, software engineering, AI, cloud, QA, ecommerce, and dedicated talent from one accountable team.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Techspirex | Software development company and dedicated teams",
+    title: "Techspirex | Software development company in Pakistan",
     description:
       "Product design, software engineering, AI, cloud, QA, ecommerce, and dedicated talent.",
   },

@@ -57,6 +57,18 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
                 {siteContact.email}
               </a>
             </p>
+            <p className="mt-2">
+              UK and international:{" "}
+              <a href={`tel:${siteContact.phoneUk.replace(/\s/g, "")}`} className="font-medium text-primary transition-colors duration-300 ease-[var(--ease-expo-out)] hover:underline">
+                {siteContact.phoneUk}
+              </a>
+            </p>
+            <p className="mt-2">
+              Pakistan:{" "}
+              <a href={`tel:${siteContact.phonePk.replace(/\s/g, "")}`} className="font-medium text-primary transition-colors duration-300 ease-[var(--ease-expo-out)] hover:underline">
+                {siteContact.phonePk}
+              </a>
+            </p>
             <p className="mt-2">{siteContact.address}</p>
           </div>
         </div>

@@ -6,7 +6,7 @@ export const staffAugmentation: ServiceContent = {
   flagship: false,
   tagline: "Add the exact capability your team needs, for as long as it needs it.",
   heroSummary:
-    "Dedicated developers, designers, QA engineers, DevOps engineers, and technical leads who work inside your delivery process for a defined period or an ongoing roadmap.",
+    "Hire dedicated developers, designers, QA engineers, DevOps engineers and technical leads from Techspirex in Lahore. They work inside your tools and planning process, at agreed monthly capacity, for a short delivery gap or an ongoing roadmap. Start with one named specialist and add people only when the work needs them.",
   problems: [
     "A roadmap is approved but hiring permanent specialists would take too long.",
     "The internal team needs extra delivery capacity for a launch, migration, or backlog.",

@@ -47,7 +47,7 @@ export function localBusinessSchema() {
     logo: `${SITE_URL}/logo-mark.svg`,
     image: `${SITE_URL}/logo-mark.svg`,
     email: "info@techspirex.com",
-    telephone: "+92 371 4156567",
+    telephone: "+44 7708 626539",
     priceRange: "$$",
     parentOrganization: { "@id": ORG_ID },
     address: {
