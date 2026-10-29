@@ -99,6 +99,13 @@ const nextConfig: NextConfig = {
       // self-redirects. The old site's "/Insights" already 404s and isn't
       // worth preserving link equity for, so it's simply not redirected.
       { source: "/contact-us", destination: "/contact", permanent: true },
+      // Legacy URLs that Search Console reports as 404.
+      { source: "/home", destination: "/", permanent: true },
+      {
+        source: "/digital-marketing/ecommerce-solutions",
+        destination: "/services/ecommerce",
+        permanent: true,
+      },
       /*
         Three insight posts were rewritten around the specific incidents they
         had only described in the abstract, which changed the subject enough
