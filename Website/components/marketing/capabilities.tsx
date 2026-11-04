@@ -5,6 +5,7 @@ import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
 const supporting = [
+  { title: "Mobile app development", problem: "Ship iOS and Android apps, along with the backend they depend on.", href: routes.serviceMobileAppDevelopment },
   { title: "AI & automation", problem: "Reduce repeatable operational work with clear human checkpoints.", href: routes.serviceAiAutomation },
   { title: "UI/UX design", problem: "Make complex workflows understandable, usable, and conversion-aware.", href: routes.serviceUiUxDesign },
   { title: "DevOps & cloud", problem: "Create a deployment path your team can run and troubleshoot.", href: routes.serviceDevopsCloud },

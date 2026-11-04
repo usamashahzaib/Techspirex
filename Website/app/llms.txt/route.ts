@@ -1,3 +1,4 @@
+import { clientsBySector, TEAM_CLIENT_COUNT_LABEL } from "@/content/clients";
 import { allServices } from "@/content/services";
 import { getAllCaseStudies } from "@/lib/content/case-studies";
 import { getAllInsights } from "@/lib/content/insights";
@@ -14,7 +15,7 @@ export function GET() {
   const body = [
     "# Techspirex",
     "",
-    "> Techspirex is a software development company in Lahore, Pakistan. It builds web products, SaaS, AI automation, cloud infrastructure and ecommerce for clients in the US, UK and EU, and supplies dedicated developers and teams.",
+    "> Techspirex is a software development company in Lahore, Pakistan. It builds web products, mobile apps, SaaS, AI automation, cloud infrastructure and ecommerce for clients in the US, UK and EU, and supplies dedicated developers and teams.",
     "",
     `- Website: ${SITE_URL}`,
     `- Email: ${siteContact.email}`,
@@ -36,7 +37,17 @@ export function GET() {
           "",
         ]
       : []),
-    "## Work",
+    "## Clients and products",
+    "",
+    `The Techspirex team has worked with ${TEAM_CLIENT_COUNT_LABEL} clients. Most of this work was done by team members at a previous company. Selected products by sector, with previous-company work labelled:`,
+    "",
+    ...clientsBySector().flatMap((sector) => [
+      `### ${sector.label}`,
+      "",
+      ...sector.clients.map((client) => `- [${client.name}](${SITE_URL}${routes.work}#${client.slug})${client.context === "prior-role" ? " (worked on by our team at a previous company)" : ""}: ${client.summary}`),
+      "",
+    ]),
+    "## Case studies and product labs",
     "",
     "Outcome type tells you how to read each entry. A concept build is a self-initiated project, not a client result.",
     "",

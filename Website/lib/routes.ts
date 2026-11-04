@@ -2,6 +2,7 @@ export const routes = {
   home: "/",
   services: "/services",
   serviceWebDevelopment: "/services/web-development",
+  serviceMobileAppDevelopment: "/services/mobile-app-development",
   serviceAiAutomation: "/services/ai-automation",
   serviceUiUxDesign: "/services/ui-ux-design",
   serviceDevopsCloud: "/services/devops-cloud",
@@ -28,6 +29,7 @@ export function insightItem(slug: string) {
 
 export const serviceNavItems = [
   { label: "Web development", href: routes.serviceWebDevelopment, flagship: true },
+  { label: "Mobile app development", href: routes.serviceMobileAppDevelopment, flagship: false },
   { label: "AI & automation", href: routes.serviceAiAutomation, flagship: false },
   { label: "UI/UX design", href: routes.serviceUiUxDesign, flagship: false },
   { label: "DevOps & cloud", href: routes.serviceDevopsCloud, flagship: false },
@@ -56,5 +58,5 @@ export const siteContact = {
   email: "info@techspirex.com",
   phoneUk: "+44 7708 626539",
   phonePk: "+92 371 4156567",
-  address: "Lahore, Pakistan",
+  address: "Park View Society, Lahore, Pakistan",
 } as const;

@@ -1,27 +1,11 @@
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { BrandNodeField } from "@/components/marketing/brand-backdrops";
+import { ClientMark } from "@/components/marketing/client-mark";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PillCta } from "@/components/ui/pill-cta";
-
-const featured = {
-  name: "byQalam",
-  kicker: "Shipped product · Live",
-  tagline: "A LinkedIn authority & career-visibility OS",
-  detail:
-    "A real SaaS product we designed and engineered end to end for its founder - AI-assisted LinkedIn, content, and resume tooling that aligns one credible professional story, without fabricating accomplishments.",
-  attribution: "Built for Fizza M., Founder - byQalam",
-  live: "https://www.byqalam.com",
-  caseStudy: "/work/byqalam-career-os",
-  capabilities: [
-    "LinkedIn audit",
-    "AI post voice-training",
-    "ATS resume tooling",
-    "Career Vault",
-    "Content analytics",
-    "Auth & billing",
-  ],
-};
+import { clients, clientSectors, TEAM_CLIENT_COUNT_LABEL } from "@/content/clients";
+import { routes } from "@/lib/routes";
 
 const demos = [
   {
@@ -55,57 +39,38 @@ export function WorkShowcase() {
         <div className="reveal-scroll grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
             <Eyebrow tone="cyan">
-              Proof you can open
+              Selected work
             </Eyebrow>
-            <h2 className="mt-5 max-w-[11ch] font-heading text-4xl font-extrabold leading-[0.95] tracking-[-0.05em] sm:text-6xl">
-              The work is the pitch.
+            <h2 className="mt-5 max-w-[12ch] font-heading text-4xl font-extrabold leading-[0.95] tracking-[-0.05em] sm:text-6xl">
+              Products our team has worked on.
             </h2>
           </div>
           <p className="max-w-xl text-lg leading-relaxed text-brand-lilac-mist lg:pt-7">
-            Start with a live SaaS product. Then open the product labs and test the details yourself. No moodboard standing in for delivery.
+            Our team has worked with {TEAM_CLIENT_COUNT_LABEL} clients on mobile apps, marketplaces, SaaS platforms, and AI products. These are some of them.
           </p>
         </div>
 
-        {/* Featured real, shipped product - double bezel: outer shell + inset glass core */}
-        <div className="beam reveal-scroll bezel-shell mt-16 border border-white/10 bg-white/[0.03] p-2">
-          <div className="bezel-core glass p-6 shadow-[0_40px_120px_-60px_rgba(16,210,246,0.55)] sm:p-9 lg:p-10">
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
-              <div>
-                <p className="inline-flex items-center gap-2 rounded-full border border-brand-cyan/40 bg-brand-cyan/[0.08] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-brand-cyan-pale">
-                  <span className="signal-pulse size-1.5 rounded-full bg-brand-cyan" aria-hidden="true" />
-                  {featured.kicker}
-                </p>
-                <h3 className="mt-5 font-heading text-4xl font-black tracking-[-0.05em] sm:text-5xl">{featured.name}</h3>
-                <p className="mt-2 text-base font-semibold text-brand-lilac-bright">{featured.tagline}</p>
-                <p className="mt-5 max-w-xl text-sm leading-relaxed text-brand-lilac-soft sm:text-[15px]">{featured.detail}</p>
-                <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.12em] text-brand-lilac">{featured.attribution}</p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <PillCta href={featured.live} tone="cyan" external icon="arrow-up-right">
-                    Open byQalam
-                  </PillCta>
-                  <PillCta href={featured.caseStudy} tone="outline-dark">
-                    Read the case study
-                  </PillCta>
-                </div>
-              </div>
+        <ul className="reveal-scroll-stagger mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+          {clients.map((client) => (
+            <li key={client.slug} className="bg-brand-violet-deep sm:last:col-span-2">
+              <Link href={`${routes.work}#${client.slug}`} className="flex h-full items-center gap-4 p-4 transition-colors duration-300 hover:bg-white/[0.06]">
+                <ClientMark client={client} />
+                <span>
+                  <span className="block font-heading text-lg font-extrabold tracking-[-0.02em]">{client.name}</span>
+                  <span className="mt-0.5 block text-xs text-brand-lilac-soft">{clientSectors.find((sector) => sector.id === client.sector)?.label}</span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-              <div className="signal-panel self-stretch overflow-hidden rounded-[1.5rem] border border-white/10 bg-brand-ink/55 p-2">
-                <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-brand-cyan-pale">Product surface / inspected</span>
-                  <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-brand-lilac"><span className="size-1.5 rounded-full bg-brand-cyan" /> live</span>
-                </div>
-                <ol className="divide-y divide-white/10 px-2">
-                  {featured.capabilities.map((cap, index) => (
-                    <li key={cap} className="grid grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-3.5">
-                      <span className="font-mono text-[9px] text-brand-lilac">{String(index + 1).padStart(2, "0")}</span>
-                      <span className="text-sm font-bold text-brand-lilac-bright">{cap}</span>
-                      <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-brand-cyan">shipped</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-          </div>
+        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-sm leading-relaxed text-brand-lilac-soft">
+            Most of these were built by members of our team at a previous company. Each one is labelled on the work page.
+          </p>
+          <PillCta href={routes.work} tone="cyan" className="shrink-0">
+            See the work by sector
+          </PillCta>
         </div>
 
         <Eyebrow size="sm" tone="lilac" className="mt-20">

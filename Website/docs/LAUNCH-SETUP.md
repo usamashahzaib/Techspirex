@@ -75,7 +75,7 @@ Test: open `/contact` in a private browser window and submit a valid brief. A su
 NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX
 ```
 
-The site does not load GA4 until the visitor accepts analytics cookies. Test with the browser developer tools Network tab: before consent there should be no Google Analytics request; after consent, GA4 should appear.
+GA4 runs in Consent Mode with storage denied by default. Test with the browser developer tools: before consent, the Google tag loads and sends cookieless requests (`gcs=G100`) and no `_ga` cookie exists; after consent, the `_ga` cookie appears.
 
 ## 5. Google Search Console
 
@@ -117,7 +117,7 @@ Check all of these after the final redeploy:
 - Contact form email arrives in the Resend inbox.
 - Newsletter confirmation email arrives and the confirmation link works once.
 - Turnstile rejects obvious automated or invalid submissions.
-- GA4 is absent before consent and present after consent.
+- No `_ga` cookie before consent; `_ga` cookie present after consent.
 - Search Console and Bing show no ownership, sitemap, or crawl errors.
 - No API key appears in browser source, GitHub, or Vercel logs.
 

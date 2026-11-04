@@ -20,9 +20,10 @@ export function organizationSchema() {
     image: `${SITE_URL}/logo-mark.svg`,
     email: "info@techspirex.com",
     description:
-      "Techspirex is a software development company providing product design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth engineering, and dedicated technical teams worldwide.",
+      "Techspirex is a software development company providing product design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, growth engineering, and dedicated technical teams worldwide.",
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Park View Society",
       addressLocality: "Lahore",
       addressRegion: "Punjab",
       addressCountry: "PK",
@@ -52,6 +53,7 @@ export function localBusinessSchema() {
     parentOrganization: { "@id": ORG_ID },
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Park View Society",
       addressLocality: "Lahore",
       addressRegion: "Punjab",
       addressCountry: "PK",
@@ -64,6 +66,7 @@ export function localBusinessSchema() {
     ],
     knowsAbout: [
       "Web development",
+      "Mobile app development",
       "SaaS development",
       "AI automation",
       "UI/UX design",
@@ -138,6 +141,26 @@ export function serviceCatalogSchema(services: { name: string; slug: string; her
         description: service.heroSummary,
         url: `${SITE_URL}/services/${service.slug}`,
         provider: { "@id": ORG_ID },
+      },
+    })),
+  };
+}
+
+/* No creator is stated: most of these products were built while our team worked at a previous company. */
+export function portfolioSchema(products: { slug: string; name: string; summary: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Products the Techspirex team has worked on",
+    numberOfItems: products.length,
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: product.name,
+        description: product.summary,
+        url: `${SITE_URL}/work#${product.slug}`,
       },
     })),
   };

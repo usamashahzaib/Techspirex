@@ -85,7 +85,7 @@ export function ContactForm() {
         <div>
           <p className="font-heading text-lg font-semibold">Brief received.</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Our engineering team reviews new inquiries within a couple of hours during business days.
+            Our engineering team reviews new inquiries and replies within one business day.
             We&apos;ll reply from info@techspirex.com to schedule a discovery call.
           </p>
         </div>

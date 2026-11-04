@@ -31,10 +31,11 @@ export const metadata: Metadata = {
     template: "%s | Techspirex",
   },
   description:
-    "Techspirex is a software development company in Lahore serving clients worldwide with product design, web and SaaS development, AI automation, cloud, QA, ecommerce, and dedicated teams.",
+    "Techspirex is a software development company in Lahore serving clients worldwide with product design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, and dedicated teams.",
   keywords: [
     "web development agency",
     "product engineering studio",
+    "mobile app development company",
     "SaaS development",
     "software development team",
     "custom web application development",

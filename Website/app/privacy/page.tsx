@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <section>
       <div className="prose prose-neutral mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 dark:prose-invert prose-headings:font-heading">
         <h1>Privacy policy</h1>
-        <p className="text-muted-foreground">Last updated 11 August 2026.</p>
+        <p className="text-muted-foreground">Last updated 4 November 2026.</p>
 
         <h2>What we collect</h2>
         <p>
@@ -36,7 +36,9 @@ export default function PrivacyPage() {
         <p>
           We use Google Analytics 4 to understand how visitors use this site in aggregate. This
           collects standard analytics data (pages viewed, general location, device type) and does not
-          include the content of anything you submit through our forms.
+          include the content of anything you submit through our forms. Analytics storage is denied by
+          default: Google&apos;s tag loads and sends a cookieless request before you make a choice,
+          and analytics cookies are set only if you accept them.
         </p>
 
         <h2>Third-party services</h2>

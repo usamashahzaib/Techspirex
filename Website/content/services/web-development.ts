@@ -27,7 +27,7 @@ export const webDevelopment: ServiceContent = {
     },
   ],
   audience:
-    "Founders and small leadership teams who need a working product, not a proof of concept - typically pre-seed through Series A, or an established small business replacing a legacy system.",
+    "Founders, product teams, and established businesses who need a working product rather than a proof of concept, including companies replacing a legacy system.",
   credibility:
     "Web development is the team's deepest capability and the reason Techspirex exists - every other service supports a product build, not the other way around.",
   scope: [

@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const projectTypes = [
   "Web development",
+  "Mobile app development",
   "AI & automation",
   "UI/UX design",
   "DevOps & cloud",

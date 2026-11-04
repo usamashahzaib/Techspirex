@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Check, Code, Cube, Pulse } from "@phosphor-icons/react/dist/ssr";
+import { clients, clientSectors } from "@/content/clients";
+import { routes } from "@/lib/routes";
 
 const stages = [
   { number: "01", label: "Scope", value: "Constraint mapped", icon: Pulse },
@@ -53,12 +55,12 @@ export function HeroProofSystem() {
           </div>
 
           <Link
-            href="/work/byqalam-career-os"
+            href={routes.work}
             className="group flex min-h-16 items-center justify-between border-t border-white/10 bg-brand-cyan px-5 text-brand-ink transition-colors duration-500 ease-[var(--ease-expo-out)] hover:bg-brand-cyan-pale"
           >
             <span>
-              <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.18em]">Shipped product / Live</span>
-              <span className="mt-0.5 block text-lg font-black tracking-[-0.035em]">Open the byQalam build</span>
+              <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.18em]">{clients.length} products / {clientSectors.length} sectors</span>
+              <span className="mt-0.5 block text-lg font-black tracking-[-0.035em]">See the products we have worked on</span>
             </span>
             <span className="flex size-10 items-center justify-center rounded-full bg-brand-ink text-brand-cyan transition-transform duration-500 ease-[var(--ease-expo-out)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
               <ArrowUpRight className="size-4" weight="light" aria-hidden="true" />

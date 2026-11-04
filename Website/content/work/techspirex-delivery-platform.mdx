@@ -1,69 +1,62 @@
 ---
-title: "A Next.js delivery platform, built for launch"
-clientOrIndustry: "Our own pre-launch build · DevOps & Cloud"
+title: "The engineering behind this website"
+clientOrIndustry: "Our own site · DevOps & Cloud"
 service: "devops-cloud"
-summary: "Our own pre-launch implementation: a Next.js app with a strict CSP, automated accessibility checks, and integrations designed to fail visibly when configuration is missing."
+summary: "How this Next.js site is built and run: its security headers, the CSP trade-off we chose, consent-gated analytics, automated accessibility checks, and forms that report failure instead of hiding it."
 outcomeType: "implementation"
-outcome: "Built and ready for production deployment"
+outcome: "Live in production"
 publishedAt: "2026-08-12"
 ---
 
-**This case study is about our own pre-launch implementation.** It is not a live
-production deployment. Before we can publish signed client infrastructure work,
-the most honest thing we can show is the code and local production build behind
-this site. The details below are verifiable in the repository and with the
-documented build and test commands.
-
-## Why our own site counts as evidence
-
-A DevOps claim is easy to make and hard to prove. So instead of describing a
-pipeline we ran for someone we cannot name, we document this implementation. The same
-discipline - security headers, a strict Content Security Policy, automated
-quality gates, and integrations that fail honestly instead of silently - is what
-we bring to client infrastructure.
+**This case study is about this website, not a client engagement.** It is small,
+and it does not show how we operate infrastructure at client scale. What it does
+show is how we make and document engineering decisions, and you can check the
+security details below yourself by reading this site's response headers.
 
 ## Security posture
 
-- **Strict Content Security Policy with per-request nonces.** Every inline script
-  on the site carries a nonce generated in middleware; `unsafe-eval` is dropped
-  entirely outside development. There is no blanket `unsafe-inline` escape hatch.
-- **Full security header set** - HSTS, frame denial, referrer policy, and a
-  locked-down permissions policy - applied at the edge, not per-page.
-- **No third-party script runs before consent.** Analytics load only after the
-  visitor accepts, and the CSP is written so a rogue injected script has nowhere
-  to execute.
+- **A Content Security Policy with one deliberate trade-off.** `script-src`
+  allows `'unsafe-inline'`. We first shipped per-request nonces, then found they
+  forced every page to render dynamically, because Next.js streams its own inline
+  scripts into each document. We chose static rendering and
+  [wrote up the reasoning and the cost](/insights/csp-nonce-killed-static-rendering).
+  `unsafe-eval` is excluded in production. The other directives stay strict:
+  `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`,
+  `frame-ancestors 'none'`, and a closed `connect-src` allowlist.
+- **Security headers on every route** - HSTS, frame denial, `nosniff`, a referrer
+  policy, and a locked-down permissions policy.
+- **Analytics storage is off until you choose.** Google Analytics runs in Consent
+  Mode with storage denied by default. Google's tag still loads and sends a
+  cookieless request before a choice is made, but no analytics cookies are set
+  unless the visitor accepts.
 
-## Quality gates that actually block
+## Quality checks
 
-Before release, this implementation is checked with:
+We run these before release:
 
 - **TypeScript in strict mode** - the whole codebase, no `any` escape hatches in
   the app surface.
 - **Playwright end-to-end tests** covering route status codes, navigation, form
   behavior, and layout overflow at mobile, tablet, and desktop viewports.
 - **Automated accessibility checks** - axe-core runs against real rendered pages
-  in the Playwright suite, not as an afterthought.
-- **A copy linter** - a small custom script that fails the build on typographic
-  and voice violations, because consistency is a delivery concern too.
+  in the Playwright suite. Automated checks catch only part of what a manual
+  accessibility review would.
+- **A copy linter** - a small custom script, run with lint, that fails on
+  typographic violations, because consistency is a delivery concern too.
 
 ## Integrations that fail loudly, not silently
 
-The forms are designed around external email delivery and spam protection. When a
-credential is missing, the affected feature says so plainly
-and tells the visitor how to reach us directly. Nothing is ever silently
-dropped. That fail-closed, fail-honest pattern is a deliberate engineering
-decision, and it is the same one we apply to client systems.
+The forms depend on external email delivery and spam protection. When a credential
+is missing or a provider fails, the visitor is told plainly and given a direct way
+to reach us. A genuine submission is never reported as sent when it was not.
 
 ## The stack
 
-Next.js (App Router), React and TypeScript in strict mode, Tailwind
-CSS, middleware-based security and CSP, Playwright and axe-core for the test
-suite, and adapter-based integrations. The deployment target is Vercel; the
-required production credentials and deployment remain launch steps.
+Next.js (App Router), React and TypeScript in strict mode, Tailwind CSS, Playwright
+and axe-core for testing, deployed on Vercel.
 
 ## The honest caveat
 
-This is our own platform, not a client engagement. It demonstrates the standard
-we are building toward, not a claim that the site or its integrations are live.
-When we publish client infrastructure case studies, they will name the client
-and the measured result.
+This is our own website, not client infrastructure, and it carries no client
+outcome. When we publish client infrastructure case studies, they will name the
+client and the measured result.

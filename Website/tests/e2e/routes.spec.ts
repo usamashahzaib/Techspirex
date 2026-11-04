@@ -4,6 +4,7 @@ const routes = [
   "/",
   "/services",
   "/services/web-development",
+  "/services/mobile-app-development",
   "/services/ai-automation",
   "/services/ui-ux-design",
   "/services/devops-cloud",

@@ -13,9 +13,9 @@ import { PillCta } from "@/components/ui/pill-cta";
 export const metadata: Metadata = {
   title: "Software development services and dedicated teams",
   description:
-    "End-to-end software services from Techspirex: product strategy, UI/UX design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.",
+    "End-to-end software services from Techspirex: product strategy, UI/UX design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.",
   alternates: { canonical: "/services" },
-    ...pageSocialMetadata("Software development services and dedicated teams", "End-to-end software services from Techspirex: product strategy, UI/UX design, web and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.", "/services"),
+    ...pageSocialMetadata("Software development services and dedicated teams", "End-to-end software services from Techspirex: product strategy, UI/UX design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.", "/services"),
 };
 
 const lifecycle = [
@@ -37,7 +37,7 @@ const serviceFaqs = [
   {
     question: "What software development services does Techspirex provide?",
     answer:
-      "Techspirex covers product discovery, UX and UI design, web and SaaS development, APIs, AI automation, ecommerce, cloud infrastructure, DevOps, QA, technical SEO, analytics, maintenance, and staff augmentation.",
+      "Techspirex covers product discovery, UX and UI design, web, mobile app, and SaaS development, APIs, AI automation, ecommerce, cloud infrastructure, DevOps, QA, technical SEO, analytics, maintenance, and staff augmentation.",
   },
   {
     question: "Can Techspirex provide one developer or designer for an existing team?",

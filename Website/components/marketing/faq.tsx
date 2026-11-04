@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TEAM_CLIENT_COUNT_LABEL } from "@/content/clients";
 import { routes } from "@/lib/routes";
 import { faqSchema } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -6,14 +7,18 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 
 const faqs = [
   {
+    question: "What kinds of products has your team worked on?",
+    answer: `Mobile apps, marketplaces, SaaS platforms, and AI products across healthcare and wellness, commerce, workplace and learning, mobility and logistics, and fintech. Our team has worked with ${TEAM_CLIENT_COUNT_LABEL} clients, most of them at a previous company. The work page lists products by sector and labels which is which.`,
+  },
+  {
     question: "How can I judge the quality before hiring you?",
     answer:
-      "Open the working demos on this site and test them. For your project, we first turn the brief into a concrete scope with risks, dependencies, and a delivery sequence. During delivery, you review working software against agreed acceptance criteria instead of relying on progress claims.",
+      "See the products our team has worked on, grouped by sector on the work page, and test the working demos on this site. For your project, we first turn the brief into a concrete scope with risks, dependencies, and a delivery sequence. During delivery, you review working software against agreed acceptance criteria instead of relying on progress claims.",
   },
   {
     question: "Where is Techspirex based, and who will I actually work with?",
     answer:
-      "Techspirex works with founders and teams worldwide and is headquartered in Lahore, Pakistan. The people responsible for scoping, design, and engineering join the relevant project conversations directly; the delivery structure is documented before work starts.",
+      "Techspirex works with founders and teams worldwide and is headquartered in Park View Society, Lahore, Pakistan. The people responsible for scoping, design, and engineering join the relevant project conversations directly; the delivery structure is documented before work starts.",
   },
   {
     question: "How much does a project cost, and how do you price?",
