@@ -39,7 +39,8 @@ export const contactSchema = z.object({
   // action can silently return success instead of leaking a `website` field
   // error that reveals the trap. Real users never see or fill this field.
   website: z.string().max(2000).optional(),
-  "cf-turnstile-response": z.string().min(1, "Verification failed, please retry."),
+  // A missing field (widget unfinished or blocked) gets the same plain wording as an empty one.
+  "cf-turnstile-response": z.string({ error: "Verification is still running. Wait a few seconds and send again." }).min(1, "Verification is still running. Wait a few seconds and send again."),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;

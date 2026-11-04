@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useRef, cloneElement, type ReactElement } from "react";
+import { useActionState, useEffect, useRef, useState, cloneElement, type FormEvent, type ReactElement } from "react";
 import { useFormStatus } from "react-dom";
 import { submitContactForm, type ContactState } from "./actions";
 import { projectTypes } from "@/lib/validation/contact";
-import { TurnstileWidget } from "@/components/forms/turnstile-widget";
+import { TurnstileWidget, hasTurnstileToken, resetTurnstile } from "@/components/forms/turnstile-widget";
 import { trackEvent } from "@/lib/analytics/events";
 import { CheckCircle, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 
@@ -63,6 +63,13 @@ const inputClass =
 export function ContactForm() {
   const [state, formAction] = useActionState(submitContactForm, initialState);
   const resultRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [waitNote, setWaitNote] = useState(false);
+
+  useEffect(() => {
+    // The spent token is single use; ask for a fresh one before the visitor retries.
+    if (state.status === "error") resetTurnstile(formRef.current);
+  }, [state]);
 
   useEffect(() => {
     if (state.status === "success") trackEvent("contact_form_submit");
@@ -94,9 +101,21 @@ export function ContactForm() {
   }
 
   const errors = state.status === "error" ? state.fieldErrors : undefined;
+  const kept = state.status === "error" ? state.values : undefined;
+
+  // Cloudflare can take several seconds to hand out a token. Sending before it
+  // arrives only produces an error, so hold the submit and say why.
+  function holdUntilVerified(event: FormEvent<HTMLFormElement>) {
+    if (hasTurnstileToken(event.currentTarget)) {
+      setWaitNote(false);
+      return;
+    }
+    event.preventDefault();
+    setWaitNote(true);
+  }
 
   return (
-    <form action={formAction} noValidate className="flex flex-col gap-5">
+    <form ref={formRef} action={formAction} onSubmit={holdUntilVerified} noValidate className="flex flex-col gap-5">
       {state.status === "error" && (
         <div ref={resultRef} tabIndex={-1} role="alert" className="flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive focus:outline-none">
           <WarningCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
@@ -111,7 +130,7 @@ export function ContactForm() {
       </div>
 
       <Field label="Project type" name="projectType" error={errors?.projectType}>
-        <select id="projectType" name="projectType" required defaultValue="" className={inputClass}>
+        <select key={kept?.projectType ?? "unset"} id="projectType" name="projectType" required defaultValue={kept?.projectType ?? ""} className={inputClass}>
           <option value="" disabled>
             Select one
           </option>
@@ -125,31 +144,36 @@ export function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Name" name="name" error={errors?.name}>
-          <input id="name" name="name" type="text" required autoComplete="name" className={inputClass} />
+          <input id="name" name="name" type="text" required autoComplete="name" defaultValue={kept?.name} className={inputClass} />
         </Field>
         <Field label="Work email" name="email" error={errors?.email}>
-          <input id="email" name="email" type="email" required autoComplete="email" className={inputClass} />
+          <input id="email" name="email" type="email" required autoComplete="email" defaultValue={kept?.email} className={inputClass} />
         </Field>
       </div>
 
       <Field label="Company (optional)" name="company" error={errors?.company}>
-        <input id="company" name="company" type="text" autoComplete="organization" className={inputClass} />
+        <input id="company" name="company" type="text" autoComplete="organization" defaultValue={kept?.company} className={inputClass} />
       </Field>
 
       <Field label="What are you trying to achieve?" name="goal" error={errors?.goal}>
-        <textarea id="goal" name="goal" required rows={5} className={inputClass} />
+        <textarea id="goal" name="goal" required rows={5} defaultValue={kept?.goal} className={inputClass} />
       </Field>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Budget (optional)" name="budget" error={errors?.budget}>
-          <input id="budget" name="budget" type="text" placeholder="e.g. $10k-25k" className={inputClass} />
+          <input id="budget" name="budget" type="text" placeholder="e.g. $10k-25k" defaultValue={kept?.budget} className={inputClass} />
         </Field>
         <Field label="Timeline (optional)" name="timeline" error={errors?.timeline}>
-          <input id="timeline" name="timeline" type="text" placeholder="e.g. Q4 2026" className={inputClass} />
+          <input id="timeline" name="timeline" type="text" placeholder="e.g. Q4 2026" defaultValue={kept?.timeline} className={inputClass} />
         </Field>
       </div>
 
       <TurnstileWidget />
+      {waitNote && (
+        <p role="status" className="text-sm text-muted-foreground">
+          Still checking that you are human. This can take up to 15 seconds. Send again when the check above shows as done. If it never finishes, email info@techspirex.com.
+        </p>
+      )}
       {errors?.["cf-turnstile-response"]?.[0] && (
         <p role="alert" className="text-sm text-destructive">
           {errors["cf-turnstile-response"][0]}

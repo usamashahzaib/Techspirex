@@ -8,7 +8,24 @@ import { sendContactNotification, EmailNotConfiguredError } from "@/lib/email";
 export type ContactState =
   | { status: "idle" }
   | { status: "success" }
-  | { status: "error"; message: string; fieldErrors?: Record<string, string[]> };
+  | {
+      status: "error";
+      message: string;
+      fieldErrors?: Record<string, string[]>;
+      // Echoed back so the form can refill itself: React clears uncontrolled fields after every action.
+      values?: Record<string, string>;
+    };
+
+const RETAINED_FIELDS = ["projectType", "name", "email", "company", "goal", "budget", "timeline"] as const;
+
+function retainedValues(raw: Record<string, unknown>): Record<string, string> {
+  const values: Record<string, string> = {};
+  for (const field of RETAINED_FIELDS) {
+    const value = raw[field];
+    if (typeof value === "string") values[field] = value;
+  }
+  return values;
+}
 
 export async function submitContactForm(
   _prev: ContactState,
@@ -22,6 +39,7 @@ export async function submitContactForm(
       status: "error",
       message: "Please fix the errors below and try again.",
       fieldErrors: parsed.error.flatten().fieldErrors,
+      values: retainedValues(raw),
     };
   }
 
@@ -33,7 +51,7 @@ export async function submitContactForm(
   // Rate limiting + Turnstile, in the order documented in lib/security/form-guard.ts.
   const guard = await guardFormSubmission("contact", parsed.data["cf-turnstile-response"]);
   if (!guard.ok) {
-    return { status: "error", message: guardMessage("contact", guard.reason) };
+    return { status: "error", message: guardMessage("contact", guard.reason), values: retainedValues(raw) };
   }
 
   try {
@@ -53,12 +71,14 @@ export async function submitContactForm(
         status: "error",
         message:
           "The form is temporarily unavailable. Nothing was sent. Please email info@techspirex.com directly.",
+        values: retainedValues(raw),
       };
     }
     console.error("[contact] failed to send notification", error);
     return {
       status: "error",
       message: "Something went wrong sending your message. Please try again or email us directly.",
+      values: retainedValues(raw),
     };
   }
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { subscribeToNewsletter, type NewsletterState } from "./actions";
-import { TurnstileWidget } from "@/components/forms/turnstile-widget";
+import { TurnstileWidget, resetTurnstile } from "@/components/forms/turnstile-widget";
 import { trackEvent } from "@/lib/analytics/events";
 
 const initialState: NewsletterState = { status: "idle" };
@@ -24,6 +24,13 @@ function SubmitButton() {
 export function NewsletterForm() {
   const [state, formAction] = useActionState(subscribeToNewsletter, initialState);
 
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    // Each result spends the token; fetch a fresh one for the next attempt.
+    if (state.status !== "idle") resetTurnstile(formRef.current);
+  }, [state]);
+
   useEffect(() => {
     if (state.status === "pending") trackEvent("newsletter_subscribe");
   }, [state.status]);
@@ -31,7 +38,7 @@ export function NewsletterForm() {
   const isError = state.status === "error";
 
   return (
-    <form action={formAction} noValidate className="flex flex-col gap-2">
+    <form ref={formRef} action={formAction} noValidate className="flex flex-col gap-2">
       <div className="flex flex-col gap-2 sm:flex-row">
         <label htmlFor="newsletter-email" className="sr-only">
           Email address

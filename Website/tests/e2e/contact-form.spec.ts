@@ -1,4 +1,23 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+/*
+  The form holds its submit until Cloudflare has issued a token, which takes a
+  few seconds against the real widget. Tests that are about something other than
+  verification stand in a token so they exercise the submit itself.
+*/
+async function provideVerificationToken(page: Page) {
+  await page.evaluate(() => {
+    const form = document.querySelector("form:has(#name)") as HTMLFormElement;
+    let field = form.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');
+    if (!field) {
+      field = document.createElement("input");
+      field.type = "hidden";
+      field.name = "cf-turnstile-response";
+      form.appendChild(field);
+    }
+    if (!field.value) field.value = "e2e-stand-in-token";
+  });
+}
 
 test("contact form shows validation errors on empty submit", async ({ page }) => {
   await page.goto("/contact");
@@ -46,6 +65,7 @@ test("contact form shows a loading state while submitting", async ({ page }) => 
   await page.getByLabel("Work email").fill("test@example.com");
   await page.getByLabel(/what are you trying to achieve/i).fill("A real project goal, long enough to pass validation.");
 
+  await provideVerificationToken(page);
   const postStarted = page.waitForRequest(
     (request) => request.method() === "POST" && request.url().includes("/contact")
   );
@@ -86,6 +106,7 @@ test("contact form disables the submit button while a submission is in flight", 
   await page.getByLabel("Work email").fill("test@example.com");
   await page.getByLabel(/what are you trying to achieve/i).fill("A real project goal, long enough to pass validation.");
 
+  await provideVerificationToken(page);
   const postStarted = page.waitForRequest(
     (request) => request.method() === "POST" && request.url().includes("/contact")
   );
@@ -112,8 +133,7 @@ test("contact form shows a clear error when spam verification has not completed"
     injected its hidden input yet), so this test does not depend on it
     either way: block the script entirely, then simulate the exact DOM
     state an unsolved widget leaves behind - a present-but-empty
-    `cf-turnstile-response` field - and assert the server's real response to
-    that field, which is the thing this test actually cares about.
+    `cf-turnstile-response` field - and assert the form holds the submit.
   */
   await page.route("https://challenges.cloudflare.com/**", (route) => route.abort());
   await page.goto("/contact");
@@ -134,9 +154,40 @@ test("contact form shows a clear error when spam verification has not completed"
   await page.getByLabel("Name").fill("Test User");
   await page.getByLabel("Work email").fill("test@example.com");
   await page.getByLabel(/what are you trying to achieve/i).fill("A real project goal, long enough to pass validation.");
+  let posted = false;
+  page.on("request", (request) => {
+    if (request.method() === "POST" && request.url().includes("/contact")) posted = true;
+  });
   await page.getByRole("button", { name: /send project brief/i }).click();
 
-  await expect(page.getByText(/verification failed/i)).toBeVisible();
+  // The form holds the submit itself rather than sending a doomed request and
+  // showing the visitor a validation error for a field they cannot see.
+  await expect(page.getByText(/still checking that you are human/i)).toBeVisible();
+  expect(posted).toBe(false);
+});
+
+test("contact form keeps what the visitor typed when the server rejects the brief", async ({ page }) => {
+  await page.goto("/contact");
+  await page.waitForFunction(() => {
+    const form = document.querySelector("form");
+    return Boolean(form) && Object.keys(form!).some((key) => key.startsWith("__react"));
+  });
+
+  await page.getByLabel("Project type").selectOption("Web development");
+  await page.getByLabel("Name").fill("Test User");
+  await page.getByLabel("Work email").fill("test@example.com");
+  // Too short for the server's 20 character minimum, so the action rejects it
+  // before any email is attempted. React clears uncontrolled fields after the
+  // action, so this proves the typed values are put back.
+  await page.getByLabel(/what are you trying to achieve/i).fill("Too short");
+  await provideVerificationToken(page);
+  await page.getByRole("button", { name: /send project brief/i }).click();
+
+  await expect(page.getByText(/at least a sentence or two/i)).toBeVisible();
+  await expect(page.getByLabel("Name")).toHaveValue("Test User");
+  await expect(page.getByLabel("Work email")).toHaveValue("test@example.com");
+  await expect(page.getByLabel("Project type")).toHaveValue("Web development");
+  await expect(page.getByLabel(/what are you trying to achieve/i)).toHaveValue("Too short");
 });
 
 test("newsletter form validates email", async ({ page }) => {

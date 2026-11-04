@@ -21,6 +21,27 @@ import { DEV_BYPASS_TOKEN } from "@/lib/turnstile-constants";
   emitted a bare hidden input, so a misconfigured production deploy looked
   completely normal while every submission failed.
 */
+type TurnstileApi = { reset: (container?: Element | string) => void };
+
+/*
+  A Turnstile token is single use, and a React 19 form reset blanks the hidden
+  input it lives in. After any submission the widget must be asked for a fresh
+  token, or the next attempt goes out with none and fails.
+*/
+export function resetTurnstile(form: HTMLFormElement | null) {
+  const container = form?.querySelector(".cf-turnstile");
+  const api = (window as unknown as { turnstile?: TurnstileApi }).turnstile;
+  if (container && api) api.reset(container);
+}
+
+/* True when the form has a token to send. Without a site key the widget renders a placeholder token. */
+export function hasTurnstileToken(form: HTMLFormElement): boolean {
+  // Read it the way the server does (the last value wins), so the check and the action agree.
+  const values = new FormData(form).getAll("cf-turnstile-response");
+  const last = values[values.length - 1];
+  return typeof last === "string" && last.length > 0;
+}
+
 export function TurnstileWidget() {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
