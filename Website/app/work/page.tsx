@@ -38,7 +38,7 @@ export default function WorkPage() {
             <h1 className="mt-6 max-w-[12ch] text-[clamp(3rem,6.5vw,6.5rem)] font-black leading-[0.9] tracking-[-0.065em]">Products our team has worked on.</h1>
           </div>
           <div className="lg:pb-3">
-            <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale text-pretty">Our team has worked with {TEAM_CLIENT_COUNT_LABEL} clients. These are some of the products, grouped by sector. Work done at a previous company is labelled.</p>
+            <p className="max-w-xl text-xl font-medium leading-relaxed text-brand-lilac-pale text-pretty">Our team has worked with {TEAM_CLIENT_COUNT_LABEL} clients. These are some of the products, grouped by sector.</p>
             <dl className="mt-10 grid grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
               {[[TEAM_CLIENT_COUNT_LABEL, "Clients across our team"], [String(clients.length), "Products listed here"], [String(clientSectors.length), "Sectors"]].map(([value, label]) => (
                 <div key={label} className="flex flex-col-reverse justify-end bg-brand-ink/80 px-4 py-5"><dt className="mt-1 font-mono text-[9px] uppercase tracking-[0.15em] text-brand-lilac">{label}</dt><dd className="text-3xl font-black text-brand-cyan-pale">{value}</dd></div>
@@ -59,7 +59,7 @@ export default function WorkPage() {
       {caseStudies.length > 0 ? (
         <section className="border-b border-border bg-card">
           <div className="mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-            <div className="mb-12 grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-end"><div><Eyebrow size="sm">Case studies and product labs</Eyebrow><h2 className="mt-4 text-4xl font-black tracking-[-0.05em] sm:text-6xl">Read how things get built.</h2></div><p className="max-w-xl text-muted-foreground lg:justify-self-end">Concepts are labelled as concepts. Implementations are labelled as implementations. The distinction is part of the work.</p></div>
+            <div className="mb-12 grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-end"><div><Eyebrow size="sm">Case studies</Eyebrow><h2 className="mt-4 text-4xl font-black tracking-[-0.05em] sm:text-6xl">Read how things get built.</h2></div><p className="max-w-xl text-muted-foreground lg:justify-self-end">A written account of a shipped product, from the first decision to launch.</p></div>
             <div className="reveal-scroll-stagger border-y border-border">
               {caseStudies.map((study, index) => (
                 <Link key={study.slug} href={`${routes.work}/${study.slug}`} className="group grid gap-5 border-b border-border py-8 last:border-b-0 sm:grid-cols-[3rem_0.55fr_1fr_auto] sm:items-center sm:px-4 transition-[background-color,padding] duration-500 ease-[var(--ease-expo-out)] hover:bg-background sm:hover:px-7">

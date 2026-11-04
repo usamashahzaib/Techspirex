@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { ChromeGate } from "@/components/layout/chrome-gate";
 import { ConsentBanner } from "@/components/consent/consent-banner";
 import { organizationSchema, localBusinessSchema, websiteSchema } from "@/lib/seo/schema";
 import { GoogleAnalytics } from "@/lib/analytics/google-analytics";
@@ -98,15 +97,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to main content
         </a>
-        <ChromeGate>
-          <SiteHeader />
-        </ChromeGate>
+        <SiteHeader />
         <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}
         </main>
-        <ChromeGate>
-          <SiteFooter />
-        </ChromeGate>
+        <SiteFooter />
         <ConsentBanner />
         <GoogleAnalytics />
       </body>

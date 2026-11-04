@@ -38,7 +38,7 @@ export function Proof() {
           </p>
           <div className="mt-9 editorial-rule text-brand-cyan" aria-hidden="true" />
           <p className="mt-5 max-w-md font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-brand-lilac">
-            Concept work is labelled. Simulated data is labelled. Commercial outcomes are claimed only when attributable and approved.
+            Commercial outcomes are claimed only when attributable and approved.
           </p>
         </div>
 

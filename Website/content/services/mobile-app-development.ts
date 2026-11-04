@@ -21,7 +21,7 @@ export const mobileAppDevelopment: ServiceContent = {
   audience:
     "Founders and product teams building a mobile product, and businesses that need an existing app rebuilt or taken over.",
   credibility:
-    "Our team has worked on mobile products including DADSS, Blushee, Nosghy, KaizenTeams, and Chorus Sleep. The work page lists them by sector and labels work done at a previous company.",
+    "Our team has worked on mobile products including DADSS, Blushee, Nosghy, KaizenTeams, and Chorus Sleep. The work page lists them by sector.",
   scope: [
     { model: "Fixed scope first release", detail: "A defined first version with written acceptance criteria and a release plan." },
     { model: "Ongoing product team", detail: "Continued releases and feature work after launch, with the same people." },

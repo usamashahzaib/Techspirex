@@ -1,35 +1,10 @@
 import Link from "next/link";
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { BrandNodeField } from "@/components/marketing/brand-backdrops";
 import { ClientMark } from "@/components/marketing/client-mark";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PillCta } from "@/components/ui/pill-cta";
 import { clients, clientSectors, TEAM_CLIENT_COUNT_LABEL } from "@/content/clients";
 import { routes } from "@/lib/routes";
-
-const demos = [
-  {
-    index: "01",
-    type: "SaaS analytics",
-    title: "Meridian",
-    detail: "Interactive subscription analytics with period switching, cohort retention, and hand-built data visualisation.",
-    href: "/demos/meridian",
-  },
-  {
-    index: "02",
-    type: "AI automation",
-    title: "Relay",
-    detail: "A support triage console built around confidence, escalation boundaries, editable drafts, and human control.",
-    href: "/demos/relay",
-  },
-  {
-    index: "03",
-    type: "Ecommerce",
-    title: "Camber",
-    detail: "A complete storefront flow with filtering, a stateful cart, transparent order math, and checkout.",
-    href: "/demos/camber",
-  },
-];
 
 export function WorkShowcase() {
   return (
@@ -64,36 +39,10 @@ export function WorkShowcase() {
           ))}
         </ul>
 
-        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-2xl text-sm leading-relaxed text-brand-lilac-soft">
-            Most of these were built by members of our team at a previous company. Each one is labelled on the work page.
-          </p>
+        <div className="mt-8 flex justify-start">
           <PillCta href={routes.work} tone="cyan" className="shrink-0">
             See the work by sector
           </PillCta>
-        </div>
-
-        <Eyebrow size="sm" tone="lilac" className="mt-20">
-          Concept builds · self-initiated, not client results
-        </Eyebrow>
-        <div className="reveal-scroll-stagger mt-5 divide-y divide-white/15 border-y border-white/15">
-          {demos.map((demo) => (
-            <Link
-              key={demo.href}
-              href={demo.href}
-              className="group grid gap-4 py-9 transition-[background-color,color,padding] duration-500 ease-[var(--ease-expo-out)] hover:bg-brand-cyan hover:text-brand-violet-deep sm:grid-cols-[3rem_0.55fr_1.1fr_auto] sm:items-center sm:px-5 sm:hover:px-7"
-            >
-              <span className="font-mono text-xs font-bold text-brand-cyan group-hover:text-brand-violet">{demo.index}</span>
-              <div>
-                <Eyebrow size="xs" tone="lilac" weight="normal" className="group-hover:text-brand-violet">{demo.type}</Eyebrow>
-                <h3 className="mt-1 font-heading text-3xl font-extrabold tracking-[-0.04em]">{demo.title}</h3>
-              </div>
-              <p className="max-w-xl text-sm leading-relaxed text-brand-lilac-soft group-hover:text-brand-violet-deep">{demo.detail}</p>
-              <span className="flex size-11 items-center justify-center rounded-full border border-white/20 transition-[background-color,color,transform] duration-500 ease-[var(--ease-expo-out)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:bg-[#f8f5ef] group-hover:text-[#17233a]" aria-hidden="true">
-                <ArrowUpRight weight="light" className="size-4" />
-              </span>
-            </Link>
-          ))}
         </div>
       </div>
     </section>

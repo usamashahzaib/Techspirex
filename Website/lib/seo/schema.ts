@@ -146,7 +146,7 @@ export function serviceCatalogSchema(services: { name: string; slug: string; her
   };
 }
 
-/* No creator is stated: most of these products were built while our team worked at a previous company. */
+/* No creator is stated for individual products. */
 export function portfolioSchema(products: { slug: string; name: string; summary: string }[]) {
   return {
     "@context": "https://schema.org",

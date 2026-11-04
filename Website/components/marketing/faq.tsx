@@ -8,7 +8,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 const faqs = [
   {
     question: "What kinds of products has your team worked on?",
-    answer: `Mobile apps, marketplaces, SaaS platforms, and AI products across healthcare and wellness, commerce, workplace and learning, mobility and logistics, and fintech. Our team has worked with ${TEAM_CLIENT_COUNT_LABEL} clients, most of them at a previous company. The work page lists products by sector and labels which is which.`,
+    answer: `Mobile apps, marketplaces, SaaS platforms, and AI products across healthcare and wellness, commerce, workplace and learning, mobility and logistics, and fintech. Our team has worked with ${TEAM_CLIENT_COUNT_LABEL} clients. The work page lists products by sector.`,
   },
   {
     question: "How can I judge the quality before hiring you?",

@@ -100,6 +100,14 @@ const nextConfig: NextConfig = {
       // self-redirects. The old site's "/Insights" already 404s and isn't
       // worth preserving link equity for, so it's simply not redirected.
       { source: "/contact-us", destination: "/contact", permanent: true },
+      // Concept builds were removed from the site.
+      { source: "/demos/:path*", destination: "/work", permanent: true },
+      { source: "/work/camber-storefront", destination: "/work", permanent: true },
+      { source: "/work/meridian-analytics", destination: "/work", permanent: true },
+      { source: "/work/product-design-system", destination: "/work", permanent: true },
+      { source: "/work/relay-inbox-automation", destination: "/work", permanent: true },
+      { source: "/work/technical-seo-foundation", destination: "/work", permanent: true },
+      { source: "/work/techspirex-delivery-platform", destination: "/work", permanent: true },
       // Legacy URLs that Search Console reports as 404.
       { source: "/home", destination: "/", permanent: true },
       {

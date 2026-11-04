@@ -1,7 +1,7 @@
 # Case studies
 
 Published delivery evidence lives here as repository-authored MDX. Each entry labels whether it is
-shipped work, a concept build, or an implementation reference. No fabricated client result ships on this site.
+shipped work. No fabricated client result ships on this site.
 
 ## Adding a case study
 

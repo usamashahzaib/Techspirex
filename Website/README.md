@@ -13,18 +13,6 @@ Software development company based in Lahore, building web and mobile products, 
 - **Testing:** Vitest (unit), Playwright (e2e, accessibility)
 - **Deployment:** Vercel
 
-## Working demos
-
-Three concept builds ship with the site as interactive proof of product thinking, interface quality, and engineering detail:
-
-| Demo | Type | Path |
-|------|------|------|
-| **Meridian** | SaaS analytics dashboard | `/demos/meridian` |
-| **Relay** | AI support triage console | `/demos/relay` |
-| **Camber** | Ecommerce storefront | `/demos/camber` |
-
-Each demo is a self-contained working application - not a mockup.
-
 ## Development
 
 ```bash

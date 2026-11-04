@@ -22,9 +22,9 @@ describe("client portfolio data", () => {
     }
   });
 
-  it("marks work done at a previous company", () => {
-    const own = clients.filter((client) => client.context === "techspirex").map((client) => client.slug);
-    expect(own).toEqual(["byqalam"]);
+  it("gives every product a unique slug", () => {
+    const slugs = clients.map((client) => client.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
   });
 });
 

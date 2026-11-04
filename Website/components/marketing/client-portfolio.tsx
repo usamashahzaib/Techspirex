@@ -21,9 +21,6 @@ export function ClientPortfolio() {
                   <ClientMark client={client} />
                   <div>
                     <h3 className="text-2xl font-black tracking-[-0.035em]">{client.name}</h3>
-                    {client.context === "prior-role" ? (
-                      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-primary">Worked on by our team at a previous company</p>
-                    ) : null}
                     <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{client.summary}</p>
                     <ul className="mt-4 flex flex-wrap gap-2">
                       {client.scope.map((item) => (

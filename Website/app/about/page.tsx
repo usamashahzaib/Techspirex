@@ -60,7 +60,7 @@ export default function AboutPage() {
         <div className="relative mx-auto grid max-w-[1400px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24 lg:px-8 lg:py-32">
           <div><Eyebrow size="sm">Where we are today</Eyebrow><h2 className="mt-5 max-w-[11ch] text-4xl font-black leading-[0.95] tracking-[-0.055em] sm:text-6xl">No scale theatre. Senior attention is the model.</h2></div>
           <div className="space-y-6 self-end text-lg leading-relaxed text-muted-foreground">
-            <p>Techspirex is a small company with a team that has shipped a lot of software. Between us, we have worked with {TEAM_CLIENT_COUNT_LABEL} clients on mobile apps, marketplaces, SaaS platforms, and AI products, most of them at a previous company. The <Link href={routes.work} className="font-medium text-primary underline underline-offset-4">work page</Link> shows which is which.</p>
+            <p>Techspirex is a software company with a team that has shipped a lot of software. Between us, we have worked with {TEAM_CLIENT_COUNT_LABEL} clients on mobile apps, marketplaces, SaaS platforms, and AI products. The <Link href={routes.work} className="font-medium text-primary underline underline-offset-4">work page</Link> lists them by sector.</p>
             <p>The studio grew from web development into design, DevOps, AI automation, marketing, and ecommerce because real delivery required those disciplines to work together.</p>
             <p className="border-l-2 border-primary pl-5 font-semibold text-foreground">The advantage is simple: your work does not compete with a giant account list for senior attention.</p>
           </div>
