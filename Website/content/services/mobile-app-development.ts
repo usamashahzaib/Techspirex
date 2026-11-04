@@ -6,7 +6,7 @@ export const mobileAppDevelopment: ServiceContent = {
   flagship: false,
   tagline: "iOS and Android apps, along with the backend they depend on.",
   heroSummary:
-    "Mobile app development for iOS and Android, including the backend, admin tools, and integrations behind the app. Our team has worked on marketplaces, on-demand booking, healthcare, fintech, and AI-assisted products.",
+    "Mobile app development for iOS and Android, including the backend, admin tools, and integrations. Experience across marketplaces, healthcare, and fintech.",
   problems: [
     "The product needs two connected apps, such as rider and driver or patient and doctor, and the flows between them are not yet clear.",
     "An existing app is hard to change, and each release breaks something that used to work.",

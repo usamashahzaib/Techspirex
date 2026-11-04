@@ -22,7 +22,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: z.string().min(1).optional(),
   NEXT_PUBLIC_BING_SITE_VERIFICATION: z.string().min(1).optional(),
   // IndexNow key for instant Bing/Yandex/Seznam URL submission. Overrides the
-  // committed default in lib/seo/indexnow.ts; the public key file must match.
+  // committed default in scripts/submit-indexnow.mjs; the public key file must match.
   INDEXNOW_KEY: z.string().min(8).optional(),
   /*
     Set to "true" only when a proxy that overwrites x-forwarded-for/x-real-ip

@@ -51,7 +51,9 @@ export async function sendContactNotification(input: {
   if (!env.CONTACT_NOTIFICATION_EMAIL) throw new EmailNotConfiguredError();
   const resend = getClient();
 
-  await resend.emails.send({
+  // Resend returns API failures instead of throwing, and this email is the only
+  // record of the lead, so a failure must reach the visitor.
+  const sent = await resend.emails.send({
     from: "Techspirex website <notifications@techspirex.com>",
     to: env.CONTACT_NOTIFICATION_EMAIL,
     replyTo: input.email,
@@ -68,6 +70,8 @@ export async function sendContactNotification(input: {
       input.goal,
     ].join("\n"),
   });
+
+  if (sent.error) throw new Error(sent.error.message || "Failed to send contact notification");
 }
 
 /** Resend has no typed "already exists" code, so match its message text. */

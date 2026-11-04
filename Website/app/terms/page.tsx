@@ -14,7 +14,7 @@ export default function TermsPage() {
     <section>
       <div className="prose prose-neutral mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 dark:prose-invert prose-headings:font-heading">
         <h1>Terms of use</h1>
-        <p className="text-muted-foreground">Last updated 11 August 2026.</p>
+        <p className="text-muted-foreground">Last updated 4 November 2026.</p>
 
         <h2>Scope</h2>
         <p>
@@ -34,7 +34,7 @@ export default function TermsPage() {
         <h2>Intellectual property</h2>
         <p>
           The Techspirex name, logo, and website content are the property of Techspirex unless
-          otherwise noted. Case study content is published with client permission where applicable.
+          otherwise noted. Client names, logos, and other third-party marks belong to their respective owners.
         </p>
 
         <h2>Acceptable use</h2>

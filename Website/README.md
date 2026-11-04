@@ -1,8 +1,8 @@
 # Techspirex
 
-Web engineering studio based in Lahore, building web products, ecommerce, and AI systems for founders and small teams in the US, UK, and EU.
+Software development company based in Lahore, building web and mobile products, ecommerce, and AI systems for clients in the US, UK, and EU.
 
-**Live site:** [techspirex.com](https://techspirex.com)
+**Live site:** [www.techspirex.com](https://www.techspirex.com)
 
 ## Stack
 
@@ -43,7 +43,8 @@ the full list of variable **names**; never commit or share their values.
 `NEWSLETTER_FROM_EMAIL`, `NEWSLETTER_CONFIRM_SECRET`, `TURNSTILE_SECRET_KEY`,
 `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_SITE_URL`,
 `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, `NEXT_PUBLIC_BING_SITE_VERIFICATION`,
-`INDEXNOW_KEY`, `TRUST_PROXY_HEADERS`.
+`INDEXNOW_KEY`, `TRUST_PROXY_HEADERS`, `UPSTASH_REDIS_REST_URL`,
+`UPSTASH_REDIS_REST_TOKEN`.
 
 ## Testing and validation
 
@@ -54,7 +55,7 @@ Playwright needs its browser binaries installed once per machine before
 npx playwright install chromium
 ```
 
-Full validation, in the order CI/a pre-release check should run them:
+Full validation, in pre-release order. CI (`.github/workflows/ci.yml`) runs everything except the Playwright suite:
 
 ```bash
 npm run lint          # ESLint + copy-rule check
@@ -77,4 +78,4 @@ also does this automatically via its own `webServer`.
 
 ## License
 
-Proprietary. All rights reserved.
+Proprietary. All rights reserved. See `LICENSE`.

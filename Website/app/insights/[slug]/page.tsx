@@ -27,7 +27,7 @@ export async function generateMetadata({
   return {
     title: insight.title,
     description: insight.summary,
-    alternates: { canonical: `/insights/${slug}` },
+    alternates: { canonical: `/insights/${slug}`, types: { "application/rss+xml": "/insights/rss.xml" } },
     ...pageSocialMetadata(insight.title, insight.summary, `/insights/${slug}`),
     authors: [{ name: insight.author }],
   };

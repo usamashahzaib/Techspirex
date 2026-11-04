@@ -13,9 +13,9 @@ import { PillCta } from "@/components/ui/pill-cta";
 export const metadata: Metadata = {
   title: "Software development services and dedicated teams",
   description:
-    "End-to-end software services from Techspirex: product strategy, UI/UX design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.",
+    "Software services from Techspirex: UI/UX design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, and staff augmentation.",
   alternates: { canonical: "/services" },
-    ...pageSocialMetadata("Software development services and dedicated teams", "End-to-end software services from Techspirex: product strategy, UI/UX design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, growth, and staff augmentation.", "/services"),
+    ...pageSocialMetadata("Software development services and dedicated teams", "Software services from Techspirex: UI/UX design, web, mobile app, and SaaS development, AI automation, cloud, QA, ecommerce, and staff augmentation.", "/services"),
 };
 
 const lifecycle = [

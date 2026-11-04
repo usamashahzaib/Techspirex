@@ -54,6 +54,21 @@ test("unknown route returns a custom 404 with recovery links", async ({ page }) 
   await expect(page.getByRole("link", { name: /go home/i })).toBeVisible();
 });
 
+test("every sitemap page has a meta description of at most 160 characters", async ({ request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  const paths = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => new URL(match[1]).pathname);
+  expect(paths.length).toBeGreaterThan(0);
+
+  for (const path of paths) {
+    const html = await (await request.get(path)).text();
+    const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "";
+    // Entities such as &#x27; count as one character once a browser decodes them.
+    const length = description.replace(/&[#\w]+;/g, "x").length;
+    expect(length, path).toBeGreaterThan(0);
+    expect(length, path).toBeLessThanOrEqual(160);
+  }
+});
+
 test("sitemap.xml and robots.txt are served", async ({ page, baseURL }) => {
   const sitemap = await page.request.get(`${baseURL}/sitemap.xml`);
   expect(sitemap.ok()).toBeTruthy();

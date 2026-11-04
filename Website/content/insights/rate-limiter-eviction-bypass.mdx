@@ -1,6 +1,6 @@
 ---
 title: "Fixing our rate limiter's memory leak almost created a way to bypass it"
-summary: "The original limiter was a denial-of-service vector against itself. The obvious fix handed attackers a fresh quota on demand. The difference between the two correct-looking versions is which end of a Map you delete from."
+summary: "Our limiter could be used to attack itself, and the obvious fix handed attackers a fresh quota. The difference is which end of a Map you delete from."
 category: "Web development"
 author: "Tayyab Ahmad"
 publishedAt: "2026-09-02"

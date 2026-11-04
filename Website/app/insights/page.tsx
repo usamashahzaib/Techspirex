@@ -9,7 +9,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 export const metadata: Metadata = {
   title: "Insights",
   description: "Engineering and delivery notes from the Techspirex team.",
-  alternates: { canonical: "/insights" },
+  alternates: { canonical: "/insights", types: { "application/rss+xml": "/insights/rss.xml" } },
     ...pageSocialMetadata("Insights", "Engineering and delivery notes from the Techspirex team.", "/insights"),
 };
 

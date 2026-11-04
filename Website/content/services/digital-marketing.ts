@@ -6,7 +6,7 @@ export const digitalMarketing: ServiceContent = {
   flagship: false,
   tagline: "Marketing that agrees with what the site actually does.",
   heroSummary:
-    "SEO and performance marketing built with an understanding of the product underneath it - most useful paired with a web development engagement, so the site and the campaign tell the same story.",
+    "SEO and performance marketing built with an understanding of the product underneath it, so the site and the campaign tell the same story.",
   problems: [
     "Traffic is arriving but not converting, often because the landing experience doesn't match what brought people there.",
     "Technical SEO issues (slow pages, broken metadata, poor crawlability) are capping organic growth regardless of content quality.",

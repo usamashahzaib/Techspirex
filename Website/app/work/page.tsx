@@ -14,7 +14,7 @@ import { portfolioSchema } from "@/lib/seo/schema";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
 const description =
-  "Mobile apps, marketplaces, SaaS platforms, and AI products the Techspirex team has worked on, grouped by sector: healthcare, commerce, workplace, mobility, and fintech.";
+  "Mobile apps, marketplaces, SaaS platforms, and AI products the Techspirex team has worked on, grouped by sector, from healthcare to fintech.";
 
 export const metadata: Metadata = {
   title: "Work",
