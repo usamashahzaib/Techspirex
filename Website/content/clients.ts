@@ -170,6 +170,8 @@ export const clients: Client[] = [
     sector: "mobility-logistics",
     summary: "An app that lets travelers earn by carrying goods between locations.",
     scope: ["Trip management", "Sender and traveler messaging"],
+    logo: { src: "/clients/icarry.png", tile: "light" },
+    url: "https://icarry.app",
   },
   {
     slug: "axehedge",
