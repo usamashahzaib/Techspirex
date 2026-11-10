@@ -7,7 +7,7 @@ const title = "Hire dedicated developers and software teams";
 // The page body opens with a longer answer. Search snippets cut near 155
 // characters, so the meta description is its own shorter sentence.
 const description =
-  "Hire dedicated developers, QA, DevOps and design specialists from a Lahore team. Start with one person, agree monthly capacity, and work inside your own tools.";
+  "Hire dedicated developers, QA, DevOps and design specialists from Lahore, Pakistan. Start with one person, agree monthly capacity, work in your own tools.";
 
 export const metadata: Metadata = {
   title,

@@ -46,5 +46,9 @@ export const staffAugmentation: ServiceContent = {
       question: "Can the resource work in our existing team and tools?",
       answer: "Yes. The normal model is to work inside your communication, planning, repository, review, and release process with agreed overlap hours.",
     },
+    {
+      question: "How much time zone overlap do we get with a team in Lahore?",
+      answer: "Lahore is UTC+5 all year with no clock change. That puts it 5 hours ahead of London in winter and 4 in summer, and 9 to 10 hours ahead of New York depending on daylight saving. The overlap window is set in the role definition step, before work starts, so you know which hours the specialist is online.",
+    },
   ],
 };
