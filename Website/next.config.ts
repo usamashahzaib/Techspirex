@@ -115,6 +115,14 @@ const nextConfig: NextConfig = {
         destination: "/services/ecommerce",
         permanent: true,
       },
+      // Old WordPress "/<category>/<service>" URLs still crawled in Nov 2026.
+      // The last segment names the service, so each goes to that service page.
+      { source: "/web-development/ai-automation", destination: "/services/ai-automation", permanent: true },
+      { source: "/ai-automation/digital-marketing", destination: "/services/digital-marketing", permanent: true },
+      { source: "/ui-ux-design/ui-ux-design", destination: "/services/ui-ux-design", permanent: true },
+      { source: "/ui-ux-design/ecommerce-solutions", destination: "/services/ecommerce", permanent: true },
+      { source: "/ui-ux-design/digital-marketing", destination: "/services/digital-marketing", permanent: true },
+      { source: "/ui-ux-design/ai-automation", destination: "/services/ai-automation", permanent: true },
       /*
         Three insight posts were rewritten around the specific incidents they
         had only described in the abstract, which changed the subject enough
